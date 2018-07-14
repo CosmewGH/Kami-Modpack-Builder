@@ -1,6 +1,6 @@
 Kami Modpack Builder
 ===========
-Kami Modpack Builder is a (sort-of) fork of [Sm4shExplorer] (https://github.com/Deinonychus71/Sm4shExplorer), built to expand its functionality, and to improve the efficiency of Modpack Creation.
+Kami Modpack Builder is a (sort-of) fork of [Sm4shExplorer](https://github.com/Deinonychus71/Sm4shExplorer), built to expand its functionality, and to improve the efficiency of Modpack Creation.
 It can support it's own database of imported mods for Character Skins, Stages, etc. Mods can be enabled and disabled on the fly, skins can be moved around and have appropriate database files be fixed automatically. It keeps track of which mods are enabled to rebuild the patch file and pack folders appropriately. The explorer view of Sm4sh Explorer is also supported, but does not allow for any dynamic functionality.
 
 This is still very much work in progress, and is not fully working yet even.
@@ -29,7 +29,7 @@ This is still very much work in progress, and is not fully working yet even.
 - On your SD: Backup your 'content/patch' folder before doing ANY CHANGE.
 - Visual Studio 2015 and .NET Framework 4.5
 - Libs zlib32.dll/zlib64.dll/zlibnet.dll/DTLS.exe for the main soft
-- Libs libg719_decode.dll/libg7221_decode.dll/libmpg123-0.dll/libvorbis.dll/NAudio.dll and libvgmstream.dll from [this repo] (https://github.com/Deinonychus71/vgmstream) for Sm4shMusic
+- Libs libg719_decode.dll/libg7221_decode.dll/libmpg123-0.dll/libvorbis.dll/NAudio.dll and libvgmstream.dll from [this repo](https://github.com/Deinonychus71/vgmstream) for Sm4shMusic
 
 ==Future plans==
 - Built-in Sm4shMusic support to manage the list of musics and assign them to different stages (use [vgmstream from kode54](https://github.com/kode54/vgmstream)
