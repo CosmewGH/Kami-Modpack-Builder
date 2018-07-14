@@ -1,7 +1,8 @@
 Kami Modpack Builder
 ===========
 Kami Modpack Builder is a (sort-of) fork of [Sm4shExplorer](https://github.com/Deinonychus71/Sm4shExplorer), built to expand its functionality, and to improve the efficiency of Modpack Creation.
-It can support it's own database of imported mods for Character Skins, Stages, etc. Mods can be enabled and disabled on the fly, skins can be moved around and have appropriate database files be fixed automatically. It keeps track of which mods are enabled to rebuild the patch file and pack folders appropriately. The explorer view of Sm4sh Explorer is also supported, but does not allow for any dynamic functionality.
+
+Kami can support it's own database of imported mods for Character Skins, Stages, etc. Mods can be enabled and disabled on the fly, skins can be moved around and have appropriate database files be fixed automatically. It keeps track of which mods are enabled to rebuild the patch file and pack folders appropriately. The explorer view of Sm4sh Explorer is also supported, but does not allow for any dynamic functionality.
 
 This is still very much work in progress, and is not fully working yet even.
 
@@ -24,7 +25,7 @@ This is still very much work in progress, and is not fully working yet even.
 - Automatic MTB Fixing for skin voice and sound packs
  
 ==What do I need?==
-- An extration of the game on your computer (folders "content", "code" and "meta"). The will folder will have to remain untouched at all time to avoid issues.
+- An extraction of the game on your computer (folders "content", "code" and "meta"). The folder will have to remain untouched at all times to avoid issues.
 - The latest patch, unmodified (current is v288, you need at least v208) in the same directory (so that "content" > "patch")
 - On your SD: Backup your 'content/patch' folder before doing ANY CHANGE.
 - Visual Studio 2015 and .NET Framework 4.5
@@ -37,3 +38,6 @@ This is still very much work in progress, and is not fully working yet even.
 - SSS (Stage Select Screen) editing tab
 - Integrating Sm4shMusic
 - Other possible suggestions
+
+
+Huge thanks to all the creators and contributors of Sm4shExplorer. Without them, this wouldn't be possible. I have simply stacked functionality on top of the huge codebase that was made by them. If you have contributed to any of the code used in this project and feel I haven't given proper credits/gotten permissions, please contact me. My intention is not to steal, but to improve modpack creation for myself and the community. If you have any suggestions or concerns, let me know as well.
