@@ -21,6 +21,7 @@ namespace KamiModpackBuilder
         ConsoleRedirText _ConsoleText = null;
         ConsoleRedirProgress _ConsoleProgress = null;
         bool _MainLoaded = false;
+        bool _UserControlsLoaded = false;
         SmashProjectManager _ProjectManager = null;
         #endregion
 
@@ -138,6 +139,7 @@ namespace KamiModpackBuilder
         }
         #endregion
 
+        #region Events
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             LoadProject();
@@ -152,14 +154,21 @@ namespace KamiModpackBuilder
         {
             LoadProjectCompleted();
 
-            //User Controls in Tabs
-            UserControls.CharacterMods characterMods = new UserControls.CharacterMods(_ProjectManager);
-            characterMods.Parent = tabPageCharacterMods;
-            characterMods.Dock = DockStyle.Fill;
+            if (!_UserControlsLoaded)
+            {
+                //User Controls in Tabs
+                UserControls.CharacterMods characterMods = new UserControls.CharacterMods(_ProjectManager);
+                characterMods.Parent = tabPageCharacterMods;
+                characterMods.Dock = DockStyle.Fill;
+                _ProjectManager._CharacterModsPage = characterMods;
 
-            UserControls.Explorer explorer = new UserControls.Explorer(_ProjectManager);
-            explorer.Parent = tabPageExplorer;
-            explorer.Dock = DockStyle.Fill;
+                UserControls.Explorer explorer = new UserControls.Explorer(_ProjectManager);
+                explorer.Parent = tabPageExplorer;
+                explorer.Dock = DockStyle.Fill;
+                _ProjectManager._ExplorerPage = explorer;
+
+                _UserControlsLoaded = true;
+            }
         }
 
         private void Main_Shown(object sender, EventArgs e)
@@ -181,5 +190,49 @@ namespace KamiModpackBuilder
             _ProjectManager.SaveProject();
             _ProjectManager.SaveConfig();
         }
+
+        private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateProject();
+        }
+
+        private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = openFileDialog.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                LogHelper.Info("Loading project file...");
+                _ProjectManager.LoadProject(openFileDialog.FileName);
+
+                _ProjectManager.RefreshTabViews();
+            }
+        }
+
+        private void projectSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.ProjectSettings settings = new Forms.ProjectSettings(_ProjectManager.CurrentProject);
+            settings.ShowDialog();
+            _ProjectManager.SaveProject();
+        }
+
+        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.Preferences preferences = new Forms.Preferences(_ProjectManager);
+            preferences.ShowDialog();
+            _ProjectManager.SaveConfig();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ProjectManager.SaveProject();
+            _ProjectManager.SaveConfig();
+            this.Close();
+        }
+
+        private void aboutKamiModpackBuilderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(String.Format(UIStrings.INFO_ABOUT + "\r\n" + UIStrings.INFO_THANKS, GlobalConstants.VERSION));
+        }
+        #endregion
     }
 }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
+using KamiModpackBuilder.UserControls;
 
 namespace KamiModpackBuilder
 {
@@ -35,9 +36,12 @@ namespace KamiModpackBuilder
         public ResourceCollection ResourceDataCore { get { return _resColDataCore; } }
 
         /// <summary>
-        /// The Project Manager of the current project
+        /// The current project
         /// </summary>
         public SmashMod CurrentProject { get { return _CurrentProject; } }
+        
+        public Explorer _ExplorerPage;
+        public CharacterMods _CharacterModsPage;
         #endregion
 
         #region Project Management
@@ -116,12 +120,17 @@ namespace KamiModpackBuilder
 
         internal SmashMod LoadProject(string projectPathFile)
         {
+            LogHelper.Info(String.Format("Loading project \"{0}\"", projectPathFile));
+
             XmlSerializer ser = new XmlSerializer(typeof(SmashMod));
             SmashMod loadedProject = null;
             using (StreamReader reader = new StreamReader(projectPathFile))
                 loadedProject = (SmashMod)(ser.Deserialize(reader));
             _CurrentProject = loadedProject;
             _ProjectFilePath = projectPathFile;
+
+            _Config.LastProject = _ProjectFilePath;
+            SaveConfig();
 
             LoadProjectData();
 
@@ -227,6 +236,12 @@ namespace KamiModpackBuilder
             InitializeDBs();
 
             return true;
+        }
+
+        public void RefreshTabViews()
+        {
+            _ExplorerPage.RefreshTreeView();
+            _CharacterModsPage.RefreshData();
         }
         #endregion
 

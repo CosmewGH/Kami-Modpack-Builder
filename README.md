@@ -36,7 +36,6 @@ This is still very much work in progress, and is not fully working yet even.
 - Built-in Sm4shMusic support to manage the list of musics and assign them to different stages (use [vgmstream from kode54](https://github.com/kode54/vgmstream)
 - CSS (Character Select Screen) editing tab
 - SSS (Stage Select Screen) editing tab
-- Integrating Sm4shMusic
 - Other possible suggestions
 
 

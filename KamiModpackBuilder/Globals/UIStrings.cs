@@ -30,9 +30,14 @@ namespace KamiModpackBuilder.Globals
         public const string WARN_EXPORT_FOLDER_EXISTS = "Warning. The folder '{0}' already exists. If you wish to continue, all content from this folder will be deleted. Proceed?";
         public const string INFO_PACK_REBUILD = "This feature will rebuild the resource files and patchfile. \r\nThis will ensure that the game takes your changes into account. When it's done, you can find the file in this folder:\r\n{0}";
 
-        public const string INFO_THANKS = 
-            "- Sammi Husky for his DTLSExtractor\r\n"+
-            "- Soneek for introducing me to very nice, motivated people\r\n" +
-            "- The Brawltools team for their amazing work";
+        public const string INFO_ABOUT =
+            "Kami Modpack Builder v.{0} by Saiyan197\r\n" +
+            "Based largely on Sm4shExplorer by Deinonychus71\r\n";
+        public const string INFO_THANKS =
+            "Thanks to:\r\n" +
+            "- Deinonychus71 for creating Sm4shExplorer\r\n" +
+            "- Sammi Husky for his DTLSExtractor\r\n" +
+            "- Soneek for his work with smash music\r\n" +
+            "- Everyone else who has contributed to the Smash Modding Community";
     }
 }

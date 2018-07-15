@@ -36,6 +36,12 @@ namespace KamiModpackBuilder.UserControls
             comboBoxCharacters_SelectedIndexChanged(this, null);
         }
 
+        public void RefreshData()
+        {
+            InitializeCharactersComboBox();
+            comboBoxCharacters_SelectedIndexChanged(this, null);
+        }
+
         private void InitializeCharactersComboBox()
         {
             int fighterCount = DB.FightersDB.Fighters.Count;

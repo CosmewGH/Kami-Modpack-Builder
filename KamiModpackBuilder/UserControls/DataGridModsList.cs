@@ -203,7 +203,7 @@ namespace KamiModpackBuilder.UserControls
 
                 popup.Initialize();
 
-                popup.Show();
+                popup.ShowDialog();
             }
         }
 

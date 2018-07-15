@@ -18,6 +18,7 @@ namespace KamiModpackBuilder.Objects
         public List<string> ActiveGeneralMods { get; set; }
         public bool EditorCSSActive { get; set; } //Whether the modified CSS created in the internal editor will be used in the build.
         public bool EditorSSSActive { get; set; } //Whether the modified SSS created in the internal editor will be used in the build.
+        public bool EditorCharacterMenuDBActive { get; set; } //Whether the global_menu_parameter database file is updated automatically and used in the build.
         public bool EditorCharacterStringsActive { get; set; } //Whether the Character Nameplate numbers, Name strings, and Boxing ring texts specified by character mods will be used in the build.
         public bool EditorMusicActive { get; set; } //Whether the modified music databases and strings by Sm4shMusic will be used in the build.
         public bool EditorMTBFix { get; set; } //Whether the modified MTB for custom sounds and voices is used when building.
@@ -67,6 +68,7 @@ namespace KamiModpackBuilder.Objects
             ActiveGeneralMods = new List<string>();
             EditorCSSActive = true;
             EditorSSSActive = true;
+            EditorCharacterMenuDBActive = true;
             EditorCharacterStringsActive = true;
             EditorMusicActive = true;
             EditorMTBFix = true;

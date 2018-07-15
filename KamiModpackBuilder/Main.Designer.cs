@@ -33,7 +33,6 @@
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveProjectAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.projectSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +53,7 @@
             this.textConsole = new System.Windows.Forms.TextBox();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -81,10 +80,9 @@
             this.newProjectToolStripMenuItem,
             this.openProjectToolStripMenuItem,
             this.saveProjectToolStripMenuItem,
-            this.saveProjectAsToolStripMenuItem,
             this.toolStripSeparator1,
-            this.projectSettingsToolStripMenuItem,
             this.preferencesToolStripMenuItem,
+            this.projectSettingsToolStripMenuItem,
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
@@ -96,12 +94,14 @@
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
             this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(255, 30);
             this.newProjectToolStripMenuItem.Text = "New Project";
+            this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
             // 
             // openProjectToolStripMenuItem
             // 
             this.openProjectToolStripMenuItem.Name = "openProjectToolStripMenuItem";
             this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(255, 30);
             this.openProjectToolStripMenuItem.Text = "Open Project";
+            this.openProjectToolStripMenuItem.Click += new System.EventHandler(this.openProjectToolStripMenuItem_Click);
             // 
             // saveProjectToolStripMenuItem
             // 
@@ -109,12 +109,6 @@
             this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(255, 30);
             this.saveProjectToolStripMenuItem.Text = "Save Project";
             this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.SaveProjectToolStripMenuItem_Click);
-            // 
-            // saveProjectAsToolStripMenuItem
-            // 
-            this.saveProjectAsToolStripMenuItem.Name = "saveProjectAsToolStripMenuItem";
-            this.saveProjectAsToolStripMenuItem.Size = new System.Drawing.Size(255, 30);
-            this.saveProjectAsToolStripMenuItem.Text = "Save Project As...";
             // 
             // toolStripSeparator1
             // 
@@ -126,12 +120,14 @@
             this.projectSettingsToolStripMenuItem.Name = "projectSettingsToolStripMenuItem";
             this.projectSettingsToolStripMenuItem.Size = new System.Drawing.Size(255, 30);
             this.projectSettingsToolStripMenuItem.Text = "Project Settings";
+            this.projectSettingsToolStripMenuItem.Click += new System.EventHandler(this.projectSettingsToolStripMenuItem_Click);
             // 
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
             this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(255, 30);
             this.preferencesToolStripMenuItem.Text = "Application Settings";
+            this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -143,6 +139,7 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(255, 30);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -155,8 +152,9 @@
             // aboutKamiModpackBuilderToolStripMenuItem
             // 
             this.aboutKamiModpackBuilderToolStripMenuItem.Name = "aboutKamiModpackBuilderToolStripMenuItem";
-            this.aboutKamiModpackBuilderToolStripMenuItem.Size = new System.Drawing.Size(292, 30);
+            this.aboutKamiModpackBuilderToolStripMenuItem.Size = new System.Drawing.Size(329, 30);
             this.aboutKamiModpackBuilderToolStripMenuItem.Text = "About Kami Modpack Builder";
+            this.aboutKamiModpackBuilderToolStripMenuItem.Click += new System.EventHandler(this.aboutKamiModpackBuilderToolStripMenuItem_Click);
             // 
             // backgroundWorker
             // 
@@ -290,6 +288,12 @@
             this.saveFileDialog.Filter = "XML files|*.xml";
             this.saveFileDialog.Title = "Create Project File";
             // 
+            // openFileDialog
+            // 
+            this.openFileDialog.DefaultExt = "xml";
+            this.openFileDialog.FileName = "openFileDialog";
+            this.openFileDialog.Filter = "XML files|*.xml";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -340,10 +344,9 @@
         private System.Windows.Forms.TextBox textConsole;
         private System.Windows.Forms.TabPage tabPageExplorer;
         private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveProjectAsToolStripMenuItem;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
 
