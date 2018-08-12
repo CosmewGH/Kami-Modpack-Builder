@@ -16,7 +16,6 @@ namespace KamiModpackBuilder
 {
     public partial class Main : Form
     {
-
         #region Members
         ConsoleRedirText _ConsoleText = null;
         ConsoleRedirProgress _ConsoleProgress = null;
@@ -182,7 +181,11 @@ namespace KamiModpackBuilder
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (_ProjectManager != null)
+            {
+                _ProjectManager.SaveProject();
+                _ProjectManager.SaveConfig();
                 _ProjectManager.CleanTempFolder();
+            }
         }
 
         private void SaveProjectToolStripMenuItem_Click(object sender, EventArgs e)

@@ -57,7 +57,7 @@ namespace KamiModpackBuilder.UserControls
 
         private void CreateDataGrids()
         {
-            _GridSlots = new DataGridSlotModList();
+            _GridSlots = new DataGridSlotModList(_SmashProjectManager);
             _GridSlots.Dock = DockStyle.Fill;
 
             _GridSlotsInactive = new DataGridModsList(_SmashProjectManager, false, DataGridModsList.ModListType.CharacterSlots);

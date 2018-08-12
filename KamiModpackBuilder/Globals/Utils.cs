@@ -205,5 +205,51 @@ namespace KamiModpackBuilder.Globals
                 }
             }
         }
+
+        #region Open/Save KamiMod Files
+        public static CharacterSlotModXML OpenCharacterSlotKamiModFile(string characterName, string modName)
+        {
+            CharacterSlotModXML data = DeserializeXML<CharacterSlotModXML>(PathHelper.FolderCharSlotsMods + characterName + Path.DirectorySeparatorChar + modName + Path.DirectorySeparatorChar + "kamimod.xml");
+            return data;
+        }
+
+        public static void SaveCharacterSlotKamiModFile(string characterName, string modName, CharacterSlotModXML data)
+        {
+            SerializeXMLToFile(data, PathHelper.FolderCharSlotsMods + characterName + Path.DirectorySeparatorChar + modName + Path.DirectorySeparatorChar + "kamimod.xml");
+        }
+
+        public static CharacterGeneralModXML OpenCharacterGeneralKamiModFile(string characterName, string modName)
+        {
+            CharacterGeneralModXML data = DeserializeXML<CharacterGeneralModXML>(PathHelper.FolderCharGeneralMods + characterName + Path.DirectorySeparatorChar + modName + Path.DirectorySeparatorChar + "kamimod.xml");
+            return data;
+        }
+
+        public static void SaveCharacterGeneralKamiModFile(string characterName, string modName, CharacterGeneralModXML data)
+        {
+            SerializeXMLToFile(data, PathHelper.FolderCharGeneralMods + characterName + Path.DirectorySeparatorChar + modName + Path.DirectorySeparatorChar + "kamimod.xml");
+        }
+
+        public static StageModXML OpenStageKamiModFile(string modName)
+        {
+            StageModXML data = DeserializeXML<StageModXML>(PathHelper.FolderStageMods + modName + Path.DirectorySeparatorChar + "kamimod.xml");
+            return data;
+        }
+
+        public static void SaveStageKamiModFile(string modName, StageModXML data)
+        {
+            SerializeXMLToFile(data, PathHelper.FolderStageMods + modName + Path.DirectorySeparatorChar + "kamimod.xml");
+        }
+
+        public static GeneralModXML OpenGeneralKamiModFile(string modName)
+        {
+            GeneralModXML data = DeserializeXML<GeneralModXML>(PathHelper.FolderGeneralMods + modName + Path.DirectorySeparatorChar + "kamimod.xml");
+            return data;
+        }
+
+        public static void SaveGeneralKamiModFile(string modName, GeneralModXML data)
+        {
+            SerializeXMLToFile(data, PathHelper.FolderGeneralMods + modName + Path.DirectorySeparatorChar + "kamimod.xml");
+        }
+        #endregion
     }
 }
