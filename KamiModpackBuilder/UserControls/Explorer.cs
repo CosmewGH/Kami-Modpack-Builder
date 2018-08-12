@@ -12,6 +12,7 @@ using KamiModpackBuilder.Objects;
 using DamienG.Security.Cryptography;
 using System.IO;
 using System.Diagnostics;
+using KamiModpackBuilder.Properties;
 
 namespace KamiModpackBuilder.UserControls
 {
@@ -27,9 +28,9 @@ namespace KamiModpackBuilder.UserControls
             InitializeComponent();
 
             treeView.ImageList = new ImageList();
-            treeView.ImageList.Images.Add(UIConstants.ICON_FOLDER, Resources.Resource.icon_folder);
-            treeView.ImageList.Images.Add(UIConstants.ICON_FILE, Resources.Resource.icon_file);
-            treeView.ImageList.Images.Add(UIConstants.ICON_PACKED, Resources.Resource.icon_packed);
+            treeView.ImageList.Images.Add(UIConstants.ICON_FOLDER, Resources.icon_folder);
+            treeView.ImageList.Images.Add(UIConstants.ICON_FILE, Resources.icon_file);
+            treeView.ImageList.Images.Add(UIConstants.ICON_PACKED, Resources.icon_packed);
 
             RefreshTreeView();
         }

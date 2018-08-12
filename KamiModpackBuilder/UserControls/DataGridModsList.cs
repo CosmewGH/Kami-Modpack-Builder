@@ -20,7 +20,10 @@ namespace KamiModpackBuilder.UserControls
         private bool _IsActiveList = false;
         private ModListType _ModListType = ModListType.General;
         private SmashProjectManager _SmashProjectManager;
+        private SmashMod _Project;
         private DB.Fighter _CurrentFighter;
+        private List<RowData> _RowData = new List<RowData>();
+        private List<ModRow> _Rows = new List<ModRow>();
         #endregion
 
         #region Enums
@@ -42,10 +45,74 @@ namespace KamiModpackBuilder.UserControls
         public void ChangeSelectedFighter(DB.Fighter a_fighter)
         {
             _CurrentFighter = a_fighter;
+            if (_Rows != null) for (int i = 0; i < _Rows.Count;  ++i)
+                {
+                    _Rows[i].ChangeSelectedFighter(_CurrentFighter);
+                }
+            RefreshRowData();
         }
         #endregion
 
         #region Private Methods
+        
+        private void RefreshRowData()
+        {
+            _RowData = new List<RowData>();
+            _Project = _SmashProjectManager.CurrentProject;
+            /*
+            for (int i = 0; i < _CurrentFighter.maxSlots; ++i)
+            {
+                RowData row = new RowData();
+                for (int j = 0; j < _Project.ActiveCharacterSlotMods.Count; ++j)
+                {
+                    if (_Project.ActiveCharacterSlotMods[j].SlotID == i)
+                    {
+                        row.modFolder = _Project.ActiveCharacterSlotMods[j].FolderName;
+
+                        CharacterSlotModXML data = Globals.Utils.OpenCharacterSlotKamiModFile(_CurrentFighter.name, row.modFolder);
+                        row.name = data.DisplayName;
+                        _RowData.Add(row);
+                        break;
+                    }
+                }
+                if (i < _CurrentFighter.defaultSlots)
+                {
+                    row.name = "Default";
+                    _RowData.Add(row);
+                    break;
+                }
+            }
+            */
+            RowData row = new RowData();
+            row.name = "Test Mod 1";
+            _RowData.Add(row);
+            row = new RowData();
+            row.name = "Test Mod 2";
+            _RowData.Add(row);
+            row = new RowData();
+            row.name = "Test Mod 3";
+            _RowData.Add(row);
+
+            PopulateRows();
+        }
+
+        private void PopulateRows()
+        {
+            for (int i = 0; i < _Rows.Count; ++i)
+            {
+                _Rows[i].Parent = null;
+            }
+            _Rows = new List<ModRow>();
+            for (int i = 0; i < _RowData.Count; ++i)
+            {
+                ModRow row = new ModRow(_SmashProjectManager, _IsActiveList, _ModListType);
+                row.ChangeSelectedFighter(_CurrentFighter);
+                row.UpdateData(_RowData[i]);
+                row.Dock = DockStyle.Top;
+                _Rows.Add(row);
+                row.Parent = panelModList;
+            }
+        }
 
         #region Events
         private void DataGridModsList_DragDrop(object sender, DragEventArgs e)
@@ -224,5 +291,16 @@ namespace KamiModpackBuilder.UserControls
         #endregion
 
         #endregion
+        
+        public class RowData
+        {
+            public string name = "";
+            public int textureID = -1;
+            public string warningText = "";
+            public bool hasWarning = false;
+            public string errorText = "";
+            public bool hasError = false;
+            public string modFolder = "";
+        }
     }
 }

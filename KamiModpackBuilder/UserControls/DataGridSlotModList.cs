@@ -18,7 +18,8 @@ namespace KamiModpackBuilder.UserControls
         private SmashProjectManager _SmashProjectManager;
         private SmashMod _Project;
         private DB.Fighter _CurrentFighter;
-        private List<SlotRowData> _RowData;
+        private List<SlotRowData> _RowData = new List<SlotRowData>();
+        private List<ModRow> _Rows = new List<ModRow>();
         #endregion
 
         #region Constructors
@@ -34,13 +35,15 @@ namespace KamiModpackBuilder.UserControls
         {
             if (a_fighter == _CurrentFighter) return;
             _CurrentFighter = a_fighter;
+            if (_Rows != null) for (int i = 0; i < _Rows.Count; ++i)
+                {
+                    _Rows[i].ChangeSelectedFighter(_CurrentFighter);
+                }
             RefreshRowData();
         }
 
         private void RefreshRowData()
         {
-            //TODO: Get rid of datagrid stuff, will use a virtical list of usercontrol rows instead
-
             _RowData = new List<SlotRowData>();
             _Project = _SmashProjectManager.CurrentProject;
 
@@ -56,17 +59,44 @@ namespace KamiModpackBuilder.UserControls
 
                         CharacterSlotModXML data = Globals.Utils.OpenCharacterSlotKamiModFile(_CurrentFighter.name, row.modFolder);
                         row.name = data.DisplayName;
-                        row.warningText = "test";
-                        row.hasWarning = true;
+                        _RowData.Add(row);
+                        break;
                     }
                 }
+                if (i < _CurrentFighter.defaultSlots)
+                {
+                    row.name = "Default";
+                    _RowData.Add(row);
+                    break;
+                }
+            }
+
+            PopulateRows();
+        }
+
+        private void PopulateRows()
+        {
+            for (int i = 0; i < _Rows.Count; ++i)
+            {
+                _Rows[i].Parent = null;
+            }
+            _Rows = new List<ModRow>();
+            for (int i = 0; i < _RowData.Count; ++i)
+            {
+                ModRow row = new ModRow(_SmashProjectManager, true, DataGridModsList.ModListType.CharacterSlots);
+                row.ChangeSelectedFighter(_CurrentFighter);
+                row.UpdateData(_RowData[i]);
+                row.Dock = DockStyle.Top;
+                _Rows.Add(row);
+                row.Parent = panelModList;
             }
         }
 
-        private class SlotRowData
+        public class SlotRowData
         {
             public int slotNum = 0;
             public string name = "";
+            public int textureID = -1;
             public string warningText = "";
             public bool hasWarning = false;
             public string errorText = "";
