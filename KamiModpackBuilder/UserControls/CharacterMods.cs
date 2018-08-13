@@ -80,6 +80,7 @@ namespace KamiModpackBuilder.UserControls
         {
             if (!_IsInitialized) return;
 
+            _GridSlots.ChangeSelectedFighter(DB.FightersDB.Fighters[comboBoxCharacters.SelectedIndex]);
             _GridSlotsInactive.ChangeSelectedFighter(DB.FightersDB.Fighters[comboBoxCharacters.SelectedIndex]);
             _GridGeneral.ChangeSelectedFighter(DB.FightersDB.Fighters[comboBoxCharacters.SelectedIndex]);
             _GridGeneralInactive.ChangeSelectedFighter(DB.FightersDB.Fighters[comboBoxCharacters.SelectedIndex]);

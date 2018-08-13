@@ -22,6 +22,10 @@ namespace KamiModpackBuilder.UserControls
         private DataGridModsList.ModListType _ModListType = DataGridModsList.ModListType.General;
         private SmashProjectManager _SmashProjectManager;
         private DB.Fighter _CurrentFighter;
+        private bool m_IsSelected = false;
+
+        private Color colorHighlight = Color.LightBlue;
+        private Color colorNormal = Color.White;
         #endregion
 
         #region Properties
@@ -33,6 +37,9 @@ namespace KamiModpackBuilder.UserControls
         public string errorText = "";
         public bool hasError = false;
         public string modFolder = "";
+
+        public bool isSelected { get { return m_IsSelected; } }
+        public bool isSelectable = true;
         #endregion
 
         #region Constructors
@@ -81,8 +88,9 @@ namespace KamiModpackBuilder.UserControls
         {
             if (_IsActiveList && _ModListType == DataGridModsList.ModListType.CharacterSlots)
             {
-                labelSlotNumber.Text = slotNum.ToString();
+                labelSlotNumber.Text = (slotNum+1).ToString();
             }
+            else labelSlotNumber.Text = String.Empty;
             labelModName.Text = name;
             if (hasError)
             {
@@ -107,8 +115,8 @@ namespace KamiModpackBuilder.UserControls
 
         private void panelModList_Click(object sender, EventArgs e)
         {
-            panelModList.BackColor = Color.LightBlue;
-            //TODO: Make this select the control and deselect the others
+            if (m_IsSelected) DeselectMod();
+            else SelectMod();
         }
 
         private void labelModName_Click(object sender, EventArgs e)
@@ -121,6 +129,23 @@ namespace KamiModpackBuilder.UserControls
         {
             panelModList_Click(null, null);
             return;
+        }
+
+        private void SelectMod()
+        {
+            if (!isSelectable) return;
+            colorNormal = panelModList.BackColor;
+            panelModList.BackColor = colorHighlight;
+            m_IsSelected = true;
+        }
+
+        public void DeselectMod()
+        {
+            if (m_IsSelected)
+            {
+                panelModList.BackColor = colorNormal;
+                m_IsSelected = false;
+            }
         }
     }
 }

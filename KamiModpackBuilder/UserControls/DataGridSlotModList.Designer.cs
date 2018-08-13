@@ -180,6 +180,7 @@
             // 
             // panelModList
             // 
+            this.panelModList.AutoScroll = true;
             this.panelModList.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panelModList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelModList.Location = new System.Drawing.Point(3, 3);

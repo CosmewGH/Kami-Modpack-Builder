@@ -103,7 +103,7 @@ namespace KamiModpackBuilder.UserControls
                 _Rows[i].Parent = null;
             }
             _Rows = new List<ModRow>();
-            for (int i = 0; i < _RowData.Count; ++i)
+            for (int i = _RowData.Count - 1; i > -1; --i)
             {
                 ModRow row = new ModRow(_SmashProjectManager, _IsActiveList, _ModListType);
                 row.ChangeSelectedFighter(_CurrentFighter);
@@ -294,13 +294,13 @@ namespace KamiModpackBuilder.UserControls
         
         public class RowData
         {
-            public string name = "";
+            public string name = String.Empty;
             public int textureID = -1;
-            public string warningText = "";
+            public string warningText = String.Empty;
             public bool hasWarning = false;
-            public string errorText = "";
+            public string errorText = String.Empty;
             public bool hasError = false;
-            public string modFolder = "";
+            public string modFolder = String.Empty;
         }
     }
 }
