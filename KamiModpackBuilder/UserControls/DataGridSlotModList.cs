@@ -87,7 +87,6 @@ namespace KamiModpackBuilder.UserControls
                 row.ChangeSelectedFighter(_CurrentFighter);
                 row.UpdateData(_RowData[i]);
                 row.Dock = DockStyle.Top;
-                if (_RowData[i].modFolder == String.Empty) row.isSelectable = false;
                 _Rows.Add(row);
                 row.Parent = panelModList;
             }

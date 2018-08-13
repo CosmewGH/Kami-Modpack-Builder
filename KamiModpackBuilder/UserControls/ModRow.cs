@@ -26,6 +26,7 @@ namespace KamiModpackBuilder.UserControls
 
         private Color colorHighlight = Color.LightBlue;
         private Color colorNormal = Color.White;
+        private bool isSelectable = true;
         #endregion
 
         #region Properties
@@ -39,7 +40,6 @@ namespace KamiModpackBuilder.UserControls
         public string modFolder = "";
 
         public bool isSelected { get { return m_IsSelected; } }
-        public bool isSelectable = true;
         #endregion
 
         #region Constructors
@@ -105,6 +105,16 @@ namespace KamiModpackBuilder.UserControls
             else
             {
                 buttonError.Visible = false;
+            }
+            if (modFolder == String.Empty)
+            {
+                buttonProperties.Visible = false;
+                isSelectable = false;
+            }
+            else
+            {
+                buttonProperties.Visible = true;
+                isSelectable = true;
             }
         }
         #endregion
