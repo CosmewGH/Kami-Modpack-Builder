@@ -38,8 +38,11 @@ namespace KamiModpackBuilder.UserControls
         public string errorText = "";
         public bool hasError = false;
         public string modFolder = "";
+        public bool propertiesEnabled = true;
 
         public bool isSelected { get { return m_IsSelected; } }
+        public bool isActiveList { get { return _IsActiveList; } }
+        public DataGridModsList.ModListType modListType { get { return _ModListType; } }
         #endregion
 
         #region Constructors
@@ -50,6 +53,33 @@ namespace KamiModpackBuilder.UserControls
             _SmashProjectManager = a_smashProjectManager;
             _IsActiveList = a_isActiveList;
             _ModListType = a_modListType;
+            switch (_ModListType) {
+                case (DataGridModsList.ModListType.CharacterSlots):
+                    EventManager.OnCharSlotModSelectionChanged += OnModSelectionChanged; break;
+                case (DataGridModsList.ModListType.CharacterGeneral):
+                    EventManager.OnCharGeneralModSelectionChanged += OnModSelectionChanged; break;
+                case (DataGridModsList.ModListType.Stage):
+                    EventManager.OnStageModSelectionChanged += OnModSelectionChanged; break;
+                case (DataGridModsList.ModListType.General):
+                    EventManager.OnMiscModSelectionChanged += OnModSelectionChanged; break;
+            }
+        }
+        #endregion
+
+        #region Destructor
+        ~ModRow()
+        {
+            switch (_ModListType)
+            {
+                case (DataGridModsList.ModListType.CharacterSlots):
+                    EventManager.OnCharSlotModSelectionChanged -= OnModSelectionChanged; break;
+                case (DataGridModsList.ModListType.CharacterGeneral):
+                    EventManager.OnCharGeneralModSelectionChanged -= OnModSelectionChanged; break;
+                case (DataGridModsList.ModListType.Stage):
+                    EventManager.OnStageModSelectionChanged -= OnModSelectionChanged; break;
+                case (DataGridModsList.ModListType.General):
+                    EventManager.OnMiscModSelectionChanged -= OnModSelectionChanged; break;
+            }
         }
         #endregion
 
@@ -68,6 +98,7 @@ namespace KamiModpackBuilder.UserControls
             errorText = rowData.errorText;
             hasError = rowData.hasError;
             modFolder = rowData.modFolder;
+            propertiesEnabled = rowData.propertiesEnabled;
             UpdateData();
         }
 
@@ -81,6 +112,7 @@ namespace KamiModpackBuilder.UserControls
             errorText = rowData.errorText;
             hasError = rowData.hasError;
             modFolder = rowData.modFolder;
+            propertiesEnabled = rowData.propertiesEnabled;
             UpdateData();
         }
 
@@ -114,6 +146,7 @@ namespace KamiModpackBuilder.UserControls
             else
             {
                 buttonProperties.Visible = true;
+                if (!propertiesEnabled) buttonProperties.Enabled = false;
                 isSelectable = true;
             }
         }
@@ -125,8 +158,8 @@ namespace KamiModpackBuilder.UserControls
 
         private void panelModList_Click(object sender, EventArgs e)
         {
-            if (m_IsSelected) DeselectMod();
-            else SelectMod();
+            if (m_IsSelected) SetModAsDeselected();
+            else SetModAsSelected();
         }
 
         private void labelModName_Click(object sender, EventArgs e)
@@ -141,20 +174,87 @@ namespace KamiModpackBuilder.UserControls
             return;
         }
 
-        private void SelectMod()
+        private void SetModAsDeselected()
         {
             if (!isSelectable) return;
-            colorNormal = panelModList.BackColor;
-            panelModList.BackColor = colorHighlight;
-            m_IsSelected = true;
+            switch (_ModListType)
+            {
+                case (DataGridModsList.ModListType.CharacterSlots):
+                    EventManager.CharSlotModSelectionChanged(null); break;
+                case (DataGridModsList.ModListType.CharacterGeneral):
+                    EventManager.CharGeneralModSelectionChanged(null); break;
+                case (DataGridModsList.ModListType.Stage):
+                    EventManager.StageModSelectionChanged(null); break;
+                case (DataGridModsList.ModListType.General):
+                    EventManager.MiscModSelectionChanged(null); break;
+            }
         }
 
-        public void DeselectMod()
+        private void SetModAsSelected()
+        {
+            if (!isSelectable) return;
+            switch (_ModListType)
+            {
+                case (DataGridModsList.ModListType.CharacterSlots):
+                    EventManager.CharSlotModSelectionChanged(this); break;
+                case (DataGridModsList.ModListType.CharacterGeneral):
+                    EventManager.CharGeneralModSelectionChanged(this); break;
+                case (DataGridModsList.ModListType.Stage):
+                    EventManager.StageModSelectionChanged(this); break;
+                case (DataGridModsList.ModListType.General):
+                    EventManager.MiscModSelectionChanged(this); break;
+            }
+        }
+
+        private void SelectMod()
+        {
+            if (!m_IsSelected)
+            {
+                colorNormal = panelModList.BackColor;
+                panelModList.BackColor = colorHighlight;
+                m_IsSelected = true;
+            }
+        }
+
+        private void DeselectMod()
         {
             if (m_IsSelected)
             {
                 panelModList.BackColor = colorNormal;
                 m_IsSelected = false;
+            }
+        }
+
+        #region Events
+        private void OnModSelectionChanged(ModRow modRowSelected)
+        {
+            if (modRowSelected != this) DeselectMod();
+            else SelectMod();
+        }
+        #endregion
+
+        private void buttonProperties_Click(object sender, EventArgs e)
+        {
+            Forms.SlotModProperties popup = new Forms.SlotModProperties(PathHelper.FolderCharSlotsMods + Path.DirectorySeparatorChar + _CurrentFighter.name + Path.DirectorySeparatorChar + modFolder, _CurrentFighter.name);
+            if (!popup.isInitialized)
+            {
+                MessageBox.Show("The mod properties could not be opened. Is the mod missing?");
+                return;
+            }
+            popup.ShowDialog();
+            switch (_ModListType)
+            {
+                case DataGridModsList.ModListType.CharacterSlots:
+                    _SmashProjectManager._CharacterModsPage.RefreshSlotModsLists();
+                    break;
+                case DataGridModsList.ModListType.CharacterGeneral:
+                    _SmashProjectManager._CharacterModsPage.RefreshGeneralModsLists();
+                    break;
+                case DataGridModsList.ModListType.Stage:
+                    //TODO: Update with the stagemods usercontrol
+                case DataGridModsList.ModListType.General:
+                    //TODO: Update with the generalmods usercontrol
+                    break;
             }
         }
     }

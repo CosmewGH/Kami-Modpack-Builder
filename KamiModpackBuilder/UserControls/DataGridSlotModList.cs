@@ -31,6 +31,7 @@ namespace KamiModpackBuilder.UserControls
         }
         #endregion
 
+        #region Public Methods
         public void ChangeSelectedFighter(DB.Fighter a_fighter)
         {
             if (a_fighter == _CurrentFighter) return;
@@ -39,10 +40,58 @@ namespace KamiModpackBuilder.UserControls
                 {
                     _Rows[i].ChangeSelectedFighter(_CurrentFighter);
                 }
+            switch (_CurrentFighter.voicePackSlots)
+            {
+                case (DB.Fighter.VoicePackSlots.All): groupBoxVoiceMods.Visible = false; break;
+                case (DB.Fighter.VoicePackSlots.One):
+                    comboBoxVoiceSlot2.Visible = false;
+                    groupBoxVoiceMods.Visible = true;
+                    break;
+                case (DB.Fighter.VoicePackSlots.Two):
+                    comboBoxVoiceSlot2.Visible = true;
+                    groupBoxVoiceMods.Visible = true;
+                    break;
+            }
+            switch (_CurrentFighter.soundPackSlots)
+            {
+                case (DB.Fighter.SoundPackSlots.All): groupBoxSoundSlots.Visible = false; break;
+                case (DB.Fighter.SoundPackSlots.One):
+                    comboBoxSoundSlot2.Visible = false;
+                    groupBoxSoundSlots.Visible = true;
+                    break;
+                case (DB.Fighter.SoundPackSlots.Two):
+                    comboBoxSoundSlot2.Visible = true;
+                    groupBoxSoundSlots.Visible = true;
+                    break;
+            }
+            if (!groupBoxVoiceMods.Visible && !groupBoxSoundSlots.Visible) tableLayoutPanel4.SetRowSpan(panelModList, 2);
+            else
+            {
+                tableLayoutPanel4.SetRowSpan(panelModList, 1);
+                if (groupBoxVoiceMods.Visible)
+                {
+                    if (groupBoxSoundSlots.Visible)
+                    {
+                        tableLayoutPanel1.SetColumnSpan(groupBoxVoiceMods, 1);
+                        tableLayoutPanel1.SetColumnSpan(groupBoxSoundSlots, 1);
+                        tableLayoutPanel1.SetColumn(groupBoxSoundSlots, 1);
+                    }
+                    else
+                    {
+                        tableLayoutPanel1.SetColumnSpan(groupBoxVoiceMods, 2);
+                    }
+                }
+                else
+                {
+                    tableLayoutPanel1.SetColumnSpan(groupBoxSoundSlots, 2);
+                    tableLayoutPanel1.SetColumn(groupBoxSoundSlots, 1);
+                }
+            }
             RefreshRowData();
         }
+        #endregion
 
-        private void RefreshRowData()
+        public void RefreshRowData()
         {
             _RowData = new List<SlotRowData>();
             _Project = _SmashProjectManager.CurrentProject;
@@ -50,19 +99,32 @@ namespace KamiModpackBuilder.UserControls
             for (int i = 0; i < _CurrentFighter.maxSlots; ++i)
             {
                 SlotRowData row = new SlotRowData();
+                bool modFound = false;
                 row.slotNum = i;
                 for (int j = 0; j < _Project.ActiveCharacterSlotMods.Count; ++j)
                 {
-                    if (_Project.ActiveCharacterSlotMods[j].SlotID == i)
+                    if (_Project.ActiveCharacterSlotMods[j].SlotID == i && _Project.ActiveCharacterSlotMods[j].CharacterID == _CurrentFighter.id)
                     {
                         row.modFolder = _Project.ActiveCharacterSlotMods[j].FolderName;
 
                         CharacterSlotModXML data = Globals.Utils.OpenCharacterSlotKamiModFile(_CurrentFighter.name, row.modFolder);
-                        row.name = data.DisplayName;
+                        if (data != null)
+                        {
+                            row.name = data.DisplayName;
+                        }
+                        else
+                        {
+                            row.name = String.Format("{0} (Mod is missing!)", row.modFolder);
+                            row.hasError = true;
+                            row.propertiesEnabled = false;
+                            row.errorText = "Mod could not be found!";
+                        }
                         _RowData.Add(row);
+                        modFound = true;
                         break;
                     }
                 }
+                if (modFound) continue;
                 if (i < _CurrentFighter.defaultSlots)
                 {
                     row.name = "Default";
@@ -92,6 +154,17 @@ namespace KamiModpackBuilder.UserControls
             }
         }
 
+        public void SelectMod(string modFolderName)
+        {
+            for (int i = 0; i < _Rows.Count; ++i) {
+                if (_Rows[i].modFolder.Equals(modFolderName))
+                {
+                    Globals.EventManager.CharSlotModSelectionChanged(_Rows[i]);
+                    return;
+                }
+            }
+        }
+
         public class SlotRowData
         {
             public int slotNum = 0;
@@ -102,6 +175,7 @@ namespace KamiModpackBuilder.UserControls
             public string errorText = String.Empty;
             public bool hasError = false;
             public string modFolder = String.Empty;
+            public bool propertiesEnabled = true;
         }
     }
 }

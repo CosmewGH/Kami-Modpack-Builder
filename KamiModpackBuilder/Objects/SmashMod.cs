@@ -317,11 +317,9 @@ namespace KamiModpackBuilder.Objects
         public string BoxingRingText { get; set; }
         public bool WifiSafe { get; set; }
         public MetalModelStatus MetalModel { get; set; }
-        public string Credits { get; set; }
-        public List<string> CreditsLinks { get; set; }
         public string Notes { get; set; }
 
-        public enum MetalModelStatus { Works, Missing, Crashes}
+        public enum MetalModelStatus { Unknown, Works, Missing, Crashes}
 
         public CharacterSlotModXML()
         {

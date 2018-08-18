@@ -34,8 +34,8 @@
             this.openProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.projectSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.projectSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -115,19 +115,19 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(252, 6);
             // 
-            // projectSettingsToolStripMenuItem
-            // 
-            this.projectSettingsToolStripMenuItem.Name = "projectSettingsToolStripMenuItem";
-            this.projectSettingsToolStripMenuItem.Size = new System.Drawing.Size(255, 30);
-            this.projectSettingsToolStripMenuItem.Text = "Project Settings";
-            this.projectSettingsToolStripMenuItem.Click += new System.EventHandler(this.projectSettingsToolStripMenuItem_Click);
-            // 
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
             this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(255, 30);
             this.preferencesToolStripMenuItem.Text = "Application Settings";
             this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
+            // 
+            // projectSettingsToolStripMenuItem
+            // 
+            this.projectSettingsToolStripMenuItem.Name = "projectSettingsToolStripMenuItem";
+            this.projectSettingsToolStripMenuItem.Size = new System.Drawing.Size(255, 30);
+            this.projectSettingsToolStripMenuItem.Text = "Project Settings";
+            this.projectSettingsToolStripMenuItem.Click += new System.EventHandler(this.projectSettingsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -178,7 +178,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.textConsole);
             this.splitContainer1.Size = new System.Drawing.Size(1291, 952);
-            this.splitContainer1.SplitterDistance = 738;
+            this.splitContainer1.SplitterDistance = 828;
             this.splitContainer1.TabIndex = 3;
             // 
             // tabControl
@@ -194,7 +194,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1291, 738);
+            this.tabControl.Size = new System.Drawing.Size(1291, 828);
             this.tabControl.TabIndex = 2;
             // 
             // tabPageCharacterMods
@@ -202,7 +202,7 @@
             this.tabPageCharacterMods.Location = new System.Drawing.Point(4, 29);
             this.tabPageCharacterMods.Name = "tabPageCharacterMods";
             this.tabPageCharacterMods.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCharacterMods.Size = new System.Drawing.Size(1283, 705);
+            this.tabPageCharacterMods.Size = new System.Drawing.Size(1283, 795);
             this.tabPageCharacterMods.TabIndex = 0;
             this.tabPageCharacterMods.Text = "Character Mods";
             this.tabPageCharacterMods.UseVisualStyleBackColor = true;
@@ -274,7 +274,7 @@
             this.textConsole.Multiline = true;
             this.textConsole.Name = "textConsole";
             this.textConsole.ReadOnly = true;
-            this.textConsole.Size = new System.Drawing.Size(1291, 210);
+            this.textConsole.Size = new System.Drawing.Size(1291, 120);
             this.textConsole.TabIndex = 0;
             // 
             // folderBrowserDialog

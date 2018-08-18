@@ -54,44 +54,50 @@ namespace KamiModpackBuilder.UserControls
         #endregion
 
         #region Private Methods
-        
-        private void RefreshRowData()
+
+        public void RefreshRowData()
         {
             _RowData = new List<RowData>();
             _Project = _SmashProjectManager.CurrentProject;
-            /*
-            for (int i = 0; i < _CurrentFighter.maxSlots; ++i)
+
+            string baseDirectory = String.Empty;
+            switch (_ModListType) {
+                case (ModListType.CharacterSlots):
+                    baseDirectory = PathHelper.FolderCharSlotsMods + _CurrentFighter.name + Path.DirectorySeparatorChar;
+                    break;
+                case (ModListType.CharacterGeneral):
+                    baseDirectory = PathHelper.FolderCharGeneralMods + _CurrentFighter.name + Path.DirectorySeparatorChar;
+                    break;
+                case (ModListType.Stage):
+                    baseDirectory = PathHelper.FolderStageMods;
+                    break;
+                case (ModListType.General):
+                    baseDirectory = PathHelper.FolderGeneralMods;
+                    break;
+            }
+            string[] kamiFiles = Directory.GetFiles(baseDirectory, "kamimod.xml", SearchOption.AllDirectories);
+
+            for (int i = 0; i < kamiFiles.Count(); ++i)
             {
-                RowData row = new RowData();
+                string modFolderName = kamiFiles[i].Replace(baseDirectory, String.Empty).Split(Path.DirectorySeparatorChar).First();
+                //Check if the mod is already active. If it is, don't include it in this list.
+                bool modIsActive = false;
                 for (int j = 0; j < _Project.ActiveCharacterSlotMods.Count; ++j)
                 {
-                    if (_Project.ActiveCharacterSlotMods[j].SlotID == i)
+                    if (_Project.ActiveCharacterSlotMods[j].FolderName.Equals(modFolderName))
                     {
-                        row.modFolder = _Project.ActiveCharacterSlotMods[j].FolderName;
-
-                        CharacterSlotModXML data = Globals.Utils.OpenCharacterSlotKamiModFile(_CurrentFighter.name, row.modFolder);
-                        row.name = data.DisplayName;
-                        _RowData.Add(row);
+                        modIsActive = true;
                         break;
                     }
                 }
-                if (i < _CurrentFighter.defaultSlots)
-                {
-                    row.name = "Default";
-                    _RowData.Add(row);
-                    break;
-                }
+                if (modIsActive) continue;
+
+                RowData row = new RowData();
+                CharacterSlotModXML data = Utils.DeserializeXML<CharacterSlotModXML>(kamiFiles[i]);
+                row.modFolder = modFolderName;
+                row.name = data.DisplayName;
+                _RowData.Add(row);
             }
-            */
-            RowData row = new RowData();
-            row.name = "Test Mod 1";
-            _RowData.Add(row);
-            row = new RowData();
-            row.name = "Test Mod 2";
-            _RowData.Add(row);
-            row = new RowData();
-            row.name = "Test Mod 3";
-            _RowData.Add(row);
 
             PopulateRows();
         }
@@ -111,6 +117,27 @@ namespace KamiModpackBuilder.UserControls
                 row.Dock = DockStyle.Top;
                 _Rows.Add(row);
                 row.Parent = panelModList;
+            }
+        }
+
+        public void SelectMod(string modFolderName)
+        {
+            for (int i = 0; i < _Rows.Count; ++i)
+            {
+                if (_Rows[i].modFolder.Equals(modFolderName))
+                {
+                    switch (_ModListType)
+                    {
+                        case (DataGridModsList.ModListType.CharacterSlots):
+                            EventManager.CharSlotModSelectionChanged(_Rows[i]); return;
+                        case (DataGridModsList.ModListType.CharacterGeneral):
+                            EventManager.CharGeneralModSelectionChanged(_Rows[i]); return;
+                        case (DataGridModsList.ModListType.Stage):
+                            EventManager.StageModSelectionChanged(_Rows[i]); return;
+                        case (DataGridModsList.ModListType.General):
+                            EventManager.MiscModSelectionChanged(_Rows[i]); return;
+                    }
+                }
             }
         }
 
@@ -271,6 +298,8 @@ namespace KamiModpackBuilder.UserControls
                 popup.Initialize();
 
                 popup.ShowDialog();
+
+                RefreshRowData();
             }
         }
 
@@ -291,7 +320,7 @@ namespace KamiModpackBuilder.UserControls
         #endregion
 
         #endregion
-        
+
         public class RowData
         {
             public string name = String.Empty;
@@ -301,6 +330,7 @@ namespace KamiModpackBuilder.UserControls
             public string errorText = String.Empty;
             public bool hasError = false;
             public string modFolder = String.Empty;
+            public bool propertiesEnabled = true;
         }
     }
 }

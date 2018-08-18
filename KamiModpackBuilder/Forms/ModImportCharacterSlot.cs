@@ -241,7 +241,7 @@ namespace KamiModpackBuilder.Forms
                 xml.Voice = (string.Equals(voice, "None") ? false : true);
                 xml.Haslxx = (_CurrentFighter.lowPolySlots == Fighter.LowPolySlots.None) ? false : (string.Equals(lxx, "None") ? false : true);
                 xml.TextureID = -1;//TODO: calculate textureid here
-                xml.MetalModel = CharacterSlotModXML.MetalModelStatus.Works; //Assuming it works
+                xml.MetalModel = CharacterSlotModXML.MetalModelStatus.Unknown;
                 xml.WifiSafe = true; //Assuming wifi-safe
                 xml.UseCustomName = xml.chrn_11;
                 xml.CharacterName = xml.UseCustomName ? rowNames[i] : "";
