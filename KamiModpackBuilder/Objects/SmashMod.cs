@@ -334,8 +334,6 @@ namespace KamiModpackBuilder.Objects
     {
         public string DisplayName { get; set; }
         public bool WifiSafe { get; set; }
-        public string Credits { get; set; }
-        public List<string> CreditsLinks { get; set; }
         public string Notes { get; set; }
 
         public CharacterGeneralModXML()
@@ -352,8 +350,6 @@ namespace KamiModpackBuilder.Objects
         public string DisplayName { get; set; }
         public int IntendedStage { get; set; }
         public bool WifiSafe { get; set; }
-        public string Credits { get; set; }
-        public List<string> CreditsLinks { get; set; }
         public string Notes { get; set; }
 
         public StageModXML()
@@ -369,8 +365,6 @@ namespace KamiModpackBuilder.Objects
     {
         public string DisplayName { get; set; }
         public bool WifiSafe { get; set; }
-        public string Credits { get; set; }
-        public List<string> CreditsLinks { get; set; }
         public string Notes { get; set; }
 
         public GeneralModXML()

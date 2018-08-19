@@ -51,6 +51,11 @@ namespace KamiModpackBuilder.UserControls
                 }
             RefreshRowData();
         }
+
+        public void BeginImport(string path)
+        {
+            ParseImportFiles(new string[] { path });
+        }
         #endregion
 
         #region Private Methods
@@ -60,43 +65,120 @@ namespace KamiModpackBuilder.UserControls
             _RowData = new List<RowData>();
             _Project = _SmashProjectManager.CurrentProject;
 
-            string baseDirectory = String.Empty;
-            switch (_ModListType) {
-                case (ModListType.CharacterSlots):
-                    baseDirectory = PathHelper.FolderCharSlotsMods + _CurrentFighter.name + Path.DirectorySeparatorChar;
-                    break;
-                case (ModListType.CharacterGeneral):
-                    baseDirectory = PathHelper.FolderCharGeneralMods + _CurrentFighter.name + Path.DirectorySeparatorChar;
-                    break;
-                case (ModListType.Stage):
-                    baseDirectory = PathHelper.FolderStageMods;
-                    break;
-                case (ModListType.General):
-                    baseDirectory = PathHelper.FolderGeneralMods;
-                    break;
-            }
-            string[] kamiFiles = Directory.GetFiles(baseDirectory, "kamimod.xml", SearchOption.AllDirectories);
-
-            for (int i = 0; i < kamiFiles.Count(); ++i)
+            if (_IsActiveList)
             {
-                string modFolderName = kamiFiles[i].Replace(baseDirectory, String.Empty).Split(Path.DirectorySeparatorChar).First();
-                //Check if the mod is already active. If it is, don't include it in this list.
-                bool modIsActive = false;
-                for (int j = 0; j < _Project.ActiveCharacterSlotMods.Count; ++j)
+                for (int j = 0; j < _Project.ActiveCharacterGeneralMods.Count; ++j)
                 {
-                    if (_Project.ActiveCharacterSlotMods[j].FolderName.Equals(modFolderName))
-                    {
-                        modIsActive = true;
-                        break;
-                    }
-                }
-                if (modIsActive) continue;
+                    if (_Project.ActiveCharacterGeneralMods[j].CharacterID != _CurrentFighter.id) continue;
 
-                RowData row = new RowData();
-                CharacterSlotModXML data = Utils.DeserializeXML<CharacterSlotModXML>(kamiFiles[i]);
-                row.modFolder = modFolderName;
-                row.name = data.DisplayName;
-                _RowData.Add(row);
+                    RowData row = new RowData();
+                    row.modFolder = _Project.ActiveCharacterGeneralMods[j].FolderName;
+
+                    CharacterGeneralModXML data = Globals.Utils.OpenCharacterGeneralKamiModFile(_CurrentFighter.name, row.modFolder);
+                    if (data != null)
+                    {
+                        row.name = data.DisplayName;
+                    }
+                    else
+                    {
+                        row.name = String.Format("{0} (Mod is missing!)", row.modFolder);
+                        row.hasError = true;
+                        row.propertiesEnabled = false;
+                        row.errorText = "Mod could not be found!";
+                    }
+                    _RowData.Add(row);
+                }
+            }
+            else
+            {
+                string baseDirectory = String.Empty;
+                switch (_ModListType)
+                {
+                    case (ModListType.CharacterSlots):
+                        baseDirectory = PathHelper.FolderCharSlotsMods + _CurrentFighter.name + Path.DirectorySeparatorChar;
+                        break;
+                    case (ModListType.CharacterGeneral):
+                        baseDirectory = PathHelper.FolderCharGeneralMods + _CurrentFighter.name + Path.DirectorySeparatorChar;
+                        break;
+                    case (ModListType.Stage):
+                        baseDirectory = PathHelper.FolderStageMods;
+                        break;
+                    case (ModListType.General):
+                        baseDirectory = PathHelper.FolderGeneralMods;
+                        break;
+                }
+                string[] kamiFiles = Directory.GetFiles(baseDirectory, "kamimod.xml", SearchOption.AllDirectories);
+
+                for (int i = 0; i < kamiFiles.Count(); ++i)
+                {
+                    string modFolderName = kamiFiles[i].Replace(baseDirectory, String.Empty).Split(Path.DirectorySeparatorChar).First();
+                    //Check if the mod is already active. If it is, don't include it in this list.
+                    bool modIsActive = false;
+                    switch (_ModListType)
+                    {
+                        case (ModListType.CharacterSlots):
+                            for (int j = 0; j < _Project.ActiveCharacterSlotMods.Count; ++j)
+                            {
+                                if (_Project.ActiveCharacterSlotMods[j].FolderName.Equals(modFolderName))
+                                {
+                                    modIsActive = true;
+                                    break;
+                                }
+                            }
+                            break;
+                        case (ModListType.CharacterGeneral):
+                            for (int j = 0; j < _Project.ActiveCharacterGeneralMods.Count; ++j)
+                            {
+                                if (_Project.ActiveCharacterGeneralMods[j].FolderName.Equals(modFolderName))
+                                {
+                                    modIsActive = true;
+                                    break;
+                                }
+                            }
+                            break;
+                        case (ModListType.Stage):
+                            for (int j = 0; j < _Project.ActiveStageMods.Count; ++j)
+                            {
+                                if (_Project.ActiveStageMods[j].FolderName.Equals(modFolderName))
+                                {
+                                    modIsActive = true;
+                                    break;
+                                }
+                            }
+                            break;
+                        case (ModListType.General):
+                            for (int j = 0; j < _Project.ActiveGeneralMods.Count; ++j)
+                            {
+                                if (_Project.ActiveGeneralMods[j].Equals(modFolderName))
+                                {
+                                    modIsActive = true;
+                                    break;
+                                }
+                            }
+                            break;
+                    }
+                    if (modIsActive) continue;
+
+                    RowData row = new RowData();
+                    row.modFolder = modFolderName;
+                    switch (_ModListType)
+                    {
+                        case (ModListType.CharacterSlots):
+                            CharacterSlotModXML data = Utils.DeserializeXML<CharacterSlotModXML>(kamiFiles[i]);
+                            row.name = data.DisplayName;
+                            break;
+                        case (ModListType.CharacterGeneral):
+                            row.name = Utils.DeserializeXML<CharacterGeneralModXML>(kamiFiles[i]).DisplayName;
+                            break;
+                        case (ModListType.Stage):
+                            row.name = Utils.DeserializeXML<StageModXML>(kamiFiles[i]).DisplayName;
+                            break;
+                        case (ModListType.General):
+                            row.name = Utils.DeserializeXML<GeneralModXML>(kamiFiles[i]).DisplayName;
+                            break;
+                    }
+                    _RowData.Add(row);
+                }
             }
 
             PopulateRows();
@@ -278,6 +360,8 @@ namespace KamiModpackBuilder.UserControls
                     Utils.CopyAllValidFilesBetweenDirectories(oldBasePath, newBasePath);
 
                     LogHelper.Info(String.Format("KamiMod {0} imported successfully!", modFolderName));
+
+                    RefreshRowData();
                 }
             }
             else
@@ -305,7 +389,87 @@ namespace KamiModpackBuilder.UserControls
 
         private void ProcessCharacterGeneralModFiles(string[] files, string baseDirectory)
         {
+            string[] xmlFiles = Utils.FindFilesByFilename(files, "kamimod.xml");
 
+            List<string> XmlModFiles = new List<string>();
+            List<CharacterGeneralModXML> XmlMods = new List<CharacterGeneralModXML>();
+            if (xmlFiles != null)
+            {
+                foreach (string xmlFile in xmlFiles)
+                {
+                    if (Path.GetFileName(xmlFile) != "kamimod.xml") continue;
+
+                    CharacterGeneralModXML mod = Utils.DeserializeXML<CharacterGeneralModXML>(xmlFile);
+                    if (mod == null) continue;
+                    XmlMods.Add(mod);
+                    XmlModFiles.Add(xmlFile);
+                }
+            }
+
+            if (XmlMods.Count > 0)
+            {
+                for (int i = 0; i < XmlMods.Count; ++i)
+                {
+                    string oldBasePath = Path.GetDirectoryName(XmlModFiles[0]);
+
+                    string modFolderName = oldBasePath.Split(Path.DirectorySeparatorChar).Last();
+                    if (modFolderName == "unzip") modFolderName = XmlMods[i].DisplayName;
+
+                    oldBasePath = oldBasePath + Path.DirectorySeparatorChar;
+
+                    string newBasePath = PathHelper.FolderCharGeneralMods + _CurrentFighter.name + Path.DirectorySeparatorChar + modFolderName + Path.DirectorySeparatorChar;
+
+                    Utils.CopyAllValidFilesBetweenDirectories(oldBasePath, newBasePath);
+
+                    LogHelper.Info(String.Format("KamiMod {0} imported successfully!", modFolderName));
+
+                    RefreshRowData();
+                }
+            }
+            else
+            {
+                string cameraFolder = Utils.FindDirectoryInFiles(files, "camera", baseDirectory);
+                string modelFolder = Utils.FindDirectoryInFiles(files, "model", baseDirectory);
+                string effectFolder = Utils.FindDirectoryInFiles(files, "effect", baseDirectory);
+                string motionFolder = Utils.FindDirectoryInFiles(files, "motion", baseDirectory);
+                string scriptFolder = Utils.FindDirectoryInFiles(files, "script", baseDirectory);
+                string soundFolder = Utils.FindDirectoryInFiles(files, "sound", baseDirectory);
+                
+                string name = baseDirectory.Split(Path.DirectorySeparatorChar).Last();
+                Forms.NewModNamePopup popup = new Forms.NewModNamePopup();
+                popup.nameText = name;
+                popup.ShowDialog();
+                if (!popup.confirmPressed) return;
+                name = popup.nameText;
+                name = PathHelper.RemoveInvalidFilenameChars(name);
+                if (name.Length < 1)
+                {
+                    MessageBox.Show("Invalid mod name given. Aborting import.");
+                    LogHelper.Error("Invalid mod name given. Aborting import.");
+                    return;
+                }
+                string newModDirectory = PathHelper.FolderCharGeneralMods + Path.DirectorySeparatorChar + _CurrentFighter.name + Path.DirectorySeparatorChar + name + Path.DirectorySeparatorChar;
+                
+                #region XML File Creation
+                CharacterGeneralModXML xml = new CharacterGeneralModXML();
+                xml.DisplayName = name;
+                xml.WifiSafe = true; //Assuming wifi-safe
+                Utils.SerializeXMLToFile(xml, newModDirectory + "kamimod.xml");
+                #endregion
+
+                #region Mod Files
+                if (!cameraFolder.Equals(String.Empty)) Utils.CopyAllValidFilesBetweenDirectories(cameraFolder, newModDirectory + "camera" + Path.DirectorySeparatorChar);
+                if (!modelFolder.Equals(String.Empty)) Utils.CopyAllValidFilesBetweenDirectories(modelFolder, newModDirectory + "model" + Path.DirectorySeparatorChar);
+                if (!effectFolder.Equals(String.Empty)) Utils.CopyAllValidFilesBetweenDirectories(effectFolder, newModDirectory + "effect" + Path.DirectorySeparatorChar);
+                if (!motionFolder.Equals(String.Empty)) Utils.CopyAllValidFilesBetweenDirectories(motionFolder, newModDirectory + "motion" + Path.DirectorySeparatorChar);
+                if (!scriptFolder.Equals(String.Empty)) Utils.CopyAllValidFilesBetweenDirectories(scriptFolder, newModDirectory + "script" + Path.DirectorySeparatorChar);
+                if (!soundFolder.Equals(String.Empty)) Utils.CopyAllValidFilesBetweenDirectories(soundFolder, newModDirectory + "sound" + Path.DirectorySeparatorChar);
+                #endregion
+
+                LogHelper.Info(String.Format("Mod {0} imported successfully!", name));
+
+                RefreshRowData();
+            }
         }
 
         private void ProcessStageModFiles(string[] files, string baseDirectory)

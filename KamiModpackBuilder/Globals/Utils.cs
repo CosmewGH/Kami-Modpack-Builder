@@ -153,6 +153,28 @@ namespace KamiModpackBuilder.Globals
             }
             return foundFiles.ToArray();
         }
+        
+        /// <summary>
+        /// Goes over every file to see if any are located in the desired directory name. If it is found, returns the full path of the found directory.
+        /// </summary>
+        /// <param name="filesToSearch">List of files to search for the directory using.</param>
+        /// <param name="directoryName">The exact name of the directory to find.</param>
+        /// <param name="baseDirectory">The base part of the directory to exclude in name searching.</param>
+        /// <returns></returns>
+        public static string FindDirectoryInFiles(string[] filesToSearch, string directoryName, string baseDirectory)
+        {
+            if (baseDirectory.EndsWith(Path.DirectorySeparatorChar.ToString())) baseDirectory = baseDirectory.Remove(baseDirectory.Length - 1);
+            foreach (string fileToSearch in filesToSearch)
+            {
+                string relativePath = fileToSearch.Replace(baseDirectory, String.Empty);
+                if (relativePath.Contains(Path.DirectorySeparatorChar + directoryName + Path.DirectorySeparatorChar))
+                {
+                    int position = relativePath.IndexOf(directoryName) + directoryName.Length + baseDirectory.Length;
+                    return fileToSearch.Remove(position);
+                }
+            }
+            return String.Empty;
+        }
 
         public static T DeserializeXML<T>(string file)
         {

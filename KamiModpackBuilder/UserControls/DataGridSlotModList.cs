@@ -103,26 +103,25 @@ namespace KamiModpackBuilder.UserControls
                 row.slotNum = i;
                 for (int j = 0; j < _Project.ActiveCharacterSlotMods.Count; ++j)
                 {
-                    if (_Project.ActiveCharacterSlotMods[j].SlotID == i && _Project.ActiveCharacterSlotMods[j].CharacterID == _CurrentFighter.id)
-                    {
-                        row.modFolder = _Project.ActiveCharacterSlotMods[j].FolderName;
+                    if (_Project.ActiveCharacterSlotMods[j].CharacterID != _CurrentFighter.id) continue;
+                    if (_Project.ActiveCharacterSlotMods[j].SlotID != i) continue;
+                    row.modFolder = _Project.ActiveCharacterSlotMods[j].FolderName;
 
-                        CharacterSlotModXML data = Globals.Utils.OpenCharacterSlotKamiModFile(_CurrentFighter.name, row.modFolder);
-                        if (data != null)
-                        {
-                            row.name = data.DisplayName;
-                        }
-                        else
-                        {
-                            row.name = String.Format("{0} (Mod is missing!)", row.modFolder);
-                            row.hasError = true;
-                            row.propertiesEnabled = false;
-                            row.errorText = "Mod could not be found!";
-                        }
-                        _RowData.Add(row);
-                        modFound = true;
-                        break;
+                    CharacterSlotModXML data = Globals.Utils.OpenCharacterSlotKamiModFile(_CurrentFighter.name, row.modFolder);
+                    if (data != null)
+                    {
+                        row.name = data.DisplayName;
                     }
+                    else
+                    {
+                        row.name = String.Format("{0} (Mod is missing!)", row.modFolder);
+                        row.hasError = true;
+                        row.propertiesEnabled = false;
+                        row.errorText = "Mod could not be found!";
+                    }
+                    _RowData.Add(row);
+                    modFound = true;
+                    break;
                 }
                 if (modFound) continue;
                 if (i < _CurrentFighter.defaultSlots)

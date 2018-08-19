@@ -243,8 +243,12 @@ namespace KamiModpackBuilder.UserControls
                 {
                     buttonGeneralRight.Enabled = true;
                     buttonGeneralLeft.Enabled = false;
-                    buttonGeneralUp.Enabled = true;//TODO: Add check to see if it is the top of the list already
-                    buttonGeneralDown.Enabled = true;//TODO: Add check to see if it is the bottom of the list already
+                    for (int i = 0; i < CurrentFighterActiveGeneralMods.Count; ++i) {
+                        if (!SelectedGeneralMod.modFolder.Equals(CurrentFighterActiveGeneralMods[i].FolderName)) continue;
+                        buttonGeneralUp.Enabled = (i > 0);
+                        buttonGeneralDown.Enabled = (i < CurrentFighterActiveGeneralMods.Count - 1);
+                        break;
+                    }
                 }
             }
         }
@@ -355,32 +359,118 @@ namespace KamiModpackBuilder.UserControls
 
         private void buttonGeneralLeft_Click(object sender, EventArgs e)
         {
-
+            if (SelectedGeneralMod == null) return;
+            if (SelectedGeneralMod.isActiveList) return;
+            
+            CharacterGeneralMod newActiveMod = new CharacterGeneralMod();
+            newActiveMod.CharacterID = _CurrentFighter.id;
+            newActiveMod.FolderName = SelectedGeneralMod.modFolder;
+            _SmashProjectManager.CurrentProject.ActiveCharacterGeneralMods.Add(newActiveMod);
+            CurrentFighterActiveGeneralMods.Add(newActiveMod);
+            RefreshGeneralModsLists();
+            _GridGeneral.SelectMod(newActiveMod.FolderName);
         }
 
         private void buttonGeneralRight_Click(object sender, EventArgs e)
         {
-
+            if (SelectedGeneralMod == null) return;
+            if (!SelectedGeneralMod.isActiveList) return;
+            string modFolder = SelectedGeneralMod.modFolder;
+            for (int i = 0; i < CurrentFighterActiveGeneralMods.Count; ++i)
+            {
+                if (CurrentFighterActiveGeneralMods[i].FolderName.Equals(modFolder))
+                {
+                    _SmashProjectManager.CurrentProject.ActiveCharacterGeneralMods.Remove(CurrentFighterActiveGeneralMods[i]);
+                    CurrentFighterActiveGeneralMods.RemoveAt(i);
+                    break;
+                }
+            }
+            RefreshGeneralModsLists();
+            _GridGeneralInactive.SelectMod(modFolder);
         }
 
         private void buttonGeneralUp_Click(object sender, EventArgs e)
         {
-
+            if (SelectedGeneralMod == null) return;
+            if (!SelectedGeneralMod.isActiveList) return;
+            string modFolder = SelectedGeneralMod.modFolder;
+            for (int i = 0; i < CurrentFighterActiveGeneralMods.Count; ++i)
+            {
+                if (!CurrentFighterActiveGeneralMods[i].FolderName.Equals(modFolder)) continue;
+                CharacterGeneralMod mod = CurrentFighterActiveGeneralMods[i];
+                int index = _SmashProjectManager.CurrentProject.ActiveCharacterGeneralMods.IndexOf(mod);
+                _SmashProjectManager.CurrentProject.ActiveCharacterGeneralMods.RemoveAt(index);
+                _SmashProjectManager.CurrentProject.ActiveCharacterGeneralMods.Insert(index - 1, mod);
+                CurrentFighterActiveGeneralMods.RemoveAt(i);
+                CurrentFighterActiveGeneralMods.Insert(i - 1, mod);
+                break;
+            }
+            RefreshGeneralModsLists();
+            _GridGeneral.SelectMod(modFolder);
         }
 
         private void buttonGeneralDown_Click(object sender, EventArgs e)
         {
-
+            if (SelectedGeneralMod == null) return;
+            if (!SelectedGeneralMod.isActiveList) return;
+            string modFolder = SelectedGeneralMod.modFolder;
+            for (int i = 0; i < CurrentFighterActiveGeneralMods.Count; ++i)
+            {
+                if (!CurrentFighterActiveGeneralMods[i].FolderName.Equals(modFolder)) continue;
+                CharacterGeneralMod mod = CurrentFighterActiveGeneralMods[i];
+                int index = _SmashProjectManager.CurrentProject.ActiveCharacterGeneralMods.IndexOf(mod);
+                _SmashProjectManager.CurrentProject.ActiveCharacterGeneralMods.RemoveAt(index);
+                _SmashProjectManager.CurrentProject.ActiveCharacterGeneralMods.Insert(index + 1, mod);
+                CurrentFighterActiveGeneralMods.RemoveAt(i);
+                CurrentFighterActiveGeneralMods.Insert(i + 1, mod);
+                break;
+            }
+            RefreshGeneralModsLists();
+            _GridGeneral.SelectMod(modFolder);
         }
 
         private void buttonImportSlotMod_Click(object sender, EventArgs e)
         {
-
+            Forms.ImportFolderOrZip popup = new Forms.ImportFolderOrZip();
+            popup.textInstuctions = "Mod can contain model data, portrait data, and audio data.";
+            popup.ShowDialog();
+            String path = String.Empty;
+            if (popup.choseZip)
+            {
+                if (openFileDialogImportZip.ShowDialog() == DialogResult.OK)
+                {
+                    _GridSlotsInactive.BeginImport(openFileDialogImportZip.FileName);
+                }
+            }
+            else if (popup.choseFolder)
+            {
+                if (folderBrowserDialogImportFolder.ShowDialog() == DialogResult.OK)
+                {
+                    _GridSlotsInactive.BeginImport(folderBrowserDialogImportFolder.SelectedPath);
+                }
+            }
         }
 
         private void buttonImportGeneralMod_Click(object sender, EventArgs e)
         {
-
+            Forms.ImportFolderOrZip popup = new Forms.ImportFolderOrZip();
+            popup.textInstuctions = "Folder must have at least one of the following folders (Based on the\r\nSm4shExplorer hierarchy in the fighter folder) so Kami Modpack Builder\r\nknows where to place the files: model, sound, motion, effect, script, camera.";
+            popup.ShowDialog();
+            String path = String.Empty;
+            if (popup.choseZip)
+            {
+                if (openFileDialogImportZip.ShowDialog() == DialogResult.OK)
+                {
+                    _GridGeneralInactive.BeginImport(openFileDialogImportZip.FileName);
+                }
+            }
+            else if (popup.choseFolder)
+            {
+                if (folderBrowserDialogImportFolder.ShowDialog() == DialogResult.OK)
+                {
+                    _GridGeneralInactive.BeginImport(folderBrowserDialogImportFolder.SelectedPath);
+                }
+            }
         }
         #endregion
     }

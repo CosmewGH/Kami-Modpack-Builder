@@ -79,11 +79,23 @@
     <Compile Include="Forms\CreationProjectInfo.Designer.cs">
       <DependentUpon>CreationProjectInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ImportFolderOrZip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImportFolderOrZip.Designer.cs">
+      <DependentUpon>ImportFolderOrZip.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ModImportCharacterSlot.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ModImportCharacterSlot.Designer.cs">
       <DependentUpon>ModImportCharacterSlot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NewModNamePopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NewModNamePopup.Designer.cs">
+      <DependentUpon>NewModNamePopup.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Preferences.cs">
       <SubType>Form</SubType>
@@ -172,9 +184,15 @@
     <EmbeddedResource Include="Forms\CreationProjectInfo.resx">
       <DependentUpon>CreationProjectInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ImportFolderOrZip.resx">
+      <DependentUpon>ImportFolderOrZip.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ModImportCharacterSlot.resx">
       <DependentUpon>ModImportCharacterSlot.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NewModNamePopup.resx">
+      <DependentUpon>NewModNamePopup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Preferences.resx">
       <DependentUpon>Preferences.cs</DependentUpon>
