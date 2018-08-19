@@ -395,7 +395,6 @@
             // 
             // openFileDialogImportZip
             // 
-            this.openFileDialogImportZip.FileName = "openFileDialog1";
             this.openFileDialogImportZip.Filter = "Zip files|*.zip";
             // 
             // CharacterMods

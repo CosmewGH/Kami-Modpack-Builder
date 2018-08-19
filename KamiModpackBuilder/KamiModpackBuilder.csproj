@@ -91,6 +91,12 @@
     <Compile Include="Forms\ModImportCharacterSlot.Designer.cs">
       <DependentUpon>ModImportCharacterSlot.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ModProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModProperties.Designer.cs">
+      <DependentUpon>ModProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\NewModNamePopup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,6 +196,9 @@
     <EmbeddedResource Include="Forms\ModImportCharacterSlot.resx">
       <DependentUpon>ModImportCharacterSlot.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ModProperties.resx">
+      <DependentUpon>ModProperties.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\NewModNamePopup.resx">
       <DependentUpon>NewModNamePopup.cs</DependentUpon>

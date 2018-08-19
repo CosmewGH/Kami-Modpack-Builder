@@ -87,7 +87,7 @@ namespace KamiModpackBuilder.Forms
 
             //TODO: Portraits
 
-            textBoxNotes.Text = XMLData.Notes.Replace("\n", "\r\n"); ;
+            textBoxNotes.Text = XMLData.Notes.Replace("\n", "\r\n");
 
             IsInitialized = true;
         }

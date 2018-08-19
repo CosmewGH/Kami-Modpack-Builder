@@ -235,13 +235,47 @@ namespace KamiModpackBuilder.UserControls
 
         private void buttonProperties_Click(object sender, EventArgs e)
         {
-            Forms.SlotModProperties popup = new Forms.SlotModProperties(PathHelper.FolderCharSlotsMods + Path.DirectorySeparatorChar + _CurrentFighter.name + Path.DirectorySeparatorChar + modFolder, _CurrentFighter.name);
-            if (!popup.isInitialized)
+            Forms.SlotModProperties popup;
+            Forms.ModProperties popup2;
+            switch (_ModListType)
             {
-                MessageBox.Show("The mod properties could not be opened. Is the mod missing?");
-                return;
+                case DataGridModsList.ModListType.CharacterSlots:
+                    popup = new Forms.SlotModProperties(PathHelper.FolderCharSlotsMods + Path.DirectorySeparatorChar + _CurrentFighter.name + Path.DirectorySeparatorChar + modFolder, _CurrentFighter.name);
+                    if (!popup.isInitialized)
+                    {
+                        MessageBox.Show("The mod properties could not be opened. Is the mod missing?");
+                        return;
+                    }
+                    popup.ShowDialog();
+                    break;
+                case DataGridModsList.ModListType.CharacterGeneral:
+                    popup2 = new Forms.ModProperties(PathHelper.FolderCharGeneralMods + Path.DirectorySeparatorChar + _CurrentFighter.name + Path.DirectorySeparatorChar + modFolder, _ModListType, _CurrentFighter.name);
+                    if (!popup2.isInitialized)
+                    {
+                        MessageBox.Show("The mod properties could not be opened. Is the mod missing?");
+                        return;
+                    }
+                    popup2.ShowDialog();
+                    break;
+                case DataGridModsList.ModListType.Stage:
+                    popup2 = new Forms.ModProperties(PathHelper.FolderStageMods + Path.DirectorySeparatorChar + modFolder, _ModListType);
+                    if (!popup2.isInitialized)
+                    {
+                        MessageBox.Show("The mod properties could not be opened. Is the mod missing?");
+                        return;
+                    }
+                    popup2.ShowDialog();
+                    break;
+                case DataGridModsList.ModListType.General:
+                    popup2 = new Forms.ModProperties(PathHelper.FolderGeneralMods + Path.DirectorySeparatorChar + modFolder, _ModListType);
+                    if (!popup2.isInitialized)
+                    {
+                        MessageBox.Show("The mod properties could not be opened. Is the mod missing?");
+                        return;
+                    }
+                    popup2.ShowDialog();
+                    break;
             }
-            popup.ShowDialog();
             switch (_ModListType)
             {
                 case DataGridModsList.ModListType.CharacterSlots:
