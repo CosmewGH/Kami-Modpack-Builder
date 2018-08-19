@@ -69,7 +69,25 @@ namespace KamiModpackBuilder.Forms
             textBoxCustomName.Enabled = checkBoxUseCustomName.Checked;
             textBoxBoxingRing.Enabled = checkBoxUseCustomName.Checked;
 
+            bool hasModels = false;
+            string[] nutFiles = Directory.GetFiles(ModPath + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "body", "*.nut", SearchOption.AllDirectories);
+            if (nutFiles.Length > 0) hasModels = true;
+            else
+            {
+                nutFiles = Directory.GetFiles(ModPath + Path.DirectorySeparatorChar + "model", "*.nut", SearchOption.AllDirectories);
+                if (nutFiles.Length > 0) hasModels = true;
+            }
+            if (hasModels)
+            {
+                FileTypes.NUT nut = new FileTypes.NUT();
+                nut.Read(nutFiles[0]);
+                if (nut.Textures.Count > 0)
+                {
+                    XMLData.TextureID = (nut.Textures[0].HashId & 0x0000FF00) >> 8;
+                }
+            }
             textBoxTextureID.Text = XMLData.TextureID.ToString();
+
             checkBoxWifiSafe.Checked = XMLData.WifiSafe;
             comboBoxMetalModel.DataSource = new List<String> { "Unknown", "Works", "Missing", "Crashes" };
             comboBoxMetalModel.SelectedIndex = (int)XMLData.MetalModel;
@@ -108,12 +126,13 @@ namespace KamiModpackBuilder.Forms
             if (XMLData.TextureID < 0) XMLData.TextureID = 0;
             if (XMLData.TextureID > 255) XMLData.TextureID = 255;
             textBoxTextureID.Text = XMLData.TextureID.ToString();
-            //TODO: Set the textureID
+            TextureIDFix textureIDFix = new TextureIDFix();
+            TextureIDFix.Mod mod = new TextureIDFix.Mod(ModPath + Path.DirectorySeparatorChar + "model");
+            textureIDFix.ChangeTextureID(mod, (ushort)XMLData.TextureID);
         }
 
         private void SaveXMLData()
         {
-
             XMLData.DisplayName = textBoxDisplayName.Text;
             XMLData.UseCustomName = checkBoxUseCustomName.Checked;
             XMLData.CharacterName = textBoxCustomName.Text;

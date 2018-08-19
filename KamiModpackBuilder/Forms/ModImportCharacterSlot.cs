@@ -240,7 +240,7 @@ namespace KamiModpackBuilder.Forms
                 xml.Sound = (string.Equals(sound, "None") ? false : true);
                 xml.Voice = (string.Equals(voice, "None") ? false : true);
                 xml.Haslxx = (_CurrentFighter.lowPolySlots == Fighter.LowPolySlots.None) ? false : (string.Equals(lxx, "None") ? false : true);
-                xml.TextureID = -1;//TODO: calculate textureid here
+                xml.TextureID = -1;//Is recalculated lower
                 xml.MetalModel = CharacterSlotModXML.MetalModelStatus.Unknown;
                 xml.WifiSafe = true; //Assuming wifi-safe
                 xml.UseCustomName = xml.chrn_11;
@@ -254,6 +254,15 @@ namespace KamiModpackBuilder.Forms
                 {
                     if (modelParts[k].Equals("None")) continue;
                     string foldername = GetFilenameFromComboBoxString(ModelNutDirectories, ComboBoxList_ModelNutDirectories, modelParts[k]);
+                    if (xml.TextureID == -1)
+                    {
+                        FileTypes.NUT nut = new FileTypes.NUT();
+                        nut.Read(foldername);
+                        if (nut.Textures.Count > 0)
+                        {
+                            xml.TextureID = nut.Textures[0].HashId;
+                        }
+                    }
                     foldername = foldername.Replace(Path.GetFileName(foldername), string.Empty);
                     Utils.CopyAllValidFilesBetweenDirectories(foldername, baseModelPath + _CurrentFighter.modelParts[k] + Path.DirectorySeparatorChar);
                 }
