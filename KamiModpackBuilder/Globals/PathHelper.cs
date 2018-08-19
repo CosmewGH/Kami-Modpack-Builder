@@ -127,6 +127,16 @@ namespace KamiModpackBuilder.Globals
             return FolderCharSlotsMods + charName + Path.DirectorySeparatorChar;
         }
 
+        public static string GetCharacterSlotModPath(string charName, string modName)
+        {
+            return GetCharacterSlotsFolder(charName) + modName + Path.DirectorySeparatorChar;
+        }
+
+        public static string GetCharacterSlotModKamiPath(string charName, string modName)
+        {
+            return GetCharacterSlotModPath(charName, modName) + "kamimod.xml";
+        }
+
         public static string GetCharacterGeneralFolder(string charName)
         {
             return FolderCharGeneralMods + charName + Path.DirectorySeparatorChar;

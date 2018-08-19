@@ -31,7 +31,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.comboBoxCharacters = new System.Windows.Forms.ComboBox();
-            this.buttonTextureIDFixCurrent = new System.Windows.Forms.Button();
             this.buttonTextureIDFixAll = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.buttonImportSlotMod = new System.Windows.Forms.Button();
@@ -76,7 +75,6 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.comboBoxCharacters);
-            this.flowLayoutPanel1.Controls.Add(this.buttonTextureIDFixCurrent);
             this.flowLayoutPanel1.Controls.Add(this.buttonTextureIDFixAll);
             this.flowLayoutPanel1.Controls.Add(this.checkBox1);
             this.flowLayoutPanel1.Controls.Add(this.buttonImportSlotMod);
@@ -90,6 +88,7 @@
             // 
             // comboBoxCharacters
             // 
+            this.comboBoxCharacters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCharacters.FormattingEnabled = true;
             this.comboBoxCharacters.Location = new System.Drawing.Point(2, 2);
             this.comboBoxCharacters.Margin = new System.Windows.Forms.Padding(2);
@@ -98,34 +97,23 @@
             this.comboBoxCharacters.TabIndex = 1;
             this.comboBoxCharacters.SelectedIndexChanged += new System.EventHandler(this.comboBoxCharacters_SelectedIndexChanged);
             // 
-            // buttonTextureIDFixCurrent
-            // 
-            this.buttonTextureIDFixCurrent.AutoSize = true;
-            this.buttonTextureIDFixCurrent.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonTextureIDFixCurrent.Location = new System.Drawing.Point(130, 2);
-            this.buttonTextureIDFixCurrent.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonTextureIDFixCurrent.Name = "buttonTextureIDFixCurrent";
-            this.buttonTextureIDFixCurrent.Size = new System.Drawing.Size(146, 23);
-            this.buttonTextureIDFixCurrent.TabIndex = 2;
-            this.buttonTextureIDFixCurrent.Text = "TextureID Fix Selected Slot";
-            this.buttonTextureIDFixCurrent.UseVisualStyleBackColor = true;
-            // 
             // buttonTextureIDFixAll
             // 
             this.buttonTextureIDFixAll.AutoSize = true;
             this.buttonTextureIDFixAll.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonTextureIDFixAll.Location = new System.Drawing.Point(280, 2);
+            this.buttonTextureIDFixAll.Location = new System.Drawing.Point(130, 2);
             this.buttonTextureIDFixAll.Margin = new System.Windows.Forms.Padding(2);
             this.buttonTextureIDFixAll.Name = "buttonTextureIDFixAll";
             this.buttonTextureIDFixAll.Size = new System.Drawing.Size(120, 23);
             this.buttonTextureIDFixAll.TabIndex = 3;
             this.buttonTextureIDFixAll.Text = "TextureID Fix All Slots";
             this.buttonTextureIDFixAll.UseVisualStyleBackColor = true;
+            this.buttonTextureIDFixAll.Click += new System.EventHandler(this.buttonTextureIDFixAll_Click);
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(404, 2);
+            this.checkBox1.Location = new System.Drawing.Point(254, 2);
             this.checkBox1.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
@@ -136,7 +124,7 @@
             // 
             // buttonImportSlotMod
             // 
-            this.buttonImportSlotMod.Location = new System.Drawing.Point(504, 2);
+            this.buttonImportSlotMod.Location = new System.Drawing.Point(354, 2);
             this.buttonImportSlotMod.Margin = new System.Windows.Forms.Padding(2);
             this.buttonImportSlotMod.Name = "buttonImportSlotMod";
             this.buttonImportSlotMod.Size = new System.Drawing.Size(105, 23);
@@ -147,7 +135,7 @@
             // 
             // buttonImportGeneralMod
             // 
-            this.buttonImportGeneralMod.Location = new System.Drawing.Point(613, 2);
+            this.buttonImportGeneralMod.Location = new System.Drawing.Point(463, 2);
             this.buttonImportGeneralMod.Margin = new System.Windows.Forms.Padding(2);
             this.buttonImportGeneralMod.Name = "buttonImportGeneralMod";
             this.buttonImportGeneralMod.Size = new System.Drawing.Size(121, 23);
@@ -425,7 +413,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.ComboBox comboBoxCharacters;
-        private System.Windows.Forms.Button buttonTextureIDFixCurrent;
         private System.Windows.Forms.Button buttonTextureIDFixAll;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;

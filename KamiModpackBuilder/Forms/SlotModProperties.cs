@@ -129,6 +129,7 @@ namespace KamiModpackBuilder.Forms
             TextureIDFix textureIDFix = new TextureIDFix();
             TextureIDFix.Mod mod = new TextureIDFix.Mod(ModPath + Path.DirectorySeparatorChar + "model");
             textureIDFix.ChangeTextureID(mod, (ushort)XMLData.TextureID);
+            LogHelper.Info(String.Format("Changed Texture ID of {0} to {1} successfully.", ModPath, XMLData.TextureID));
         }
 
         private void SaveXMLData()

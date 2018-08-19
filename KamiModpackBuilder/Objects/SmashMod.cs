@@ -16,6 +16,7 @@ namespace KamiModpackBuilder.Objects
         public List<StageSlotMod> ActiveStageMods { get; set; }
         public List<CharacterGeneralMod> ActiveCharacterGeneralMods { get; set; }
         public List<string> ActiveGeneralMods { get; set; }
+        public List<CharacterAudioSlotSelection> CharacterAudioSlotSelections { get; set; }
         public bool EditorCSSActive { get; set; } //Whether the modified CSS created in the internal editor will be used in the build.
         public bool EditorSSSActive { get; set; } //Whether the modified SSS created in the internal editor will be used in the build.
         public bool EditorCharacterMenuDBActive { get; set; } //Whether the global_menu_parameter database file is updated automatically and used in the build.
@@ -370,6 +371,23 @@ namespace KamiModpackBuilder.Objects
         public GeneralModXML()
         {
 
+        }
+    }
+
+    public class CharacterAudioSlotSelection
+    {
+        public int CharacterID { get; set; }
+        public int Voice1 { get; set; }
+        public int Voice2 { get; set; }
+        public int Sound1 { get; set; }
+        public int Sound2 { get; set; }
+
+        public CharacterAudioSlotSelection()
+        {
+            Voice1 = 0;
+            Voice2 = 0;
+            Sound1 = 0;
+            Sound2 = 0;
         }
     }
 }

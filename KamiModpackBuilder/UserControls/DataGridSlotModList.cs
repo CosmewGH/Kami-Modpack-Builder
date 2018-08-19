@@ -26,6 +26,7 @@ namespace KamiModpackBuilder.UserControls
         public DataGridSlotModList(SmashProjectManager a_smashProjectManager)
         {
             InitializeComponent();
+            InitializeAudioComboBoxes();
 
             _SmashProjectManager = a_smashProjectManager;
         }
@@ -67,6 +68,9 @@ namespace KamiModpackBuilder.UserControls
             if (!groupBoxVoiceMods.Visible && !groupBoxSoundSlots.Visible) tableLayoutPanel4.SetRowSpan(panelModList, 2);
             else
             {
+                CharacterAudioSlotSelection audio = _SmashProjectManager._CharacterModsPage.CurrentFighterAudioSlotSelections;
+                if (audio != null) RefreshAudioComboBoxes(audio);
+
                 tableLayoutPanel4.SetRowSpan(panelModList, 1);
                 if (groupBoxVoiceMods.Visible)
                 {
@@ -90,6 +94,30 @@ namespace KamiModpackBuilder.UserControls
             RefreshRowData();
         }
         #endregion
+        
+        private void InitializeAudioComboBoxes()
+        {
+            string[] slots = {"Default", "Slot 1", "Slot 2", "Slot 3", "Slot 4",
+            "Slot 5", "Slot 6", "Slot 7", "Slot 8",
+            "Slot 9", "Slot 10", "Slot 11", "Slot 12",
+            "Slot 13", "Slot 14", "Slot 15", "Slot 16"};
+            comboBoxVoiceSlot1.DataSource = slots;
+            comboBoxVoiceSlot2.DataSource = slots.Clone();
+            comboBoxSoundSlot1.DataSource = slots.Clone();
+            comboBoxSoundSlot2.DataSource = slots.Clone();
+            comboBoxVoiceSlot1.SelectedIndex = 0;
+            comboBoxVoiceSlot2.SelectedIndex = 0;
+            comboBoxSoundSlot1.SelectedIndex = 0;
+            comboBoxSoundSlot2.SelectedIndex = 0;
+        }
+
+        private void RefreshAudioComboBoxes(CharacterAudioSlotSelection audio)
+        {
+            comboBoxVoiceSlot1.SelectedIndex = audio.Voice1;
+            comboBoxVoiceSlot2.SelectedIndex = audio.Voice2;
+            comboBoxSoundSlot1.SelectedIndex = audio.Sound1;
+            comboBoxSoundSlot2.SelectedIndex = audio.Sound2;
+        }
 
         public void RefreshRowData()
         {
@@ -175,6 +203,42 @@ namespace KamiModpackBuilder.UserControls
             public bool hasError = false;
             public string modFolder = String.Empty;
             public bool propertiesEnabled = true;
+        }
+
+        private void comboBoxVoiceSlot1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_SmashProjectManager == null) return;
+
+            CharacterAudioSlotSelection audio = _SmashProjectManager._CharacterModsPage.CurrentFighterAudioSlotSelections;
+            if (audio == null) return;
+            audio.Voice1 = comboBoxVoiceSlot1.SelectedIndex;
+        }
+
+        private void comboBoxVoiceSlot2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_SmashProjectManager == null) return;
+
+            CharacterAudioSlotSelection audio = _SmashProjectManager._CharacterModsPage.CurrentFighterAudioSlotSelections;
+            if (audio == null) return;
+            audio.Voice2 = comboBoxVoiceSlot2.SelectedIndex;
+        }
+
+        private void comboBoxSoundSlot1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_SmashProjectManager == null) return;
+
+            CharacterAudioSlotSelection audio = _SmashProjectManager._CharacterModsPage.CurrentFighterAudioSlotSelections;
+            if (audio == null) return;
+            audio.Sound1 = comboBoxSoundSlot1.SelectedIndex;
+        }
+
+        private void comboBoxSoundSlot2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_SmashProjectManager == null) return;
+
+            CharacterAudioSlotSelection audio = _SmashProjectManager._CharacterModsPage.CurrentFighterAudioSlotSelections;
+            if (audio == null) return;
+            audio.Sound2 = comboBoxSoundSlot2.SelectedIndex;
         }
     }
 }

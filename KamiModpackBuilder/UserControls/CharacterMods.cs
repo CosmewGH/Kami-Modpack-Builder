@@ -1,11 +1,6 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using KamiModpackBuilder.Objects;
 
@@ -27,6 +22,7 @@ namespace KamiModpackBuilder.UserControls
 
         private List<CharacterSlotMod> CurrentFighterActiveSlotMods = new List<CharacterSlotMod>();
         private List<CharacterGeneralMod> CurrentFighterActiveGeneralMods = new List<CharacterGeneralMod>();
+        public CharacterAudioSlotSelection CurrentFighterAudioSlotSelections = null;
 
         public DB.Fighter CurrentFighter { get { return _CurrentFighter; } }
 
@@ -107,6 +103,24 @@ namespace KamiModpackBuilder.UserControls
             {
                 if (_SmashProjectManager.CurrentProject.ActiveCharacterGeneralMods[i].CharacterID == _CurrentFighter.id) CurrentFighterActiveGeneralMods.Add(_SmashProjectManager.CurrentProject.ActiveCharacterGeneralMods[i]);
             }
+            CurrentFighterAudioSlotSelections = null;
+            if (_CurrentFighter.voicePackSlots != DB.Fighter.VoicePackSlots.All || _CurrentFighter.soundPackSlots != DB.Fighter.SoundPackSlots.All)
+            {
+                for (int i = 0; i < _SmashProjectManager.CurrentProject.CharacterAudioSlotSelections.Count; ++i)
+                {
+                    if (_SmashProjectManager.CurrentProject.CharacterAudioSlotSelections[i].CharacterID == _CurrentFighter.id)
+                    {
+                        CurrentFighterAudioSlotSelections = _SmashProjectManager.CurrentProject.CharacterAudioSlotSelections[i];
+                        break;
+                    }
+                }
+                if (CurrentFighterAudioSlotSelections == null)
+                {
+                    CurrentFighterAudioSlotSelections = new CharacterAudioSlotSelection();
+                    CurrentFighterAudioSlotSelections.CharacterID = _CurrentFighter.id;
+                    _SmashProjectManager.CurrentProject.CharacterAudioSlotSelections.Add(CurrentFighterAudioSlotSelections);
+                }
+            }
         }
 
         private int GetAvailableActiveSlot()
@@ -175,11 +189,11 @@ namespace KamiModpackBuilder.UserControls
             if (!_IsInitialized) return;
 
             _CurrentFighter = DB.FightersDB.Fighters[comboBoxCharacters.SelectedIndex];
+            GetCurrentCharacterActiveMods();
             _GridSlots.ChangeSelectedFighter(_CurrentFighter);
             _GridSlotsInactive.ChangeSelectedFighter(_CurrentFighter);
             _GridGeneral.ChangeSelectedFighter(_CurrentFighter);
             _GridGeneralInactive.ChangeSelectedFighter(_CurrentFighter);
-            GetCurrentCharacterActiveMods();
             Globals.EventManager.CharSlotModSelectionChanged(null);
         }
 
@@ -470,6 +484,33 @@ namespace KamiModpackBuilder.UserControls
                 {
                     _GridGeneralInactive.BeginImport(folderBrowserDialogImportFolder.SelectedPath);
                 }
+            }
+        }
+
+        private void buttonTextureIDFixAll_Click(object sender, EventArgs e)
+        {
+            Globals.LogHelper.Info(string.Format("Beginning Texture ID fix for character: {0}.", _CurrentFighter.nameHuman));
+
+            List<ushort> usedIDs = new List<ushort>();
+            foreach (CharacterSlotMod slot in CurrentFighterActiveSlotMods)
+            {
+                string kamiPath = Globals.PathHelper.GetCharacterSlotModKamiPath(_CurrentFighter.name, slot.FolderName);
+                string modPath = Globals.PathHelper.GetCharacterSlotModPath(_CurrentFighter.name, slot.FolderName);
+                CharacterSlotModXML xml = Globals.Utils.DeserializeXML<CharacterSlotModXML>(kamiPath);
+                ushort currentID = (ushort)xml.TextureID;
+
+                if (currentID % 4 == 0 || usedIDs.Contains(currentID))
+                {
+                    xml.TextureID = 128;
+                    while (usedIDs.Contains((ushort)xml.TextureID)) ++xml.TextureID;
+
+                    TextureIDFix textureIDFix = new TextureIDFix();
+                    TextureIDFix.Mod mod = new TextureIDFix.Mod(modPath + "model");
+                    textureIDFix.ChangeTextureID(mod, (ushort)xml.TextureID);
+                    Globals.Utils.SerializeXMLToFile(xml, kamiPath);
+                    Globals.LogHelper.Info(String.Format("Changed Texture ID of {0} to {1} successfully.", slot.FolderName, xml.TextureID));
+                }
+                usedIDs.Add((ushort)xml.TextureID);
             }
         }
         #endregion
