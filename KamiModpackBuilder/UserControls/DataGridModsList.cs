@@ -44,6 +44,7 @@ namespace KamiModpackBuilder.UserControls
         #region Public Methods
         public void ChangeSelectedFighter(DB.Fighter a_fighter)
         {
+            if (_ModListType == ModListType.General || _ModListType == ModListType.Stage) return;
             _CurrentFighter = a_fighter;
             if (_Rows != null) for (int i = 0; i < _Rows.Count;  ++i)
                 {
@@ -67,26 +68,72 @@ namespace KamiModpackBuilder.UserControls
 
             if (_IsActiveList)
             {
-                for (int j = 0; j < _Project.ActiveCharacterGeneralMods.Count; ++j)
+                if (_ModListType == ModListType.CharacterGeneral) {
+                    for (int j = 0; j < _Project.ActiveCharacterGeneralMods.Count; ++j)
+                    {
+                        if (_Project.ActiveCharacterGeneralMods[j].CharacterID != _CurrentFighter.id) continue;
+
+                        RowData row = new RowData();
+                        row.modFolder = _Project.ActiveCharacterGeneralMods[j].FolderName;
+
+                        CharacterGeneralModXML data = Globals.Utils.OpenCharacterGeneralKamiModFile(_CurrentFighter.name, row.modFolder);
+                        if (data != null)
+                        {
+                            row.name = data.DisplayName;
+                        }
+                        else
+                        {
+                            row.name = String.Format("{0} (Mod is missing!)", row.modFolder);
+                            row.hasError = true;
+                            row.propertiesEnabled = false;
+                            row.errorText = "Mod could not be found!";
+                        }
+                        _RowData.Add(row);
+                    }
+                }
+                else if (_ModListType == ModListType.Stage)
                 {
-                    if (_Project.ActiveCharacterGeneralMods[j].CharacterID != _CurrentFighter.id) continue;
-
-                    RowData row = new RowData();
-                    row.modFolder = _Project.ActiveCharacterGeneralMods[j].FolderName;
-
-                    CharacterGeneralModXML data = Globals.Utils.OpenCharacterGeneralKamiModFile(_CurrentFighter.name, row.modFolder);
-                    if (data != null)
+                    for (int j = 0; j < _Project.ActiveStageMods.Count; ++j)
                     {
-                        row.name = data.DisplayName;
+                        RowData row = new RowData();
+                        row.modFolder = _Project.ActiveStageMods[j].FolderName;
+
+                        StageModXML data = Globals.Utils.OpenStageKamiModFile(row.modFolder);
+                        if (data != null)
+                        {
+                            row.name = data.DisplayName;
+                        }
+                        else
+                        {
+                            row.name = String.Format("{0} (Mod is missing!)", row.modFolder);
+                            row.hasError = true;
+                            row.propertiesEnabled = false;
+                            row.errorText = "Mod could not be found!";
+                        }
+                        _RowData.Add(row);
                     }
-                    else
+                }
+                else if (_ModListType == ModListType.General)
+                {
+                    for (int j = 0; j < _Project.ActiveGeneralMods.Count; ++j)
                     {
-                        row.name = String.Format("{0} (Mod is missing!)", row.modFolder);
-                        row.hasError = true;
-                        row.propertiesEnabled = false;
-                        row.errorText = "Mod could not be found!";
+                        RowData row = new RowData();
+                        row.modFolder = _Project.ActiveGeneralMods[j];
+
+                        GeneralModXML data = Globals.Utils.OpenGeneralKamiModFile(row.modFolder);
+                        if (data != null)
+                        {
+                            row.name = data.DisplayName;
+                        }
+                        else
+                        {
+                            row.name = String.Format("{0} (Mod is missing!)", row.modFolder);
+                            row.hasError = true;
+                            row.propertiesEnabled = false;
+                            row.errorText = "Mod could not be found!";
+                        }
+                        _RowData.Add(row);
                     }
-                    _RowData.Add(row);
                 }
             }
             else

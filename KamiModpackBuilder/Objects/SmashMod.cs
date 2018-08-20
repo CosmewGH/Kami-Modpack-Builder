@@ -352,6 +352,11 @@ namespace KamiModpackBuilder.Objects
         public int IntendedStage { get; set; }
         public bool WifiSafe { get; set; }
         public string Notes { get; set; }
+        public bool stage_10 { get; set; }
+        public bool stage_11 { get; set; }
+        public bool stage_12 { get; set; }
+        public bool stage_30 { get; set; }
+        public bool stagen_10 { get; set; }
 
         public StageModXML()
         {

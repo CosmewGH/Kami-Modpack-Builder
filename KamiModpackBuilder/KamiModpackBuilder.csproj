@@ -188,11 +188,23 @@
     <Compile Include="UserControls\Explorer.Designer.cs">
       <DependentUpon>Explorer.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\GeneralMods.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\GeneralMods.Designer.cs">
+      <DependentUpon>GeneralMods.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ModRow.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\ModRow.Designer.cs">
       <DependentUpon>ModRow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\StageMods.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\StageMods.Designer.cs">
+      <DependentUpon>StageMods.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Forms\CreationProjectInfo.resx">
       <DependentUpon>CreationProjectInfo.cs</DependentUpon>
@@ -238,8 +250,14 @@
     <EmbeddedResource Include="UserControls\Explorer.resx">
       <DependentUpon>Explorer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\GeneralMods.resx">
+      <DependentUpon>GeneralMods.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ModRow.resx">
       <DependentUpon>ModRow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\StageMods.resx">
+      <DependentUpon>StageMods.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

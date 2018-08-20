@@ -161,6 +161,16 @@ namespace KamiModpackBuilder
                 characterMods.Dock = DockStyle.Fill;
                 _ProjectManager._CharacterModsPage = characterMods;
 
+                UserControls.StageMods stageMods = new UserControls.StageMods(_ProjectManager);
+                stageMods.Parent = tabPageStageMods;
+                stageMods.Dock = DockStyle.Fill;
+                _ProjectManager._StageModsPage = stageMods;
+
+                UserControls.GeneralMods generalMods = new UserControls.GeneralMods(_ProjectManager);
+                generalMods.Parent = tabPageGeneralMods;
+                generalMods.Dock = DockStyle.Fill;
+                _ProjectManager._GeneralModsPage = generalMods;
+
                 UserControls.Explorer explorer = new UserControls.Explorer(_ProjectManager);
                 explorer.Parent = tabPageExplorer;
                 explorer.Dock = DockStyle.Fill;

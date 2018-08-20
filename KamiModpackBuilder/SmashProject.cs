@@ -42,6 +42,8 @@ namespace KamiModpackBuilder
         
         public Explorer _ExplorerPage;
         public CharacterMods _CharacterModsPage;
+        public StageMods _StageModsPage;
+        public GeneralMods _GeneralModsPage;
         #endregion
 
         #region Project Management
