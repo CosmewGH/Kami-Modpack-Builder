@@ -757,20 +757,605 @@ namespace KamiModpackBuilder
             return outputResCol;
         }
 
+        struct FighterName
+        {
+            public int CharID;
+            public int nameplateSlot;
+            public string name;
+            public string BoxingText;
+        }
+
         private void BuildingExportFiles(ResourceCollection resCol, string exportFolder, bool packing)
         {
             string baseFolder = PathHelper.GetExplorerFolder(PathHelperEnum.FOLDER_PATCH, resCol.PartitionName);
-            List<string> filesList = new List<string>();
+            SortedList<string,string> filesList = new SortedList<string,string>();
+            List<string> explorerFiles = new List<string>();
+            List<string> fileSearch = new List<string>();
             if (Directory.Exists(baseFolder))
             {
-                filesList.AddRange(Directory.GetDirectories(baseFolder, "*", SearchOption.AllDirectories));
-                filesList.AddRange(Directory.GetFiles(baseFolder, "*", SearchOption.AllDirectories));
-                string[] filesToProcess = filesList.ToArray();
-                Array.Sort(filesToProcess, new CustomStringComparer());
-                if (filesToProcess.Length > 0)
+
+                #region Character Slot Mods
+                List<FighterName> fighterNames = new List<FighterName>();
+                foreach (CharacterSlotMod mod in _CurrentProject.ActiveCharacterSlotMods)
+                {
+                    DB.Fighter currentFighter = DB.FightersDB.GetFighterFromID(mod.CharacterID);
+                    string fighterName = currentFighter.name;
+                    CharacterSlotModXML xml = Utils.OpenCharacterSlotKamiModFile(fighterName, mod.FolderName);
+                    if (xml == null)
+                    {
+                        LogHelper.Error(string.Format("Mod '{0}' missing, skipping...", mod.FolderName));
+                        continue;
+                    }
+                    if (_CurrentProject.BuildIsWifiSafe && !xml.WifiSafe)
+                    {
+                        LogHelper.Info(string.Format("Mod '{0}' is not Wifi-Safe, skipping...", mod.FolderName));
+                        continue;
+                    }
+                    if (_CurrentProject.BuildSafetySetting > 0)
+                    {
+                        switch (_CurrentProject.BuildSafetySetting)
+                        {
+                            case 1:
+                                if (xml.MetalModel == CharacterSlotModXML.MetalModelStatus.Crashes)
+                                {
+                                    LogHelper.Info(string.Format("Mod '{0}' has a crashing metal model, skipping...", mod.FolderName));
+                                    continue;
+                                }
+                                break;
+                            case 2:
+                                if (xml.MetalModel != CharacterSlotModXML.MetalModelStatus.Works)
+                                {
+                                    LogHelper.Info(string.Format("The metal model of mod '{0}' is not confirmed to be working, skipping...", mod.FolderName));
+                                    continue;
+                                }
+                                break;
+                        }
+                    }
+                    string modFolder = PathHelper.GetCharacterSlotModPath(fighterName, mod.FolderName);
+                    string explorerFolder = PathHelper.GetExplorerFolder(PathHelperEnum.FOLDER_PATCH);
+                    string explorerFighterFolder = explorerFolder + "data" + Path.DirectorySeparatorChar + "fighter" + Path.DirectorySeparatorChar + fighterName.ToLower() + Path.DirectorySeparatorChar;
+                    string explorerChrFolder = explorerFolder + "data" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "replace" + Path.DirectorySeparatorChar + "chr" + Path.DirectorySeparatorChar;
+                    string explorerChrDlcFolder = explorerFolder + "data" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "replace" + Path.DirectorySeparatorChar + "append" + Path.DirectorySeparatorChar + "chr" + Path.DirectorySeparatorChar;
+
+                    #region Models
+                    if (Directory.Exists(modFolder + "model"))
+                    {
+                        fileSearch.AddRange(Directory.GetFiles(modFolder + "model", "*", SearchOption.AllDirectories));
+                        foreach (string f in fileSearch)
+                        {
+                            string explorerFilename = f.Replace(modFolder + "model" + Path.DirectorySeparatorChar, string.Empty);
+                            string[] split = explorerFilename.Split(Path.DirectorySeparatorChar);
+                            explorerFilename = split.First() + Path.DirectorySeparatorChar + "c" + mod.SlotID.ToString("D2") + explorerFilename.Remove(0, split.First().Length);
+                            explorerFilename = explorerFighterFolder + "model" + Path.DirectorySeparatorChar + explorerFilename;
+                            if (!filesList.ContainsKey(explorerFilename))
+                            {
+                                if (!Utils.IsAnAcceptedExtension(f))
+                                    LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                                else
+                                    filesList.Add(explorerFilename, f);
+                            }
+                        }
+                        fileSearch.Clear();
+                    }
+                    #endregion
+                    #region Sounds
+                    if (xml.Sound)
+                    {
+                        if (currentFighter.soundPackSlots == Fighter.SoundPackSlots.All)
+                        {
+                            fileSearch.AddRange(Directory.GetFiles(modFolder + "sound", "*snd_se_*", SearchOption.AllDirectories));
+                            if (fileSearch.Count > 0)
+                            {
+                                string explorerFilename = fileSearch[0].Replace(modFolder + "sound" + Path.DirectorySeparatorChar, string.Empty);
+                                explorerFilename = explorerFilename.Replace("cxx", "c" + mod.SlotID.ToString("D2"));
+                                explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
+                                if (!filesList.ContainsKey(explorerFilename))
+                                {
+                                    if (!Utils.IsAnAcceptedExtension(fileSearch[0]))
+                                        LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", fileSearch[0]));
+                                    else
+                                        filesList.Add(explorerFilename, fileSearch[0]);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (_CurrentProject.GetAudioSlotForFighter(currentFighter.id, false, 0) == mod.SlotID)
+                            {
+                                fileSearch.AddRange(Directory.GetFiles(modFolder + "sound", "*snd_se_*", SearchOption.AllDirectories));
+                                if (fileSearch.Count > 0)
+                                {
+                                    string explorerFilename = fileSearch[0].Replace(modFolder + "sound" + Path.DirectorySeparatorChar, string.Empty);
+                                    explorerFilename = explorerFilename.Replace("cxx", "c00");
+                                    explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
+                                    if (!filesList.ContainsKey(explorerFilename))
+                                    {
+                                        if (!Utils.IsAnAcceptedExtension(fileSearch[0]))
+                                            LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", fileSearch[0]));
+                                        else
+                                            filesList.Add(explorerFilename, fileSearch[0]);
+                                    }
+                                }
+                            }
+                            else if (currentFighter.soundPackSlots == Fighter.SoundPackSlots.Two && _CurrentProject.GetAudioSlotForFighter(currentFighter.id, false, 1) == mod.SlotID)
+                            {
+                                fileSearch.AddRange(Directory.GetFiles(modFolder + "sound", "*snd_se_*", SearchOption.AllDirectories));
+                                if (fileSearch.Count > 0)
+                                {
+                                    string explorerFilename = fileSearch[0].Replace(modFolder + "sound" + Path.DirectorySeparatorChar, string.Empty);
+                                    explorerFilename = explorerFilename.Replace("cxx", "c01");
+                                    explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
+                                    if (!filesList.ContainsKey(explorerFilename))
+                                    {
+                                        if (!Utils.IsAnAcceptedExtension(fileSearch[0]))
+                                            LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", fileSearch[0]));
+                                        else
+                                            filesList.Add(explorerFilename, fileSearch[0]);
+                                    }
+                                }
+                            }
+                        }
+                        fileSearch.Clear();
+                    }
+                    if (xml.Voice)
+                    {
+                        if (currentFighter.voicePackSlots == Fighter.VoicePackSlots.All)
+                        {
+                            fileSearch.AddRange(Directory.GetFiles(modFolder + "sound", "*snd_vc_*", SearchOption.AllDirectories));
+                            if (fileSearch.Count > 0)
+                            {
+                                string explorerFilename = fileSearch[0].Replace(modFolder + "sound" + Path.DirectorySeparatorChar, string.Empty);
+                                explorerFilename = explorerFilename.Replace("cxx", "c" + mod.SlotID.ToString("D2"));
+                                explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
+                                if (!filesList.ContainsKey(explorerFilename))
+                                {
+                                    if (!Utils.IsAnAcceptedExtension(fileSearch[0]))
+                                        LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", fileSearch[0]));
+                                    else
+                                        filesList.Add(explorerFilename, fileSearch[0]);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (_CurrentProject.GetAudioSlotForFighter(currentFighter.id, true, 0) == mod.SlotID)
+                            {
+                                fileSearch.AddRange(Directory.GetFiles(modFolder + "sound", "*snd_vc_*", SearchOption.AllDirectories));
+                                if (fileSearch.Count > 0)
+                                {
+                                    string explorerFilename = fileSearch[0].Replace(modFolder + "sound" + Path.DirectorySeparatorChar, string.Empty);
+                                    explorerFilename = explorerFilename.Replace("cxx", "c00");
+                                    explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
+                                    if (!filesList.ContainsKey(explorerFilename))
+                                    {
+                                        if (!Utils.IsAnAcceptedExtension(fileSearch[0]))
+                                            LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", fileSearch[0]));
+                                        else
+                                            filesList.Add(explorerFilename, fileSearch[0]);
+                                    }
+                                }
+                            }
+                            else if (currentFighter.soundPackSlots == Fighter.SoundPackSlots.Two && _CurrentProject.GetAudioSlotForFighter(currentFighter.id, true, 1) == mod.SlotID)
+                            {
+                                fileSearch.AddRange(Directory.GetFiles(modFolder + "sound", "*snd_vc_*", SearchOption.AllDirectories));
+                                if (fileSearch.Count > 0)
+                                {
+                                    string explorerFilename = fileSearch[0].Replace(modFolder + "sound" + Path.DirectorySeparatorChar, string.Empty);
+                                    explorerFilename = explorerFilename.Replace("cxx", "c01");
+                                    explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
+                                    if (!filesList.ContainsKey(explorerFilename))
+                                    {
+                                        if (!Utils.IsAnAcceptedExtension(fileSearch[0]))
+                                            LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", fileSearch[0]));
+                                        else
+                                            filesList.Add(explorerFilename, fileSearch[0]);
+                                    }
+                                }
+                            }
+                        }
+                        fileSearch.Clear();
+                    }
+                    #endregion
+                    #region Chr
+                    if (xml.chr_00 || xml.chr_11 || xml.chr_13 || xml.stock_90)
+                    {
+                        fileSearch.AddRange(Directory.GetFiles(modFolder + "chr", "*chr_00*", SearchOption.AllDirectories));
+                        foreach (string f in fileSearch)
+                        {
+                            string explorerFilename = f.Replace(modFolder + "chr" + Path.DirectorySeparatorChar, string.Empty);
+                            explorerFilename = explorerFilename.Replace("XX", (mod.SlotID + 1).ToString("D2"));
+                            explorerFilename = explorerChrFolder + "chr_00" + Path.DirectorySeparatorChar + explorerFilename;
+                            if (!filesList.ContainsKey(explorerFilename))
+                            {
+                                if (!Utils.IsAnAcceptedExtension(f))
+                                    LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                                else
+                                    filesList.Add(explorerFilename, f);
+                            }
+                            if (currentFighter.isDLC)
+                            {
+                                explorerFilename = explorerFilename.Replace(explorerChrFolder, explorerChrDlcFolder);
+                                if (!filesList.ContainsKey(explorerFilename))
+                                {
+                                    if (!Utils.IsAnAcceptedExtension(f))
+                                        LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                                    else
+                                        filesList.Add(explorerFilename, f);
+                                }
+                            }
+                        }
+                        fileSearch.Clear();
+                        fileSearch.AddRange(Directory.GetFiles(modFolder + "chr", "*chr_11*", SearchOption.AllDirectories));
+                        foreach (string f in fileSearch)
+                        {
+                            string explorerFilename = f.Replace(modFolder + "chr" + Path.DirectorySeparatorChar, string.Empty);
+                            explorerFilename = explorerFilename.Replace("XX", (mod.SlotID + 1).ToString("D2"));
+                            explorerFilename = explorerChrFolder + "chr_11" + Path.DirectorySeparatorChar + explorerFilename;
+                            if (!filesList.ContainsKey(explorerFilename))
+                            {
+                                if (!Utils.IsAnAcceptedExtension(f))
+                                    LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                                else
+                                    filesList.Add(explorerFilename, f);
+                            }
+                            if (currentFighter.isDLC)
+                            {
+                                explorerFilename = explorerFilename.Replace(explorerChrFolder, explorerChrDlcFolder);
+                                if (!filesList.ContainsKey(explorerFilename))
+                                {
+                                    if (!Utils.IsAnAcceptedExtension(f))
+                                        LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                                    else
+                                        filesList.Add(explorerFilename, f);
+                                }
+                            }
+                        }
+                        fileSearch.Clear();
+                        fileSearch.AddRange(Directory.GetFiles(modFolder + "chr", "*chr_13*", SearchOption.AllDirectories));
+                        foreach (string f in fileSearch)
+                        {
+                            string explorerFilename = f.Replace(modFolder + "chr" + Path.DirectorySeparatorChar, string.Empty);
+                            explorerFilename = explorerFilename.Replace("XX", (mod.SlotID + 1).ToString("D2"));
+                            explorerFilename = explorerChrFolder + "chr_13" + Path.DirectorySeparatorChar + explorerFilename;
+                            if (!filesList.ContainsKey(explorerFilename))
+                            {
+                                if (!Utils.IsAnAcceptedExtension(f))
+                                    LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                                else
+                                    filesList.Add(explorerFilename, f);
+                            }
+                            if (currentFighter.isDLC)
+                            {
+                                explorerFilename = explorerFilename.Replace(explorerChrFolder, explorerChrDlcFolder);
+                                if (!filesList.ContainsKey(explorerFilename))
+                                {
+                                    if (!Utils.IsAnAcceptedExtension(f))
+                                        LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                                    else
+                                        filesList.Add(explorerFilename, f);
+                                }
+                            }
+                        }
+                        fileSearch.Clear();
+                        fileSearch.AddRange(Directory.GetFiles(modFolder + "chr", "*stock_90*", SearchOption.AllDirectories));
+                        foreach (string f in fileSearch)
+                        {
+                            string explorerFilename = f.Replace(modFolder + "chr" + Path.DirectorySeparatorChar, string.Empty);
+                            explorerFilename = explorerFilename.Replace("XX", (mod.SlotID + 1).ToString("D2"));
+                            explorerFilename = explorerChrFolder + "stock_90" + Path.DirectorySeparatorChar + explorerFilename;
+                            if (!filesList.ContainsKey(explorerFilename))
+                            {
+                                if (!Utils.IsAnAcceptedExtension(f))
+                                    LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                                else
+                                    filesList.Add(explorerFilename, f);
+                            }
+                            if (currentFighter.isDLC)
+                            {
+                                explorerFilename = explorerFilename.Replace(explorerChrFolder, explorerChrDlcFolder);
+                                if (!filesList.ContainsKey(explorerFilename))
+                                {
+                                    if (!Utils.IsAnAcceptedExtension(f))
+                                        LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                                    else
+                                        filesList.Add(explorerFilename, f);
+                                }
+                            }
+                        }
+                        fileSearch.Clear();
+                    }
+                    #endregion
+                    #region Nameplate
+                    if (xml.UseCustomName)
+                    {
+                        bool found = false;
+                        for (int i = 0; i < fighterNames.Count; ++i)
+                        {
+                            if (fighterNames[i].CharID == currentFighter.id)
+                            {
+                                if (fighterNames[i].name.Equals(xml.CharacterName))
+                                {
+                                    found = true;
+                                    //TODO: Update fighter database for this skin slot here
+                                }
+                            }
+                        }
+                        if (!found)
+                        {
+                            int highestNameSlot = currentFighter.defaultNameplateSlots - 1;
+
+                            for (int i = 0; i < fighterNames.Count; ++i)
+                            {
+                                if (fighterNames[i].CharID == currentFighter.id)
+                                {
+                                    if (fighterNames[i].nameplateSlot > highestNameSlot) highestNameSlot = fighterNames[i].nameplateSlot;
+                                }
+                            }
+                            ++highestNameSlot;
+                            FighterName newName = new FighterName { name = xml.CharacterName, BoxingText = xml.BoxingRingText, CharID = currentFighter.id, nameplateSlot = highestNameSlot };
+                            fighterNames.Add(newName);
+                            //TODO: Update fighter database for this skin slot here
+                            //TODO: Update strings database for this slot here
+
+                            if (xml.chrn_11) {
+                            fileSearch.AddRange(Directory.GetFiles(modFolder + "chr", "*chrn_11*", SearchOption.AllDirectories));
+                                foreach (string f in fileSearch)
+                                {
+                                    string explorerFilename = f.Replace(modFolder + "chr" + Path.DirectorySeparatorChar, string.Empty);
+                                    explorerFilename = explorerFilename.Replace("XX", (highestNameSlot + 1).ToString("D2"));
+                                    explorerFilename = explorerChrFolder + "chrn_11" + Path.DirectorySeparatorChar + explorerFilename;
+                                    if (!filesList.ContainsKey(explorerFilename))
+                                    {
+                                        if (!Utils.IsAnAcceptedExtension(f))
+                                            LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                                        else
+                                            filesList.Add(explorerFilename, f);
+                                    }
+                                    if (currentFighter.isDLC)
+                                    {
+                                        explorerFilename = explorerFilename.Replace(explorerChrFolder, explorerChrDlcFolder);
+                                        if (!filesList.ContainsKey(explorerFilename))
+                                        {
+                                            if (!Utils.IsAnAcceptedExtension(f))
+                                                LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                                            else
+                                                filesList.Add(explorerFilename, f);
+                                        }
+                                    }
+                                }
+                            }
+                            fileSearch.Clear();
+                        }
+                    }
+                    #endregion
+                }
+                fileSearch.Clear();
+                #endregion
+                #region Character General Mods
+                foreach (CharacterGeneralMod mod in _CurrentProject.ActiveCharacterGeneralMods)
+                {
+                    DB.Fighter currentFighter = DB.FightersDB.GetFighterFromID(mod.CharacterID);
+                    string fighterName = currentFighter.name;
+                    CharacterGeneralModXML xml = Utils.OpenCharacterGeneralKamiModFile(fighterName, mod.FolderName);
+                    if (xml == null)
+                    {
+                        LogHelper.Error(string.Format("Mod '{0}' missing, skipping...", mod.FolderName));
+                        continue;
+                    }
+                    if (_CurrentProject.BuildIsWifiSafe && !xml.WifiSafe)
+                    {
+                        LogHelper.Info(string.Format("Mod '{0}' is not Wifi-Safe, skipping...", mod.FolderName));
+                        continue;
+                    }
+                    string modFolder = PathHelper.GetCharacterGeneralModPath(fighterName, mod.FolderName);
+                    string explorerFolder = PathHelper.GetExplorerFolder(PathHelperEnum.FOLDER_PATCH);
+                    string explorerFighterFolder = explorerFolder + "data" + Path.DirectorySeparatorChar + "fighter" + Path.DirectorySeparatorChar + fighterName.ToLower() + Path.DirectorySeparatorChar;
+
+                    if (Directory.Exists(modFolder + "model")) fileSearch.AddRange(Directory.GetFiles(modFolder + "model", "*", SearchOption.AllDirectories));
+                    if (Directory.Exists(modFolder + "effect")) fileSearch.AddRange(Directory.GetFiles(modFolder + "effect", "*", SearchOption.AllDirectories));
+                    if (Directory.Exists(modFolder + "motion")) fileSearch.AddRange(Directory.GetFiles(modFolder + "motion", "*", SearchOption.AllDirectories));
+                    if (Directory.Exists(modFolder + "script")) fileSearch.AddRange(Directory.GetFiles(modFolder + "script", "*", SearchOption.AllDirectories));
+                    if (Directory.Exists(modFolder + "sound")) fileSearch.AddRange(Directory.GetFiles(modFolder + "sound", "*", SearchOption.AllDirectories));
+                    if (Directory.Exists(modFolder + "camera")) fileSearch.AddRange(Directory.GetFiles(modFolder + "camera", "*", SearchOption.AllDirectories));
+                    foreach (string f in fileSearch)
+                    {
+                        string explorerFilename = f.Replace(modFolder, string.Empty);
+                        explorerFilename = explorerFighterFolder + explorerFilename;
+                        if (!filesList.ContainsKey(explorerFilename))
+                        {
+                            if (!Utils.IsAnAcceptedExtension(f))
+                                LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                            else
+                                filesList.Add(explorerFilename, f);
+                        }
+                    }
+                }
+                fileSearch.Clear();
+                #endregion
+                #region Stage Mods
+                foreach (StageSlotMod mod in _CurrentProject.ActiveStageMods)
+                {
+                    DB.Stage currentStage = DB.StagesDB.GetStageFromID(mod.StageID);
+                    string stageName = currentStage.Label;
+                    string stagePath = (currentStage.Type == StageType.Melee ? "melee" : "end") + Path.DirectorySeparatorChar + stageName + Path.DirectorySeparatorChar;
+                    StageModXML xml = Utils.OpenStageKamiModFile(mod.FolderName);
+                    if (xml == null)
+                    {
+                        LogHelper.Error(string.Format("Mod '{0}' missing, skipping...", mod.FolderName));
+                        continue;
+                    }
+                    if (_CurrentProject.BuildIsWifiSafe && !xml.WifiSafe)
+                    {
+                        LogHelper.Info(string.Format("Mod '{0}' is not Wifi-Safe, skipping...", mod.FolderName));
+                        continue;
+                    }
+                    string modFolder = PathHelper.GetStageModPath(mod.FolderName);
+                    string explorerFolder = PathHelper.GetExplorerFolder(PathHelperEnum.FOLDER_PATCH);
+                    string explorerStageFolder = explorerFolder + "data" + Path.DirectorySeparatorChar + "stage" + Path.DirectorySeparatorChar + stagePath;
+                    string explorerStageUIFolder = explorerFolder + "data" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "replace" + Path.DirectorySeparatorChar + "stage" + Path.DirectorySeparatorChar;
+
+                    #region Stage Data
+                    if (Directory.Exists(modFolder + "stage"))
+                    {
+                        fileSearch.AddRange(Directory.GetFiles(modFolder + "stage", "*", SearchOption.AllDirectories));
+                        foreach (string f in fileSearch)
+                        {
+                            string explorerFilename = f.Replace(modFolder + "stage" + Path.DirectorySeparatorChar, string.Empty);
+                            explorerFilename = explorerStageFolder + explorerFilename;
+                            if (!filesList.ContainsKey(explorerFilename))
+                            {
+                                if (!Utils.IsAnAcceptedExtension(f))
+                                    LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                                else
+                                    filesList.Add(explorerFilename, f);
+                            }
+                        }
+                        fileSearch.Clear();
+                    }
+                    #endregion
+                    #region UI
+                    if (Directory.Exists(modFolder + "ui"))
+                    {
+                        fileSearch.AddRange(Directory.GetFiles(modFolder + "ui", "*stage_10*", SearchOption.AllDirectories));
+                        foreach (string f in fileSearch)
+                        {
+                            string explorerFilename = f.Replace(modFolder + "ui" + Path.DirectorySeparatorChar, string.Empty);
+                            explorerFilename = explorerFilename.Replace("XX", stageName);
+                            explorerFilename = explorerStageUIFolder + "stage_10" + Path.DirectorySeparatorChar + explorerFilename;
+                            if (!filesList.ContainsKey(explorerFilename))
+                            {
+                                if (!Utils.IsAnAcceptedExtension(f))
+                                    LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                                else
+                                    filesList.Add(explorerFilename, f);
+                            }
+                        }
+                        fileSearch.Clear();
+                        fileSearch.AddRange(Directory.GetFiles(modFolder + "ui", "*stage_11*", SearchOption.AllDirectories));
+                        foreach (string f in fileSearch)
+                        {
+                            string explorerFilename = f.Replace(modFolder + "ui" + Path.DirectorySeparatorChar, string.Empty);
+                            explorerFilename = explorerFilename.Replace("XX", stageName);
+                            explorerFilename = explorerStageUIFolder + "stage_11" + Path.DirectorySeparatorChar + explorerFilename;
+                            if (!filesList.ContainsKey(explorerFilename))
+                            {
+                                if (!Utils.IsAnAcceptedExtension(f))
+                                    LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                                else
+                                    filesList.Add(explorerFilename, f);
+                            }
+                        }
+                        fileSearch.Clear();
+                        fileSearch.AddRange(Directory.GetFiles(modFolder + "ui", "*stage_12*", SearchOption.AllDirectories));
+                        foreach (string f in fileSearch)
+                        {
+                            string explorerFilename = f.Replace(modFolder + "ui" + Path.DirectorySeparatorChar, string.Empty);
+                            explorerFilename = explorerFilename.Replace("XX", stageName);
+                            explorerFilename = explorerStageUIFolder + "stage_12" + Path.DirectorySeparatorChar + explorerFilename;
+                            if (!filesList.ContainsKey(explorerFilename))
+                            {
+                                if (!Utils.IsAnAcceptedExtension(f))
+                                    LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                                else
+                                    filesList.Add(explorerFilename, f);
+                            }
+                        }
+                        fileSearch.Clear();
+                        fileSearch.AddRange(Directory.GetFiles(modFolder + "ui", "*stage_30*", SearchOption.AllDirectories));
+                        foreach (string f in fileSearch)
+                        {
+                            string explorerFilename = f.Replace(modFolder + "ui" + Path.DirectorySeparatorChar, string.Empty);
+                            explorerFilename = explorerFilename.Replace("XX", stageName);
+                            explorerFilename = explorerStageUIFolder + "stage_30" + Path.DirectorySeparatorChar + explorerFilename;
+                            if (!filesList.ContainsKey(explorerFilename))
+                            {
+                                if (!Utils.IsAnAcceptedExtension(f))
+                                    LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                                else
+                                    filesList.Add(explorerFilename, f);
+                            }
+                        }
+                        fileSearch.Clear();
+                        fileSearch.AddRange(Directory.GetFiles(modFolder + "ui", "*stagen_10*", SearchOption.AllDirectories));
+                        foreach (string f in fileSearch)
+                        {
+                            string explorerFilename = f.Replace(modFolder + "ui" + Path.DirectorySeparatorChar, string.Empty);
+                            explorerFilename = explorerFilename.Replace("XX", stageName);
+                            explorerFilename = explorerStageUIFolder + "stagen_10" + Path.DirectorySeparatorChar + explorerFilename;
+                            if (!filesList.ContainsKey(explorerFilename))
+                            {
+                                if (!Utils.IsAnAcceptedExtension(f))
+                                    LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                                else
+                                    filesList.Add(explorerFilename, f);
+                            }
+                        }
+                        fileSearch.Clear();
+                    }
+                    #endregion
+
+                }
+                fileSearch.Clear();
+                #endregion
+                #region General Mods
+                foreach (string mod in _CurrentProject.ActiveGeneralMods)
+                {
+                    GeneralModXML xml = Utils.OpenGeneralKamiModFile(mod);
+                    if (xml == null)
+                    {
+                        LogHelper.Error(string.Format("Mod '{0}' missing, skipping...", mod));
+                        continue;
+                    }
+                    if (_CurrentProject.BuildIsWifiSafe && !xml.WifiSafe)
+                    {
+                        LogHelper.Info(string.Format("Mod '{0}' is not Wifi-Safe, skipping...", mod));
+                        continue;
+                    }
+                    string modFolder = PathHelper.GetGeneralModPath(mod);
+                    string explorerFolder = PathHelper.GetExplorerFolder(PathHelperEnum.FOLDER_PATCH);
+
+                    if (Directory.Exists(modFolder + "data")) fileSearch.AddRange(Directory.GetFiles(modFolder + "data", "*", SearchOption.AllDirectories));
+                    if (Directory.Exists(modFolder + "data(us_en)")) fileSearch.AddRange(Directory.GetFiles(modFolder + "data(us_en)", "*", SearchOption.AllDirectories));
+                    if (Directory.Exists(modFolder + "data(us_fr)")) fileSearch.AddRange(Directory.GetFiles(modFolder + "data(us_fr)", "*", SearchOption.AllDirectories));
+                    if (Directory.Exists(modFolder + "data(us_sp)")) fileSearch.AddRange(Directory.GetFiles(modFolder + "data(us_sp)", "*", SearchOption.AllDirectories));
+                    foreach (string f in fileSearch)
+                    {
+                        string explorerFilename = f.Replace(modFolder, string.Empty);
+                        explorerFilename = explorerFolder + explorerFilename;
+                        if (!filesList.ContainsKey(explorerFilename))
+                        {
+                            if (!Utils.IsAnAcceptedExtension(f))
+                                LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                            else
+                                filesList.Add(explorerFilename, f);
+                        }
+                    }
+                    fileSearch.Clear();
+                }
+                #endregion
+
+                #region Editor Mods
+                #endregion
+
+                #region Explorer Mods
+                explorerFiles.AddRange(Directory.GetDirectories(baseFolder, "*", SearchOption.AllDirectories));
+                explorerFiles.AddRange(Directory.GetFiles(baseFolder, "*", SearchOption.AllDirectories));
+                foreach (string f in explorerFiles)
+                {
+                    if (!filesList.ContainsKey(f))
+                    {
+                        if (!Utils.IsAnAcceptedExtension(f))
+                            LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", f));
+                        else
+                            filesList.Add(f, f);
+                    }
+                }
+                #endregion
+                
+                if (filesList.Count > 0)
                 {
                     LogHelper.Info(string.Format("Packaging '{0}'... to '{1}'", resCol.PartitionName, exportFolder));
-                    BuildNewResources(resCol, filesToProcess, exportFolder, packing);
+                    BuildNewResources(resCol, filesList, exportFolder, packing);
                 }
             }
         }
@@ -804,17 +1389,9 @@ namespace KamiModpackBuilder
             }
         }
 
-        private bool BuildNewResources(ResourceCollection resCol, string[] filesToProcess, string exportFolder, bool packing)
+        private bool BuildNewResources(ResourceCollection resCol, SortedList<string,string> filesToProcess, string exportFolder, bool packing)
         {
-            List<string> listFiles = new List<string>();
-            foreach (string file in filesToProcess)
-            {
-                if (!Utils.IsAnAcceptedExtension(file))
-                    LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", file));
-                else
-                    listFiles.Add(file);
-            }
-            string[] files = listFiles.ToArray();
+            string[] files = filesToProcess.Keys.ToArray();
 
             string baseToExclude = PathHelper.GetExplorerFolder(PathHelperEnum.FOLDER_PATCH, resCol.PartitionName);
             List<PackageProcessor> packNeedsRepacking = new List<PackageProcessor>();
@@ -823,7 +1400,7 @@ namespace KamiModpackBuilder
                 string relativePath = file.Replace(baseToExclude, string.Empty).Replace(Path.DirectorySeparatorChar, '/');
 
                 //This ensure that we are dealing with a folder or a file.
-                FileAttributes pathAttrs = File.GetAttributes(file);
+                FileAttributes pathAttrs = File.GetAttributes(filesToProcess[file]);
                 bool isFolder = false;
                 if (pathAttrs.HasFlag(FileAttributes.Directory))
                 {
@@ -849,7 +1426,7 @@ namespace KamiModpackBuilder
                     uint decSize;
                     byte[] fileToWrite;
 
-                    GetFileBinary(nItem, file, out cmpSize, out decSize, out fileToWrite);
+                    GetFileBinary(nItem, filesToProcess[file], out cmpSize, out decSize, out fileToWrite);
 
                     nItem.CmpSize = cmpSize;
                     nItem.DecSize = decSize;
@@ -863,7 +1440,7 @@ namespace KamiModpackBuilder
 
             //packed management
             foreach (PackageProcessor package in packNeedsRepacking)
-                ProcessPackage(package, packing);
+                ProcessPackage(package, packing, filesToProcess);
 
             return true;
         }
@@ -968,7 +1545,7 @@ namespace KamiModpackBuilder
 
         #region Processing packed files
         #region private methods
-        private void ProcessPackageUnpacked(ResourceItem rItemTopResource, string[] files, string exportFolder)
+        private void ProcessPackageUnpacked(ResourceItem rItemTopResource, string[] files, string exportFolder, SortedList<string, string> fileRedirects)
         {
             ResourceCollection resCol = rItemTopResource.ResourceCollection;
             string baseTempFolder = PathHelper.FolderTemp + resCol.PartitionName + Path.DirectorySeparatorChar;
@@ -979,7 +1556,7 @@ namespace KamiModpackBuilder
 
                 string resPath = file.Replace(baseTempFolder, string.Empty).Replace(Path.DirectorySeparatorChar, '/');
                 bool isFolder = false;
-                FileAttributes pathAttrs = File.GetAttributes(file);
+                FileAttributes pathAttrs = File.GetAttributes(fileRedirects[file]);
                 if (pathAttrs.HasFlag(FileAttributes.Directory))
                 {
                     resPath += "/";
@@ -996,7 +1573,7 @@ namespace KamiModpackBuilder
                 {
                     byte[] fileToWrite;
 
-                    GetFileBinary(nItem, file, out cmpSize, out decSize, out fileToWrite);
+                    GetFileBinary(nItem, fileRedirects[file], out cmpSize, out decSize, out fileToWrite);
 
                     nItem.CmpSize = cmpSize;
                     nItem.DecSize = decSize;
@@ -1017,7 +1594,7 @@ namespace KamiModpackBuilder
             }
         }
 
-        private void ProcessPackage(PackageProcessor package, bool packing)
+        private void ProcessPackage(PackageProcessor package, bool packing, SortedList<string,string> fileRedirects)
         {
             ResourceCollection resCol = package.TopResource.ResourceCollection;
             CleanTempFolder();
@@ -1032,13 +1609,13 @@ namespace KamiModpackBuilder
                 foreach (string file in package.FilesToAdd)
                 {
                     string savePath = file.Replace(baseToExclude, PathHelper.FolderTemp);//baseTempFolder + newPath.Replace("/", Path.DirectorySeparatorChar);
-                    FileAttributes pathAttrs = File.GetAttributes(file);
+                    FileAttributes pathAttrs = File.GetAttributes(fileRedirects[file]);
                     if (pathAttrs.HasFlag(FileAttributes.Directory))
                         Directory.CreateDirectory(savePath);
                     else
                     {
                         Directory.CreateDirectory(Path.GetDirectoryName(savePath));
-                        File.Copy(file, savePath, true);
+                        File.Copy(fileRedirects[file], savePath, true);
                     }
                 }
             }
@@ -1055,7 +1632,7 @@ namespace KamiModpackBuilder
 
             if (!packing)
             {
-                ProcessPackageUnpacked(package.TopResource, files, package.ExportFolder);
+                ProcessPackageUnpacked(package.TopResource, files, package.ExportFolder, fileRedirects);
             }
             else
             {

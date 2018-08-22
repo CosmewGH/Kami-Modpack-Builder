@@ -141,6 +141,21 @@ namespace KamiModpackBuilder.Globals
         {
             return FolderCharGeneralMods + charName + Path.DirectorySeparatorChar;
         }
+
+        public static string GetCharacterGeneralModPath(string charName, string modName)
+        {
+            return GetCharacterGeneralFolder(charName) + modName + Path.DirectorySeparatorChar;
+        }
+
+        public static string GetStageModPath(string modName)
+        {
+            return GetStageModsFolder() + modName + Path.DirectorySeparatorChar;
+        }
+
+        public static string GetGeneralModPath(string modName)
+        {
+            return GetGeneralModsFolder() + modName + Path.DirectorySeparatorChar;
+        }
         #endregion
 
         #region internal methods

@@ -45,6 +45,9 @@ namespace KamiModpackBuilder.Objects
         public bool ExportCSVIgnoreCompSize { get; set; }
         public bool ExportWithDateFolder { get; set; }
 
+        public bool BuildIsWifiSafe { get; set; }
+        public int BuildSafetySetting { get; set; }
+
         public List<SmashModItem> UnlocalizationItems { get; set; }
         public List<SmashModItem> ResourcesToRemove { get; set; }
         //public List<string> PluginsOrder { get; set; }
@@ -91,7 +94,10 @@ namespace KamiModpackBuilder.Objects
             ExportCSVIgnoreCompSize = true;
             ExportCSVIgnoreFlags = true;
             ExportCSVIgnorePackOffsets = true;
-        }
+
+            BuildIsWifiSafe = false;
+            BuildSafetySetting = 0;
+    }
         #endregion
 
         #region Unlocalize
@@ -259,6 +265,27 @@ namespace KamiModpackBuilder.Objects
                 return GetRegionName(4);
             return string.Empty;
         }
+
+        public int GetAudioSlotForFighter(int fighterID, bool voice, int index)
+        {
+            for (int i = 0; i < CharacterAudioSlotSelections.Count; ++i)
+            {
+                if (fighterID == CharacterAudioSlotSelections[i].CharacterID)
+                {
+                    if (voice)
+                    {
+                        if (index == 0) return CharacterAudioSlotSelections[i].Voice1;
+                        else return CharacterAudioSlotSelections[i].Voice2;
+                    }
+                    else
+                    {
+                        if (index == 0) return CharacterAudioSlotSelections[i].Sound1;
+                        else return CharacterAudioSlotSelections[i].Sound2;
+                    }
+                }
+            }
+            return -1;
+        }
     }
     
     /// <summary>
@@ -378,7 +405,7 @@ namespace KamiModpackBuilder.Objects
 
         }
     }
-
+    
     public class CharacterAudioSlotSelection
     {
         public int CharacterID { get; set; }

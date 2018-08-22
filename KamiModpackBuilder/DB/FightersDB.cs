@@ -34,8 +34,24 @@ namespace KamiModpackBuilder.DB
         {
             throw new Exception(string.Format("FightersDB: Version {0} for Ultimate not supported.", gameVersion));
         }
+        public static Fighter GetFighterFromID(int id)
+        {
+            for (int i = 0; i < _FightersDB.Count; ++i)
+            {
+                if (_FightersDB[i].id == id) return _FightersDB[i];
+            }
+            return null;
+        }
+        public static Fighter GetFighterFromName(string name)
+        {
+            for (int i = 0; i < _FightersDB.Count; ++i)
+            {
+                if (_FightersDB[i].name.Equals(name)) return _FightersDB[i];
+            }
+            return null;
+        }
         #endregion
-        
+
         #region Wii U
         private static List<Fighter> GenerateFightersDatabaseWiiU208()
         {

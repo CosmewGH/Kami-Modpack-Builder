@@ -78,6 +78,12 @@
     <Compile Include="FileTypes\MTA.cs" />
     <Compile Include="FileTypes\NUD.cs" />
     <Compile Include="FileTypes\Nut.cs" />
+    <Compile Include="Forms\BuildSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BuildSettings.Designer.cs">
+      <DependentUpon>BuildSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CreationProjectInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,6 +220,9 @@
     <Compile Include="UserControls\StageMods.Designer.cs">
       <DependentUpon>StageMods.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\BuildSettings.resx">
+      <DependentUpon>BuildSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\CreationProjectInfo.resx">
       <DependentUpon>CreationProjectInfo.cs</DependentUpon>
     </EmbeddedResource>

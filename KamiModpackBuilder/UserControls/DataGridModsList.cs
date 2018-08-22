@@ -417,6 +417,13 @@ namespace KamiModpackBuilder.UserControls
                     string modFolderName = oldBasePath.Split(Path.DirectorySeparatorChar).Last();
                     if (modFolderName == "unzip") modFolderName = XmlMods[i].DisplayName;
 
+                    CharacterSlotModXML xmlTest = Utils.OpenCharacterSlotKamiModFile(_CurrentFighter.name, modFolderName);
+                    if (xmlTest != null)
+                    {
+                        MessageBox.Show(String.Format("Mod already exists under the same folder name '{0}'. Skipping...", modFolderName));
+                        return;
+                    }
+
                     oldBasePath = oldBasePath + Path.DirectorySeparatorChar;
 
                     string newBasePath = PathHelper.FolderCharSlotsMods + _CurrentFighter.name + Path.DirectorySeparatorChar + modFolderName + Path.DirectorySeparatorChar;
@@ -479,6 +486,13 @@ namespace KamiModpackBuilder.UserControls
                     string modFolderName = oldBasePath.Split(Path.DirectorySeparatorChar).Last();
                     if (modFolderName == "unzip") modFolderName = XmlMods[i].DisplayName;
 
+                    CharacterGeneralModXML xmlTest = Utils.OpenCharacterGeneralKamiModFile(_CurrentFighter.name, modFolderName);
+                    if (xmlTest != null)
+                    {
+                        MessageBox.Show(String.Format("Mod already exists under the same folder name '{0}'. Skipping...", modFolderName));
+                        return;
+                    }
+
                     oldBasePath = oldBasePath + Path.DirectorySeparatorChar;
 
                     string newBasePath = PathHelper.FolderCharGeneralMods + _CurrentFighter.name + Path.DirectorySeparatorChar + modFolderName + Path.DirectorySeparatorChar;
@@ -502,15 +516,27 @@ namespace KamiModpackBuilder.UserControls
                 string name = baseDirectory.Split(Path.DirectorySeparatorChar).Last();
                 Forms.NewModNamePopup popup = new Forms.NewModNamePopup();
                 popup.nameText = name;
-                popup.ShowDialog();
-                if (!popup.confirmPressed) return;
-                name = popup.nameText;
-                name = PathHelper.RemoveInvalidFilenameChars(name);
-                if (name.Length < 1)
+                bool nameValid = false;
+
+                while (!nameValid)
                 {
-                    MessageBox.Show("Invalid mod name given. Aborting import.");
-                    LogHelper.Error("Invalid mod name given. Aborting import.");
-                    return;
+                    popup.ShowDialog();
+                    if (!popup.confirmPressed) return;
+                    popup.confirmPressed = false;
+                    name = popup.nameText;
+                    name = PathHelper.RemoveInvalidFilenameChars(name);
+                    if (name.Length < 1)
+                    {
+                        MessageBox.Show("Invalid mod name given. Please enter a new one.");
+                        continue;
+                    }
+                    CharacterGeneralModXML xmlTest = Utils.OpenCharacterGeneralKamiModFile(_CurrentFighter.name, name);
+                    if (xmlTest != null)
+                    {
+                        MessageBox.Show("Mod already exists under the same folder name. Please enter a new one.");
+                        continue;
+                    }
+                    nameValid = true;
                 }
                 string newModDirectory = PathHelper.FolderCharGeneralMods + Path.DirectorySeparatorChar + _CurrentFighter.name + Path.DirectorySeparatorChar + name + Path.DirectorySeparatorChar;
                 
@@ -564,6 +590,13 @@ namespace KamiModpackBuilder.UserControls
                     string modFolderName = oldBasePath.Split(Path.DirectorySeparatorChar).Last();
                     if (modFolderName == "unzip") modFolderName = XmlMods[i].DisplayName;
 
+                    StageModXML xmlTest = Utils.OpenStageKamiModFile(modFolderName);
+                    if (xmlTest != null)
+                    {
+                        MessageBox.Show(String.Format("Mod already exists under the same folder name '{0}'. Skipping...", modFolderName));
+                        return;
+                    }
+
                     oldBasePath = oldBasePath + Path.DirectorySeparatorChar;
 
                     string newBasePath = PathHelper.FolderStageMods + modFolderName + Path.DirectorySeparatorChar;
@@ -615,15 +648,27 @@ namespace KamiModpackBuilder.UserControls
                 string name = baseDirectory.Split(Path.DirectorySeparatorChar).Last();
                 Forms.NewModNamePopup popup = new Forms.NewModNamePopup();
                 popup.nameText = name;
-                popup.ShowDialog();
-                if (!popup.confirmPressed) return;
-                name = popup.nameText;
-                name = PathHelper.RemoveInvalidFilenameChars(name);
-                if (name.Length < 1)
+                bool nameValid = false;
+
+                while (!nameValid)
                 {
-                    MessageBox.Show("Invalid mod name given. Aborting import.");
-                    LogHelper.Error("Invalid mod name given. Aborting import.");
-                    return;
+                    popup.ShowDialog();
+                    if (!popup.confirmPressed) return;
+                    popup.confirmPressed = false;
+                    name = popup.nameText;
+                    name = PathHelper.RemoveInvalidFilenameChars(name);
+                    if (name.Length < 1)
+                    {
+                        MessageBox.Show("Invalid mod name given. Please enter a new one.");
+                        continue;
+                    }
+                    StageModXML xmlTest = Utils.OpenStageKamiModFile(name);
+                    if (xmlTest != null)
+                    {
+                        MessageBox.Show("Mod already exists under the same folder name. Please enter a new one.");
+                        continue;
+                    }
+                    nameValid = true;
                 }
                 string newModDirectory = PathHelper.FolderStageMods + Path.DirectorySeparatorChar + name + Path.DirectorySeparatorChar;
                 
@@ -693,6 +738,13 @@ namespace KamiModpackBuilder.UserControls
                     string modFolderName = oldBasePath.Split(Path.DirectorySeparatorChar).Last();
                     if (modFolderName == "unzip") modFolderName = XmlMods[i].DisplayName;
 
+                    GeneralModXML xmlTest = Utils.OpenGeneralKamiModFile(modFolderName);
+                    if (xmlTest != null)
+                    {
+                        MessageBox.Show(String.Format("Mod already exists under the same folder name '{0}'. Skipping...", modFolderName));
+                        return;
+                    }
+
                     oldBasePath = oldBasePath + Path.DirectorySeparatorChar;
 
                     string newBasePath = PathHelper.FolderGeneralMods + modFolderName + Path.DirectorySeparatorChar;
@@ -722,16 +774,28 @@ namespace KamiModpackBuilder.UserControls
                 string name = baseDirectory.Split(Path.DirectorySeparatorChar).Last();
                 Forms.NewModNamePopup popup = new Forms.NewModNamePopup();
                 popup.nameText = name;
-                popup.ShowDialog();
-                if (!popup.confirmPressed) return;
-                name = popup.nameText;
-                name = PathHelper.RemoveInvalidFilenameChars(name);
-                if (name.Length < 1)
+                bool nameValid = false;
+                while (!nameValid)
                 {
-                    MessageBox.Show("Invalid mod name given. Aborting import.");
-                    LogHelper.Error("Invalid mod name given. Aborting import.");
-                    return;
+                    popup.ShowDialog();
+                    if (!popup.confirmPressed) return;
+                    popup.confirmPressed = false;
+                    name = popup.nameText;
+                    name = PathHelper.RemoveInvalidFilenameChars(name);
+                    if (name.Length < 1)
+                    {
+                        MessageBox.Show("Invalid mod name given. Please enter a new one.");
+                        continue;
+                    }
+                    GeneralModXML xmlTest = Utils.OpenGeneralKamiModFile(name);
+                    if (xmlTest != null)
+                    {
+                        MessageBox.Show("Mod already exists under the same folder name. Please enter a new one.");
+                        continue;
+                    }
+                    nameValid = true;
                 }
+
                 string newModDirectory = PathHelper.FolderGeneralMods + Path.DirectorySeparatorChar + name + Path.DirectorySeparatorChar;
 
                 #region XML File Creation

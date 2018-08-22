@@ -34,6 +34,14 @@ namespace KamiModpackBuilder.DB
         {
             throw new Exception(string.Format("StageDB: Version {0} for Ultimate not supported.", gameVersion));
         }
+        public static Stage GetStageFromID(int id)
+        {
+            for (int i = 0; i < _StagesDB.Count; ++i)
+            {
+                if (_StagesDB[i].ID == id) return _StagesDB[i];
+            }
+            return null;
+        }
         #endregion
 
         #region Wii U

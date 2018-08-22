@@ -183,6 +183,20 @@ namespace KamiModpackBuilder.Forms
                             return;
                     }
                 }
+                CharacterSlotModXML xmlTest = Utils.OpenCharacterSlotKamiModFile(_CurrentFighter.name, rowName);
+                if (xmlTest != null)
+                {
+                    MessageBox.Show("At least one row shares a name with an already existing mod!");
+                    return;
+                }
+                for (int j = 0; j < i; ++j)
+                {
+                    if (row.Cells[j].Value.Equals(rowName))
+                    {
+                        MessageBox.Show("At least 2 mods you are importing share the same name. Make sure they are all unique!");
+                        return;
+                    }
+                }
 
                 bool pass = false;
                 for (int j = 1; j < 29; ++j)

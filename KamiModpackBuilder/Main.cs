@@ -246,6 +246,12 @@ namespace KamiModpackBuilder
         {
             MessageBox.Show(String.Format(UIStrings.INFO_ABOUT + "\r\n" + UIStrings.INFO_THANKS, GlobalConstants.VERSION));
         }
+
+        private void buildToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.BuildSettings form = new Forms.BuildSettings(_ProjectManager);
+            form.ShowDialog();
+        }
         #endregion
     }
 }
