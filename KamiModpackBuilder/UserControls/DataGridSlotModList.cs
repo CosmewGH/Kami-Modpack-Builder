@@ -165,11 +165,12 @@ namespace KamiModpackBuilder.UserControls
 
         private void PopulateRows()
         {
-            for (int i = 0; i < _Rows.Count; ++i)
+            for (int i = _Rows.Count - 1; i >= 0; --i)
             {
                 _Rows[i].Parent = null;
+                _Rows[i].Dispose();
+                _Rows.RemoveAt(i);
             }
-            _Rows = new List<ModRow>();
             for (int i = _RowData.Count - 1; i > -1; --i)
             {
                 ModRow row = new ModRow(_SmashProjectManager, true, DataGridModsList.ModListType.CharacterSlots);

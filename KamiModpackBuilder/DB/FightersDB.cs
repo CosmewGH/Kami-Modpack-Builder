@@ -76,7 +76,7 @@ namespace KamiModpackBuilder.DB
                 new Fighter(0x24, "Drmario", "Dr. Mario", false, Fighter.LowPolySlots.All, Fighter.SoundPackSlots.All, Fighter.VoicePackSlots.All, 16, 8, 1, null, new List<string>{ "body","stethoscope" }),
                 new Fighter(0x25, "Rosetta", "Rosalina & Luma", false, Fighter.LowPolySlots.All),
                 new Fighter(0x26, "Wiifit", "Wii Fit Trainer", false, Fighter.LowPolySlots.All),
-                new Fighter(0x27, "Littlemac", "Little Mac", false, Fighter.LowPolySlots.None, Fighter.SoundPackSlots.All, Fighter.VoicePackSlots.Two, 16, 16),
+                new Fighter(0x27, "Littlemac", "Little Mac", false, Fighter.LowPolySlots.None, Fighter.SoundPackSlots.All, Fighter.VoicePackSlots.Two, 16, 16, 1, null, new List<string>{ "body","championbelt","throwsweat" }),
                 new Fighter(0x28, "Murabito", "Villager", false, Fighter.LowPolySlots.None, Fighter.SoundPackSlots.All, Fighter.VoicePackSlots.All, 16, 8, 2, new Dictionary<int, int> { [1] = 1, [3] = 1, [5] = 1, [7] = 1 }),
                 new Fighter(0x29, "Palutena", "Palutena", false, Fighter.LowPolySlots.All),
                 new Fighter(0x2a, "Reflet", "Robin", false, Fighter.LowPolySlots.All),

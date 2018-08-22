@@ -99,6 +99,7 @@ namespace KamiModpackBuilder
                 XmlSerializer ser = new XmlSerializer(typeof(SmashMod));
                 using (TextWriter writer = new StreamWriter(_ProjectFilePath, false))
                     ser.Serialize(writer, _CurrentProject);
+                LogHelper.Info("Project saved.");
             }
             catch (Exception e)
             {

@@ -240,7 +240,7 @@ namespace KamiModpackBuilder.UserControls
             switch (_ModListType)
             {
                 case DataGridModsList.ModListType.CharacterSlots:
-                    popup = new Forms.SlotModProperties(PathHelper.FolderCharSlotsMods + Path.DirectorySeparatorChar + _CurrentFighter.name + Path.DirectorySeparatorChar + modFolder, _CurrentFighter.name);
+                    popup = new Forms.SlotModProperties(PathHelper.FolderCharSlotsMods + Path.DirectorySeparatorChar + _CurrentFighter.name + Path.DirectorySeparatorChar + modFolder, _CurrentFighter.name, _SmashProjectManager);
                     if (!popup.isInitialized)
                     {
                         MessageBox.Show("The mod properties could not be opened. Is the mod missing?");
@@ -285,9 +285,10 @@ namespace KamiModpackBuilder.UserControls
                     _SmashProjectManager._CharacterModsPage.RefreshGeneralModsLists();
                     break;
                 case DataGridModsList.ModListType.Stage:
-                    //TODO: Update with the stagemods usercontrol
+                    _SmashProjectManager._StageModsPage.RefreshModsLists();
+                    break;
                 case DataGridModsList.ModListType.General:
-                    //TODO: Update with the generalmods usercontrol
+                    _SmashProjectManager._GeneralModsPage.RefreshModsLists();
                     break;
             }
         }

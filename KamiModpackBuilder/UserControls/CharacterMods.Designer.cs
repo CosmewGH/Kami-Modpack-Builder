@@ -53,7 +53,6 @@
             this.buttonSlotRight = new System.Windows.Forms.Button();
             this.buttonSlotUp = new System.Windows.Forms.Button();
             this.openFileDialogImportZip = new System.Windows.Forms.OpenFileDialog();
-            this.folderBrowserDialogImportFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -67,9 +66,8 @@
             this.panel1.Controls.Add(this.flowLayoutPanel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(931, 24);
+            this.panel1.Size = new System.Drawing.Size(1396, 37);
             this.panel1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -81,19 +79,17 @@
             this.flowLayoutPanel1.Controls.Add(this.buttonImportGeneralMod);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(931, 24);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1396, 37);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // comboBoxCharacters
             // 
             this.comboBoxCharacters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCharacters.FormattingEnabled = true;
-            this.comboBoxCharacters.Location = new System.Drawing.Point(2, 2);
-            this.comboBoxCharacters.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxCharacters.Location = new System.Drawing.Point(3, 3);
             this.comboBoxCharacters.Name = "comboBoxCharacters";
-            this.comboBoxCharacters.Size = new System.Drawing.Size(124, 21);
+            this.comboBoxCharacters.Size = new System.Drawing.Size(184, 28);
             this.comboBoxCharacters.TabIndex = 1;
             this.comboBoxCharacters.SelectedIndexChanged += new System.EventHandler(this.comboBoxCharacters_SelectedIndexChanged);
             // 
@@ -101,10 +97,9 @@
             // 
             this.buttonTextureIDFixAll.AutoSize = true;
             this.buttonTextureIDFixAll.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonTextureIDFixAll.Location = new System.Drawing.Point(130, 2);
-            this.buttonTextureIDFixAll.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonTextureIDFixAll.Location = new System.Drawing.Point(193, 3);
             this.buttonTextureIDFixAll.Name = "buttonTextureIDFixAll";
-            this.buttonTextureIDFixAll.Size = new System.Drawing.Size(120, 23);
+            this.buttonTextureIDFixAll.Size = new System.Drawing.Size(174, 30);
             this.buttonTextureIDFixAll.TabIndex = 3;
             this.buttonTextureIDFixAll.Text = "TextureID Fix All Slots";
             this.buttonTextureIDFixAll.UseVisualStyleBackColor = true;
@@ -113,21 +108,19 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(254, 2);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox1.Location = new System.Drawing.Point(373, 3);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
-            this.checkBox1.Size = new System.Drawing.Size(96, 21);
+            this.checkBox1.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
+            this.checkBox1.Size = new System.Drawing.Size(140, 30);
             this.checkBox1.TabIndex = 5;
             this.checkBox1.Text = "Error Checking";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // buttonImportSlotMod
             // 
-            this.buttonImportSlotMod.Location = new System.Drawing.Point(354, 2);
-            this.buttonImportSlotMod.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonImportSlotMod.Location = new System.Drawing.Point(519, 3);
             this.buttonImportSlotMod.Name = "buttonImportSlotMod";
-            this.buttonImportSlotMod.Size = new System.Drawing.Size(105, 23);
+            this.buttonImportSlotMod.Size = new System.Drawing.Size(158, 35);
             this.buttonImportSlotMod.TabIndex = 6;
             this.buttonImportSlotMod.Text = "Import Slot Mod";
             this.buttonImportSlotMod.UseVisualStyleBackColor = true;
@@ -135,10 +128,9 @@
             // 
             // buttonImportGeneralMod
             // 
-            this.buttonImportGeneralMod.Location = new System.Drawing.Point(463, 2);
-            this.buttonImportGeneralMod.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonImportGeneralMod.Location = new System.Drawing.Point(683, 3);
             this.buttonImportGeneralMod.Name = "buttonImportGeneralMod";
-            this.buttonImportGeneralMod.Size = new System.Drawing.Size(121, 23);
+            this.buttonImportGeneralMod.Size = new System.Drawing.Size(182, 35);
             this.buttonImportGeneralMod.TabIndex = 7;
             this.buttonImportGeneralMod.Text = "Import General Mod";
             this.buttonImportGeneralMod.UseVisualStyleBackColor = true;
@@ -148,17 +140,16 @@
             // 
             this.panel2.Controls.Add(this.tableLayoutPanel1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 24);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2);
+            this.panel2.Location = new System.Drawing.Point(0, 37);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(931, 714);
+            this.panel2.Size = new System.Drawing.Size(1396, 1098);
             this.panel2.TabIndex = 1;
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
@@ -168,24 +159,22 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanelSlotButtons, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 19F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 61.53846F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 19F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 38.46154F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(931, 714);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1396, 1098);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(181, 6);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(273, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 13);
+            this.label1.Size = new System.Drawing.Size(127, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Active Slot Mods";
             // 
@@ -193,10 +182,9 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(659, 6);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(990, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 13);
+            this.label2.Size = new System.Drawing.Size(139, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Inactive Slot Mods";
             // 
@@ -204,10 +192,9 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(147, 440);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(221, 677);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(155, 13);
+            this.label3.Size = new System.Drawing.Size(230, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Active General Character Mods";
             // 
@@ -215,10 +202,9 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(625, 440);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(938, 677);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(163, 13);
+            this.label4.Size = new System.Drawing.Size(242, 20);
             this.label4.TabIndex = 3;
             this.label4.Text = "Inactive General Character Mods";
             // 
@@ -231,25 +217,24 @@
             this.tableLayoutPanelGeneralButtons.Controls.Add(this.buttonGeneralLeft, 0, 0);
             this.tableLayoutPanelGeneralButtons.Controls.Add(this.buttonGeneralRight, 0, 1);
             this.tableLayoutPanelGeneralButtons.Controls.Add(this.buttonGeneralUp, 0, 2);
-            this.tableLayoutPanelGeneralButtons.Location = new System.Drawing.Point(451, 531);
-            this.tableLayoutPanelGeneralButtons.Margin = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanelGeneralButtons.Location = new System.Drawing.Point(676, 817);
             this.tableLayoutPanelGeneralButtons.Name = "tableLayoutPanelGeneralButtons";
             this.tableLayoutPanelGeneralButtons.RowCount = 4;
             this.tableLayoutPanelGeneralButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanelGeneralButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanelGeneralButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanelGeneralButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelGeneralButtons.Size = new System.Drawing.Size(29, 104);
+            this.tableLayoutPanelGeneralButtons.Size = new System.Drawing.Size(44, 160);
             this.tableLayoutPanelGeneralButtons.TabIndex = 8;
             // 
             // buttonGeneralDown
             // 
             this.buttonGeneralDown.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonGeneralDown.Enabled = false;
-            this.buttonGeneralDown.Location = new System.Drawing.Point(0, 80);
-            this.buttonGeneralDown.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.buttonGeneralDown.Location = new System.Drawing.Point(0, 123);
+            this.buttonGeneralDown.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.buttonGeneralDown.Name = "buttonGeneralDown";
-            this.buttonGeneralDown.Size = new System.Drawing.Size(29, 22);
+            this.buttonGeneralDown.Size = new System.Drawing.Size(44, 34);
             this.buttonGeneralDown.TabIndex = 7;
             this.buttonGeneralDown.Text = "↓";
             this.buttonGeneralDown.UseVisualStyleBackColor = true;
@@ -259,10 +244,10 @@
             // 
             this.buttonGeneralLeft.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonGeneralLeft.Enabled = false;
-            this.buttonGeneralLeft.Location = new System.Drawing.Point(0, 2);
-            this.buttonGeneralLeft.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.buttonGeneralLeft.Location = new System.Drawing.Point(0, 3);
+            this.buttonGeneralLeft.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.buttonGeneralLeft.Name = "buttonGeneralLeft";
-            this.buttonGeneralLeft.Size = new System.Drawing.Size(29, 22);
+            this.buttonGeneralLeft.Size = new System.Drawing.Size(44, 34);
             this.buttonGeneralLeft.TabIndex = 6;
             this.buttonGeneralLeft.Text = "←";
             this.buttonGeneralLeft.UseVisualStyleBackColor = true;
@@ -272,10 +257,10 @@
             // 
             this.buttonGeneralRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonGeneralRight.Enabled = false;
-            this.buttonGeneralRight.Location = new System.Drawing.Point(0, 28);
-            this.buttonGeneralRight.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.buttonGeneralRight.Location = new System.Drawing.Point(0, 43);
+            this.buttonGeneralRight.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.buttonGeneralRight.Name = "buttonGeneralRight";
-            this.buttonGeneralRight.Size = new System.Drawing.Size(29, 22);
+            this.buttonGeneralRight.Size = new System.Drawing.Size(44, 34);
             this.buttonGeneralRight.TabIndex = 5;
             this.buttonGeneralRight.Text = "→";
             this.buttonGeneralRight.UseVisualStyleBackColor = true;
@@ -285,10 +270,10 @@
             // 
             this.buttonGeneralUp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonGeneralUp.Enabled = false;
-            this.buttonGeneralUp.Location = new System.Drawing.Point(0, 54);
-            this.buttonGeneralUp.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.buttonGeneralUp.Location = new System.Drawing.Point(0, 83);
+            this.buttonGeneralUp.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.buttonGeneralUp.Name = "buttonGeneralUp";
-            this.buttonGeneralUp.Size = new System.Drawing.Size(29, 22);
+            this.buttonGeneralUp.Size = new System.Drawing.Size(44, 34);
             this.buttonGeneralUp.TabIndex = 4;
             this.buttonGeneralUp.Text = "↑";
             this.buttonGeneralUp.UseVisualStyleBackColor = true;
@@ -304,8 +289,7 @@
             this.tableLayoutPanelSlotButtons.Controls.Add(this.buttonSlotLeft, 0, 0);
             this.tableLayoutPanelSlotButtons.Controls.Add(this.buttonSlotRight, 0, 1);
             this.tableLayoutPanelSlotButtons.Controls.Add(this.buttonSlotUp, 0, 2);
-            this.tableLayoutPanelSlotButtons.Location = new System.Drawing.Point(451, 161);
-            this.tableLayoutPanelSlotButtons.Margin = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanelSlotButtons.Location = new System.Drawing.Point(676, 248);
             this.tableLayoutPanelSlotButtons.Name = "tableLayoutPanelSlotButtons";
             this.tableLayoutPanelSlotButtons.RowCount = 5;
             this.tableLayoutPanelSlotButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -313,17 +297,17 @@
             this.tableLayoutPanelSlotButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanelSlotButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanelSlotButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanelSlotButtons.Size = new System.Drawing.Size(29, 130);
+            this.tableLayoutPanelSlotButtons.Size = new System.Drawing.Size(44, 200);
             this.tableLayoutPanelSlotButtons.TabIndex = 9;
             // 
             // buttonSlotBottom
             // 
             this.buttonSlotBottom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonSlotBottom.Enabled = false;
-            this.buttonSlotBottom.Location = new System.Drawing.Point(0, 106);
-            this.buttonSlotBottom.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.buttonSlotBottom.Location = new System.Drawing.Point(0, 163);
+            this.buttonSlotBottom.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.buttonSlotBottom.Name = "buttonSlotBottom";
-            this.buttonSlotBottom.Size = new System.Drawing.Size(29, 22);
+            this.buttonSlotBottom.Size = new System.Drawing.Size(44, 34);
             this.buttonSlotBottom.TabIndex = 8;
             this.buttonSlotBottom.Text = "↓↓";
             this.buttonSlotBottom.UseVisualStyleBackColor = true;
@@ -333,10 +317,10 @@
             // 
             this.buttonSlotDown.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonSlotDown.Enabled = false;
-            this.buttonSlotDown.Location = new System.Drawing.Point(0, 80);
-            this.buttonSlotDown.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.buttonSlotDown.Location = new System.Drawing.Point(0, 123);
+            this.buttonSlotDown.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.buttonSlotDown.Name = "buttonSlotDown";
-            this.buttonSlotDown.Size = new System.Drawing.Size(29, 22);
+            this.buttonSlotDown.Size = new System.Drawing.Size(44, 34);
             this.buttonSlotDown.TabIndex = 7;
             this.buttonSlotDown.Text = "↓";
             this.buttonSlotDown.UseVisualStyleBackColor = true;
@@ -346,10 +330,10 @@
             // 
             this.buttonSlotLeft.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonSlotLeft.Enabled = false;
-            this.buttonSlotLeft.Location = new System.Drawing.Point(0, 2);
-            this.buttonSlotLeft.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.buttonSlotLeft.Location = new System.Drawing.Point(0, 3);
+            this.buttonSlotLeft.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.buttonSlotLeft.Name = "buttonSlotLeft";
-            this.buttonSlotLeft.Size = new System.Drawing.Size(29, 22);
+            this.buttonSlotLeft.Size = new System.Drawing.Size(44, 34);
             this.buttonSlotLeft.TabIndex = 6;
             this.buttonSlotLeft.Text = "←";
             this.buttonSlotLeft.UseVisualStyleBackColor = true;
@@ -359,10 +343,10 @@
             // 
             this.buttonSlotRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonSlotRight.Enabled = false;
-            this.buttonSlotRight.Location = new System.Drawing.Point(0, 28);
-            this.buttonSlotRight.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.buttonSlotRight.Location = new System.Drawing.Point(0, 43);
+            this.buttonSlotRight.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.buttonSlotRight.Name = "buttonSlotRight";
-            this.buttonSlotRight.Size = new System.Drawing.Size(29, 22);
+            this.buttonSlotRight.Size = new System.Drawing.Size(44, 34);
             this.buttonSlotRight.TabIndex = 5;
             this.buttonSlotRight.Text = "→";
             this.buttonSlotRight.UseVisualStyleBackColor = true;
@@ -372,10 +356,10 @@
             // 
             this.buttonSlotUp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonSlotUp.Enabled = false;
-            this.buttonSlotUp.Location = new System.Drawing.Point(0, 54);
-            this.buttonSlotUp.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.buttonSlotUp.Location = new System.Drawing.Point(0, 83);
+            this.buttonSlotUp.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.buttonSlotUp.Name = "buttonSlotUp";
-            this.buttonSlotUp.Size = new System.Drawing.Size(29, 22);
+            this.buttonSlotUp.Size = new System.Drawing.Size(44, 34);
             this.buttonSlotUp.TabIndex = 4;
             this.buttonSlotUp.Text = "↑";
             this.buttonSlotUp.UseVisualStyleBackColor = true;
@@ -387,13 +371,12 @@
             // 
             // CharacterMods
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CharacterMods";
-            this.Size = new System.Drawing.Size(931, 738);
+            this.Size = new System.Drawing.Size(1396, 1135);
             this.panel1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
@@ -433,6 +416,5 @@
         private System.Windows.Forms.Button buttonImportSlotMod;
         private System.Windows.Forms.Button buttonImportGeneralMod;
         private System.Windows.Forms.OpenFileDialog openFileDialogImportZip;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialogImportFolder;
     }
 }

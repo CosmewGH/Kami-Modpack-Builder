@@ -151,6 +151,13 @@ namespace KamiModpackBuilder.Forms
             if (!buttonRemoveRow.Enabled) buttonRemoveRow.Enabled = true;
         }
 
+        private void ModImportCharacterSlot_Shown(object sender, EventArgs e)
+        {
+            this.Activate();
+            dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
+            dataGridView1.BeginEdit(true);
+        }
+
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
             //Validate that the rows are set up correctly
@@ -268,9 +275,12 @@ namespace KamiModpackBuilder.Forms
                 }
                 if (_CurrentFighter.lowPolySlots != Fighter.LowPolySlots.None)
                 {
-                    string foldername = GetFilenameFromComboBoxString(ModelNutDirectories, ComboBoxList_ModelNutDirectories, lxx);
-                    foldername = foldername.Replace(Path.GetFileName(foldername), string.Empty);
-                    Utils.CopyAllValidFilesBetweenDirectories(foldername, baseModelPath + "lxx" + Path.DirectorySeparatorChar);
+                    if (!lxx.Equals("None"))
+                    {
+                        string foldername = GetFilenameFromComboBoxString(ModelNutDirectories, ComboBoxList_ModelNutDirectories, lxx);
+                        foldername = foldername.Replace(Path.GetFileName(foldername), string.Empty);
+                        Utils.CopyAllValidFilesBetweenDirectories(foldername, baseModelPath + "lxx" + Path.DirectorySeparatorChar);
+                    }
                 }
                 #endregion
 

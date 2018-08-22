@@ -19,6 +19,7 @@ namespace KamiModpackBuilder.Forms
         private string ModPath = String.Empty;
         private string CharName = String.Empty;
         private CharacterSlotModXML XMLData = null;
+        private SmashProjectManager _SmashProjectManager = null;
         private bool IsInitialized = false;
 
         private string PathKami = String.Empty;
@@ -32,11 +33,12 @@ namespace KamiModpackBuilder.Forms
 
         public bool isInitialized { get { return IsInitialized; } }
 
-        public SlotModProperties(string modPath, string charName)
+        public SlotModProperties(string modPath, string charName, SmashProjectManager project)
         {
             InitializeComponent();
             ModPath = modPath;
             CharName = charName;
+            _SmashProjectManager = project;
             PathKami = ModPath + Path.DirectorySeparatorChar + "kamimod.xml";
             PathVoice = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_vc_" + CharName + "_cxx.nus3bank";
             PathSound = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_se_" + CharName + "_cxx.nus3bank";
@@ -70,12 +72,16 @@ namespace KamiModpackBuilder.Forms
             textBoxBoxingRing.Enabled = checkBoxUseCustomName.Checked;
 
             bool hasModels = false;
-            string[] nutFiles = Directory.GetFiles(ModPath + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "body", "*.nut", SearchOption.AllDirectories);
-            if (nutFiles.Length > 0) hasModels = true;
-            else
+            string[] nutFiles = new string[0];
+            if (Directory.Exists(ModPath + Path.DirectorySeparatorChar + "model"))
             {
-                nutFiles = Directory.GetFiles(ModPath + Path.DirectorySeparatorChar + "model", "*.nut", SearchOption.AllDirectories);
+                if (Directory.Exists(ModPath + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "body")) nutFiles = Directory.GetFiles(ModPath + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "body", "*.nut", SearchOption.AllDirectories);
                 if (nutFiles.Length > 0) hasModels = true;
+                else
+                {
+                    nutFiles = Directory.GetFiles(ModPath + Path.DirectorySeparatorChar + "model", "*.nut", SearchOption.AllDirectories);
+                    if (nutFiles.Length > 0) hasModels = true;
+                }
             }
             if (hasModels)
             {
@@ -85,6 +91,14 @@ namespace KamiModpackBuilder.Forms
                 {
                     XMLData.TextureID = (nut.Textures[0].HashId & 0x0000FF00) >> 8;
                 }
+            }
+            else
+            {
+                XMLData.TextureID = -1;
+                XMLData.MetalModel = CharacterSlotModXML.MetalModelStatus.Unknown;
+                comboBoxMetalModel.Enabled = false;
+                textBoxTextureID.Enabled = false;
+                buttonTextureIDChange.Enabled = false;
             }
             textBoxTextureID.Text = XMLData.TextureID.ToString();
 
@@ -126,8 +140,14 @@ namespace KamiModpackBuilder.Forms
             if (XMLData.TextureID < 0) XMLData.TextureID = 0;
             if (XMLData.TextureID > 255) XMLData.TextureID = 255;
             textBoxTextureID.Text = XMLData.TextureID.ToString();
+            
+            TextureIDFix.CharacterException exc = TextureIDFix.CharacterException.None;
+            if (_SmashProjectManager._CharacterModsPage.CurrentFighter.id == 0x32 && !_SmashProjectManager.CurrentProject.IsSwitch) exc = TextureIDFix.CharacterException.Pacman_WiiU;
+            if (_SmashProjectManager._CharacterModsPage.CurrentFighter.id == 0x2a && !_SmashProjectManager.CurrentProject.IsSwitch) exc = TextureIDFix.CharacterException.Robin_WiiU;
+
             TextureIDFix textureIDFix = new TextureIDFix();
-            TextureIDFix.Mod mod = new TextureIDFix.Mod(ModPath + Path.DirectorySeparatorChar + "model");
+
+            TextureIDFix.Mod mod = new TextureIDFix.Mod(ModPath + Path.DirectorySeparatorChar + "model", exc);
             textureIDFix.ChangeTextureID(mod, (ushort)XMLData.TextureID);
             LogHelper.Info(String.Format("Changed Texture ID of {0} to {1} successfully.", ModPath, XMLData.TextureID));
         }

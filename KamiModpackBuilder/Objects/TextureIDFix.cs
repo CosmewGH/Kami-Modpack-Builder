@@ -6,16 +6,27 @@ namespace KamiModpackBuilder.Objects
 {
     class TextureIDFix
     {
+        public enum CharacterException { None, Pacman_WiiU, Robin_WiiU}
+        
         public class Mod
         {
             public string[] nudFiles;
             public string[] nutFiles;
+            public string[] mtaFiles = new string[0];
             public Dictionary<int, int> hashChanges = new Dictionary<int, int>();
 
-            public Mod(string directoryName)
+            public Mod(string directoryName, CharacterException exception)
             {
                 nutFiles = Directory.GetFiles(directoryName, "*.nut", SearchOption.AllDirectories);
                 nudFiles = Directory.GetFiles(directoryName, "*.nud", SearchOption.AllDirectories);
+                switch (exception) {
+                    case CharacterException.Pacman_WiiU:
+                        mtaFiles = Directory.GetFiles(directoryName, "model.mta", SearchOption.AllDirectories);
+                        break;
+                    case CharacterException.Robin_WiiU:
+                        mtaFiles = Directory.GetFiles(directoryName, "FitRefletBodyMainbook.mta", SearchOption.AllDirectories);
+                        break;
+                }
             }
         }
 
@@ -25,8 +36,10 @@ namespace KamiModpackBuilder.Objects
         public void ChangeTextureID(Mod mod, ushort id)
         {
             ushort textureNum = 0;
+            int baseID = -1;
             List<FileTypes.NUT> nuts = new List<FileTypes.NUT>();
             List<FileTypes.NUD> nuds = new List<FileTypes.NUD>();
+            List<FileTypes.MTA> mtas = new List<FileTypes.MTA>();
             for (int i = 0; i < mod.nutFiles.Length; ++i)
             {
                 FileTypes.NUT n = new FileTypes.NUT();
@@ -38,6 +51,7 @@ namespace KamiModpackBuilder.Objects
                     {
                         mod.hashChanges.Add(t.HashId, (int)((t.HashId & 0xFFFF0000) | (id << 8) | textureNum));
                         ++textureNum;
+                        if (baseID == -1) baseID = t.HashId;
                     }
                 }
             }
@@ -45,16 +59,13 @@ namespace KamiModpackBuilder.Objects
             {
                 FileTypes.NUD n = new FileTypes.NUD();
                 n.Read(mod.nudFiles[i]);
-                nuds.Add(n);/*
-                foreach (FileTypes.NUD.MatTexture t in n.allTextures)
-                {
-                    if (!mod.hashChanges.ContainsKey(t.hash))
-                    {
-                        mod.hashChanges.Add(t.hash, (int)((t.hash & 0xFFFF0000) | (id << 8) | textureNum));
-                        ++textureNum;
-                        Globals.LogHelper.Error(String.Format("Texture IDs in NUD files not matching Texture IDs in Nut files!\r\n{0}", mod.nudFiles[i]));
-                    }
-                }*/
+                nuds.Add(n);
+            }
+            for (int i = 0; i < mod.mtaFiles.Length; ++i)
+            {
+                FileTypes.MTA m = new FileTypes.MTA();
+                m.Read(mod.mtaFiles[i], (short)(baseID >> 16));
+                mtas.Add(m);
             }
             foreach (FileTypes.NUT n in nuts)
             {
@@ -83,6 +94,21 @@ namespace KamiModpackBuilder.Objects
                     n.Data.writeInt(mod.hashChanges[t.hash]);
                 }
                 n.SaveToFile(n.SourceFile);
+            }
+            foreach (FileTypes.MTA m in mtas)
+            {
+                List<int> changedOffsets = new List<int>();
+                foreach (FileTypes.MTA.TextureID t in m.ids)
+                {
+                    if (!mod.hashChanges.ContainsKey(t.id)) continue;
+                    if (changedOffsets.Contains(t.id)) continue;
+
+                    changedOffsets.Add(t.offset);
+                    m.Data.seek(t.offset);
+                    m.Data.writeInt(mod.hashChanges[t.id]);
+                    
+                }
+                m.SaveToFile(m.SourceFile);
             }
         }
     }

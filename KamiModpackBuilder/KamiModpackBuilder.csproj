@@ -46,6 +46,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DTLS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -74,6 +75,7 @@
     <Compile Include="DB\IconsDB.cs" />
     <Compile Include="DB\StagesDB.cs" />
     <Compile Include="FileTypes\DDS.cs" />
+    <Compile Include="FileTypes\MTA.cs" />
     <Compile Include="FileTypes\NUD.cs" />
     <Compile Include="FileTypes\Nut.cs" />
     <Compile Include="Forms\CreationProjectInfo.cs">
@@ -81,6 +83,12 @@
     </Compile>
     <Compile Include="Forms\CreationProjectInfo.Designer.cs">
       <DependentUpon>CreationProjectInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FolderSelectDialog.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\FolderSelectDialog.designer.cs">
+      <DependentUpon>FolderSelectDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ImportFolderOrZip.cs">
       <SubType>Form</SubType>

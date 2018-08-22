@@ -136,14 +136,17 @@ namespace KamiModpackBuilder.UserControls
             int highestDefaultSlotAvailable = _CurrentFighter.defaultSlots - 1;
             while (highestDefaultSlotAvailable > -1)
             {
+                bool repeat = false;
                 for (int i = 0; i < CurrentFighterActiveSlotMods.Count; ++i)
                 {
                     if (CurrentFighterActiveSlotMods[i].SlotID == highestDefaultSlotAvailable)
                     {
                         --highestDefaultSlotAvailable;
+                        repeat = true;
                         break;
                     }
                 }
+                if (repeat) continue;
                 return highestDefaultSlotAvailable;
             }
             //If no default slots are available, return -1 as no spots are available.
@@ -458,9 +461,10 @@ namespace KamiModpackBuilder.UserControls
             }
             else if (popup.choseFolder)
             {
-                if (folderBrowserDialogImportFolder.ShowDialog() == DialogResult.OK)
+                FolderSelectDialog ofd = new FolderSelectDialog();
+                if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    _GridSlotsInactive.BeginImport(folderBrowserDialogImportFolder.SelectedPath);
+                    _GridSlotsInactive.BeginImport(ofd.SelectedPath);
                 }
             }
         }
@@ -480,9 +484,10 @@ namespace KamiModpackBuilder.UserControls
             }
             else if (popup.choseFolder)
             {
-                if (folderBrowserDialogImportFolder.ShowDialog() == DialogResult.OK)
+                FolderSelectDialog ofd = new FolderSelectDialog();
+                if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    _GridGeneralInactive.BeginImport(folderBrowserDialogImportFolder.SelectedPath);
+                    _GridGeneralInactive.BeginImport(ofd.SelectedPath);
                 }
             }
         }
@@ -499,13 +504,17 @@ namespace KamiModpackBuilder.UserControls
                 CharacterSlotModXML xml = Globals.Utils.DeserializeXML<CharacterSlotModXML>(kamiPath);
                 ushort currentID = (ushort)xml.TextureID;
 
-                if (currentID % 4 == 0 || usedIDs.Contains(currentID))
+                if ((currentID % 4 == 0 && currentID < 128) || usedIDs.Contains(currentID))
                 {
                     xml.TextureID = 128;
                     while (usedIDs.Contains((ushort)xml.TextureID)) ++xml.TextureID;
 
+                    TextureIDFix.CharacterException exc = TextureIDFix.CharacterException.None;
+                    if (_CurrentFighter.id == 0x32 && !_SmashProjectManager.CurrentProject.IsSwitch) exc = TextureIDFix.CharacterException.Pacman_WiiU;
+                    if (_CurrentFighter.id == 0x2a && !_SmashProjectManager.CurrentProject.IsSwitch) exc = TextureIDFix.CharacterException.Robin_WiiU;
+
                     TextureIDFix textureIDFix = new TextureIDFix();
-                    TextureIDFix.Mod mod = new TextureIDFix.Mod(modPath + "model");
+                    TextureIDFix.Mod mod = new TextureIDFix.Mod(modPath + "model", exc);
                     textureIDFix.ChangeTextureID(mod, (ushort)xml.TextureID);
                     Globals.Utils.SerializeXMLToFile(xml, kamiPath);
                     Globals.LogHelper.Info(String.Format("Changed Texture ID of {0} to {1} successfully.", slot.FolderName, xml.TextureID));

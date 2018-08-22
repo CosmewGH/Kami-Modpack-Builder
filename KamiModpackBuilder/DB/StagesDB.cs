@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace KamiModpackBuilder.DB
 {
@@ -10,10 +8,12 @@ namespace KamiModpackBuilder.DB
     {
         #region Members
         private static List<Stage> _StagesDB;
+        private static string[] _StagesDBNames;
         #endregion
 
         #region Properties
         public static List<Stage> Stages { get { return _StagesDB; } }
+        public static string[] StageNames { get { return _StagesDBNames; } }
         #endregion
 
         #region Main Methods
@@ -28,7 +28,7 @@ namespace KamiModpackBuilder.DB
         {
             if (gameVersion < 208)
                 throw new Exception(string.Format("StageDB: Version {0} for Wii U not supported.", gameVersion));
-            _StagesDB = GenerateStagesDatabaseWiiU208();
+            GenerateStagesDatabaseWiiU208();
         }
         private static void InitializeStagesSwitchDB(int gameVersion)
         {
@@ -37,9 +37,9 @@ namespace KamiModpackBuilder.DB
         #endregion
 
         #region Wii U
-        private static List<Stage> GenerateStagesDatabaseWiiU208()
+        private static void GenerateStagesDatabaseWiiU208()
         {
-            List<Stage> stages = new List<Stage>
+            _StagesDB = new List<Stage>
             {
                 new Stage(0x0, "BattleField_f", "Battlefield", StageType.Melee),
                 new Stage(0x1, "End_f", "Final Destination", StageType.Melee),
@@ -170,8 +170,13 @@ namespace KamiModpackBuilder.DB
                 new Stage(0x7e, "Umbra_f", "Umbra Clock Tower", StageType.Melee),
                 new Stage(0x7f, "Umbra_f", "Umbra Clock Tower (Omega)", StageType.End)
             };
-
-            return stages;
+            List<string>  names = new List<string>();
+            foreach (Stage st in _StagesDB)
+            {
+                if (st.Type == StageType.End) names.Add("end" + Path.DirectorySeparatorChar + st.Label);
+                if (st.Type == StageType.Melee) names.Add("melee" + Path.DirectorySeparatorChar + st.Label);
+            }
+            _StagesDBNames = names.ToArray();
         }
         #endregion
     }

@@ -94,7 +94,7 @@
             this.panel1.Location = new System.Drawing.Point(3, 262);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1410, 34);
-            this.panel1.TabIndex = 0;
+            this.panel1.TabIndex = 1;
             // 
             // buttonCancel
             // 
@@ -113,7 +113,7 @@
             this.buttonConfirm.Location = new System.Drawing.Point(484, 5);
             this.buttonConfirm.Name = "buttonConfirm";
             this.buttonConfirm.Size = new System.Drawing.Size(75, 29);
-            this.buttonConfirm.TabIndex = 2;
+            this.buttonConfirm.TabIndex = 0;
             this.buttonConfirm.Text = "Confirm";
             this.buttonConfirm.UseVisualStyleBackColor = true;
             this.buttonConfirm.Click += new System.EventHandler(this.buttonConfirm_Click);
@@ -125,7 +125,7 @@
             this.buttonRemoveRow.Location = new System.Drawing.Point(731, 5);
             this.buttonRemoveRow.Name = "buttonRemoveRow";
             this.buttonRemoveRow.Size = new System.Drawing.Size(75, 29);
-            this.buttonRemoveRow.TabIndex = 1;
+            this.buttonRemoveRow.TabIndex = 2;
             this.buttonRemoveRow.Text = "- Row";
             this.buttonRemoveRow.UseVisualStyleBackColor = true;
             this.buttonRemoveRow.Click += new System.EventHandler(this.buttonRemoveRow_Click);
@@ -136,7 +136,7 @@
             this.buttonAddRow.Location = new System.Drawing.Point(605, 5);
             this.buttonAddRow.Name = "buttonAddRow";
             this.buttonAddRow.Size = new System.Drawing.Size(75, 29);
-            this.buttonAddRow.TabIndex = 0;
+            this.buttonAddRow.TabIndex = 1;
             this.buttonAddRow.Text = "+ Row";
             this.buttonAddRow.UseVisualStyleBackColor = true;
             this.buttonAddRow.Click += new System.EventHandler(this.buttonAddRow_Click);
@@ -183,7 +183,7 @@
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.Size = new System.Drawing.Size(1410, 253);
-            this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.TabIndex = 0;
             // 
             // ColumnName
             // 
@@ -388,6 +388,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ModImportCharacterSlot";
             this.Text = "Importing New Character Slot Mods";
+            this.Shown += new System.EventHandler(this.ModImportCharacterSlot_Shown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
