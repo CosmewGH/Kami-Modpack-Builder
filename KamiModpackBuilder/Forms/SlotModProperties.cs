@@ -91,6 +91,7 @@ namespace KamiModpackBuilder.Forms
                 {
                     XMLData.TextureID = (nut.Textures[0].HashId & 0x0000FF00) >> 8;
                 }
+                XMLData.Haslxx = Directory.Exists(ModPath + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "lxx");
             }
             else
             {

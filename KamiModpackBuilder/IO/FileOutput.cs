@@ -243,6 +243,7 @@ namespace KamiModpackBuilder
 
         public void save(String fname)
         {
+            Directory.CreateDirectory(Path.GetDirectoryName(fname));
             File.WriteAllBytes(fname, data.ToArray());
         }
 

@@ -4,7 +4,6 @@ using System.IO;
 
 namespace KamiModpackBuilder.FileTypes
 {
-
     public class NutTexture
     {
         public int HashId

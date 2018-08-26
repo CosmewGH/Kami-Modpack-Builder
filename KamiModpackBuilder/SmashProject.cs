@@ -646,6 +646,16 @@ namespace KamiModpackBuilder
                     else
                         lists[i].Add(fakeFilename, realFilename);
                 }
+                string directoryFake = Path.GetDirectoryName(fakeFilename);
+                if (!lists[i].ContainsKey(directoryFake))
+                {
+                    string directoryReal = Path.GetDirectoryName(realFilename);
+                    if (!Utils.IsAnAcceptedExtension(directoryReal))
+                        LogHelper.Error(string.Format("The file '{0}' has a forbidden extension, skipping...", directoryReal));
+                    else
+                        lists[i].Add(directoryFake, directoryReal);
+                }
+                return;
             }
         }
 
@@ -677,6 +687,8 @@ namespace KamiModpackBuilder
             if (Directory.Exists(exportPatchFolder))
                 Directory.Delete(exportPatchFolder, true);
 
+            CharacterDBParam CharDB = new CharacterDBParam(this);
+            CharacterStringsMSBT charStringsMSBD = new CharacterStringsMSBT(this);
 
             string[] baseFolders = new string[_resCols.Count()];
             SortedList<string, string>[] filesLists = new SortedList<string, string>[_resCols.Count()];
@@ -689,6 +701,7 @@ namespace KamiModpackBuilder
             
             List<string> explorerFiles = new List<string>();
             List<string> fileSearch = new List<string>();
+            List<AutoMTBFix.Nus3BankFile> nus3Banks = new List<AutoMTBFix.Nus3BankFile>();
 
             #region Character Slot Mods
             List<FighterName> fighterNames = new List<FighterName>();
@@ -705,6 +718,11 @@ namespace KamiModpackBuilder
                 if (_CurrentProject.BuildIsWifiSafe && !xml.WifiSafe)
                 {
                     LogHelper.Info(string.Format("Mod '{0}' is not Wifi-Safe, skipping...", mod.FolderName));
+                    continue;
+                }
+                if (_CurrentProject.BuildIsWifiSafe && mod.SlotID >= currentFighter.defaultSlots)
+                {
+                    LogHelper.Info(string.Format("Mod '{0}' is on an extra slot and therefore not Wifi-Safe, skipping...", mod.FolderName));
                     continue;
                 }
                 if (_CurrentProject.BuildSafetySetting > 0)
@@ -727,6 +745,9 @@ namespace KamiModpackBuilder
                             break;
                     }
                 }
+
+                CharDB.SetCharacterSlotCount(currentFighter.id, mod.SlotID+1);
+
                 string modFolder = PathHelper.GetCharacterSlotModPath(fighterName, mod.FolderName);
                 string explorerFolder = PathHelper.GetExplorerFolder(PathHelperEnum.FOLDER_PATCH);
                 string explorerFighterFolder = explorerFolder + "data" + Path.DirectorySeparatorChar + "fighter" + Path.DirectorySeparatorChar + fighterName.ToLower() + Path.DirectorySeparatorChar;
@@ -744,14 +765,41 @@ namespace KamiModpackBuilder
                         {
                             explorerFilename = "body" + Path.DirectorySeparatorChar + explorerFilename;
                             explorerFilename = explorerFilename.Replace("lxx", "l" + mod.SlotID.ToString("D2"));
+                            explorerFilename = explorerFighterFolder + "model" + Path.DirectorySeparatorChar + explorerFilename;
+                            AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                        }
+                        else if(explorerFilename.Contains("body"))
+                        {
+                            string[] split = explorerFilename.Split(Path.DirectorySeparatorChar);
+                            string slotNum = mod.SlotID.ToString("D2");
+                            explorerFilename = split.First() + Path.DirectorySeparatorChar + "c" + slotNum + explorerFilename.Remove(0, split.First().Length);
+                            explorerFilename = explorerFighterFolder + "model" + Path.DirectorySeparatorChar + explorerFilename;
+                            AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                            if (_CurrentProject.OverrideLowPolyModels)
+                            {
+                                if (mod.SlotID < currentFighter.defaultSlots)
+                                {
+                                    if (!xml.Haslxx && currentFighter.lowPolySlots != Fighter.LowPolySlots.None)
+                                    {
+                                        {
+                                            if ((currentFighter.lowPolySlots == Fighter.LowPolySlots.All) ||
+                                                (currentFighter.lowPolySlots == Fighter.LowPolySlots.EvenSlots && mod.SlotID % 2 == 1) ||
+                                                (currentFighter.lowPolySlots == Fighter.LowPolySlots.OddSlots && mod.SlotID % 2 == 0))
+                                                explorerFilename = explorerFilename.Replace("c" + slotNum, "l" + slotNum);
+                                            AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                        }
+                                    }
+                                }
+                            }
                         }
                         else
                         {
                             string[] split = explorerFilename.Split(Path.DirectorySeparatorChar);
-                            explorerFilename = split.First() + Path.DirectorySeparatorChar + "c" + mod.SlotID.ToString("D2") + explorerFilename.Remove(0, split.First().Length);
+                            string slotNum = mod.SlotID.ToString("D2");
+                            explorerFilename = split.First() + Path.DirectorySeparatorChar + "c" + slotNum + explorerFilename.Remove(0, split.First().Length);
+                            explorerFilename = explorerFighterFolder + "model" + Path.DirectorySeparatorChar + explorerFilename;
+                            AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
                         }
-                        explorerFilename = explorerFighterFolder + "model" + Path.DirectorySeparatorChar + explorerFilename;
-                        AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
                     }
                     fileSearch.Clear();
                 }
@@ -765,9 +813,11 @@ namespace KamiModpackBuilder
                         if (fileSearch.Count > 0)
                         {
                             string explorerFilename = fileSearch[0].Replace(modFolder + "sound" + Path.DirectorySeparatorChar, string.Empty);
-                            explorerFilename = explorerFilename.Replace("cxx", "c" + mod.SlotID.ToString("D2"));
+                            if (mod.SlotID > 0) explorerFilename = explorerFilename.Replace("_cxx", "_c" + mod.SlotID.ToString("D2"));
+                            else explorerFilename = explorerFilename.Replace("_cxx", "");
                             explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
                             AddFileToResColFileLists(explorerFilename, fileSearch[0], baseFolders, filesLists);
+                            nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0] });
                         }
                     }
                     else
@@ -778,9 +828,10 @@ namespace KamiModpackBuilder
                             if (fileSearch.Count > 0)
                             {
                                 string explorerFilename = fileSearch[0].Replace(modFolder + "sound" + Path.DirectorySeparatorChar, string.Empty);
-                                explorerFilename = explorerFilename.Replace("cxx", "c00");
+                                explorerFilename = explorerFilename.Replace("_cxx", "");
                                 explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
                                 AddFileToResColFileLists(explorerFilename, fileSearch[0], baseFolders, filesLists);
+                                nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0] });
                             }
                         }
                         else if (currentFighter.soundPackSlots == Fighter.SoundPackSlots.Two && _CurrentProject.GetAudioSlotForFighter(currentFighter.id, false, 1) == mod.SlotID)
@@ -789,9 +840,10 @@ namespace KamiModpackBuilder
                             if (fileSearch.Count > 0)
                             {
                                 string explorerFilename = fileSearch[0].Replace(modFolder + "sound" + Path.DirectorySeparatorChar, string.Empty);
-                                explorerFilename = explorerFilename.Replace("cxx", "c01");
+                                explorerFilename = explorerFilename.Replace("_cxx", "_c01");
                                 explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
                                 AddFileToResColFileLists(explorerFilename, fileSearch[0], baseFolders, filesLists);
+                                nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0] });
                             }
                         }
                     }
@@ -805,9 +857,11 @@ namespace KamiModpackBuilder
                         if (fileSearch.Count > 0)
                         {
                             string explorerFilename = fileSearch[0].Replace(modFolder + "sound" + Path.DirectorySeparatorChar, string.Empty);
-                            explorerFilename = explorerFilename.Replace("cxx", "c" + mod.SlotID.ToString("D2"));
+                            if (mod.SlotID > 0) explorerFilename = explorerFilename.Replace("_cxx", "_c" + mod.SlotID.ToString("D2"));
+                            else explorerFilename = explorerFilename.Replace("_cxx", "");
                             explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
                             AddFileToResColFileLists(explorerFilename, fileSearch[0], baseFolders, filesLists);
+                            nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0] });
                         }
                     }
                     else
@@ -818,9 +872,10 @@ namespace KamiModpackBuilder
                             if (fileSearch.Count > 0)
                             {
                                 string explorerFilename = fileSearch[0].Replace(modFolder + "sound" + Path.DirectorySeparatorChar, string.Empty);
-                                explorerFilename = explorerFilename.Replace("cxx", "c00");
+                                explorerFilename = explorerFilename.Replace("_cxx", "");
                                 explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
                                 AddFileToResColFileLists(explorerFilename, fileSearch[0], baseFolders, filesLists);
+                                nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0] });
                             }
                         }
                         else if (currentFighter.soundPackSlots == Fighter.SoundPackSlots.Two && _CurrentProject.GetAudioSlotForFighter(currentFighter.id, true, 1) == mod.SlotID)
@@ -829,9 +884,10 @@ namespace KamiModpackBuilder
                             if (fileSearch.Count > 0)
                             {
                                 string explorerFilename = fileSearch[0].Replace(modFolder + "sound" + Path.DirectorySeparatorChar, string.Empty);
-                                explorerFilename = explorerFilename.Replace("cxx", "c01");
+                                explorerFilename = explorerFilename.Replace("_cxx", "_c01");
                                 explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
                                 AddFileToResColFileLists(explorerFilename, fileSearch[0], baseFolders, filesLists);
+                                nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0] });
                             }
                         }
                     }
@@ -910,7 +966,7 @@ namespace KamiModpackBuilder
                             if (fighterNames[i].name.Equals(xml.CharacterName))
                             {
                                 found = true;
-                                //TODO: Update fighter database for this skin slot here
+                                CharDB.SetCharacterSlotNameIndex(currentFighter.id, mod.SlotID, fighterNames[i].nameplateSlot+1);
                             }
                         }
                     }
@@ -928,8 +984,8 @@ namespace KamiModpackBuilder
                         ++highestNameSlot;
                         FighterName newName = new FighterName { name = xml.CharacterName, BoxingText = xml.BoxingRingText, CharID = currentFighter.id, nameplateSlot = highestNameSlot };
                         fighterNames.Add(newName);
-                        //TODO: Update fighter database for this skin slot here
-                        //TODO: Update strings database for this slot here
+                        CharDB.SetCharacterSlotNameIndex(currentFighter.id, mod.SlotID, newName.nameplateSlot+1);
+                        charStringsMSBD.AddNewCharEntry(currentFighter.name, newName.nameplateSlot + 1, xml.CharacterName, xml.BoxingRingText);
 
                         if (xml.chrn_11)
                         {
@@ -953,6 +1009,9 @@ namespace KamiModpackBuilder
                 #endregion
             }
             fileSearch.Clear();
+            CharDB.SaveFiles();
+            charStringsMSBD.SaveFile();
+            //TODO: DO MTB Fix with the nus3banks dictionary
             #endregion
             #region Character General Mods
             foreach (CharacterGeneralMod mod in _CurrentProject.ActiveCharacterGeneralMods)
@@ -1110,6 +1169,14 @@ namespace KamiModpackBuilder
             }
             #endregion
             #region Editor Mods
+            fileSearch.AddRange(Directory.GetFiles(PathHelper.FolderEditorMods, "*", SearchOption.AllDirectories));
+            foreach (string f in fileSearch)
+            {
+                string explorerFilename = f.Replace(PathHelper.FolderEditorMods, string.Empty);
+                explorerFilename = PathHelper.GetExplorerFolder(PathHelperEnum.FOLDER_PATCH) + explorerFilename;
+                AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+            }
+            fileSearch.Clear();
             #endregion
             #region Explorer Mods
             for (int i = 0; i < _resCols.Count(); ++i)
