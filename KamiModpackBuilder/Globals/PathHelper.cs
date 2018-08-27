@@ -156,6 +156,11 @@ namespace KamiModpackBuilder.Globals
         {
             return GetGeneralModsFolder() + modName + Path.DirectorySeparatorChar;
         }
+
+        public static string GetApplicationDirectory()
+        {
+            return Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar;
+        }
         #endregion
 
         #region internal methods

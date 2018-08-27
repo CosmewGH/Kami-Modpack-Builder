@@ -817,7 +817,7 @@ namespace KamiModpackBuilder
                             else explorerFilename = explorerFilename.Replace("_cxx", "");
                             explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
                             AddFileToResColFileLists(explorerFilename, fileSearch[0], baseFolders, filesLists);
-                            nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0] });
+                            nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0], cxxNum = (ushort)mod.SlotID });
                         }
                     }
                     else
@@ -831,7 +831,7 @@ namespace KamiModpackBuilder
                                 explorerFilename = explorerFilename.Replace("_cxx", "");
                                 explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
                                 AddFileToResColFileLists(explorerFilename, fileSearch[0], baseFolders, filesLists);
-                                nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0] });
+                                nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0], cxxNum = 0 });
                             }
                         }
                         else if (currentFighter.soundPackSlots == Fighter.SoundPackSlots.Two && _CurrentProject.GetAudioSlotForFighter(currentFighter.id, false, 1) == mod.SlotID)
@@ -843,7 +843,7 @@ namespace KamiModpackBuilder
                                 explorerFilename = explorerFilename.Replace("_cxx", "_c01");
                                 explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
                                 AddFileToResColFileLists(explorerFilename, fileSearch[0], baseFolders, filesLists);
-                                nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0] });
+                                nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0], cxxNum = 1 });
                             }
                         }
                     }
@@ -861,7 +861,7 @@ namespace KamiModpackBuilder
                             else explorerFilename = explorerFilename.Replace("_cxx", "");
                             explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
                             AddFileToResColFileLists(explorerFilename, fileSearch[0], baseFolders, filesLists);
-                            nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0] });
+                            nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0], cxxNum = (ushort)mod.SlotID });
                         }
                     }
                     else
@@ -875,7 +875,7 @@ namespace KamiModpackBuilder
                                 explorerFilename = explorerFilename.Replace("_cxx", "");
                                 explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
                                 AddFileToResColFileLists(explorerFilename, fileSearch[0], baseFolders, filesLists);
-                                nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0] });
+                                nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0], cxxNum = 0 });
                             }
                         }
                         else if (currentFighter.soundPackSlots == Fighter.SoundPackSlots.Two && _CurrentProject.GetAudioSlotForFighter(currentFighter.id, true, 1) == mod.SlotID)
@@ -887,7 +887,7 @@ namespace KamiModpackBuilder
                                 explorerFilename = explorerFilename.Replace("_cxx", "_c01");
                                 explorerFilename = explorerFighterFolder + "sound" + Path.DirectorySeparatorChar + explorerFilename;
                                 AddFileToResColFileLists(explorerFilename, fileSearch[0], baseFolders, filesLists);
-                                nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0] });
+                                nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0], cxxNum = 1 });
                             }
                         }
                     }
@@ -1011,6 +1011,8 @@ namespace KamiModpackBuilder
             fileSearch.Clear();
             CharDB.SaveFiles();
             charStringsMSBD.SaveFile();
+            AutoMTBFix mtb = new AutoMTBFix(nus3Banks, this);
+            mtb.Run();
             //TODO: DO MTB Fix with the nus3banks dictionary
             #endregion
             #region Character General Mods

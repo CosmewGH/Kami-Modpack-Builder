@@ -22,104 +22,95 @@ namespace KamiModpackBuilder.FileTypes
             object[] entry = new object[5];
 
             entry[0] = "";
-            entry[1] = 2045;
-            entry[2] = GetNUS3Type("_se");
-            entry[3] = 1;
+            entry[1] = (uint)2045;
+            entry[2] = NUS3BANK.GetNUS3Type("_se");
+            entry[3] = (ushort)1;
             entry[4] = new List<uint> { 2046 };
             addNewEntry(entry);
             entry = new object[5];
             entry[0] = "";
-            entry[1] = 2052;
-            entry[2] = GetNUS3Type("_se_common");
-            entry[3] = 1;
+            entry[1] = (uint)2052;
+            entry[2] = NUS3BANK.GetNUS3Type("_se_common");
+            entry[3] = (ushort)1;
             entry[4] = new List<uint> { 2053 };
             addNewEntry(entry);
             entry = new object[5];
             entry[0] = "";
-            entry[1] = 2133;
-            entry[2] = GetNUS3Type("_se");
-            entry[3] = 1;
+            entry[1] = (uint)2133;
+            entry[2] = NUS3BANK.GetNUS3Type("_se");
+            entry[3] = (ushort)1;
             entry[4] = new List<uint> { 2134 };
             addNewEntry(entry);
             entry = new object[5];
             entry[0] = "";
-            entry[1] = 2135;
-            entry[2] = GetNUS3Type("_se_common");
-            entry[3] = 1;
+            entry[1] = (uint)2135;
+            entry[2] = NUS3BANK.GetNUS3Type("_se_common");
+            entry[3] = (ushort)1;
             entry[4] = new List<uint> { 2136 };
             addNewEntry(entry);
             entry = new object[5];
             entry[0] = "";
-            entry[1] = 2138;
-            entry[2] = GetNUS3Type("_se");
-            entry[3] = 1;
+            entry[1] = (uint)2138;
+            entry[2] = NUS3BANK.GetNUS3Type("_se");
+            entry[3] = (ushort)1;
             entry[4] = new List<uint> { 2139 };
             addNewEntry(entry);
             entry = new object[5];
             entry[0] = "";
-            entry[1] = 6039;
-            entry[2] = GetNUS3Type("_vc");
-            entry[3] = 1;
+            entry[1] = (uint)6039;
+            entry[2] = NUS3BANK.GetNUS3Type("_vc");
+            entry[3] = (ushort)1;
             entry[4] = new List<uint> { 6045 };
             addNewEntry(entry);
             entry = new object[5];
             entry[0] = "";
-            entry[1] = 6051;
-            entry[2] = GetNUS3Type("_vc");
-            entry[3] = 1;
+            entry[1] = (uint)6051;
+            entry[2] = NUS3BANK.GetNUS3Type("_vc");
+            entry[3] = (ushort)1;
             entry[4] = new List<uint> { 6056 };
             addNewEntry(entry);
             entry = new object[5];
             entry[0] = "";
-            entry[1] = 6059;
-            entry[2] = GetNUS3Type("_vc");
-            entry[3] = 1;
+            entry[1] = (uint)6059;
+            entry[2] = NUS3BANK.GetNUS3Type("_vc");
+            entry[3] = (ushort)1;
             entry[4] = new List<uint> { 6060 };
             addNewEntry(entry);
             entry = new object[5];
             entry[0] = "";
-            entry[1] = 6062;
-            entry[2] = GetNUS3Type("_vc");
-            entry[3] = 7;
+            entry[1] = (uint)6062;
+            entry[2] = NUS3BANK.GetNUS3Type("_vc");
+            entry[3] = (ushort)7;
             entry[4] = new List<uint> { 6063, 6064, 6065, 6066, 6067, 6068, 6069 };
             addNewEntry(entry);
             entry = new object[5];
             entry[0] = "";
-            entry[1] = 6133;
-            entry[2] = GetNUS3Type("_vc_ouen");
-            entry[3] = 7;
+            entry[1] = (uint)6133;
+            entry[2] = NUS3BANK.GetNUS3Type("_vc_ouen");
+            entry[3] = (ushort)7;
             entry[4] = new List<uint> { 6135, 6136, 6137, 6138, 6139, 6140, 6141 };
             addNewEntry(entry);
             entry = new object[5];
             entry[0] = "";
-            entry[1] = 6100;
-            entry[2] = GetNUS3Type("_vc_ouen");
-            entry[3] = 1;
+            entry[1] = (uint)6100;
+            entry[2] = NUS3BANK.GetNUS3Type("_vc_ouen");
+            entry[3] = (ushort)1;
             entry[4] = new List<uint> { 6142 };
             addNewEntry(entry);
             entry = new object[5];
             entry[0] = "";
-            entry[1] = 6165;
-            entry[2] = GetNUS3Type("_vc");
-            entry[3] = 1;
+            entry[1] = (uint)6165;
+            entry[2] = NUS3BANK.GetNUS3Type("_vc");
+            entry[3] = (ushort)1;
             entry[4] = new List<uint> { 6166 };
             addNewEntry(entry);
             entry = new object[5];
             entry[0] = "";
-            entry[1] = 6170;
-            entry[2] = GetNUS3Type("_vc");
-            entry[3] = 1;
+            entry[1] = (uint)6170;
+            entry[2] = NUS3BANK.GetNUS3Type("_vc");
+            entry[3] = (ushort)1;
             entry[4] = new List<uint> { 6171 };
             addNewEntry(entry);
-        }
-
-        private int GetNUS3Type(string NUS3Name)
-        {
-            if (NUS3Name.Contains("_se") && NUS3Name.Contains("_common")) return 4;
-            else if (NUS3Name.Contains("_vc") && NUS3Name.Contains("_ouen")) return 3;
-            else if (NUS3Name.Contains("_vc") && !NUS3Name.Contains("_se") && !NUS3Name.Contains("_ouen")) return 2;
-            else if (NUS3Name.Contains("_se") && NUS3Name.Contains("_vc") && !NUS3Name.Contains("_common")) return 1;
-            else return 5;
         }
 
         public void recalcTable()
@@ -130,7 +121,7 @@ namespace KamiModpackBuilder.FileTypes
             foreach (object[] i in entries)
             {
                 offsetTable.Add(currentOffset);
-                currentOffset += 0x1A + (0x4 * (uint)(i[3]));
+                currentOffset += (uint)(0x1A + (0x4 * (ushort)(i[3])));
             }
         }
 
@@ -161,7 +152,7 @@ namespace KamiModpackBuilder.FileTypes
         public int findByDefaultInternalAndNusType(int defaultInternal, int nusType) {
             int entryCount = 0;
             foreach (object[] entry in entries) {
-                if (defaultInternal == (int)entry[1] && nusType == (int)entry[2]) return entryCount;
+                if (defaultInternal == (uint)entry[1] && nusType == (ushort)entry[2]) return entryCount;
                 entryCount += 1;
             }
             return -1;
