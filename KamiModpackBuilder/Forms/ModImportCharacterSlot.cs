@@ -191,7 +191,7 @@ namespace KamiModpackBuilder.Forms
                 }
                 for (int j = 0; j < i; ++j)
                 {
-                    if (row.Cells[j].Value.Equals(rowName))
+                    if (dataGridView1.Rows[j].Cells[0].Value.Equals(rowName))
                     {
                         MessageBox.Show("At least 2 mods you are importing share the same name. Make sure they are all unique!");
                         return;

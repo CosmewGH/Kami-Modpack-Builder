@@ -80,7 +80,7 @@ namespace KamiModpackBuilder.DB
                 new Fighter(0x17, "Metaknight", "Meta Knight", false, Fighter.LowPolySlots.None, Fighter.SoundPackSlots.All, Fighter.VoicePackSlots.All, 16, 8, 1, null, new List<string> { "body","mantle" }),
                 new Fighter(0x18, "Pit", "Pit", false, Fighter.LowPolySlots.All, Fighter.SoundPackSlots.All, Fighter.VoicePackSlots.All, 16, 8, 1, null, new List<string> { "body","three" }),
                 new Fighter(0x19, "Szerosuit", "Zero Suit Samus", false, Fighter.LowPolySlots.All),
-                new Fighter(0x1A, "Pikmin", "Olimar", false, Fighter.LowPolySlots.All, Fighter.SoundPackSlots.All, Fighter.VoicePackSlots.Two, 16, 8, 2, new Dictionary<int, int> { [4] = 1, [5] = 1, [6] = 1, [7] = 1 }),
+                new Fighter(0x1A, "Pikmin", "Olimar", false, Fighter.LowPolySlots.All, Fighter.SoundPackSlots.All, Fighter.VoicePackSlots.Two, 16, 8, 2, new List<string> { "Olimar", "Alph" }),
                 new Fighter(0x1B, "Diddy", "Diddy Kong", false, Fighter.LowPolySlots.All),
                 new Fighter(0x1C, "Dedede", "Dedede"),
                 new Fighter(0x1D, "Ike", "Ike", false, Fighter.LowPolySlots.All),
@@ -96,11 +96,11 @@ namespace KamiModpackBuilder.DB
                 new Fighter(0x27, "Rosetta", "Rosalina & Luma", false, Fighter.LowPolySlots.All),
                 new Fighter(0x28, "Wiifit", "Wii Fit Trainer", false, Fighter.LowPolySlots.All),
                 new Fighter(0x29, "Littlemac", "Little Mac", false, Fighter.LowPolySlots.None, Fighter.SoundPackSlots.All, Fighter.VoicePackSlots.Two, 16, 16, 1, null, new List<string>{ "body","championbelt","throwsweat" }),
-                new Fighter(0x2A, "Murabito", "Villager", false, Fighter.LowPolySlots.None, Fighter.SoundPackSlots.All, Fighter.VoicePackSlots.All, 16, 8, 2, new Dictionary<int, int> { [1] = 1, [3] = 1, [5] = 1, [7] = 1 }),
+                new Fighter(0x2A, "Murabito", "Villager", false, Fighter.LowPolySlots.None, Fighter.SoundPackSlots.All, Fighter.VoicePackSlots.All, 16, 8, 2),
                 new Fighter(0x2B, "Palutena", "Palutena", false, Fighter.LowPolySlots.All),
                 new Fighter(0x2C, "Reflet", "Robin", false, Fighter.LowPolySlots.All, Fighter.SoundPackSlots.All, Fighter.VoicePackSlots.Two),
                 new Fighter(0x2D, "Duckhunt", "Dunk Hunt"),
-                new Fighter(0x2E, "KoopaJr", "Bowser Jr.", false, Fighter.LowPolySlots.None, Fighter.SoundPackSlots.All, Fighter.VoicePackSlots.All, 16, 8, 8, new Dictionary<int, int> { [0] = 0, [1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, [6] = 6, [7] = 7 }, new List<string> { "body","kart","remainclown" }),
+                new Fighter(0x2E, "KoopaJr", "Bowser Jr.", false, Fighter.LowPolySlots.None, Fighter.SoundPackSlots.All, Fighter.VoicePackSlots.All, 16, 8, 8, new List<string> { "Bowser Jr.", "Larry", "Roy", "Wendy", "Iggy", "Morton", "Lemmy", "Ludwig" }, new List<string> { "body","kart","remainclown" }),
                 new Fighter(0x2F, "Shulk", "Shulk", false, Fighter.LowPolySlots.All),
                 new Fighter(0x30, "Gekkouga", "Greninja"),
                 new Fighter(0x31, "Pacman", "Pac-man"),
@@ -131,7 +131,7 @@ namespace KamiModpackBuilder.DB
         private int _MaxSlots = 16;
         private int _DefaultSlots = 8;
         private int _DefaultNameplateSlots = 1;
-        private Dictionary<int, int> _NameplateSlots = null;
+        private List<string> _NameplateSlots = null;
         private bool _IsDLC = false;
         private List<string> _ModelParts = null;
         #endregion
@@ -146,7 +146,7 @@ namespace KamiModpackBuilder.DB
         public int maxSlots { get { return _MaxSlots; } }
         public int defaultSlots { get { return _DefaultSlots; } }
         public int defaultNameplateSlots { get { return _DefaultNameplateSlots; } }
-        public Dictionary<int, int> nameplateSlots { get { return _NameplateSlots; } }
+        public List<string> nameplateSlots { get { return _NameplateSlots; } }
         public bool isDLC { get { return _IsDLC; } }
         public List<string> modelParts { get { return _ModelParts; } }
         #endregion
@@ -160,7 +160,7 @@ namespace KamiModpackBuilder.DB
         public Fighter(int a_id, string a_name, string a_nameHuman, bool a_isDLC = false, 
             LowPolySlots a_lowPolySlots = LowPolySlots.None, SoundPackSlots a_soundPackSlots = SoundPackSlots.All, 
             VoicePackSlots a_voicePackSlots = VoicePackSlots.All, int a_maxSlots = 16, int a_defaultSlots = 8, 
-            int a_defaultNameplateSlots = 1, Dictionary<int, int> a_nameplateSlots = null, List<string> a_modelParts = null)
+            int a_defaultNameplateSlots = 1, List<string> a_nameplateSlots = null, List<string> a_modelParts = null)
         {
             _ID = a_id;
 
@@ -176,10 +176,7 @@ namespace KamiModpackBuilder.DB
             _IsDLC = a_isDLC;
             _ModelParts = a_modelParts;
 
-            if (_NameplateSlots == null) _NameplateSlots = new Dictionary<int, int>
-            {
-                [0] = 0
-            };
+            if (_NameplateSlots == null) _NameplateSlots = new List<string>();
             if (_ModelParts == null) _ModelParts = new List<string>
             {
                 "body"

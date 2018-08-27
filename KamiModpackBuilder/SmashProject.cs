@@ -970,6 +970,14 @@ namespace KamiModpackBuilder
                             }
                         }
                     }
+                    for (int i = 0; i < currentFighter.nameplateSlots.Count; ++i)
+                    {
+                        if (currentFighter.nameplateSlots[i].Equals(xml.CharacterName))
+                        {
+                            found = true;
+                            CharDB.SetCharacterSlotNameIndex(currentFighter.id, mod.SlotID, i + 1);
+                        }
+                    }
                     if (!found)
                     {
                         int highestNameSlot = currentFighter.defaultNameplateSlots - 1;

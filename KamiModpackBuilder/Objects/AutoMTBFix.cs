@@ -57,7 +57,7 @@ namespace KamiModpackBuilder.Objects
                 else {
                     internalIds[cXXSlot - 1] = customNusId;
                 }
-                entry[3] = internalIds.Count;
+                entry[3] = (ushort)internalIds.Count;
                 entry[4] = internalIds;
                 _MTB.modifiyExistingEntry(entryNum, entry);
             }
@@ -97,7 +97,7 @@ namespace KamiModpackBuilder.Objects
                 isCXX = true;
                 NUS3NameNoCXX = NUS3Name.Replace(search, string.Empty);
             }
-            StreamReader f = File.OpenText(Globals.PathHelper.GetApplicationDirectory() + "NUS3-IDs.db");
+            StreamReader f = File.OpenText(Globals.PathHelper.GetApplicationDirectory() + "libs" + Path.DirectorySeparatorChar + "NUS3-IDs.db");
             while (!f.EndOfStream){
                 string line = f.ReadLine();
                 if (line.Contains(NUS3Name) && line[NUS3Name.Length] == ':') {

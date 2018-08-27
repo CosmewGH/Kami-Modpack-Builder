@@ -10,6 +10,7 @@ namespace KamiModpackBuilder.FileTypes
     {
         private string filename;
         private uint header;
+        private uint header2;
         private List<object[]> entries;
         private uint offsetStart;
         private List<uint> offsetTable;
@@ -17,6 +18,7 @@ namespace KamiModpackBuilder.FileTypes
         public MTB(string fname) {
             filename = fname;
             header = 0x0042544D;
+            header2 = 0x00000001;
             entries = new List<object[]>();
 
             object[] entry = new object[5];
@@ -164,6 +166,7 @@ namespace KamiModpackBuilder.FileTypes
             FileOutput f = new FileOutput();
             f.Endian = System.IO.Endianness.Little;
             f.writeUInt(header);
+            f.writeUInt(header2);
             f.writeUInt(entryCount);
             f.writeUInt(offsetStart - 0x10);
             foreach (uint i in offsetTable)
