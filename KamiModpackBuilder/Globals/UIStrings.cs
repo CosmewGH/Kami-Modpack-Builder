@@ -36,8 +36,10 @@ namespace KamiModpackBuilder.Globals
         public const string INFO_THANKS =
             "Thanks to:\r\n" +
             "- Deinonychus71 for creating Sm4shExplorer\r\n" +
-            "- Sammi Husky for his DTLSExtractor\r\n" +
-            "- Soneek for his work with smash music\r\n" +
+            "- Sammi Husky for his DTLSExtractor and other tools\r\n" +
+            "- Soneek for his work with Sm4sh Music\r\n" +
+            "- IcySon55 for his MSBT Editor\r\n" +
+            "- Zarklord, Muno, G_F_D, and mariosonicds for their contributions for the Auto TexID Fix scripts\r\n" +
             "- Everyone else who has contributed to the Smash Modding Community";
     }
 }

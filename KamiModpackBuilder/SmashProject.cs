@@ -22,6 +22,7 @@ namespace KamiModpackBuilder
         private ResourceCollection _resColDataCore;
         private string _ProjectFilePath = string.Empty;
         private RFManager _RfManager;
+        private static SmashProjectManager _Instance;
         #endregion
 
         #region Properties
@@ -39,11 +40,16 @@ namespace KamiModpackBuilder
         /// The current project
         /// </summary>
         public SmashMod CurrentProject { get { return _CurrentProject; } }
+
+        public static SmashProjectManager instance { get { return _Instance; } }
         
         public Explorer _ExplorerPage = null;
         public CharacterMods _CharacterModsPage = null;
         public StageMods _StageModsPage = null;
         public GeneralMods _GeneralModsPage = null;
+        public Sm4shMusic.Sm4shMusic _Sm4shMusic = null;
+        public Sm4shMusic.UserControls.BGMManagement _BGMManagementPage = null;
+        public Sm4shMusic.UserControls.MyMusicManagement _MyMusicPage = null;
         #endregion
 
         #region Project Management

@@ -53,6 +53,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\DTLS.exe</HintPath>
     </Reference>
+    <Reference Include="NAudio, Version=1.7.0.11, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\NAudio.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -73,7 +77,13 @@
     <Compile Include="DB\CharsDB.cs" />
     <Compile Include="DB\FightersDB.cs" />
     <Compile Include="DB\IconsDB.cs" />
+    <Compile Include="FileTypes\NUT.cs" />
+    <Compile Include="Sm4shMusic\DB\BGMFilesDB.cs" />
+    <Compile Include="Sm4shMusic\DB\BGMStage.cs" />
+    <Compile Include="Sm4shMusic\DB\BGMStageDB.cs" />
     <Compile Include="DB\StagesDB.cs" />
+    <Compile Include="Sm4shMusic\EventHandlers\ListEntryArgs.cs" />
+    <Compile Include="Sm4shMusic\EventHandlers\MoveItemArgs.cs" />
     <Compile Include="FileTypes\DDS.cs" />
     <Compile Include="FileTypes\MSBT\BinaryTools.cs" />
     <Compile Include="FileTypes\MSBT\MSBT.cs" />
@@ -82,7 +92,6 @@
     <Compile Include="FileTypes\MTB.cs" />
     <Compile Include="FileTypes\NUD.cs" />
     <Compile Include="FileTypes\NUS3BANK.cs" />
-    <Compile Include="FileTypes\Nut.cs" />
     <Compile Include="FileTypes\PARAM.cs" />
     <Compile Include="Forms\BuildSettings.cs">
       <SubType>Form</SubType>
@@ -144,6 +153,24 @@
     <Compile Include="Forms\SlotModProperties.Designer.cs">
       <DependentUpon>SlotModProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sm4shMusic\Forms\BGMProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sm4shMusic\Forms\BGMProperties.Designer.cs">
+      <DependentUpon>BGMProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sm4shMusic\Forms\CharacterRotation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sm4shMusic\Forms\CharacterRotation.Designer.cs">
+      <DependentUpon>CharacterRotation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sm4shMusic\Forms\SortMusic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sm4shMusic\Forms\SortMusic.Designer.cs">
+      <DependentUpon>SortMusic.cs</DependentUpon>
+    </Compile>
     <Compile Include="Globals\ConsoleRedirProgress.cs" />
     <Compile Include="Globals\ConsoleRedirText.cs" />
     <Compile Include="Globals\CustomStringComparer.cs" />
@@ -152,6 +179,16 @@
     <Compile Include="Globals\LinqExtension.cs" />
     <Compile Include="Globals\LogHelper.cs" />
     <Compile Include="Globals\PathHelper.cs" />
+    <Compile Include="Sm4shMusic\Globals\Base36.cs" />
+    <Compile Include="Sm4shMusic\Globals\Debug.cs" />
+    <Compile Include="Sm4shMusic\Globals\RefreshingListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Sm4shMusic\Globals\Serializer.cs" />
+    <Compile Include="Sm4shMusic\Globals\Sm4shSoundTools.cs" />
+    <Compile Include="Sm4shMusic\Globals\Strings.cs" />
+    <Compile Include="Sm4shMusic\Globals\VGMStreamNative.cs" />
+    <Compile Include="Sm4shMusic\Globals\VGMStreamReader.cs" />
     <Compile Include="Globals\UIConstants.cs" />
     <Compile Include="Globals\UIStrings.cs" />
     <Compile Include="Globals\Utils.cs" />
@@ -177,6 +214,21 @@
     <Compile Include="Objects\ResourceExtension.cs" />
     <Compile Include="Objects\ResourceItem.cs" />
     <Compile Include="Objects\ResourceNameItem.cs" />
+    <Compile Include="Sm4shMusic\Objects\BGMEntry.cs" />
+    <Compile Include="Sm4shMusic\Objects\EnumEntity.cs" />
+    <Compile Include="Sm4shMusic\Objects\ISm4shListItem.cs" />
+    <Compile Include="Sm4shMusic\Objects\MSBTVariable.cs" />
+    <Compile Include="Sm4shMusic\Objects\MyMusicFile.cs" />
+    <Compile Include="Sm4shMusic\Objects\MyMusicStage.cs" />
+    <Compile Include="Sm4shMusic\Objects\MyMusicStageBGM.cs" />
+    <Compile Include="Sm4shMusic\Objects\PropertyFile.cs" />
+    <Compile Include="Sm4shMusic\Objects\SoundDBStage.cs" />
+    <Compile Include="Sm4shMusic\Objects\SoundDBStageSoundEntry.cs" />
+    <Compile Include="Sm4shMusic\Objects\SoundEntry.cs" />
+    <Compile Include="Sm4shMusic\Objects\SoundEntryBGM.cs" />
+    <Compile Include="Sm4shMusic\Objects\SoundEntryCollection.cs" />
+    <Compile Include="Sm4shMusic\Objects\SoundMSBTFile.cs" />
+    <Compile Include="Sm4shMusic\Objects\UISoundDBFile.cs" />
     <Compile Include="Objects\SmashMod.cs" />
     <Compile Include="Objects\TextureIDFix.cs" />
     <Compile Include="Program.cs" />
@@ -187,6 +239,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="RFManager.cs" />
+    <Compile Include="Sm4shMusic\Sm4shMusic.cs" />
     <Compile Include="SmashProject.cs" />
     <Compile Include="UserControls\CharacterMods.cs">
       <SubType>UserControl</SubType>
@@ -224,6 +277,37 @@
     <Compile Include="UserControls\ModRow.Designer.cs">
       <DependentUpon>ModRow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sm4shMusic\UserControls\BGMManagement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sm4shMusic\UserControls\BGMManagement.Designer.cs">
+      <DependentUpon>BGMManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sm4shMusic\UserControls\ListEntries.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sm4shMusic\UserControls\ListEntries.Designer.cs">
+      <DependentUpon>ListEntries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sm4shMusic\UserControls\ListEvents.cs" />
+    <Compile Include="Sm4shMusic\UserControls\MusicStageList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sm4shMusic\UserControls\MusicStageList.Designer.cs">
+      <DependentUpon>MusicStageList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sm4shMusic\UserControls\MyMusicManagement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sm4shMusic\UserControls\MyMusicManagement.Designer.cs">
+      <DependentUpon>MyMusicManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sm4shMusic\UserControls\VGMStreamPlayer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sm4shMusic\UserControls\VGMStreamPlayer.Designer.cs">
+      <DependentUpon>VGMStreamPlayer.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\StageMods.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -258,6 +342,15 @@
     <EmbeddedResource Include="Forms\SlotModProperties.resx">
       <DependentUpon>SlotModProperties.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sm4shMusic\Forms\BGMProperties.resx">
+      <DependentUpon>BGMProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sm4shMusic\Forms\CharacterRotation.resx">
+      <DependentUpon>CharacterRotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sm4shMusic\Forms\SortMusic.resx">
+      <DependentUpon>SortMusic.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -283,6 +376,21 @@
     <EmbeddedResource Include="UserControls\ModRow.resx">
       <DependentUpon>ModRow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sm4shMusic\UserControls\BGMManagement.resx">
+      <DependentUpon>BGMManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sm4shMusic\UserControls\ListEntries.resx">
+      <DependentUpon>ListEntries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sm4shMusic\UserControls\MusicStageList.resx">
+      <DependentUpon>MusicStageList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sm4shMusic\UserControls\MyMusicManagement.resx">
+      <DependentUpon>MyMusicManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sm4shMusic\UserControls\VGMStreamPlayer.resx">
+      <DependentUpon>VGMStreamPlayer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\StageMods.resx">
       <DependentUpon>StageMods.cs</DependentUpon>
     </EmbeddedResource>
@@ -304,13 +412,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="libs\DTLS.exe" />
-    <Content Include="libs\zlib32.dll" />
-    <Content Include="libs\zlib64.dll" />
+    <Content Include="libs\NAudio.dll" />
     <Content Include="libs\zlibnet.dll" />
+    <None Include="Resources\stop.png" />
+    <None Include="Resources\remove.png" />
+    <None Include="Resources\play.png" />
     <None Include="Resources\icon_warning.png" />
     <None Include="Resources\icon_error.png" />
+    <None Include="Resources\arrowdown.png" />
+    <None Include="Resources\arrowup.png" />
+    <None Include="Resources\help.png" />
     <Content Include="Resources\icon_file.png" />
     <Content Include="Resources\icon_folder.png" />
+    <None Include="Resources\icon_music.png" />
     <Content Include="Resources\icon_packed.png" />
   </ItemGroup>
   <ItemGroup>

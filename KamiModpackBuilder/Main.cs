@@ -22,6 +22,7 @@ namespace KamiModpackBuilder
         bool _MainLoaded = false;
         bool _UserControlsLoaded = false;
         SmashProjectManager _ProjectManager = null;
+
         #endregion
 
         #region Properties
@@ -102,6 +103,7 @@ namespace KamiModpackBuilder
 
         private void SaveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (_ProjectManager._Sm4shMusic != null) _ProjectManager._Sm4shMusic.CompileTheModifications();
             _ProjectManager.SaveProject();
             _ProjectManager.SaveConfig();
         }
@@ -182,7 +184,15 @@ namespace KamiModpackBuilder
                     LoadGeneralModsPage();
                     UnloadExplorerModsPage();
                     break;
-                case 6:
+                case 3:
+                case 4:
+                    if (_ProjectManager._Sm4shMusic == null) LoadMusicPages();
+                    UnloadCharacterModsPage();
+                    UnloadStageModsPage();
+                    UnloadGeneralModsPage();
+                    UnloadExplorerModsPage();
+                    break;
+                case 7:
                     if (_ProjectManager._ExplorerPage != null) return;
                     UnloadCharacterModsPage();
                     UnloadStageModsPage();
@@ -190,6 +200,46 @@ namespace KamiModpackBuilder
                     LoadExplorerModsPage();
                     break;
             }
+        }
+
+        private void saveChangesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ProjectManager._Sm4shMusic.CompileTheModifications();
+        }
+
+        private void loadConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ProjectManager._Sm4shMusic.LoadConfiguration();
+        }
+
+        private void saveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ProjectManager._Sm4shMusic.SaveConfiguration();
+        }
+
+        private void refreshBGMFilesListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ProjectManager._Sm4shMusic.RefreshBGMFilesList();
+        }
+
+        private void generateCSVForSoundDBAndMSBTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ProjectManager._Sm4shMusic.GenerateCSVForSoundDBAndMSBT();
+        }
+
+        private void generateCSVForBGMEntriesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ProjectManager._Sm4shMusic.GenerateCSVForBGMEntries();
+        }
+
+        private void generateCSVForMyMusicToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ProjectManager._Sm4shMusic.GenerateCSVForMyMusic();
+        }
+
+        private void listAllOrphanBGMsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ProjectManager._Sm4shMusic.ListAllOrphanBGMs();
         }
         #endregion
 
@@ -338,7 +388,22 @@ namespace KamiModpackBuilder
             explorer.Dock = DockStyle.Fill;
             _ProjectManager._ExplorerPage = explorer;
         }
+
+        private void LoadMusicPages()
+        {
+            Sm4shMusic.UserControls.BGMManagement bgm = new Sm4shMusic.UserControls.BGMManagement();
+            bgm.Parent = tabPageBGM;
+            bgm.Dock = DockStyle.Fill;
+            _ProjectManager._BGMManagementPage = bgm;
+            Sm4shMusic.UserControls.MyMusicManagement music = new Sm4shMusic.UserControls.MyMusicManagement();
+            music.Parent = tabPageMyMusic;
+            music.Dock = DockStyle.Fill;
+            _ProjectManager._MyMusicPage = music;
+            _ProjectManager._Sm4shMusic = new Sm4shMusic.Sm4shMusic(_ProjectManager);
+            sm4shMusicToolStripMenuItem.Enabled = true;
+        }
         #endregion
+
         #endregion
     }
 }

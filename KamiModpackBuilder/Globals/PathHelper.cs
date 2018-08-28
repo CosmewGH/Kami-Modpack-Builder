@@ -29,7 +29,6 @@ namespace KamiModpackBuilder.Globals
         public static string FolderTemp { get { return GetProjectTempFolder(); } }
         public static string FolderExplorer { get { return GetProjectExplorerFolder(); } }
         public static string FolderWorkspace { get { return GetProjectWorkspaceFolder(); } }
-        //public static string FolderPlugins { get { return GetPluginsFolder(); } }
         public static string FolderExtract { get { return GetProjectExtractFolder(); } }
         public static string FolderExport { get { return GetProjectExportFolder(); } }
         public static string FolderCharMods { get { return GetCharModsFolder(); } }
@@ -38,6 +37,8 @@ namespace KamiModpackBuilder.Globals
         public static string FolderStageMods { get { return GetStageModsFolder(); } }
         public static string FolderGeneralMods { get { return GetGeneralModsFolder(); } }
         public static string FolderEditorMods { get { return GetEditorModsFolder(); } }
+        public static string FolderBGM { get { return GetBGMFolder(); } }
+        public static string FolderMovie { get { return GetMovieFolder(); } }
 
         #region public methods
         public static bool IsItSmashFolder(string folder)
@@ -120,6 +121,16 @@ namespace KamiModpackBuilder.Globals
         public static string GetEditorModsFolder()
         {
             return FolderWorkspace + "Editor" + Path.DirectorySeparatorChar;
+        }
+
+        public static string GetBGMFolder()
+        {
+            return FolderWorkspace + "BGM" + Path.DirectorySeparatorChar;
+        }
+
+        public static string GetMovieFolder()
+        {
+            return FolderWorkspace + "Movie" + Path.DirectorySeparatorChar;
         }
 
         public static string GetCharacterSlotsFolder(string charName)
