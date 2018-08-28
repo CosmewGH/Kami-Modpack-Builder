@@ -213,6 +213,7 @@ namespace KamiModpackBuilder.UserControls
             }
             else
             {
+                CharGeneralModSelectionChanged(null);
                 if (!SelectedSlotMod.isActiveList)
                 {
                     buttonSlotUp.Enabled = false;
@@ -249,6 +250,7 @@ namespace KamiModpackBuilder.UserControls
             }
             else
             {
+                CharSlotModSelectionChanged(null);
                 if (!SelectedGeneralMod.isActiveList)
                 {
                     buttonGeneralUp.Enabled = false;
@@ -365,7 +367,7 @@ namespace KamiModpackBuilder.UserControls
             if (slot >= _CurrentFighter.defaultSlots) return;
             int newslot = GetHighestSlotModSlot();
             if (newslot >= _CurrentFighter.maxSlots - 1) return;
-            if (newslot <= _CurrentFighter.defaultSlots) newslot = _CurrentFighter.defaultSlots;
+            if (newslot < _CurrentFighter.defaultSlots) newslot = _CurrentFighter.defaultSlots;
             else ++newslot;
             CharacterSlotMod originalSlot = GetActiveModAtSlot(slot);
             originalSlot.SlotID = newslot;

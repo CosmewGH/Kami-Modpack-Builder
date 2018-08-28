@@ -58,6 +58,27 @@ namespace KamiModpackBuilder.UserControls
         {
             ParseImportFiles(new string[] { path });
         }
+
+        public void SelectMod(string modFolderName)
+        {
+            for (int i = 0; i < _Rows.Count; ++i)
+            {
+                if (_Rows[i].modFolder.Equals(modFolderName) && _Rows[i].Visible)
+                {
+                    switch (_ModListType)
+                    {
+                        case (DataGridModsList.ModListType.CharacterSlots):
+                            EventManager.CharSlotModSelectionChanged(_Rows[i]); return;
+                        case (DataGridModsList.ModListType.CharacterGeneral):
+                            EventManager.CharGeneralModSelectionChanged(_Rows[i]); return;
+                        case (DataGridModsList.ModListType.Stage):
+                            EventManager.StageModSelectionChanged(_Rows[i]); return;
+                        case (DataGridModsList.ModListType.General):
+                            EventManager.MiscModSelectionChanged(_Rows[i]); return;
+                    }
+                }
+            }
+        }
         #endregion
 
         #region Private Methods
@@ -237,40 +258,29 @@ namespace KamiModpackBuilder.UserControls
 
         private void PopulateRows()
         {
-            for (int i = _Rows.Count - 1; i >= 0; --i)
+            while (_Rows.Count < _RowData.Count)
             {
-                _Rows[i].Parent = null;
-                _Rows[i].Dispose();
-                _Rows.RemoveAt(i);
+                if (_Rows.Count < _RowData.Count)
+                {
+                    ModRow row = new ModRow(_SmashProjectManager, _IsActiveList, _ModListType);
+                    row.Dock = DockStyle.Top;
+                    _Rows.Add(row);
+                    row.Parent = panelModList;
+                }
             }
             for (int i = _RowData.Count - 1; i > -1; --i)
             {
-                ModRow row = new ModRow(_SmashProjectManager, _IsActiveList, _ModListType);
-                row.ChangeSelectedFighter(_CurrentFighter);
-                row.UpdateData(_RowData[i]);
-                row.Dock = DockStyle.Top;
-                _Rows.Add(row);
-                row.Parent = panelModList;
+                ModRow myRow = _Rows[_Rows.Count - i - 1];
+                if (_ModListType == ModListType.CharacterGeneral || _ModListType == ModListType.CharacterSlots)
+                    myRow.ChangeSelectedFighter(_CurrentFighter);
+                myRow.UpdateData(_RowData[i]);
+                myRow.Visible = true;
             }
-        }
-
-        public void SelectMod(string modFolderName)
-        {
-            for (int i = 0; i < _Rows.Count; ++i)
+            if (_Rows.Count > _RowData.Count)
             {
-                if (_Rows[i].modFolder.Equals(modFolderName))
+                for (int i = 0; i < _Rows.Count - _RowData.Count; ++i)
                 {
-                    switch (_ModListType)
-                    {
-                        case (DataGridModsList.ModListType.CharacterSlots):
-                            EventManager.CharSlotModSelectionChanged(_Rows[i]); return;
-                        case (DataGridModsList.ModListType.CharacterGeneral):
-                            EventManager.CharGeneralModSelectionChanged(_Rows[i]); return;
-                        case (DataGridModsList.ModListType.Stage):
-                            EventManager.StageModSelectionChanged(_Rows[i]); return;
-                        case (DataGridModsList.ModListType.General):
-                            EventManager.MiscModSelectionChanged(_Rows[i]); return;
-                    }
+                    _Rows[i].Visible = false;
                 }
             }
         }

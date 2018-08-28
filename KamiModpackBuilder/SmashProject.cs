@@ -40,10 +40,10 @@ namespace KamiModpackBuilder
         /// </summary>
         public SmashMod CurrentProject { get { return _CurrentProject; } }
         
-        public Explorer _ExplorerPage;
-        public CharacterMods _CharacterModsPage;
-        public StageMods _StageModsPage;
-        public GeneralMods _GeneralModsPage;
+        public Explorer _ExplorerPage = null;
+        public CharacterMods _CharacterModsPage = null;
+        public StageMods _StageModsPage = null;
+        public GeneralMods _GeneralModsPage = null;
         #endregion
 
         #region Project Management

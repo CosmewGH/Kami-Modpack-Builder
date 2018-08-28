@@ -37,6 +37,8 @@
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.projectSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutKamiModpackBuilderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,8 +56,6 @@
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -72,7 +72,8 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1291, 33);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(861, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -90,58 +91,70 @@
             this.toolStripSeparator3,
             this.exitToolStripMenuItem});
             this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
-            this.projectToolStripMenuItem.Size = new System.Drawing.Size(78, 29);
+            this.projectToolStripMenuItem.Size = new System.Drawing.Size(56, 22);
             this.projectToolStripMenuItem.Text = "Project";
             // 
             // newProjectToolStripMenuItem
             // 
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(255, 30);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newProjectToolStripMenuItem.Text = "New Project";
             this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
             // 
             // openProjectToolStripMenuItem
             // 
             this.openProjectToolStripMenuItem.Name = "openProjectToolStripMenuItem";
-            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(255, 30);
+            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openProjectToolStripMenuItem.Text = "Open Project";
             this.openProjectToolStripMenuItem.Click += new System.EventHandler(this.openProjectToolStripMenuItem_Click);
             // 
             // saveProjectToolStripMenuItem
             // 
             this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(255, 30);
+            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveProjectToolStripMenuItem.Text = "Save Project";
             this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.SaveProjectToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(252, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(255, 30);
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.preferencesToolStripMenuItem.Text = "Application Settings";
             this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
             // 
             // projectSettingsToolStripMenuItem
             // 
             this.projectSettingsToolStripMenuItem.Name = "projectSettingsToolStripMenuItem";
-            this.projectSettingsToolStripMenuItem.Size = new System.Drawing.Size(255, 30);
+            this.projectSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.projectSettingsToolStripMenuItem.Text = "Project Settings";
             this.projectSettingsToolStripMenuItem.Click += new System.EventHandler(this.projectSettingsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(252, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            // 
+            // buildToolStripMenuItem
+            // 
+            this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
+            this.buildToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.buildToolStripMenuItem.Text = "Build";
+            this.buildToolStripMenuItem.Click += new System.EventHandler(this.buildToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(255, 30);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -150,13 +163,13 @@
             this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutKamiModpackBuilderToolStripMenuItem});
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(74, 29);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // aboutKamiModpackBuilderToolStripMenuItem
             // 
             this.aboutKamiModpackBuilderToolStripMenuItem.Name = "aboutKamiModpackBuilderToolStripMenuItem";
-            this.aboutKamiModpackBuilderToolStripMenuItem.Size = new System.Drawing.Size(329, 30);
+            this.aboutKamiModpackBuilderToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.aboutKamiModpackBuilderToolStripMenuItem.Text = "About Kami Modpack Builder";
             this.aboutKamiModpackBuilderToolStripMenuItem.Click += new System.EventHandler(this.aboutKamiModpackBuilderToolStripMenuItem_Click);
             // 
@@ -170,7 +183,8 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 33);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 24);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -181,8 +195,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.textConsole);
-            this.splitContainer1.Size = new System.Drawing.Size(1291, 952);
-            this.splitContainer1.SplitterDistance = 828;
+            this.splitContainer1.Size = new System.Drawing.Size(861, 463);
+            this.splitContainer1.SplitterDistance = 402;
+            this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 3;
             // 
             // tabControl
@@ -196,77 +211,86 @@
             this.tabControl.Controls.Add(this.tabPageExplorer);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1291, 828);
+            this.tabControl.Size = new System.Drawing.Size(861, 402);
             this.tabControl.TabIndex = 2;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabPageCharacterMods
             // 
-            this.tabPageCharacterMods.Location = new System.Drawing.Point(4, 29);
+            this.tabPageCharacterMods.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCharacterMods.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPageCharacterMods.Name = "tabPageCharacterMods";
-            this.tabPageCharacterMods.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCharacterMods.Size = new System.Drawing.Size(1283, 795);
+            this.tabPageCharacterMods.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageCharacterMods.Size = new System.Drawing.Size(853, 376);
             this.tabPageCharacterMods.TabIndex = 0;
             this.tabPageCharacterMods.Text = "Character Mods";
             this.tabPageCharacterMods.UseVisualStyleBackColor = true;
             // 
             // tabPageStageMods
             // 
-            this.tabPageStageMods.Location = new System.Drawing.Point(4, 29);
+            this.tabPageStageMods.Location = new System.Drawing.Point(4, 22);
+            this.tabPageStageMods.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPageStageMods.Name = "tabPageStageMods";
-            this.tabPageStageMods.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageStageMods.Size = new System.Drawing.Size(1283, 795);
+            this.tabPageStageMods.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageStageMods.Size = new System.Drawing.Size(853, 512);
             this.tabPageStageMods.TabIndex = 1;
             this.tabPageStageMods.Text = "Stage Mods";
             this.tabPageStageMods.UseVisualStyleBackColor = true;
             // 
             // tabPageGeneralMods
             // 
-            this.tabPageGeneralMods.Location = new System.Drawing.Point(4, 29);
+            this.tabPageGeneralMods.Location = new System.Drawing.Point(4, 22);
+            this.tabPageGeneralMods.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPageGeneralMods.Name = "tabPageGeneralMods";
-            this.tabPageGeneralMods.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGeneralMods.Size = new System.Drawing.Size(1283, 795);
+            this.tabPageGeneralMods.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageGeneralMods.Size = new System.Drawing.Size(853, 512);
             this.tabPageGeneralMods.TabIndex = 2;
             this.tabPageGeneralMods.Text = "General Mods";
             this.tabPageGeneralMods.UseVisualStyleBackColor = true;
             // 
             // tabPageMusic
             // 
-            this.tabPageMusic.Location = new System.Drawing.Point(4, 29);
+            this.tabPageMusic.Location = new System.Drawing.Point(4, 22);
+            this.tabPageMusic.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPageMusic.Name = "tabPageMusic";
-            this.tabPageMusic.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMusic.Size = new System.Drawing.Size(1283, 795);
+            this.tabPageMusic.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageMusic.Size = new System.Drawing.Size(853, 512);
             this.tabPageMusic.TabIndex = 3;
             this.tabPageMusic.Text = "Music";
             this.tabPageMusic.UseVisualStyleBackColor = true;
             // 
             // tabPageCSS
             // 
-            this.tabPageCSS.Location = new System.Drawing.Point(4, 29);
+            this.tabPageCSS.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCSS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPageCSS.Name = "tabPageCSS";
-            this.tabPageCSS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCSS.Size = new System.Drawing.Size(1283, 795);
+            this.tabPageCSS.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageCSS.Size = new System.Drawing.Size(853, 512);
             this.tabPageCSS.TabIndex = 4;
             this.tabPageCSS.Text = "CSS";
             this.tabPageCSS.UseVisualStyleBackColor = true;
             // 
             // tabPageSSS
             // 
-            this.tabPageSSS.Location = new System.Drawing.Point(4, 29);
+            this.tabPageSSS.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSSS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPageSSS.Name = "tabPageSSS";
-            this.tabPageSSS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSSS.Size = new System.Drawing.Size(1283, 795);
+            this.tabPageSSS.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageSSS.Size = new System.Drawing.Size(853, 376);
             this.tabPageSSS.TabIndex = 5;
             this.tabPageSSS.Text = "SSS";
             this.tabPageSSS.UseVisualStyleBackColor = true;
             // 
             // tabPageExplorer
             // 
-            this.tabPageExplorer.Location = new System.Drawing.Point(4, 29);
+            this.tabPageExplorer.Location = new System.Drawing.Point(4, 22);
+            this.tabPageExplorer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPageExplorer.Name = "tabPageExplorer";
-            this.tabPageExplorer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageExplorer.Size = new System.Drawing.Size(1283, 795);
+            this.tabPageExplorer.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageExplorer.Size = new System.Drawing.Size(853, 512);
             this.tabPageExplorer.TabIndex = 6;
             this.tabPageExplorer.Text = "Explorer";
             this.tabPageExplorer.UseVisualStyleBackColor = true;
@@ -275,10 +299,11 @@
             // 
             this.textConsole.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textConsole.Location = new System.Drawing.Point(0, 0);
+            this.textConsole.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textConsole.Multiline = true;
             this.textConsole.Name = "textConsole";
             this.textConsole.ReadOnly = true;
-            this.textConsole.Size = new System.Drawing.Size(1291, 120);
+            this.textConsole.Size = new System.Drawing.Size(861, 58);
             this.textConsole.TabIndex = 0;
             // 
             // folderBrowserDialog
@@ -298,26 +323,15 @@
             this.openFileDialog.FileName = "openFileDialog";
             this.openFileDialog.Filter = "XML files|*.xml";
             // 
-            // buildToolStripMenuItem
-            // 
-            this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
-            this.buildToolStripMenuItem.Size = new System.Drawing.Size(255, 30);
-            this.buildToolStripMenuItem.Text = "Build";
-            this.buildToolStripMenuItem.Click += new System.EventHandler(this.buildToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(252, 6);
-            // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1291, 985);
+            this.ClientSize = new System.Drawing.Size(861, 487);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Main";
             this.Text = "Kami Modpack Builder";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);

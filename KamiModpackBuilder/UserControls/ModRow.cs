@@ -55,8 +55,8 @@ namespace KamiModpackBuilder.UserControls
             _ModListType = a_modListType;
             switch (_ModListType) {
                 case (DataGridModsList.ModListType.CharacterSlots):
-                    EventManager.OnCharSlotModSelectionChanged += OnModSelectionChanged; break;
                 case (DataGridModsList.ModListType.CharacterGeneral):
+                    EventManager.OnCharSlotModSelectionChanged += OnModSelectionChanged;
                     EventManager.OnCharGeneralModSelectionChanged += OnModSelectionChanged; break;
                 case (DataGridModsList.ModListType.Stage):
                     EventManager.OnStageModSelectionChanged += OnModSelectionChanged; break;
@@ -72,8 +72,8 @@ namespace KamiModpackBuilder.UserControls
             switch (_ModListType)
             {
                 case (DataGridModsList.ModListType.CharacterSlots):
-                    EventManager.OnCharSlotModSelectionChanged -= OnModSelectionChanged; break;
                 case (DataGridModsList.ModListType.CharacterGeneral):
+                    EventManager.OnCharSlotModSelectionChanged -= OnModSelectionChanged;
                     EventManager.OnCharGeneralModSelectionChanged -= OnModSelectionChanged; break;
                 case (DataGridModsList.ModListType.Stage):
                     EventManager.OnStageModSelectionChanged -= OnModSelectionChanged; break;

@@ -58,6 +58,142 @@ namespace KamiModpackBuilder
         }
         #endregion
         
+        #region Events
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            LoadProject();
+        }
+
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            textConsole.AppendText(e.UserState.ToString() + Environment.NewLine);
+        }
+
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            LoadProjectCompleted();
+
+            if (!_UserControlsLoaded)
+            {
+                _UserControlsLoaded = true;
+
+                //tabControl.SelectedIndex = 0;
+                tabControl_SelectedIndexChanged(null, null);
+            }
+        }
+
+        private void Main_Shown(object sender, EventArgs e)
+        {
+            this.Enabled = false;
+            Console.SetOut(_ConsoleProgress);
+
+            backgroundWorker.RunWorkerAsync();
+        }
+
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_ProjectManager != null)
+            {
+                _ProjectManager.SaveProject();
+                _ProjectManager.SaveConfig();
+                _ProjectManager.CleanTempFolder();
+            }
+        }
+
+        private void SaveProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ProjectManager.SaveProject();
+            _ProjectManager.SaveConfig();
+        }
+
+        private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateProject();
+        }
+
+        private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = openFileDialog.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                LogHelper.Info("Loading project file...");
+                _ProjectManager.LoadProject(openFileDialog.FileName);
+
+                _ProjectManager.RefreshTabViews();
+            }
+        }
+
+        private void projectSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.ProjectSettings settings = new Forms.ProjectSettings(_ProjectManager.CurrentProject);
+            settings.ShowDialog();
+            _ProjectManager.SaveProject();
+        }
+
+        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.Preferences preferences = new Forms.Preferences(_ProjectManager);
+            preferences.ShowDialog();
+            _ProjectManager.SaveConfig();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ProjectManager.SaveProject();
+            _ProjectManager.SaveConfig();
+            this.Close();
+        }
+
+        private void aboutKamiModpackBuilderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(String.Format(UIStrings.INFO_ABOUT + "\r\n" + UIStrings.INFO_THANKS, GlobalConstants.VERSION));
+        }
+
+        private void buildToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.BuildSettings form = new Forms.BuildSettings(_ProjectManager);
+            form.ShowDialog();
+        }
+
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!_UserControlsLoaded) return;
+
+            switch (tabControl.SelectedIndex)
+            {
+                case 0:
+                    if (_ProjectManager._CharacterModsPage != null) return;
+                    LoadCharacterModsPage();
+                    UnloadStageModsPage();
+                    UnloadGeneralModsPage();
+                    UnloadExplorerModsPage();
+                    break;
+                case 1:
+                    if (_ProjectManager._StageModsPage != null) return;
+                    UnloadCharacterModsPage();
+                    LoadStageModsPage();
+                    UnloadGeneralModsPage();
+                    UnloadExplorerModsPage();
+                    break;
+                case 2:
+                    if (_ProjectManager._GeneralModsPage != null) return;
+                    UnloadCharacterModsPage();
+                    UnloadStageModsPage();
+                    LoadGeneralModsPage();
+                    UnloadExplorerModsPage();
+                    break;
+                case 6:
+                    if (_ProjectManager._ExplorerPage != null) return;
+                    UnloadCharacterModsPage();
+                    UnloadStageModsPage();
+                    UnloadGeneralModsPage();
+                    LoadExplorerModsPage();
+                    break;
+            }
+        }
+        #endregion
+
+        #region Methods
         #region Save/Load
         public bool CreateProject()
         {
@@ -138,120 +274,71 @@ namespace KamiModpackBuilder
         }
         #endregion
 
-        #region Events
-        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        #region TabControls
+        private void UnloadCharacterModsPage()
         {
-            LoadProject();
+            if (_ProjectManager._CharacterModsPage == null) return;
+            _ProjectManager._CharacterModsPage.Parent = null;
+            _ProjectManager._CharacterModsPage.Dispose();
+            _ProjectManager._CharacterModsPage = null;
         }
 
-        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void LoadCharacterModsPage()
         {
-            textConsole.AppendText(e.UserState.ToString() + Environment.NewLine);
+            UserControls.CharacterMods characterMods = new UserControls.CharacterMods(_ProjectManager);
+            characterMods.Parent = tabPageCharacterMods;
+            characterMods.Dock = DockStyle.Fill;
+            _ProjectManager._CharacterModsPage = characterMods;
         }
 
-        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void UnloadStageModsPage()
         {
-            LoadProjectCompleted();
-
-            if (!_UserControlsLoaded)
-            {
-                //User Controls in Tabs
-                UserControls.CharacterMods characterMods = new UserControls.CharacterMods(_ProjectManager);
-                characterMods.Parent = tabPageCharacterMods;
-                characterMods.Dock = DockStyle.Fill;
-                _ProjectManager._CharacterModsPage = characterMods;
-
-                UserControls.StageMods stageMods = new UserControls.StageMods(_ProjectManager);
-                stageMods.Parent = tabPageStageMods;
-                stageMods.Dock = DockStyle.Fill;
-                _ProjectManager._StageModsPage = stageMods;
-
-                UserControls.GeneralMods generalMods = new UserControls.GeneralMods(_ProjectManager);
-                generalMods.Parent = tabPageGeneralMods;
-                generalMods.Dock = DockStyle.Fill;
-                _ProjectManager._GeneralModsPage = generalMods;
-
-                UserControls.Explorer explorer = new UserControls.Explorer(_ProjectManager);
-                explorer.Parent = tabPageExplorer;
-                explorer.Dock = DockStyle.Fill;
-                _ProjectManager._ExplorerPage = explorer;
-
-                _UserControlsLoaded = true;
-            }
+            if (_ProjectManager._StageModsPage == null) return;
+            _ProjectManager._StageModsPage.Parent = null;
+            _ProjectManager._StageModsPage.Dispose();
+            _ProjectManager._StageModsPage = null;
         }
 
-        private void Main_Shown(object sender, EventArgs e)
+        private void LoadStageModsPage()
         {
-            this.Enabled = false;
-            Console.SetOut(_ConsoleProgress);
-
-            backgroundWorker.RunWorkerAsync();
+            UserControls.StageMods stageMods = new UserControls.StageMods(_ProjectManager);
+            stageMods.Parent = tabPageStageMods;
+            stageMods.Dock = DockStyle.Fill;
+            _ProjectManager._StageModsPage = stageMods;
         }
 
-        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        private void UnloadGeneralModsPage()
         {
-            if (_ProjectManager != null)
-            {
-                _ProjectManager.SaveProject();
-                _ProjectManager.SaveConfig();
-                _ProjectManager.CleanTempFolder();
-            }
+            if (_ProjectManager._GeneralModsPage == null) return;
+            _ProjectManager._GeneralModsPage.Parent = null;
+            _ProjectManager._GeneralModsPage.Dispose();
+            _ProjectManager._GeneralModsPage = null;
         }
 
-        private void SaveProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LoadGeneralModsPage()
         {
-            _ProjectManager.SaveProject();
-            _ProjectManager.SaveConfig();
+            UserControls.GeneralMods generalMods = new UserControls.GeneralMods(_ProjectManager);
+            generalMods.Parent = tabPageGeneralMods;
+            generalMods.Dock = DockStyle.Fill;
+            _ProjectManager._GeneralModsPage = generalMods;
         }
 
-        private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        private void UnloadExplorerModsPage()
         {
-            CreateProject();
+            if (_ProjectManager._ExplorerPage == null) return;
+            _ProjectManager._ExplorerPage.Parent = null;
+            _ProjectManager._ExplorerPage.Dispose();
+            _ProjectManager._ExplorerPage = null;
         }
 
-        private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LoadExplorerModsPage()
         {
-            DialogResult result = openFileDialog.ShowDialog(this);
-            if (result == DialogResult.OK)
-            {
-                LogHelper.Info("Loading project file...");
-                _ProjectManager.LoadProject(openFileDialog.FileName);
-
-                _ProjectManager.RefreshTabViews();
-            }
+            UserControls.Explorer explorer = new UserControls.Explorer(_ProjectManager);
+            explorer.Parent = tabPageExplorer;
+            explorer.Dock = DockStyle.Fill;
+            _ProjectManager._ExplorerPage = explorer;
         }
-
-        private void projectSettingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.ProjectSettings settings = new Forms.ProjectSettings(_ProjectManager.CurrentProject);
-            settings.ShowDialog();
-            _ProjectManager.SaveProject();
-        }
-
-        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.Preferences preferences = new Forms.Preferences(_ProjectManager);
-            preferences.ShowDialog();
-            _ProjectManager.SaveConfig();
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ProjectManager.SaveProject();
-            _ProjectManager.SaveConfig();
-            this.Close();
-        }
-
-        private void aboutKamiModpackBuilderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(String.Format(UIStrings.INFO_ABOUT + "\r\n" + UIStrings.INFO_THANKS, GlobalConstants.VERSION));
-        }
-
-        private void buildToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.BuildSettings form = new Forms.BuildSettings(_ProjectManager);
-            form.ShowDialog();
-        }
+        #endregion
         #endregion
     }
 }
