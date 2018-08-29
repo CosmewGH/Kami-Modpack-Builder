@@ -53,6 +53,13 @@ namespace KamiModpackBuilder
         public Sm4shMusic.UserControls.MyMusicManagement _MyMusicPage = null;
         #endregion
 
+        #region Constructors
+        public SmashProjectManager()
+        {
+            _Instance = this;
+        }
+        #endregion
+
         #region Project Management
         internal SmashMod CreateNewProject(string projectFilePath, string gamePath)
         {
