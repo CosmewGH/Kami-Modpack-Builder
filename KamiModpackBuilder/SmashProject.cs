@@ -710,6 +710,10 @@ namespace KamiModpackBuilder
             List<string> fileSearch = new List<string>();
             List<AutoMTBFix.Nus3BankFile> nus3Banks = new List<AutoMTBFix.Nus3BankFile>();
 
+            if (_CurrentProject.AutoTextureIDFix)
+            {
+                new Objects.TextureIDFix().MassTextureIdFix();
+            }
             #region Character Slot Mods
             List<FighterName> fighterNames = new List<FighterName>();
             foreach (CharacterSlotMod mod in _CurrentProject.ActiveCharacterSlotMods)
@@ -774,6 +778,22 @@ namespace KamiModpackBuilder
                             explorerFilename = explorerFilename.Replace("lxx", "l" + mod.SlotID.ToString("D2"));
                             explorerFilename = explorerFighterFolder + "model" + Path.DirectorySeparatorChar + explorerFilename;
                             AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                            if (_CurrentProject.DuplicateToOtherRegions)
+                            {
+                                if (currentFighter.name.Equals("Captain"))
+                                {
+                                    if (mod.SlotID == 1)
+                                    {
+                                        string regionName;
+                                        regionName  = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_en)" + Path.DirectorySeparatorChar);
+                                        AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_fr)" + Path.DirectorySeparatorChar);
+                                        AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_sp)" + Path.DirectorySeparatorChar);
+                                        AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                    }
+                                }
+                            }
                         }
                         else if(explorerFilename.Contains("body"))
                         {
@@ -782,6 +802,35 @@ namespace KamiModpackBuilder
                             explorerFilename = split.First() + Path.DirectorySeparatorChar + "c" + slotNum + explorerFilename.Remove(0, split.First().Length);
                             explorerFilename = explorerFighterFolder + "model" + Path.DirectorySeparatorChar + explorerFilename;
                             AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                            if (_CurrentProject.DuplicateToOtherRegions)
+                            {
+                                if (currentFighter.name.Equals("Captain"))
+                                {
+                                    if (mod.SlotID == 1)
+                                    {
+                                        string regionName;
+                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_en)" + Path.DirectorySeparatorChar);
+                                        AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_fr)" + Path.DirectorySeparatorChar);
+                                        AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_sp)" + Path.DirectorySeparatorChar);
+                                        AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                    }
+                                }
+                                if (currentFighter.name.Equals("Robot"))
+                                {
+                                    if (mod.SlotID <= 1)
+                                    {
+                                        string regionName;
+                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_en)" + Path.DirectorySeparatorChar);
+                                        AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_fr)" + Path.DirectorySeparatorChar);
+                                        AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_sp)" + Path.DirectorySeparatorChar);
+                                        AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                    }
+                                }
+                            }
                             if (_CurrentProject.OverrideLowPolyModels)
                             {
                                 if (mod.SlotID < currentFighter.defaultSlots)
@@ -792,8 +841,23 @@ namespace KamiModpackBuilder
                                             if ((currentFighter.lowPolySlots == Fighter.LowPolySlots.All) ||
                                                 (currentFighter.lowPolySlots == Fighter.LowPolySlots.EvenSlots && mod.SlotID % 2 == 1) ||
                                                 (currentFighter.lowPolySlots == Fighter.LowPolySlots.OddSlots && mod.SlotID % 2 == 0))
+                                            {
                                                 explorerFilename = explorerFilename.Replace("c" + slotNum, "l" + slotNum);
-                                            AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                                AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                                if (currentFighter.name.Equals("Captain"))
+                                                {
+                                                    if (mod.SlotID == 1)
+                                                    {
+                                                        string regionName;
+                                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_en)" + Path.DirectorySeparatorChar);
+                                                        AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_fr)" + Path.DirectorySeparatorChar);
+                                                        AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_sp)" + Path.DirectorySeparatorChar);
+                                                        AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -806,6 +870,25 @@ namespace KamiModpackBuilder
                             explorerFilename = split.First() + Path.DirectorySeparatorChar + "c" + slotNum + explorerFilename.Remove(0, split.First().Length);
                             explorerFilename = explorerFighterFolder + "model" + Path.DirectorySeparatorChar + explorerFilename;
                             AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                            if (_CurrentProject.DuplicateToOtherRegions)
+                            {
+                                if (currentFighter.name.Equals("Robot"))
+                                {
+                                    if (explorerFilename.Contains(Path.DirectorySeparatorChar + "gyro"))
+                                    {
+                                        if (mod.SlotID <= currentFighter.defaultSlots)
+                                        {
+                                            string regionName;
+                                            regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_en)" + Path.DirectorySeparatorChar);
+                                            AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                            regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_fr)" + Path.DirectorySeparatorChar);
+                                            AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                            regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_sp)" + Path.DirectorySeparatorChar);
+                                            AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                     fileSearch.Clear();

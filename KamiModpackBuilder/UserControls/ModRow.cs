@@ -24,21 +24,28 @@ namespace KamiModpackBuilder.UserControls
         private DB.Fighter _CurrentFighter;
         private bool m_IsSelected = false;
 
-        private Color colorHighlight = Color.LightBlue;
         private Color colorNormal = Color.White;
+        private Color colorNotSelectable = Color.FromArgb(255, 240, 240, 240);
+        private Color colorMouseHover = Color.FromArgb(255,220,235,255);
+        private Color colorHighlight = Color.LightSkyBlue;
         private bool isSelectable = true;
+
+        private int HoverValue = 0;
         #endregion
 
         #region Properties
         public int slotNum = 0;
         public string name = "";
         public int textureID = -1;
-        public string warningText = "";
-        public bool hasWarning = false;
-        public string errorText = "";
-        public bool hasError = false;
         public string modFolder = "";
         public bool propertiesEnabled = true;
+        public CharacterSlotModXML.MetalModelStatus metal = CharacterSlotModXML.MetalModelStatus.Works;
+        public bool missingModel = false;
+        public bool missingPortraits = false;
+        public bool hasAudio = false;
+        public bool hasCustomName = false;
+        public bool wifiSafe = true;
+        public bool modMissing = false;
 
         public bool isSelected { get { return m_IsSelected; } }
         public bool isActiveList { get { return _IsActiveList; } }
@@ -91,28 +98,18 @@ namespace KamiModpackBuilder.UserControls
 
         public void UpdateData(DataGridModsList.RowData rowData)
         {
-            name = rowData.name;
-            textureID = rowData.textureID;
-            warningText = rowData.warningText;
-            hasWarning = rowData.hasWarning;
-            errorText = rowData.errorText;
-            hasError = rowData.hasError;
-            modFolder = rowData.modFolder;
-            propertiesEnabled = rowData.propertiesEnabled;
-            UpdateData();
-        }
-
-        public void UpdateData(DataGridSlotModList.SlotRowData rowData)
-        {
             slotNum = rowData.slotNum;
             name = rowData.name;
             textureID = rowData.textureID;
-            warningText = rowData.warningText;
-            hasWarning = rowData.hasWarning;
-            errorText = rowData.errorText;
-            hasError = rowData.hasError;
             modFolder = rowData.modFolder;
             propertiesEnabled = rowData.propertiesEnabled;
+            metal = rowData.metal;
+            missingModel = rowData.missingModel;
+            missingPortraits = rowData.missingPortraits;
+            hasAudio = rowData.hasAudio;
+            hasCustomName = rowData.hasCustomName;
+            wifiSafe = rowData.wifiSafe;
+            modMissing = rowData.modMissing;
             UpdateData();
         }
 
@@ -120,36 +117,57 @@ namespace KamiModpackBuilder.UserControls
         {
             if (_IsActiveList && _ModListType == DataGridModsList.ModListType.CharacterSlots)
             {
-                labelSlotNumber.Text = (slotNum+1).ToString();
+                labelModName.Text = (slotNum+1).ToString("D2") + "    " + name;
             }
-            else labelSlotNumber.Text = String.Empty;
-            labelModName.Text = name;
-            if (hasError)
+            else labelModName.Text = name;
+            HoverValue = 0;
+            if (modMissing)
             {
-                buttonError.Visible = true;
-                buttonError.Image = Resources.icon_error;
-            }
-            else if (hasWarning)
-            {
-                buttonError.Visible = true;
-                buttonError.Image = Resources.icon_warning;
+                labelError.Visible = true;
+                labelMetal.Visible = false;
+                labelWifi.Visible = false;
+                labelModel.Visible = false;
+                labelPortraits.Visible = false;
+                labelAudio.Visible = false;
+                labelCustomName.Visible = false;
             }
             else
             {
-                buttonError.Visible = false;
+                switch (metal)
+                {
+                    case CharacterSlotModXML.MetalModelStatus.Unknown:
+                        labelMetal.Image = Resources.icon_metal_unknown;
+                        labelMetal.Visible = true;
+                        break;
+                    case CharacterSlotModXML.MetalModelStatus.Missing:
+                        labelMetal.Image = Resources.icon_metal_missing;
+                        labelMetal.Visible = true;
+                        break;
+                    case CharacterSlotModXML.MetalModelStatus.Crashes:
+                        labelMetal.Image = Resources.icon_metal_crashes;
+                        labelMetal.Visible = true;
+                        break;
+                    case CharacterSlotModXML.MetalModelStatus.Works:
+                        labelMetal.Visible = false;
+                        break;
+                }
+                labelWifi.Visible = !wifiSafe;
+                labelModel.Visible = missingModel;
+                labelPortraits.Visible = missingPortraits;
+                labelAudio.Visible = hasAudio;
+                labelCustomName.Visible = hasCustomName;
             }
-            if (modFolder == String.Empty)
+            if (modFolder.Equals(String.Empty))
             {
-                buttonProperties.Visible = false;
                 isSelectable = false;
+                panelModList.BackColor = colorNotSelectable;
             }
             else
             {
-                buttonProperties.Visible = true;
-                if (!propertiesEnabled) buttonProperties.Enabled = false;
                 isSelectable = true;
+                panelModList.BackColor = colorNormal;
             }
-        }
+    }
         #endregion
 
         #region Private Methods
@@ -160,15 +178,10 @@ namespace KamiModpackBuilder.UserControls
         {
             if (m_IsSelected) SetModAsDeselected();
             else SetModAsSelected();
+            HoverValue = 0;
         }
 
-        private void labelModName_Click(object sender, EventArgs e)
-        {
-            panelModList_Click(null, null);
-            return;
-        }
-
-        private void labelSlotNumber_Click(object sender, EventArgs e)
+        private void label_Click(object sender, EventArgs e)
         {
             panelModList_Click(null, null);
             return;
@@ -210,7 +223,6 @@ namespace KamiModpackBuilder.UserControls
         {
             if (!m_IsSelected)
             {
-                colorNormal = panelModList.BackColor;
                 panelModList.BackColor = colorHighlight;
                 m_IsSelected = true;
             }
@@ -233,8 +245,9 @@ namespace KamiModpackBuilder.UserControls
         }
         #endregion
 
-        private void buttonProperties_Click(object sender, EventArgs e)
+        private void OpenProperties()
         {
+            if (modFolder == String.Empty || !propertiesEnabled) return;
             Forms.SlotModProperties popup;
             Forms.ModProperties popup2;
             switch (_ModListType)
@@ -290,6 +303,59 @@ namespace KamiModpackBuilder.UserControls
                 case DataGridModsList.ModListType.General:
                     _SmashProjectManager._GeneralModsPage.RefreshModsLists();
                     break;
+            }
+        }
+
+        private void panelModList_DoubleClick(object sender, EventArgs e)
+        {
+            OpenProperties();
+        }
+
+        private void label_DoubleClick(object sender, EventArgs e)
+        {
+            panelModList_DoubleClick(null, null);
+            return;
+        }
+
+        private void panelModList_MouseEnter(object sender, EventArgs e)
+        {
+            if (!isSelectable) return;
+            if (m_IsSelected) return;
+            ++HoverValue;
+            if (HoverValue > 2) HoverValue = 2;
+            panelModList.BackColor = colorMouseHover;
+        }
+
+        private void panelModList_MouseLeave(object sender, EventArgs e)
+        {
+            if (!isSelectable) return;
+            if (m_IsSelected) return;
+            --HoverValue;
+            if (HoverValue <= 0)
+            {
+                HoverValue = 0;
+                panelModList.BackColor = colorNormal;
+            }
+        }
+
+        private void label_MouseEnter(object sender, EventArgs e)
+        {
+            if (!isSelectable) return;
+            if (m_IsSelected) return;
+            ++HoverValue;
+            if (HoverValue > 2) HoverValue = 2;
+            panelModList.BackColor = colorMouseHover;
+        }
+
+        private void label_MouseLeave(object sender, EventArgs e)
+        {
+            if (!isSelectable) return;
+            if (m_IsSelected) return;
+            --HoverValue;
+            if (HoverValue <= 0)
+            {
+                HoverValue = 0;
+                panelModList.BackColor = colorNormal;
             }
         }
     }

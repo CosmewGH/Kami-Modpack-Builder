@@ -87,7 +87,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1292, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(1328, 33);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -304,8 +304,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.textConsole);
-            this.splitContainer1.Size = new System.Drawing.Size(1292, 716);
-            this.splitContainer1.SplitterDistance = 621;
+            this.splitContainer1.Size = new System.Drawing.Size(1328, 1131);
+            this.splitContainer1.SplitterDistance = 980;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -323,7 +323,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1292, 621);
+            this.tabControl.Size = new System.Drawing.Size(1328, 980);
             this.tabControl.TabIndex = 2;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -332,7 +332,7 @@
             this.tabPageCharacterMods.Location = new System.Drawing.Point(4, 29);
             this.tabPageCharacterMods.Name = "tabPageCharacterMods";
             this.tabPageCharacterMods.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCharacterMods.Size = new System.Drawing.Size(1284, 588);
+            this.tabPageCharacterMods.Size = new System.Drawing.Size(1320, 947);
             this.tabPageCharacterMods.TabIndex = 0;
             this.tabPageCharacterMods.Text = "Character Mods";
             this.tabPageCharacterMods.UseVisualStyleBackColor = true;
@@ -342,7 +342,7 @@
             this.tabPageStageMods.Location = new System.Drawing.Point(4, 29);
             this.tabPageStageMods.Name = "tabPageStageMods";
             this.tabPageStageMods.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageStageMods.Size = new System.Drawing.Size(1284, 588);
+            this.tabPageStageMods.Size = new System.Drawing.Size(1320, 947);
             this.tabPageStageMods.TabIndex = 1;
             this.tabPageStageMods.Text = "Stage Mods";
             this.tabPageStageMods.UseVisualStyleBackColor = true;
@@ -352,7 +352,7 @@
             this.tabPageGeneralMods.Location = new System.Drawing.Point(4, 29);
             this.tabPageGeneralMods.Name = "tabPageGeneralMods";
             this.tabPageGeneralMods.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGeneralMods.Size = new System.Drawing.Size(1284, 588);
+            this.tabPageGeneralMods.Size = new System.Drawing.Size(1320, 947);
             this.tabPageGeneralMods.TabIndex = 2;
             this.tabPageGeneralMods.Text = "General Mods";
             this.tabPageGeneralMods.UseVisualStyleBackColor = true;
@@ -362,7 +362,7 @@
             this.tabPageBGM.Location = new System.Drawing.Point(4, 29);
             this.tabPageBGM.Name = "tabPageBGM";
             this.tabPageBGM.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageBGM.Size = new System.Drawing.Size(1284, 588);
+            this.tabPageBGM.Size = new System.Drawing.Size(1320, 947);
             this.tabPageBGM.TabIndex = 7;
             this.tabPageBGM.Text = "BGM Management";
             this.tabPageBGM.UseVisualStyleBackColor = true;
@@ -372,7 +372,7 @@
             this.tabPageMyMusic.Location = new System.Drawing.Point(4, 29);
             this.tabPageMyMusic.Name = "tabPageMyMusic";
             this.tabPageMyMusic.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMyMusic.Size = new System.Drawing.Size(1284, 588);
+            this.tabPageMyMusic.Size = new System.Drawing.Size(1320, 947);
             this.tabPageMyMusic.TabIndex = 3;
             this.tabPageMyMusic.Text = "My Music";
             this.tabPageMyMusic.UseVisualStyleBackColor = true;
@@ -382,7 +382,7 @@
             this.tabPageCSS.Location = new System.Drawing.Point(4, 29);
             this.tabPageCSS.Name = "tabPageCSS";
             this.tabPageCSS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCSS.Size = new System.Drawing.Size(1284, 588);
+            this.tabPageCSS.Size = new System.Drawing.Size(1320, 947);
             this.tabPageCSS.TabIndex = 4;
             this.tabPageCSS.Text = "CSS";
             this.tabPageCSS.UseVisualStyleBackColor = true;
@@ -392,7 +392,7 @@
             this.tabPageSSS.Location = new System.Drawing.Point(4, 29);
             this.tabPageSSS.Name = "tabPageSSS";
             this.tabPageSSS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSSS.Size = new System.Drawing.Size(1284, 588);
+            this.tabPageSSS.Size = new System.Drawing.Size(1320, 947);
             this.tabPageSSS.TabIndex = 5;
             this.tabPageSSS.Text = "SSS";
             this.tabPageSSS.UseVisualStyleBackColor = true;
@@ -402,7 +402,7 @@
             this.tabPageExplorer.Location = new System.Drawing.Point(4, 29);
             this.tabPageExplorer.Name = "tabPageExplorer";
             this.tabPageExplorer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageExplorer.Size = new System.Drawing.Size(1284, 588);
+            this.tabPageExplorer.Size = new System.Drawing.Size(1320, 947);
             this.tabPageExplorer.TabIndex = 6;
             this.tabPageExplorer.Text = "Explorer";
             this.tabPageExplorer.UseVisualStyleBackColor = true;
@@ -414,7 +414,7 @@
             this.textConsole.Multiline = true;
             this.textConsole.Name = "textConsole";
             this.textConsole.ReadOnly = true;
-            this.textConsole.Size = new System.Drawing.Size(1292, 90);
+            this.textConsole.Size = new System.Drawing.Size(1328, 146);
             this.textConsole.TabIndex = 0;
             // 
             // folderBrowserDialog
@@ -431,14 +431,13 @@
             // openFileDialog
             // 
             this.openFileDialog.DefaultExt = "xml";
-            this.openFileDialog.FileName = "openFileDialog";
             this.openFileDialog.Filter = "XML files|*.xml";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1292, 749);
+            this.ClientSize = new System.Drawing.Size(1328, 1164);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using KamiModpackBuilder.Globals;
 
 namespace KamiModpackBuilder.Objects
 {
@@ -109,6 +110,66 @@ namespace KamiModpackBuilder.Objects
                     
                 }
                 m.SaveToFile(m.SourceFile);
+            }
+        }
+
+        public void MassTextureIdFix()
+        {
+            SmashMod project = SmashProjectManager.instance.CurrentProject;
+            foreach (DB.Fighter fighter in DB.FightersDB.Fighters)
+            {
+                List<ushort> ids = new List<ushort>();
+
+                foreach (CharacterSlotMod mod in project.ActiveCharacterSlotMods)
+                {
+                    if (mod.CharacterID != fighter.id) continue;
+                    string ModPath = PathHelper.GetCharacterSlotModPath(fighter.name, mod.FolderName);
+                    string PathKami = ModPath + "kamimod.xml";
+
+                    CharacterSlotModXML xml = Utils.DeserializeXML<CharacterSlotModXML>(PathKami);
+                    if (xml == null) continue;
+
+                    bool hasModels = false;
+                    string[] nutFiles = new string[0];
+                    if (Directory.Exists(ModPath + Path.DirectorySeparatorChar + "model"))
+                    {
+                        if (Directory.Exists(ModPath + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "body")) nutFiles = Directory.GetFiles(ModPath + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "body", "*.nut", SearchOption.AllDirectories);
+                        if (nutFiles.Length > 0) hasModels = true;
+                        else
+                        {
+                            nutFiles = Directory.GetFiles(ModPath + Path.DirectorySeparatorChar + "model", "*.nut", SearchOption.AllDirectories);
+                            if (nutFiles.Length > 0) hasModels = true;
+                        }
+                    }
+                    if (hasModels)
+                    {
+                        FileTypes.NUT nut = new FileTypes.NUT();
+                        nut.Read(nutFiles[0]);
+                        if (nut.Textures.Count > 0)
+                        {
+                            xml.TextureID = (nut.Textures[0].HashId & 0x0000FF00) >> 8;
+                        }
+                        else continue;
+                    }
+                    else continue;
+
+                    if ((xml.TextureID % 4 == 0 && xml.TextureID < 128) || ids.Contains((ushort)xml.TextureID))
+                    {
+                        xml.TextureID = 128;
+                        while (ids.Contains((ushort)xml.TextureID)) ++xml.TextureID;
+
+                        TextureIDFix.CharacterException exc = TextureIDFix.CharacterException.None;
+                        if (fighter.id == 0x32 && !project.IsSwitch) exc = TextureIDFix.CharacterException.Pacman_WiiU;
+                        if (fighter.id == 0x2a && !project.IsSwitch) exc = TextureIDFix.CharacterException.Robin_WiiU;
+
+                        TextureIDFix textureIDFix = new TextureIDFix();
+                        TextureIDFix.Mod textMod = new TextureIDFix.Mod(ModPath + "model", exc);
+                        textureIDFix.ChangeTextureID(textMod, (ushort)xml.TextureID);
+                        Globals.Utils.SerializeXMLToFile(xml, PathKami);
+                        Globals.LogHelper.Info(String.Format("Changed Texture ID of {0} to {1} successfully.", mod.FolderName, xml.TextureID));
+                    }
+                    ids.Add((ushort)xml.TextureID);
+                }
             }
         }
     }

@@ -37,7 +37,7 @@
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonUp = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.buttonImportMod = new System.Windows.Forms.Button();
             this.openFileDialogImportZip = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
@@ -158,7 +158,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.checkBox1);
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.buttonImportMod);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -167,22 +167,21 @@
             this.panel1.Size = new System.Drawing.Size(842, 37);
             this.panel1.TabIndex = 2;
             // 
-            // checkBox1
+            // button1
             // 
-            this.checkBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(267, 2);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
-            this.checkBox1.Size = new System.Drawing.Size(140, 30);
-            this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "Error Checking";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.button1.Location = new System.Drawing.Point(426, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(120, 35);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Delete Mod";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.buttonDeleteMod_Click);
             // 
             // buttonImportMod
             // 
             this.buttonImportMod.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonImportMod.Location = new System.Drawing.Point(417, 2);
+            this.buttonImportMod.Location = new System.Drawing.Point(242, 2);
             this.buttonImportMod.Name = "buttonImportMod";
             this.buttonImportMod.Size = new System.Drawing.Size(178, 35);
             this.buttonImportMod.TabIndex = 8;
@@ -207,7 +206,6 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanelSlotButtons.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -223,8 +221,8 @@
         private System.Windows.Forms.Button buttonLeft;
         private System.Windows.Forms.Button buttonRight;
         private System.Windows.Forms.Button buttonUp;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button buttonImportMod;
         private System.Windows.Forms.OpenFileDialog openFileDialogImportZip;
+        private System.Windows.Forms.Button button1;
     }
 }

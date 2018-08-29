@@ -113,7 +113,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.buttonBuild);
             this.Name = "BuildSettings";
-            this.Text = "BuildSettings";
+            this.Text = "Build Settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BuildSettings_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

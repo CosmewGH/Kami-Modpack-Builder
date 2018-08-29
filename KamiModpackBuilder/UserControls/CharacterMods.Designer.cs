@@ -32,7 +32,6 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.comboBoxCharacters = new System.Windows.Forms.ComboBox();
             this.buttonTextureIDFixAll = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.buttonImportSlotMod = new System.Windows.Forms.Button();
             this.buttonImportGeneralMod = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -53,6 +52,7 @@
             this.buttonSlotRight = new System.Windows.Forms.Button();
             this.buttonSlotUp = new System.Windows.Forms.Button();
             this.openFileDialogImportZip = new System.Windows.Forms.OpenFileDialog();
+            this.buttonDeleteMod = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -74,9 +74,9 @@
             // 
             this.flowLayoutPanel1.Controls.Add(this.comboBoxCharacters);
             this.flowLayoutPanel1.Controls.Add(this.buttonTextureIDFixAll);
-            this.flowLayoutPanel1.Controls.Add(this.checkBox1);
             this.flowLayoutPanel1.Controls.Add(this.buttonImportSlotMod);
             this.flowLayoutPanel1.Controls.Add(this.buttonImportGeneralMod);
+            this.flowLayoutPanel1.Controls.Add(this.buttonDeleteMod);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -95,45 +95,29 @@
             // 
             // buttonTextureIDFixAll
             // 
-            this.buttonTextureIDFixAll.AutoSize = true;
-            this.buttonTextureIDFixAll.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.buttonTextureIDFixAll.Location = new System.Drawing.Point(193, 3);
             this.buttonTextureIDFixAll.Name = "buttonTextureIDFixAll";
-            this.buttonTextureIDFixAll.Size = new System.Drawing.Size(174, 30);
+            this.buttonTextureIDFixAll.Size = new System.Drawing.Size(174, 35);
             this.buttonTextureIDFixAll.TabIndex = 3;
             this.buttonTextureIDFixAll.Text = "TextureID Fix All Slots";
-            this.buttonTextureIDFixAll.UseVisualStyleBackColor = true;
             this.buttonTextureIDFixAll.Click += new System.EventHandler(this.buttonTextureIDFixAll_Click);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(373, 3);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
-            this.checkBox1.Size = new System.Drawing.Size(140, 30);
-            this.checkBox1.TabIndex = 5;
-            this.checkBox1.Text = "Error Checking";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // buttonImportSlotMod
             // 
-            this.buttonImportSlotMod.Location = new System.Drawing.Point(519, 3);
+            this.buttonImportSlotMod.Location = new System.Drawing.Point(373, 3);
             this.buttonImportSlotMod.Name = "buttonImportSlotMod";
             this.buttonImportSlotMod.Size = new System.Drawing.Size(158, 35);
             this.buttonImportSlotMod.TabIndex = 6;
             this.buttonImportSlotMod.Text = "Import Slot Mod";
-            this.buttonImportSlotMod.UseVisualStyleBackColor = true;
             this.buttonImportSlotMod.Click += new System.EventHandler(this.buttonImportSlotMod_Click);
             // 
             // buttonImportGeneralMod
             // 
-            this.buttonImportGeneralMod.Location = new System.Drawing.Point(683, 3);
+            this.buttonImportGeneralMod.Location = new System.Drawing.Point(537, 3);
             this.buttonImportGeneralMod.Name = "buttonImportGeneralMod";
             this.buttonImportGeneralMod.Size = new System.Drawing.Size(182, 35);
             this.buttonImportGeneralMod.TabIndex = 7;
             this.buttonImportGeneralMod.Text = "Import General Mod";
-            this.buttonImportGeneralMod.UseVisualStyleBackColor = true;
             this.buttonImportGeneralMod.Click += new System.EventHandler(this.buttonImportGeneralMod_Click);
             // 
             // panel2
@@ -369,6 +353,15 @@
             // 
             this.openFileDialogImportZip.Filter = "Zip files|*.zip";
             // 
+            // buttonDeleteMod
+            // 
+            this.buttonDeleteMod.Location = new System.Drawing.Point(725, 3);
+            this.buttonDeleteMod.Name = "buttonDeleteMod";
+            this.buttonDeleteMod.Size = new System.Drawing.Size(120, 35);
+            this.buttonDeleteMod.TabIndex = 8;
+            this.buttonDeleteMod.Text = "Delete Mod";
+            this.buttonDeleteMod.Click += new System.EventHandler(this.buttonDeleteMod_Click);
+            // 
             // CharacterMods
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -379,7 +372,6 @@
             this.Size = new System.Drawing.Size(1396, 1135);
             this.panel1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -412,9 +404,9 @@
         private System.Windows.Forms.Button buttonSlotRight;
         private System.Windows.Forms.Button buttonSlotUp;
         private System.Windows.Forms.Button buttonSlotBottom;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button buttonImportSlotMod;
         private System.Windows.Forms.Button buttonImportGeneralMod;
         private System.Windows.Forms.OpenFileDialog openFileDialogImportZip;
+        private System.Windows.Forms.Button buttonDeleteMod;
     }
 }

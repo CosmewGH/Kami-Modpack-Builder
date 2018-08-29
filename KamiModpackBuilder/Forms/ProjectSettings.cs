@@ -35,8 +35,7 @@ namespace KamiModpackBuilder.Forms
             checkBoxIgnoreFlags.Checked = _Project.ExportCSVIgnoreFlags;
             checkBoxIgnorePackOffsets.Checked = _Project.ExportCSVIgnorePackOffsets;
             checkBoxAddDateToExport.Checked = _Project.ExportWithDateFolder;
-
-            checkBoxTextureIDChecking.Checked = _Project.AutoTextureIDCheck;
+            
             checkBoxTextureIDFixing.Checked = _Project.AutoTextureIDFix;
             checkBoxLxxDuplication.Checked = _Project.OverrideLowPolyModels;
             checkBoxRegionDuplication.Checked = _Project.DuplicateToOtherRegions;
@@ -106,8 +105,7 @@ namespace KamiModpackBuilder.Forms
             _Project.ExportCSVIgnoreFlags = checkBoxIgnoreFlags.Checked;
             _Project.ExportCSVIgnorePackOffsets = checkBoxIgnorePackOffsets.Checked;
             _Project.ExportWithDateFolder = checkBoxAddDateToExport.Checked;
-
-            _Project.AutoTextureIDCheck = checkBoxTextureIDChecking.Checked;
+            
             _Project.AutoTextureIDFix = checkBoxTextureIDFixing.Checked;
             _Project.OverrideLowPolyModels = checkBoxLxxDuplication.Checked;
             _Project.DuplicateToOtherRegions = checkBoxRegionDuplication.Checked;

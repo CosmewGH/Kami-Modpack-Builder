@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using KamiModpackBuilder.Objects;
+using System.IO;
 
 namespace KamiModpackBuilder.UserControls
 {
@@ -169,6 +170,27 @@ namespace KamiModpackBuilder.UserControls
                     _GridModsInactive.BeginImport(ofd.SelectedPath);
                 }
             }
+        }
+
+        private void buttonDeleteMod_Click(object sender, EventArgs e)
+        {
+            if (SelectedMod == null) return;
+            if (MessageBox.Show(string.Format("Are you sure you want to delete the mod '{0}'?", SelectedMod.name), "Delete Confirmation", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+            if (SelectedMod.isActiveList)
+            {
+                string modFolder = SelectedMod.modFolder;
+                for (int i = 0; i < _SmashProjectManager.CurrentProject.ActiveGeneralMods.Count; ++i)
+                {
+                    if (_SmashProjectManager.CurrentProject.ActiveGeneralMods[i].Equals(modFolder))
+                    {
+                        _SmashProjectManager.CurrentProject.ActiveGeneralMods.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
+            string path = Globals.PathHelper.GetGeneralModPath(SelectedMod.modFolder);
+            if (Directory.Exists(path)) Directory.Delete(path, true);
+            RefreshModsLists();
         }
     }
 }

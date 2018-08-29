@@ -86,10 +86,7 @@
             this.label31 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.checkBoxTextureIDFixing = new System.Windows.Forms.CheckBox();
-            this.label33 = new System.Windows.Forms.Label();
-            this.checkBoxTextureIDChecking = new System.Windows.Forms.CheckBox();
             this.label34 = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
             this.groupBoxSupressWarnings = new System.Windows.Forms.GroupBox();
             this.label26 = new System.Windows.Forms.Label();
             this.checkBoxModelFilesMissing = new System.Windows.Forms.CheckBox();
@@ -516,14 +513,11 @@
             this.groupBoxAutoFix.Controls.Add(this.label31);
             this.groupBoxAutoFix.Controls.Add(this.label32);
             this.groupBoxAutoFix.Controls.Add(this.checkBoxTextureIDFixing);
-            this.groupBoxAutoFix.Controls.Add(this.label33);
-            this.groupBoxAutoFix.Controls.Add(this.checkBoxTextureIDChecking);
             this.groupBoxAutoFix.Controls.Add(this.label34);
-            this.groupBoxAutoFix.Controls.Add(this.label35);
             this.groupBoxAutoFix.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxAutoFix.Location = new System.Drawing.Point(0, 504);
             this.groupBoxAutoFix.Name = "groupBoxAutoFix";
-            this.groupBoxAutoFix.Size = new System.Drawing.Size(860, 367);
+            this.groupBoxAutoFix.Size = new System.Drawing.Size(860, 327);
             this.groupBoxAutoFix.TabIndex = 3;
             this.groupBoxAutoFix.TabStop = false;
             this.groupBoxAutoFix.Text = "Auto-Fix";
@@ -531,7 +525,7 @@
             // label42
             // 
             this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(220, 324);
+            this.label42.Location = new System.Drawing.Point(220, 284);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(516, 20);
             this.label42.TabIndex = 42;
@@ -540,7 +534,7 @@
             // checkBoxSoundMTB
             // 
             this.checkBoxSoundMTB.AutoSize = true;
-            this.checkBoxSoundMTB.Location = new System.Drawing.Point(168, 324);
+            this.checkBoxSoundMTB.Location = new System.Drawing.Point(168, 284);
             this.checkBoxSoundMTB.Name = "checkBoxSoundMTB";
             this.checkBoxSoundMTB.Size = new System.Drawing.Size(22, 21);
             this.checkBoxSoundMTB.TabIndex = 41;
@@ -549,7 +543,7 @@
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(12, 324);
+            this.label43.Location = new System.Drawing.Point(12, 284);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(151, 20);
             this.label43.TabIndex = 40;
@@ -558,7 +552,7 @@
             // label40
             // 
             this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(220, 284);
+            this.label40.Location = new System.Drawing.Point(220, 244);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(543, 20);
             this.label40.TabIndex = 39;
@@ -567,7 +561,7 @@
             // checkBoxFighterStrings
             // 
             this.checkBoxFighterStrings.AutoSize = true;
-            this.checkBoxFighterStrings.Location = new System.Drawing.Point(168, 284);
+            this.checkBoxFighterStrings.Location = new System.Drawing.Point(168, 244);
             this.checkBoxFighterStrings.Name = "checkBoxFighterStrings";
             this.checkBoxFighterStrings.Size = new System.Drawing.Size(22, 21);
             this.checkBoxFighterStrings.TabIndex = 38;
@@ -576,7 +570,7 @@
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(12, 284);
+            this.label41.Location = new System.Drawing.Point(12, 244);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(117, 20);
             this.label41.TabIndex = 37;
@@ -585,7 +579,7 @@
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(220, 244);
+            this.label38.Location = new System.Drawing.Point(220, 204);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(609, 20);
             this.label38.TabIndex = 36;
@@ -595,7 +589,7 @@
             // checkBoxFighterDB
             // 
             this.checkBoxFighterDB.AutoSize = true;
-            this.checkBoxFighterDB.Location = new System.Drawing.Point(168, 244);
+            this.checkBoxFighterDB.Location = new System.Drawing.Point(168, 204);
             this.checkBoxFighterDB.Name = "checkBoxFighterDB";
             this.checkBoxFighterDB.Size = new System.Drawing.Size(22, 21);
             this.checkBoxFighterDB.TabIndex = 35;
@@ -604,7 +598,7 @@
             // label39
             // 
             this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(12, 244);
+            this.label39.Location = new System.Drawing.Point(12, 204);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(90, 20);
             this.label39.TabIndex = 34;
@@ -613,7 +607,7 @@
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(220, 204);
+            this.label36.Location = new System.Drawing.Point(220, 164);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(441, 20);
             this.label36.TabIndex = 33;
@@ -622,7 +616,7 @@
             // checkBoxYoshiFix
             // 
             this.checkBoxYoshiFix.AutoSize = true;
-            this.checkBoxYoshiFix.Location = new System.Drawing.Point(168, 204);
+            this.checkBoxYoshiFix.Location = new System.Drawing.Point(168, 164);
             this.checkBoxYoshiFix.Name = "checkBoxYoshiFix";
             this.checkBoxYoshiFix.Size = new System.Drawing.Size(22, 21);
             this.checkBoxYoshiFix.TabIndex = 32;
@@ -631,7 +625,7 @@
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(12, 204);
+            this.label37.Location = new System.Drawing.Point(12, 164);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(77, 20);
             this.label37.TabIndex = 31;
@@ -640,7 +634,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(220, 164);
+            this.label28.Location = new System.Drawing.Point(220, 124);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(441, 20);
             this.label28.TabIndex = 30;
@@ -649,7 +643,7 @@
             // checkBoxRegionDuplication
             // 
             this.checkBoxRegionDuplication.AutoSize = true;
-            this.checkBoxRegionDuplication.Location = new System.Drawing.Point(168, 164);
+            this.checkBoxRegionDuplication.Location = new System.Drawing.Point(168, 124);
             this.checkBoxRegionDuplication.Name = "checkBoxRegionDuplication";
             this.checkBoxRegionDuplication.Size = new System.Drawing.Size(22, 21);
             this.checkBoxRegionDuplication.TabIndex = 29;
@@ -658,7 +652,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(12, 164);
+            this.label29.Location = new System.Drawing.Point(12, 124);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(147, 20);
             this.label29.TabIndex = 28;
@@ -667,7 +661,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(220, 124);
+            this.label30.Location = new System.Drawing.Point(220, 84);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(510, 20);
             this.label30.TabIndex = 27;
@@ -676,7 +670,7 @@
             // checkBoxLxxDuplication
             // 
             this.checkBoxLxxDuplication.AutoSize = true;
-            this.checkBoxLxxDuplication.Location = new System.Drawing.Point(168, 124);
+            this.checkBoxLxxDuplication.Location = new System.Drawing.Point(168, 84);
             this.checkBoxLxxDuplication.Name = "checkBoxLxxDuplication";
             this.checkBoxLxxDuplication.Size = new System.Drawing.Size(22, 21);
             this.checkBoxLxxDuplication.TabIndex = 26;
@@ -685,7 +679,7 @@
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(12, 124);
+            this.label31.Location = new System.Drawing.Point(12, 84);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(113, 20);
             this.label31.TabIndex = 25;
@@ -694,7 +688,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(220, 84);
+            this.label32.Location = new System.Drawing.Point(220, 44);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(620, 20);
             this.label32.TabIndex = 24;
@@ -704,48 +698,20 @@
             // checkBoxTextureIDFixing
             // 
             this.checkBoxTextureIDFixing.AutoSize = true;
-            this.checkBoxTextureIDFixing.Location = new System.Drawing.Point(168, 84);
+            this.checkBoxTextureIDFixing.Location = new System.Drawing.Point(168, 44);
             this.checkBoxTextureIDFixing.Name = "checkBoxTextureIDFixing";
             this.checkBoxTextureIDFixing.Size = new System.Drawing.Size(22, 21);
             this.checkBoxTextureIDFixing.TabIndex = 23;
             this.checkBoxTextureIDFixing.UseVisualStyleBackColor = true;
             // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(220, 44);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(565, 20);
-            this.label33.TabIndex = 22;
-            this.label33.Text = "Automatically check all skin mod files for TextureID conflicts and give a warning" +
-    ".";
-            // 
-            // checkBoxTextureIDChecking
-            // 
-            this.checkBoxTextureIDChecking.AutoSize = true;
-            this.checkBoxTextureIDChecking.Location = new System.Drawing.Point(168, 44);
-            this.checkBoxTextureIDChecking.Name = "checkBoxTextureIDChecking";
-            this.checkBoxTextureIDChecking.Size = new System.Drawing.Size(22, 21);
-            this.checkBoxTextureIDChecking.TabIndex = 21;
-            this.checkBoxTextureIDChecking.UseVisualStyleBackColor = true;
-            // 
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(12, 84);
+            this.label34.Location = new System.Drawing.Point(12, 44);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(128, 20);
             this.label34.TabIndex = 5;
             this.label34.Text = "TextureID Fixing:";
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(12, 44);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(153, 20);
-            this.label35.TabIndex = 1;
-            this.label35.Text = "TextureID Checking:";
             // 
             // groupBoxSupressWarnings
             // 
@@ -762,12 +728,13 @@
             this.groupBoxSupressWarnings.Controls.Add(this.label20);
             this.groupBoxSupressWarnings.Controls.Add(this.label21);
             this.groupBoxSupressWarnings.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxSupressWarnings.Location = new System.Drawing.Point(0, 871);
+            this.groupBoxSupressWarnings.Location = new System.Drawing.Point(0, 831);
             this.groupBoxSupressWarnings.Name = "groupBoxSupressWarnings";
             this.groupBoxSupressWarnings.Size = new System.Drawing.Size(860, 209);
             this.groupBoxSupressWarnings.TabIndex = 4;
             this.groupBoxSupressWarnings.TabStop = false;
             this.groupBoxSupressWarnings.Text = "Supress Warnings";
+            this.groupBoxSupressWarnings.Visible = false;
             // 
             // label26
             // 
@@ -782,6 +749,7 @@
             // checkBoxModelFilesMissing
             // 
             this.checkBoxModelFilesMissing.AutoSize = true;
+            this.checkBoxModelFilesMissing.Enabled = false;
             this.checkBoxModelFilesMissing.Location = new System.Drawing.Point(168, 164);
             this.checkBoxModelFilesMissing.Name = "checkBoxModelFilesMissing";
             this.checkBoxModelFilesMissing.Size = new System.Drawing.Size(22, 21);
@@ -809,6 +777,7 @@
             // checkBoxModFileConflicts
             // 
             this.checkBoxModFileConflicts.AutoSize = true;
+            this.checkBoxModFileConflicts.Enabled = false;
             this.checkBoxModFileConflicts.Location = new System.Drawing.Point(168, 124);
             this.checkBoxModFileConflicts.Name = "checkBoxModFileConflicts";
             this.checkBoxModFileConflicts.Size = new System.Drawing.Size(22, 21);
@@ -855,6 +824,7 @@
             // checkBoxTextureIDConflicts
             // 
             this.checkBoxTextureIDConflicts.AutoSize = true;
+            this.checkBoxTextureIDConflicts.Enabled = false;
             this.checkBoxTextureIDConflicts.Location = new System.Drawing.Point(168, 44);
             this.checkBoxTextureIDConflicts.Name = "checkBoxTextureIDConflicts";
             this.checkBoxTextureIDConflicts.Size = new System.Drawing.Size(22, 21);
@@ -889,7 +859,7 @@
             this.groupBoxCSVExport.Controls.Add(this.checkBoxExportCSV);
             this.groupBoxCSVExport.Controls.Add(this.label18);
             this.groupBoxCSVExport.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxCSVExport.Location = new System.Drawing.Point(0, 1080);
+            this.groupBoxCSVExport.Location = new System.Drawing.Point(0, 1040);
             this.groupBoxCSVExport.Name = "groupBoxCSVExport";
             this.groupBoxCSVExport.Size = new System.Drawing.Size(860, 176);
             this.groupBoxCSVExport.TabIndex = 5;
@@ -971,7 +941,7 @@
             this.groupBoxDebug.Controls.Add(this.label22);
             this.groupBoxDebug.Controls.Add(this.label24);
             this.groupBoxDebug.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxDebug.Location = new System.Drawing.Point(0, 1256);
+            this.groupBoxDebug.Location = new System.Drawing.Point(0, 1216);
             this.groupBoxDebug.Name = "groupBoxDebug";
             this.groupBoxDebug.Size = new System.Drawing.Size(860, 127);
             this.groupBoxDebug.TabIndex = 6;
@@ -1054,7 +1024,7 @@
             this.ClientSize = new System.Drawing.Size(886, 845);
             this.Controls.Add(this.panel1);
             this.Name = "ProjectSettings";
-            this.Text = "ProjectSettings";
+            this.Text = "Project Settings";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ProjectSettings_FormClosed);
             this.groupBoxDirectories.ResumeLayout(false);
             this.groupBoxDirectories.PerformLayout();
@@ -1147,10 +1117,7 @@
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.CheckBox checkBoxTextureIDFixing;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.CheckBox checkBoxTextureIDChecking;
         private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.Label label35;
         private System.Windows.Forms.GroupBox groupBoxEditorMods;
         private System.Windows.Forms.Label label52;
         private System.Windows.Forms.CheckBox checkBoxUseExplorer;

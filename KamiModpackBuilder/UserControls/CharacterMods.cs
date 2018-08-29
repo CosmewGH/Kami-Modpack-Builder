@@ -525,5 +525,57 @@ namespace KamiModpackBuilder.UserControls
             }
         }
         #endregion
+
+        private void buttonDeleteMod_Click(object sender, EventArgs e)
+        {
+            if (SelectedSlotMod != null)
+            {
+                if (MessageBox.Show(string.Format("Are you sure you want to delete the mod '{0}'?", SelectedSlotMod.name),"Delete Confirmation", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+                if (SelectedSlotMod.isActiveList)
+                {
+                    string modFolder = SelectedSlotMod.modFolder;
+                    int slotNum = SelectedSlotMod.slotNum;
+                    for (int i = 0; i < CurrentFighterActiveSlotMods.Count; ++i)
+                    {
+                        if (CurrentFighterActiveSlotMods[i].FolderName.Equals(modFolder))
+                        {
+                            _SmashProjectManager.CurrentProject.ActiveCharacterSlotMods.Remove(CurrentFighterActiveSlotMods[i]);
+                            CurrentFighterActiveSlotMods.RemoveAt(i);
+                            break;
+                        }
+                    }
+                    if (slotNum > _CurrentFighter.defaultSlots - 1)
+                    {
+                        for (int i = 0; i < CurrentFighterActiveSlotMods.Count; ++i)
+                        {
+                            if (CurrentFighterActiveSlotMods[i].SlotID > slotNum) --CurrentFighterActiveSlotMods[i].SlotID;
+                        }
+                    }
+                }
+                string path = Globals.PathHelper.GetCharacterSlotModPath(CurrentFighter.name, SelectedSlotMod.modFolder);
+                if (Directory.Exists(path)) Directory.Delete(path, true);
+                RefreshSlotModsLists();
+            }
+            if (SelectedGeneralMod != null)
+            {
+                if (MessageBox.Show(string.Format("Are you sure you want to delete the mod '{0}'?", SelectedSlotMod.name), "Delete Confirmation", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+                if (SelectedGeneralMod.isActiveList)
+                {
+                    string modFolder = SelectedGeneralMod.modFolder;
+                    for (int i = 0; i < CurrentFighterActiveGeneralMods.Count; ++i)
+                    {
+                        if (CurrentFighterActiveGeneralMods[i].FolderName.Equals(modFolder))
+                        {
+                            _SmashProjectManager.CurrentProject.ActiveCharacterGeneralMods.Remove(CurrentFighterActiveGeneralMods[i]);
+                            CurrentFighterActiveGeneralMods.RemoveAt(i);
+                            break;
+                        }
+                    }
+                }
+                string path = Globals.PathHelper.GetCharacterGeneralModPath(CurrentFighter.name, SelectedGeneralMod.modFolder);
+                if (Directory.Exists(path)) Directory.Delete(path, true);
+                RefreshGeneralModsLists();
+            }
+        }
     }
 }

@@ -102,13 +102,13 @@ namespace KamiModpackBuilder.UserControls
                         if (data != null)
                         {
                             row.name = data.DisplayName;
+                            row.wifiSafe = data.WifiSafe;
                         }
                         else
                         {
                             row.name = String.Format("{0} (Mod is missing!)", row.modFolder);
-                            row.hasError = true;
+                            row.modMissing = true;
                             row.propertiesEnabled = false;
-                            row.errorText = "Mod could not be found!";
                         }
                         _RowData.Add(row);
                     }
@@ -124,13 +124,13 @@ namespace KamiModpackBuilder.UserControls
                         if (data != null)
                         {
                             row.name = data.DisplayName;
+                            row.wifiSafe = data.WifiSafe;
                         }
                         else
                         {
                             row.name = String.Format("{0} (Mod is missing!)", row.modFolder);
-                            row.hasError = true;
+                            row.modMissing = true;
                             row.propertiesEnabled = false;
-                            row.errorText = "Mod could not be found!";
                         }
                         _RowData.Add(row);
                     }
@@ -146,13 +146,13 @@ namespace KamiModpackBuilder.UserControls
                         if (data != null)
                         {
                             row.name = data.DisplayName;
+                            row.wifiSafe = data.WifiSafe;
                         }
                         else
                         {
                             row.name = String.Format("{0} (Mod is missing!)", row.modFolder);
-                            row.hasError = true;
+                            row.modMissing = true;
                             row.propertiesEnabled = false;
-                            row.errorText = "Mod could not be found!";
                         }
                         _RowData.Add(row);
                     }
@@ -238,15 +238,31 @@ namespace KamiModpackBuilder.UserControls
                         case (ModListType.CharacterSlots):
                             CharacterSlotModXML data = Utils.DeserializeXML<CharacterSlotModXML>(kamiFiles[i]);
                             row.name = data.DisplayName;
+                            row.missingPortraits = (!data.chr_00 || !data.chr_11 || !data.chr_13 || !data.stock_90);
+                            if (data.UseCustomName && !row.missingPortraits)
+                            {
+                                if (!data.chrn_11 || data.BoxingRingText == null) row.missingPortraits = true;
+                                else if (data.BoxingRingText.Equals(string.Empty)) row.missingPortraits = true;
+                            }
+                            row.metal = data.MetalModel;
+                            row.hasAudio = data.Sound || data.Voice;
+                            row.hasCustomName = data.UseCustomName;
+                            row.wifiSafe = data.WifiSafe;
                             break;
                         case (ModListType.CharacterGeneral):
-                            row.name = Utils.DeserializeXML<CharacterGeneralModXML>(kamiFiles[i]).DisplayName;
+                            CharacterGeneralModXML data2 = Utils.DeserializeXML<CharacterGeneralModXML>(kamiFiles[i]);
+                            row.name = data2.DisplayName;
+                            row.wifiSafe = data2.WifiSafe;
                             break;
                         case (ModListType.Stage):
-                            row.name = Utils.DeserializeXML<StageModXML>(kamiFiles[i]).DisplayName;
+                            StageModXML data3 = Utils.DeserializeXML<StageModXML>(kamiFiles[i]);
+                            row.name = data3.DisplayName;
+                            row.wifiSafe = data3.WifiSafe;
                             break;
                         case (ModListType.General):
-                            row.name = Utils.DeserializeXML<GeneralModXML>(kamiFiles[i]).DisplayName;
+                            GeneralModXML data4 = Utils.DeserializeXML<GeneralModXML>(kamiFiles[i]);
+                            row.name = data4.DisplayName;
+                            row.wifiSafe = data4.WifiSafe;
                             break;
                     }
                     _RowData.Add(row);
@@ -833,14 +849,18 @@ namespace KamiModpackBuilder.UserControls
 
         public class RowData
         {
+            public int slotNum = 0;
             public string name = String.Empty;
             public int textureID = -1;
-            public string warningText = String.Empty;
-            public bool hasWarning = false;
-            public string errorText = String.Empty;
-            public bool hasError = false;
             public string modFolder = String.Empty;
             public bool propertiesEnabled = true;
+            public CharacterSlotModXML.MetalModelStatus metal = CharacterSlotModXML.MetalModelStatus.Works;
+            public bool missingModel = false;
+            public bool missingPortraits = false;
+            public bool hasAudio = false;
+            public bool hasCustomName = false;
+            public bool wifiSafe = true;
+            public bool modMissing = false;
         }
     }
 }

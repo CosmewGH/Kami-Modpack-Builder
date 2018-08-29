@@ -78,7 +78,11 @@
     <Compile Include="DB\FightersDB.cs" />
     <Compile Include="DB\IconsDB.cs" />
     <Compile Include="FileTypes\NUT.cs" />
-    <Compile Include="Properties\Resources.Designer.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Sm4shMusic\DB\BGMFilesDB.cs" />
     <Compile Include="Sm4shMusic\DB\BGMStage.cs" />
     <Compile Include="Sm4shMusic\DB\BGMStageDB.cs" />
@@ -352,7 +356,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\CharacterMods.resx">
       <DependentUpon>CharacterMods.cs</DependentUpon>
@@ -413,6 +417,8 @@
     <Content Include="libs\DTLS.exe" />
     <Content Include="libs\NAudio.dll" />
     <Content Include="libs\zlibnet.dll" />
+    <None Include="Resources\icon_wifi_safe_no.png" />
+    <None Include="Resources\icon_portrait_missing.png" />
     <None Include="Resources\icon_stop.png" />
     <None Include="Resources\icon_remove.png" />
     <None Include="Resources\icon_play.png" />
@@ -476,9 +482,16 @@
     <None Include="Resources\fighter_Wiifit.png" />
     <None Include="Resources\fighter_Yoshi.png" />
     <None Include="Resources\fighter_Zelda.png" />
+    <None Include="Resources\icon_custom_name.png" />
+    <None Include="Resources\icon_audio.png" />
     <Content Include="Resources\icon_file.png" />
     <Content Include="Resources\icon_folder.png" />
     <None Include="Resources\icon_music.png" />
+    <None Include="Resources\icon_metal.png" />
+    <None Include="Resources\icon_metal_crashes.png" />
+    <None Include="Resources\icon_metal_missing.png" />
+    <None Include="Resources\icon_metal_unknown.png" />
+    <None Include="Resources\icon_models_missing.png" />
     <Content Include="Resources\icon_packed.png" />
   </ItemGroup>
   <ItemGroup>

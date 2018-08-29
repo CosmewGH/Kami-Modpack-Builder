@@ -28,7 +28,6 @@ namespace KamiModpackBuilder.Objects
         public bool YoshiFixActive { get; set; } //Whether Yoshi Fix (allowing yoshi to have fixed effects on slots higher than 8) will automatically be updated and included in the build.
         public bool DuplicateToOtherRegions { get; set; } //Duplicate applicable mod files to other regions automatically.
         public bool OverrideLowPolyModels { get; set; } //Duplicate character slot mods over the lxx folder when neccessary if an lxx variant isn't included in the mod.
-        public bool AutoTextureIDCheck { get; set; } //Check TextureIDs of character slot mods before building and report conflicts before building.
         public bool AutoTextureIDFix { get; set; } //Automatically TextureID fix all character slot mods when conflicts are found before building. Overrides AutoTextureIDCheck.
         
         public bool SupressWarningTextureIDConflicts { get; set; }
@@ -81,7 +80,6 @@ namespace KamiModpackBuilder.Objects
             YoshiFixActive = true;
             DuplicateToOtherRegions = true;
             OverrideLowPolyModels = true;
-            AutoTextureIDCheck = true;
             AutoTextureIDFix = false;
 
             SupressWarningTextureIDConflicts = false;

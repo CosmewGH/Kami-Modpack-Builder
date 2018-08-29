@@ -18,7 +18,7 @@ namespace KamiModpackBuilder.UserControls
         private SmashProjectManager _SmashProjectManager;
         private SmashMod _Project;
         private DB.Fighter _CurrentFighter;
-        private List<SlotRowData> _RowData = new List<SlotRowData>();
+        private List<DataGridModsList.RowData> _RowData = new List<DataGridModsList.RowData>();
         private List<ModRow> _Rows = new List<ModRow>();
         #endregion
 
@@ -121,12 +121,12 @@ namespace KamiModpackBuilder.UserControls
 
         public void RefreshRowData()
         {
-            _RowData = new List<SlotRowData>();
+            _RowData = new List<DataGridModsList.RowData>();
             _Project = _SmashProjectManager.CurrentProject;
 
             for (int i = 0; i < _CurrentFighter.maxSlots; ++i)
             {
-                SlotRowData row = new SlotRowData();
+                DataGridModsList.RowData row = new DataGridModsList.RowData();
                 bool modFound = false;
                 row.slotNum = i;
                 for (int j = 0; j < _Project.ActiveCharacterSlotMods.Count; ++j)
@@ -139,13 +139,22 @@ namespace KamiModpackBuilder.UserControls
                     if (data != null)
                     {
                         row.name = data.DisplayName;
+                        row.missingPortraits = (!data.chr_00 || !data.chr_11 || !data.chr_13 || !data.stock_90);
+                        if (data.UseCustomName && !row.missingPortraits)
+                        {
+                            if (!data.chrn_11 || data.BoxingRingText == null) row.missingPortraits = true;
+                            else if (data.BoxingRingText.Equals(string.Empty)) row.missingPortraits = true;
+                        }
+                        row.metal = data.MetalModel;
+                        row.hasAudio = data.Sound || data.Voice;
+                        row.hasCustomName = data.UseCustomName;
+                        row.wifiSafe = data.WifiSafe;
                     }
                     else
                     {
                         row.name = String.Format("{0} (Mod is missing!)", row.modFolder);
-                        row.hasError = true;
+                        row.modMissing = true;
                         row.propertiesEnabled = false;
-                        row.errorText = "Mod could not be found!";
                     }
                     _RowData.Add(row);
                     modFound = true;
@@ -207,19 +216,6 @@ namespace KamiModpackBuilder.UserControls
                     return;
                 }
             }
-        }
-
-        public class SlotRowData
-        {
-            public int slotNum = 0;
-            public string name = String.Empty;
-            public int textureID = -1;
-            public string warningText = String.Empty;
-            public bool hasWarning = false;
-            public string errorText = String.Empty;
-            public bool hasError = false;
-            public string modFolder = String.Empty;
-            public bool propertiesEnabled = true;
         }
 
         private void comboBoxVoiceSlot1_SelectedIndexChanged(object sender, EventArgs e)
