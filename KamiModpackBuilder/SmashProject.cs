@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
 using KamiModpackBuilder.UserControls;
+using ZLibNet;
 
 namespace KamiModpackBuilder
 {
@@ -1185,27 +1186,109 @@ namespace KamiModpackBuilder
             }
             #endregion
             #region Editor Mods
-            fileSearch.AddRange(Directory.GetFiles(PathHelper.FolderEditorMods, "*", SearchOption.AllDirectories));
+            if (_CurrentProject.EditorMTBFix)
+            {
+                fileSearch.Add(PathHelper.FolderEditorMods + "data" + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "config" + Path.DirectorySeparatorChar + "fightermodelbanktable.mtb");
+            }
+            if (_CurrentProject.EditorMusicActive)
+            {
+                fileSearch.Add(PathHelper.FolderEditorMods + "data" + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_sound_db.bin");
+                fileSearch.Add(PathHelper.FolderEditorMods + "data(us_en)" + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_sound_db.bin");
+                fileSearch.Add(PathHelper.FolderEditorMods + "data(us_fr)" + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_sound_db.bin");
+                fileSearch.Add(PathHelper.FolderEditorMods + "data(us_sp)" + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_sound_db.bin");
+                fileSearch.Add(PathHelper.FolderEditorMods + "data" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "message" + Path.DirectorySeparatorChar + "sound.msbt");
+                fileSearch.Add(PathHelper.FolderEditorMods + "data(us_fr)" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "message" + Path.DirectorySeparatorChar + "sound.msbt");
+                fileSearch.Add(PathHelper.FolderEditorMods + "data(us_sp)" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "message" + Path.DirectorySeparatorChar + "sound.msbt");
+                fileSearch.Add(PathHelper.FolderEditorMods + "data" + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "config" + Path.DirectorySeparatorChar + "bgm_mymusic.mmb");
+                fileSearch.Add(PathHelper.FolderEditorMods + "data" + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "config" + Path.DirectorySeparatorChar + "bgm_property.mpb");
+            }
+            if (_CurrentProject.EditorCharacterMenuDBActive)
+            {
+                fileSearch.Add(PathHelper.FolderEditorMods + "data" + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_character_db.bin");
+                fileSearch.Add(PathHelper.FolderEditorMods + "data(us_en)" + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_character_db.bin");
+                fileSearch.Add(PathHelper.FolderEditorMods + "data(us_fr)" + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_character_db.bin");
+                fileSearch.Add(PathHelper.FolderEditorMods + "data(us_sp)" + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_character_db.bin");
+            }
+            if (_CurrentProject.EditorCharacterStringsActive)
+            {
+                fileSearch.Add(PathHelper.FolderEditorMods + "data" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "message" + Path.DirectorySeparatorChar + "melee.msbt");
+            }
             foreach (string f in fileSearch)
             {
+                if (!File.Exists(f)) continue;
                 string explorerFilename = f.Replace(PathHelper.FolderEditorMods, string.Empty);
                 explorerFilename = PathHelper.GetExplorerFolder(PathHelperEnum.FOLDER_PATCH) + explorerFilename;
                 AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
             }
             fileSearch.Clear();
+            if (_CurrentProject.YoshiFixActive)
+            {
+                bool found = true;
+                if (!Directory.Exists(PathHelper.FolderWorkspace + "YoshiFix"))
+                {
+                    if (File.Exists(PathHelper.GetApplicationDirectory() + "tools" + Path.DirectorySeparatorChar + "Yoshi Fix.zip"))
+                    {
+                        UnZipper unZipper = new UnZipper();
+                        unZipper.ZipFile = PathHelper.GetApplicationDirectory() + "tools" + Path.DirectorySeparatorChar + "Yoshi Fix.zip";
+                        unZipper.ItemList.Add("*.*");
+                        unZipper.Destination = PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar;
+                        unZipper.Recurse = true;
+                        unZipper.UnZip();
+                        LogHelper.Debug("Unzipping file...");
+                    }
+                    else
+                    {
+                        found = false;
+                        LogHelper.Error("Yoshi Fix files not found! Please re-download Kami Modpack Loader and replace 'Yoshi Fix.zip' in the tools folder of the application!");
+                    }
+                }
+                if (found)
+                {
+                    int slots = CharDB.GetCharacterSlotCount(_CurrentProject.IsSwitch ? 0x07 : 0x07);
+                    if (slots > 8)
+                    {
+                        fileSearch.Add(PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar + "effect" + Path.DirectorySeparatorChar + "yoshi" + Path.DirectorySeparatorChar + "yoshi.010d0000.ptcl");
+                        for (int i = 8; i < slots; ++i)
+                        {
+                            fileSearch.AddRange(Directory.GetFiles(PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar + "effect" + Path.DirectorySeparatorChar + "yoshi" + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "EffYoshiAirTrace" + slots.ToString("D2"), "*", SearchOption.AllDirectories));
+                            fileSearch.AddRange(Directory.GetFiles(PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar + "effect" + Path.DirectorySeparatorChar + "yoshi" + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "EffYoshiTamagoKakeraA" + slots, "*", SearchOption.AllDirectories));
+                            fileSearch.AddRange(Directory.GetFiles(PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar + "effect" + Path.DirectorySeparatorChar + "yoshi" + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "EffYoshiTamagoKakeraB" + slots, "*", SearchOption.AllDirectories));
+                            fileSearch.AddRange(Directory.GetFiles(PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar + "effect" + Path.DirectorySeparatorChar + "yoshi" + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "EffYoshiTamagoKakeraC" + slots, "*", SearchOption.AllDirectories));
+                        }
+                        foreach (string f in fileSearch)
+                        {
+                            string explorerFilename = f.Replace(PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar, string.Empty);
+                            explorerFilename = PathHelper.GetExplorerFolder(PathHelperEnum.FOLDER_PATCH) + "data" + Path.DirectorySeparatorChar + "fighter" + Path.DirectorySeparatorChar + "yoshi" + Path.DirectorySeparatorChar + explorerFilename;
+                            AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                        }
+                        fileSearch.Clear();
+                        fileSearch.AddRange(Directory.GetFiles(PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar + slots + " slots", "*", SearchOption.AllDirectories));
+                        foreach (string f in fileSearch)
+                        {
+                            string explorerFilename = f.Replace(PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar + slots + " slots", string.Empty);
+                            explorerFilename = PathHelper.GetExplorerFolder(PathHelperEnum.FOLDER_PATCH) + "data" + Path.DirectorySeparatorChar + "fighter" + Path.DirectorySeparatorChar + "yoshi" + explorerFilename;
+                            AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                        }
+                    }
+                }
+            }
+            fileSearch.Clear();
             #endregion
             #region Explorer Mods
-            for (int i = 0; i < _resCols.Count(); ++i)
+            if (_CurrentProject.EditorExplorerChanges)
             {
-                if (Directory.Exists(baseFolders[i]))
+                for (int i = 0; i < _resCols.Count(); ++i)
                 {
-                    explorerFiles.AddRange(Directory.GetDirectories(baseFolders[i], "*", SearchOption.AllDirectories));
-                    explorerFiles.AddRange(Directory.GetFiles(baseFolders[i], "*", SearchOption.AllDirectories));
-                    foreach (string f in explorerFiles)
+                    if (Directory.Exists(baseFolders[i]))
                     {
-                        AddFileToResColFileLists(f, f, baseFolders, filesLists);
+                        explorerFiles.AddRange(Directory.GetDirectories(baseFolders[i], "*", SearchOption.AllDirectories));
+                        explorerFiles.AddRange(Directory.GetFiles(baseFolders[i], "*", SearchOption.AllDirectories));
+                        foreach (string f in explorerFiles)
+                        {
+                            AddFileToResColFileLists(f, f, baseFolders, filesLists);
+                        }
+                        fileSearch.Clear();
                     }
-                    fileSearch.Clear();
                 }
             }
             #endregion

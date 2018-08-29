@@ -103,7 +103,7 @@ namespace KamiModpackBuilder.Sm4shMusic.UserControls
                 if (_Player.PlaybackState == PlaybackState.Playing)
                 {
                     _Player.Stop();
-                    btnPlay.Image = Properties.Resources.play;
+                    btnPlay.Image = Properties.Resources.icon_play;
                 }
                 else
                 {
@@ -112,7 +112,7 @@ namespace KamiModpackBuilder.Sm4shMusic.UserControls
                     _Player.Play();
                     _Timer.Start();
                     _CurrentVGMStreamPlayer = this;
-                    btnPlay.Image = Properties.Resources.stop;
+                    btnPlay.Image = Properties.Resources.icon_stop;
                 }
             }
         }
@@ -125,7 +125,7 @@ namespace KamiModpackBuilder.Sm4shMusic.UserControls
             _CurrentVGMStreamPlayer._Reader.ResetVGM();
             _CurrentVGMStreamPlayer._Timer.Stop();
             _CurrentVGMStreamPlayer.lblTime.Text = "00:00" + _CurrentVGMStreamPlayer._FormatTotalTime;
-            _CurrentVGMStreamPlayer.btnPlay.Image = Properties.Resources.play;
+            _CurrentVGMStreamPlayer.btnPlay.Image = Properties.Resources.icon_play;
             if (_Player.PlaybackState == PlaybackState.Playing)
             {
                 _Player.Stop();

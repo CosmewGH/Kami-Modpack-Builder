@@ -118,14 +118,176 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="arrowdown" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrowdown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="fighter_Bayonetta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Bayonetta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="arrowup" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrowup.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="fighter_Captian" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Captian.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="help" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\help.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="fighter_Cloud" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Cloud.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Dedede" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Dedede.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Diddy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Diddy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Donkey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Donkey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Drmario" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Drmario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Duckhunt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Duckhunt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Falco" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Falco.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Fox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Fox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Gamewatch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Gamewatch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Ganon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Ganon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Gekkouga" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Gekkouga.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Ike" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Ike.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Kamui" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Kamui.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Kirby" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Kirby.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Koopa" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Koopa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Koopajr" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Koopajr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Link" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Link.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Littlemac" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Littlemac.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Lizardon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Lizardon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Lucario" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Lucario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Lucas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Lucas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Lucina" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Lucina.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Luigi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Luigi.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Mario" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Mario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Marth" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Marth.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Metaknight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Metaknight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Mewtwo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Mewtwo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Murabito" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Murabito.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Ness" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Ness.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Pacman" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Pacman.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Palutena" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Palutena.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Peach" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Peach.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Pikachu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Pikachu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Pikmin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Pikmin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Pit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Pit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Pitb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Pitb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Purin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Purin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Reflet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Reflet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Robot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Robot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Rockman" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Rockman.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Rosetta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Rosetta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Roy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Roy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Ryu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Ryu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Samus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Samus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Sheik" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Sheik.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Shulk" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Shulk.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Sonic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Sonic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Szerosuit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Szerosuit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Toonlink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Toonlink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Wario" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Wario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Wiifit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Wiifit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Yoshi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Yoshi.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fighter_Zelda" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fighter_Zelda.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_arrowdown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_arrowdown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_arrowup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_arrowup.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_error" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -136,22 +298,25 @@
   <data name="icon_folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_help" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_help.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_music" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_music.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_packed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_packed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_play" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_play.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_remove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_warning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="play" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\play.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\remove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

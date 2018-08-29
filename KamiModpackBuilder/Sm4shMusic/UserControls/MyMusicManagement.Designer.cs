@@ -218,7 +218,7 @@
             // 
             // helpUnk9
             // 
-            this.helpUnk9.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpUnk9.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpUnk9.Location = new System.Drawing.Point(559, 159);
             this.helpUnk9.Name = "helpUnk9";
             this.helpUnk9.Size = new System.Drawing.Size(16, 16);
@@ -228,7 +228,7 @@
             // 
             // helpUnk7
             // 
-            this.helpUnk7.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpUnk7.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpUnk7.Location = new System.Drawing.Point(559, 134);
             this.helpUnk7.Name = "helpUnk7";
             this.helpUnk7.Size = new System.Drawing.Size(16, 16);
@@ -238,7 +238,7 @@
             // 
             // helpPlayDelay
             // 
-            this.helpPlayDelay.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpPlayDelay.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpPlayDelay.Location = new System.Drawing.Point(559, 109);
             this.helpPlayDelay.Name = "helpPlayDelay";
             this.helpPlayDelay.Size = new System.Drawing.Size(16, 16);
@@ -248,7 +248,7 @@
             // 
             // helpUnk3
             // 
-            this.helpUnk3.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpUnk3.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpUnk3.Location = new System.Drawing.Point(559, 84);
             this.helpUnk3.Name = "helpUnk3";
             this.helpUnk3.Size = new System.Drawing.Size(16, 16);
@@ -258,7 +258,7 @@
             // 
             // helpUnk8
             // 
-            this.helpUnk8.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpUnk8.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpUnk8.Location = new System.Drawing.Point(263, 159);
             this.helpUnk8.Name = "helpUnk8";
             this.helpUnk8.Size = new System.Drawing.Size(16, 16);
@@ -268,7 +268,7 @@
             // 
             // helpUnk6
             // 
-            this.helpUnk6.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpUnk6.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpUnk6.Location = new System.Drawing.Point(263, 134);
             this.helpUnk6.Name = "helpUnk6";
             this.helpUnk6.Size = new System.Drawing.Size(16, 16);
@@ -278,7 +278,7 @@
             // 
             // helpUnk4
             // 
-            this.helpUnk4.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpUnk4.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpUnk4.Location = new System.Drawing.Point(263, 109);
             this.helpUnk4.Name = "helpUnk4";
             this.helpUnk4.Size = new System.Drawing.Size(16, 16);
@@ -288,7 +288,7 @@
             // 
             // helpRarity
             // 
-            this.helpRarity.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpRarity.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpRarity.Location = new System.Drawing.Point(263, 84);
             this.helpRarity.Name = "helpRarity";
             this.helpRarity.Size = new System.Drawing.Size(16, 16);
@@ -298,7 +298,7 @@
             // 
             // helpBGMSubIndex
             // 
-            this.helpBGMSubIndex.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpBGMSubIndex.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpBGMSubIndex.Location = new System.Drawing.Point(559, 49);
             this.helpBGMSubIndex.Name = "helpBGMSubIndex";
             this.helpBGMSubIndex.Size = new System.Drawing.Size(16, 16);
@@ -308,7 +308,7 @@
             // 
             // helpBGMIndex
             // 
-            this.helpBGMIndex.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpBGMIndex.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpBGMIndex.Location = new System.Drawing.Point(263, 49);
             this.helpBGMIndex.Name = "helpBGMIndex";
             this.helpBGMIndex.Size = new System.Drawing.Size(16, 16);
@@ -530,7 +530,7 @@
             // 
             // helpMyMusicID
             // 
-            this.helpMyMusicID.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpMyMusicID.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpMyMusicID.Location = new System.Drawing.Point(559, 23);
             this.helpMyMusicID.Name = "helpMyMusicID";
             this.helpMyMusicID.Size = new System.Drawing.Size(16, 16);
@@ -540,7 +540,7 @@
             // 
             // helpSoundDBID
             // 
-            this.helpSoundDBID.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpSoundDBID.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpSoundDBID.Location = new System.Drawing.Point(263, 23);
             this.helpSoundDBID.Name = "helpSoundDBID";
             this.helpSoundDBID.Size = new System.Drawing.Size(16, 16);

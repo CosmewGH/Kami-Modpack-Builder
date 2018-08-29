@@ -66,7 +66,7 @@
             // 
             // help
             // 
-            this.help.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.help.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.help.Location = new System.Drawing.Point(268, 12);
             this.help.Name = "help";
             this.help.Size = new System.Drawing.Size(16, 16);
@@ -99,7 +99,7 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Image = global::KamiModpackBuilder.Properties.Resources.remove;
+            this.btnRemove.Image = global::KamiModpackBuilder.Properties.Resources.icon_remove;
             this.btnRemove.Location = new System.Drawing.Point(65, 2);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(30, 25);
@@ -127,7 +127,7 @@
             // 
             // btnMoveUp
             // 
-            this.btnMoveUp.Image = global::KamiModpackBuilder.Properties.Resources.arrowup;
+            this.btnMoveUp.Image = global::KamiModpackBuilder.Properties.Resources.icon_arrowup;
             this.btnMoveUp.Location = new System.Drawing.Point(29, 2);
             this.btnMoveUp.Name = "btnMoveUp";
             this.btnMoveUp.Size = new System.Drawing.Size(30, 25);
@@ -137,7 +137,7 @@
             // 
             // btnMoveDown
             // 
-            this.btnMoveDown.Image = global::KamiModpackBuilder.Properties.Resources.arrowdown;
+            this.btnMoveDown.Image = global::KamiModpackBuilder.Properties.Resources.icon_arrowdown;
             this.btnMoveDown.Location = new System.Drawing.Point(0, 2);
             this.btnMoveDown.Name = "btnMoveDown";
             this.btnMoveDown.Size = new System.Drawing.Size(30, 25);

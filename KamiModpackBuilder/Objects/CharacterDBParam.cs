@@ -37,10 +37,24 @@ namespace KamiModpackBuilder.Objects
                     {
                         if (slotCount > (uint)values.Parameters[7].Value) values.Parameters[7].Value = (uint)slotCount;
                     }
-                    else values.Parameters[7].Value = (int)slotCount;
+                    else values.Parameters[7].Value = (uint)slotCount;
                     return;
                 }
             }
+        }
+
+        public int GetCharacterSlotCount(int charID)
+        {
+            PARAM.GroupWrapper group = (PARAM.GroupWrapper)Param.Nodes[0];
+            for (int i = 0; i < group.Nodes.Count; ++i)
+            {
+                PARAM.ValuesWrapper values = (PARAM.ValuesWrapper)group.Nodes[i];
+                if ((int)values.Parameters[6].Value == charID)
+                {
+                    return (int)((uint)values.Parameters[7].Value);
+                }
+            }
+            return -1;
         }
 
         public void SetCharacterSlotNameIndex(int charID, int slot, int nameIndex)

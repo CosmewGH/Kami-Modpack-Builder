@@ -78,6 +78,7 @@
     <Compile Include="DB\FightersDB.cs" />
     <Compile Include="DB\IconsDB.cs" />
     <Compile Include="FileTypes\NUT.cs" />
+    <Compile Include="Properties\Resources.Designer.cs" />
     <Compile Include="Sm4shMusic\DB\BGMFilesDB.cs" />
     <Compile Include="Sm4shMusic\DB\BGMStage.cs" />
     <Compile Include="Sm4shMusic\DB\BGMStageDB.cs" />
@@ -233,11 +234,6 @@
     <Compile Include="Objects\TextureIDFix.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="RFManager.cs" />
     <Compile Include="Sm4shMusic\Sm4shMusic.cs" />
     <Compile Include="SmashProject.cs" />
@@ -356,7 +352,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\CharacterMods.resx">
       <DependentUpon>CharacterMods.cs</DependentUpon>
@@ -394,7 +390,7 @@
     <EmbeddedResource Include="UserControls\StageMods.resx">
       <DependentUpon>StageMods.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="libs\NUS3-IDs.db">
+    <None Include="tools\NUS3-IDs.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Properties\Settings.settings">
@@ -406,6 +402,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="tools\Yoshi Fix.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -414,14 +413,69 @@
     <Content Include="libs\DTLS.exe" />
     <Content Include="libs\NAudio.dll" />
     <Content Include="libs\zlibnet.dll" />
-    <None Include="Resources\stop.png" />
-    <None Include="Resources\remove.png" />
-    <None Include="Resources\play.png" />
+    <None Include="Resources\icon_stop.png" />
+    <None Include="Resources\icon_remove.png" />
+    <None Include="Resources\icon_play.png" />
     <None Include="Resources\icon_warning.png" />
     <None Include="Resources\icon_error.png" />
-    <None Include="Resources\arrowdown.png" />
-    <None Include="Resources\arrowup.png" />
-    <None Include="Resources\help.png" />
+    <None Include="Resources\icon_arrowdown.png" />
+    <None Include="Resources\icon_arrowup.png" />
+    <None Include="Resources\icon_help.png" />
+    <None Include="Resources\fighter_Bayonetta.png" />
+    <None Include="Resources\fighter_Captian.png" />
+    <None Include="Resources\fighter_Cloud.png" />
+    <None Include="Resources\fighter_Dedede.png" />
+    <None Include="Resources\fighter_Diddy.png" />
+    <None Include="Resources\fighter_Donkey.png" />
+    <None Include="Resources\fighter_Drmario.png" />
+    <None Include="Resources\fighter_Duckhunt.png" />
+    <None Include="Resources\fighter_Falco.png" />
+    <None Include="Resources\fighter_Fox.png" />
+    <None Include="Resources\fighter_Gamewatch.png" />
+    <None Include="Resources\fighter_Ganon.png" />
+    <None Include="Resources\fighter_Gekkouga.png" />
+    <None Include="Resources\fighter_Ike.png" />
+    <None Include="Resources\fighter_Kamui.png" />
+    <None Include="Resources\fighter_Kirby.png" />
+    <None Include="Resources\fighter_Koopa.png" />
+    <None Include="Resources\fighter_Koopajr.png" />
+    <None Include="Resources\fighter_Link.png" />
+    <None Include="Resources\fighter_Littlemac.png" />
+    <None Include="Resources\fighter_Lizardon.png" />
+    <None Include="Resources\fighter_Lucario.png" />
+    <None Include="Resources\fighter_Lucas.png" />
+    <None Include="Resources\fighter_Lucina.png" />
+    <None Include="Resources\fighter_Luigi.png" />
+    <None Include="Resources\fighter_Mario.png" />
+    <None Include="Resources\fighter_Marth.png" />
+    <None Include="Resources\fighter_Metaknight.png" />
+    <None Include="Resources\fighter_Mewtwo.png" />
+    <None Include="Resources\fighter_Murabito.png" />
+    <None Include="Resources\fighter_Ness.png" />
+    <None Include="Resources\fighter_Pacman.png" />
+    <None Include="Resources\fighter_Palutena.png" />
+    <None Include="Resources\fighter_Peach.png" />
+    <None Include="Resources\fighter_Pikachu.png" />
+    <None Include="Resources\fighter_Pikmin.png" />
+    <None Include="Resources\fighter_Pit.png" />
+    <None Include="Resources\fighter_Pitb.png" />
+    <None Include="Resources\fighter_Purin.png" />
+    <None Include="Resources\fighter_Reflet.png" />
+    <None Include="Resources\fighter_Robot.png" />
+    <None Include="Resources\fighter_Rockman.png" />
+    <None Include="Resources\fighter_Rosetta.png" />
+    <None Include="Resources\fighter_Roy.png" />
+    <None Include="Resources\fighter_Ryu.png" />
+    <None Include="Resources\fighter_Samus.png" />
+    <None Include="Resources\fighter_Sheik.png" />
+    <None Include="Resources\fighter_Shulk.png" />
+    <None Include="Resources\fighter_Sonic.png" />
+    <None Include="Resources\fighter_Szerosuit.png" />
+    <None Include="Resources\fighter_Toonlink.png" />
+    <None Include="Resources\fighter_Wario.png" />
+    <None Include="Resources\fighter_Wiifit.png" />
+    <None Include="Resources\fighter_Yoshi.png" />
+    <None Include="Resources\fighter_Zelda.png" />
     <Content Include="Resources\icon_file.png" />
     <Content Include="Resources\icon_folder.png" />
     <None Include="Resources\icon_music.png" />

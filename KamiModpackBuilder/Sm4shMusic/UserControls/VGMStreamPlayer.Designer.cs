@@ -48,7 +48,7 @@
             // 
             // btnPlay
             // 
-            this.btnPlay.Image = global::KamiModpackBuilder.Properties.Resources.play;
+            this.btnPlay.Image = global::KamiModpackBuilder.Properties.Resources.icon_play;
             this.btnPlay.Location = new System.Drawing.Point(1, 2);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(16, 16);

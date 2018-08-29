@@ -126,7 +126,7 @@
             // 
             // helpBGMFilenameValue
             // 
-            this.helpBGMFilenameValue.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpBGMFilenameValue.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpBGMFilenameValue.Location = new System.Drawing.Point(537, 75);
             this.helpBGMFilenameValue.Name = "helpBGMFilenameValue";
             this.helpBGMFilenameValue.Size = new System.Drawing.Size(16, 16);
@@ -136,7 +136,7 @@
             // 
             // helpBGMNameValue
             // 
-            this.helpBGMNameValue.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpBGMNameValue.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpBGMNameValue.Location = new System.Drawing.Point(537, 50);
             this.helpBGMNameValue.Name = "helpBGMNameValue";
             this.helpBGMNameValue.Size = new System.Drawing.Size(16, 16);
@@ -146,7 +146,7 @@
             // 
             // helpBGMIDValue
             // 
-            this.helpBGMIDValue.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpBGMIDValue.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpBGMIDValue.Location = new System.Drawing.Point(537, 25);
             this.helpBGMIDValue.Name = "helpBGMIDValue";
             this.helpBGMIDValue.Size = new System.Drawing.Size(16, 16);
@@ -254,7 +254,7 @@
             // 
             // helpMenuCheckpoint4
             // 
-            this.helpMenuCheckpoint4.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpMenuCheckpoint4.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpMenuCheckpoint4.Location = new System.Drawing.Point(537, 99);
             this.helpMenuCheckpoint4.Name = "helpMenuCheckpoint4";
             this.helpMenuCheckpoint4.Size = new System.Drawing.Size(16, 16);
@@ -264,7 +264,7 @@
             // 
             // helpMenuCheckpoint3
             // 
-            this.helpMenuCheckpoint3.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpMenuCheckpoint3.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpMenuCheckpoint3.Location = new System.Drawing.Point(537, 74);
             this.helpMenuCheckpoint3.Name = "helpMenuCheckpoint3";
             this.helpMenuCheckpoint3.Size = new System.Drawing.Size(16, 16);
@@ -274,7 +274,7 @@
             // 
             // helpMenuCheckpoint2
             // 
-            this.helpMenuCheckpoint2.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpMenuCheckpoint2.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpMenuCheckpoint2.Location = new System.Drawing.Point(537, 49);
             this.helpMenuCheckpoint2.Name = "helpMenuCheckpoint2";
             this.helpMenuCheckpoint2.Size = new System.Drawing.Size(16, 16);
@@ -284,7 +284,7 @@
             // 
             // helpMenuCheckpoint1
             // 
-            this.helpMenuCheckpoint1.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpMenuCheckpoint1.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpMenuCheckpoint1.Location = new System.Drawing.Point(537, 24);
             this.helpMenuCheckpoint1.Name = "helpMenuCheckpoint1";
             this.helpMenuCheckpoint1.Size = new System.Drawing.Size(16, 16);
@@ -294,7 +294,7 @@
             // 
             // helpUnk4
             // 
-            this.helpUnk4.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpUnk4.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpUnk4.Location = new System.Drawing.Point(261, 99);
             this.helpUnk4.Name = "helpUnk4";
             this.helpUnk4.Size = new System.Drawing.Size(16, 16);
@@ -304,7 +304,7 @@
             // 
             // helpUnk3
             // 
-            this.helpUnk3.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpUnk3.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpUnk3.Location = new System.Drawing.Point(261, 74);
             this.helpUnk3.Name = "helpUnk3";
             this.helpUnk3.Size = new System.Drawing.Size(16, 16);
@@ -314,7 +314,7 @@
             // 
             // helpUnk2
             // 
-            this.helpUnk2.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpUnk2.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpUnk2.Location = new System.Drawing.Point(261, 49);
             this.helpUnk2.Name = "helpUnk2";
             this.helpUnk2.Size = new System.Drawing.Size(16, 16);
@@ -324,7 +324,7 @@
             // 
             // helpUnk1
             // 
-            this.helpUnk1.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpUnk1.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpUnk1.Location = new System.Drawing.Point(261, 24);
             this.helpUnk1.Name = "helpUnk1";
             this.helpUnk1.Size = new System.Drawing.Size(16, 16);
@@ -492,7 +492,7 @@
             // 
             // helpStreamTotalTime
             // 
-            this.helpStreamTotalTime.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpStreamTotalTime.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpStreamTotalTime.Location = new System.Drawing.Point(537, 74);
             this.helpStreamTotalTime.Name = "helpStreamTotalTime";
             this.helpStreamTotalTime.Size = new System.Drawing.Size(16, 16);
@@ -502,7 +502,7 @@
             // 
             // helpLoopEndTime
             // 
-            this.helpLoopEndTime.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpLoopEndTime.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpLoopEndTime.Location = new System.Drawing.Point(537, 49);
             this.helpLoopEndTime.Name = "helpLoopEndTime";
             this.helpLoopEndTime.Size = new System.Drawing.Size(16, 16);
@@ -512,7 +512,7 @@
             // 
             // helpLoopStartTime
             // 
-            this.helpLoopStartTime.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpLoopStartTime.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpLoopStartTime.Location = new System.Drawing.Point(537, 24);
             this.helpLoopStartTime.Name = "helpLoopStartTime";
             this.helpLoopStartTime.Size = new System.Drawing.Size(16, 16);
@@ -522,7 +522,7 @@
             // 
             // helpStreamTotalSamples
             // 
-            this.helpStreamTotalSamples.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpStreamTotalSamples.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpStreamTotalSamples.Location = new System.Drawing.Point(261, 74);
             this.helpStreamTotalSamples.Name = "helpStreamTotalSamples";
             this.helpStreamTotalSamples.Size = new System.Drawing.Size(16, 16);
@@ -532,7 +532,7 @@
             // 
             // helpLoopEndSample
             // 
-            this.helpLoopEndSample.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpLoopEndSample.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpLoopEndSample.Location = new System.Drawing.Point(261, 49);
             this.helpLoopEndSample.Name = "helpLoopEndSample";
             this.helpLoopEndSample.Size = new System.Drawing.Size(16, 16);
@@ -542,7 +542,7 @@
             // 
             // helpLoopStartSample
             // 
-            this.helpLoopStartSample.Image = global::KamiModpackBuilder.Properties.Resources.help;
+            this.helpLoopStartSample.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
             this.helpLoopStartSample.Location = new System.Drawing.Point(261, 24);
             this.helpLoopStartSample.Name = "helpLoopStartSample";
             this.helpLoopStartSample.Size = new System.Drawing.Size(16, 16);
