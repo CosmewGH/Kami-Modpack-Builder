@@ -13,7 +13,7 @@ namespace KamiModpackBuilder.FileTypes
             if (NUS3Name.Contains("_se") && NUS3Name.Contains("_common")) return 4;
             else if (NUS3Name.Contains("_vc") && NUS3Name.Contains("_ouen")) return 3;
             else if (NUS3Name.Contains("_vc") && !NUS3Name.Contains("_se") && !NUS3Name.Contains("_ouen")) return 2;
-            else if (NUS3Name.Contains("_se") && NUS3Name.Contains("_vc") && !NUS3Name.Contains("_common")) return 1;
+            else if (NUS3Name.Contains("_se") && !NUS3Name.Contains("_vc") && !NUS3Name.Contains("_common")) return 1;
             else return 5;
         }
     }

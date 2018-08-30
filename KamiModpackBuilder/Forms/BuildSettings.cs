@@ -8,6 +8,7 @@ namespace KamiModpackBuilder.Forms
     {
 
         private SmashProjectManager _SmashProjectManager;
+        public bool doBuild = false;
 
         public BuildSettings(SmashProjectManager project)
         {
@@ -33,9 +34,9 @@ namespace KamiModpackBuilder.Forms
             _SmashProjectManager.CurrentProject.BuildIsWifiSafe = checkBoxWifiSafe.Checked;
             _SmashProjectManager.CurrentProject.BuildSafetySetting = comboBoxCrashSafety.SelectedIndex;
 
-            this.Close();
+            doBuild = true;
 
-            _SmashProjectManager.RebuildRFAndPatchlist();
+            this.Close();
         }
     }
 }

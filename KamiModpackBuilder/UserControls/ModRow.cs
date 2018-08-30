@@ -151,6 +151,7 @@ namespace KamiModpackBuilder.UserControls
                         labelMetal.Visible = false;
                         break;
                 }
+                labelError.Visible = false;
                 labelWifi.Visible = !wifiSafe;
                 labelModel.Visible = missingModel;
                 labelPortraits.Visible = missingPortraits;
@@ -232,7 +233,8 @@ namespace KamiModpackBuilder.UserControls
         {
             if (m_IsSelected)
             {
-                panelModList.BackColor = colorNormal;
+                if (isSelectable) panelModList.BackColor = colorNormal;
+                else panelModList.BackColor = colorNotSelectable;
                 m_IsSelected = false;
             }
         }

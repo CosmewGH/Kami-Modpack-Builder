@@ -155,6 +155,15 @@ namespace KamiModpackBuilder
         {
             Forms.BuildSettings form = new Forms.BuildSettings(_ProjectManager);
             form.ShowDialog();
+
+            if (form.doBuild)
+            {
+                tabControl.Enabled = false;
+                menuStrip1.Enabled = false;
+                _ProjectManager.RebuildRFAndPatchlist();
+                tabControl.Enabled = true;
+                menuStrip1.Enabled = true;
+            }
         }
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
