@@ -49,6 +49,12 @@ namespace KamiModpackBuilder.Forms
             PathStock90 = ModPath + Path.DirectorySeparatorChar + "chr" + Path.DirectorySeparatorChar + "stock_90_" + CharName + "_XX.nut";
             PathChrn11 = ModPath + Path.DirectorySeparatorChar + "chr" + Path.DirectorySeparatorChar + "chrn_11_" + CharName + "_XX.nut";
 
+            if (_SmashProjectManager._CharacterModsPage.CurrentFighter.id == 0x19 && !_SmashProjectManager.CurrentProject.IsSwitch)
+            {
+                PathVoice = PathVoice.Replace("Szerosuit", "SZerosuit");
+                PathSound = PathSound.Replace("Szerosuit", "SZerosuit");
+            }
+
             XMLData = Utils.DeserializeXML<CharacterSlotModXML>(PathKami);
             if (XMLData == null) return;
 
@@ -110,7 +116,7 @@ namespace KamiModpackBuilder.Forms
             {
                 labelModels.Text = "Mod has no models";
                 XMLData.TextureID = -1;
-                XMLData.MetalModel = CharacterSlotModXML.MetalModelStatus.Unknown;
+                XMLData.MetalModel = CharacterSlotModXML.MetalModelStatus.Works;
                 comboBoxMetalModel.Enabled = false;
                 textBoxTextureID.Enabled = false;
                 buttonTextureIDChange.Enabled = false;
@@ -118,7 +124,7 @@ namespace KamiModpackBuilder.Forms
             textBoxTextureID.Text = XMLData.TextureID.ToString();
 
             checkBoxWifiSafe.Checked = XMLData.WifiSafe;
-            comboBoxMetalModel.DataSource = new List<String> { "Unknown", "Works", "Missing", "Crashes" };
+            comboBoxMetalModel.DataSource = new List<String> { "Unknown", "Works", "Errors", "Crashes" };
             comboBoxMetalModel.SelectedIndex = (int)XMLData.MetalModel;
 
             labelVoicePack.Text = XMLData.Voice ? "Yes" : "No";

@@ -263,11 +263,10 @@ namespace KamiModpackBuilder.Forms
                 xml.Voice = (string.Equals(voice, "None") ? false : true);
                 xml.Haslxx = (_CurrentFighter.lowPolySlots == Fighter.LowPolySlots.None) ? false : (string.Equals(lxx, "None") ? false : true);
                 xml.TextureID = -1;//Is recalculated lower
-                xml.MetalModel = CharacterSlotModXML.MetalModelStatus.Unknown;
+                xml.MetalModel = CharacterSlotModXML.MetalModelStatus.Works;
                 xml.WifiSafe = true; //Assuming wifi-safe
                 xml.UseCustomName = xml.chrn_11;
                 xml.CharacterName = xml.UseCustomName ? rowNames[i] : "";
-                Utils.SerializeXMLToFile<CharacterSlotModXML>(xml, baseModPath + "kamimod.xml");
                 #endregion
 
                 #region Model Files
@@ -275,6 +274,7 @@ namespace KamiModpackBuilder.Forms
                 for (int k = 0; k < modelPartsCount; ++k)
                 {
                     if (modelParts[k].Equals("None")) continue;
+                    xml.MetalModel = CharacterSlotModXML.MetalModelStatus.Unknown;
                     string foldername = GetFilenameFromComboBoxString(ModelNutDirectories, ComboBoxList_ModelNutDirectories, modelParts[k]);
                     if (xml.TextureID == -1)
                     {
@@ -317,11 +317,15 @@ namespace KamiModpackBuilder.Forms
                 {
                     string baseSoundPath = baseModPath + "sound" + Path.DirectorySeparatorChar;
                     Directory.CreateDirectory(baseSoundPath);
+                    string fighterName = _CurrentFighter.name;
+                    if (_CurrentFighter.id == 0x19 && !_SmashProjectManager.CurrentProject.IsSwitch)
+                        fighterName = fighterName.Replace("Szerosuit", "SZerosuit");
                     if (xml.Sound) File.Copy(GetFilenameFromComboBoxString(Files_Sound_Nus3bank, ComboBoxList_Files_Sound_Nus3bank, sound), baseSoundPath + "snd_se_" + _CurrentFighter.name + "_cxx.nus3bank");
                     if (xml.Voice) File.Copy(GetFilenameFromComboBoxString(Files_Voice_Nus3bank, ComboBoxList_Files_Voice_Nus3bank, voice), baseSoundPath + "snd_vc_" + _CurrentFighter.name + "_cxx.nus3bank");
                 }
                 #endregion
 
+                Utils.SerializeXMLToFile<CharacterSlotModXML>(xml, baseModPath + "kamimod.xml");
                 LogHelper.Info(String.Format("Mod {0} imported successfully!", rowNames[i]));
             }
             this.Close();
