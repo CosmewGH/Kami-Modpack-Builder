@@ -723,10 +723,7 @@ namespace KamiModpackBuilder
             List<string> fileSearch = new List<string>();
             List<AutoMTBFix.Nus3BankFile> nus3Banks = new List<AutoMTBFix.Nus3BankFile>();
 
-            if (_CurrentProject.AutoTextureIDFix)
-            {
-                new Objects.TextureIDFix().MassTextureIdFix();
-            }
+            if (_CurrentProject.AutoTextureIDFix) TextureIDFix.MassTextureIdFix();
             #region Character Slot Mods
             List<FighterName> fighterNames = new List<FighterName>();
             foreach (CharacterSlotMod mod in _CurrentProject.ActiveCharacterSlotMods)
@@ -1004,6 +1001,12 @@ namespace KamiModpackBuilder
                     foreach (string f in fileSearch)
                     {
                         string explorerFilename = f.Replace(modFolder + "chr" + Path.DirectorySeparatorChar, string.Empty);
+                        //R.O.B. c00 and c01 regional flip flop exception
+                        if (currentFighter.id == 0x1F && CurrentProject.IsSwitch)
+                        {
+                            if (mod.SlotID == 0) explorerFilename = explorerFilename.Replace("XX", (mod.SlotID + 2).ToString("D2"));
+                            else if (mod.SlotID == 1) explorerFilename = explorerFilename.Replace("XX", (mod.SlotID).ToString("D2"));
+                        }
                         explorerFilename = explorerFilename.Replace("XX", (mod.SlotID + 1).ToString("D2"));
                         explorerFilename = explorerChrFolder + "chr_00" + Path.DirectorySeparatorChar + explorerFilename;
                         AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
@@ -1018,6 +1021,12 @@ namespace KamiModpackBuilder
                     foreach (string f in fileSearch)
                     {
                         string explorerFilename = f.Replace(modFolder + "chr" + Path.DirectorySeparatorChar, string.Empty);
+                        //R.O.B. c00 and c01 regional flip flop exception
+                        if (currentFighter.id == 0x1F && CurrentProject.IsSwitch)
+                        {
+                            if (mod.SlotID == 0) explorerFilename = explorerFilename.Replace("XX", (mod.SlotID + 2).ToString("D2"));
+                            else if (mod.SlotID == 1) explorerFilename = explorerFilename.Replace("XX", (mod.SlotID).ToString("D2"));
+                        }
                         explorerFilename = explorerFilename.Replace("XX", (mod.SlotID + 1).ToString("D2"));
                         explorerFilename = explorerChrFolder + "chr_11" + Path.DirectorySeparatorChar + explorerFilename;
                         AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
@@ -1032,6 +1041,12 @@ namespace KamiModpackBuilder
                     foreach (string f in fileSearch)
                     {
                         string explorerFilename = f.Replace(modFolder + "chr" + Path.DirectorySeparatorChar, string.Empty);
+                        //R.O.B. c00 and c01 regional flip flop exception
+                        if (currentFighter.id == 0x1F && CurrentProject.IsSwitch)
+                        {
+                            if (mod.SlotID == 0) explorerFilename = explorerFilename.Replace("XX", (mod.SlotID + 2).ToString("D2"));
+                            else if (mod.SlotID == 1) explorerFilename = explorerFilename.Replace("XX", (mod.SlotID).ToString("D2"));
+                        }
                         explorerFilename = explorerFilename.Replace("XX", (mod.SlotID + 1).ToString("D2"));
                         explorerFilename = explorerChrFolder + "chr_13" + Path.DirectorySeparatorChar + explorerFilename;
                         AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
@@ -1046,6 +1061,12 @@ namespace KamiModpackBuilder
                     foreach (string f in fileSearch)
                     {
                         string explorerFilename = f.Replace(modFolder + "chr" + Path.DirectorySeparatorChar, string.Empty);
+                        //R.O.B. c00 and c01 regional flip flop exception
+                        if (currentFighter.id == 0x1F && CurrentProject.IsSwitch)
+                        {
+                            if (mod.SlotID == 0) explorerFilename = explorerFilename.Replace("XX", (mod.SlotID + 2).ToString("D2"));
+                            else if (mod.SlotID == 1) explorerFilename = explorerFilename.Replace("XX", (mod.SlotID).ToString("D2"));
+                        }
                         explorerFilename = explorerFilename.Replace("XX", (mod.SlotID + 1).ToString("D2"));
                         explorerFilename = explorerChrFolder + "stock_90" + Path.DirectorySeparatorChar + explorerFilename;
                         AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);

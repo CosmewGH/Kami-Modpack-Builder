@@ -154,6 +154,7 @@ namespace KamiModpackBuilder.Forms
         private void ModImportCharacterSlot_Shown(object sender, EventArgs e)
         {
             this.Activate();
+            if (dataGridView1.Rows.Count <= 0) return;
             dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
             dataGridView1.BeginEdit(true);
         }

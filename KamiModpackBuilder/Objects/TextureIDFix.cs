@@ -5,11 +5,74 @@ using KamiModpackBuilder.Globals;
 
 namespace KamiModpackBuilder.Objects
 {
-    class TextureIDFix
+    static class TextureIDFix
     {
-        public enum CharacterException { None, Pacman_WiiU, Robin_WiiU}
+        public static void ChangeTextureID(string directoryName, int charID, ushort id)
+        {
+            CharacterException exc = CharacterException.None;
+            if (charID == 0x2C && !SmashProjectManager.instance.CurrentProject.IsSwitch) exc = CharacterException.Robin_WiiU;
+            if (charID == 0x31 && !SmashProjectManager.instance.CurrentProject.IsSwitch) exc = CharacterException.Pacman_WiiU;
+            Mod mod = new Mod(directoryName, exc);
+            ChangeTextureID(mod, id);
+        }
+
+        public static void MassTextureIdFix()
+        {
+            SmashMod project = SmashProjectManager.instance.CurrentProject;
+            foreach (DB.Fighter fighter in DB.FightersDB.Fighters)
+            {
+                List<ushort> ids = new List<ushort>();
+
+                foreach (CharacterSlotMod mod in project.ActiveCharacterSlotMods)
+                {
+                    if (mod.CharacterID != fighter.id) continue;
+                    string ModPath = PathHelper.GetCharacterSlotModPath(fighter.name, mod.FolderName);
+                    string PathKami = ModPath + "kamimod.xml";
+
+                    CharacterSlotModXML xml = Utils.DeserializeXML<CharacterSlotModXML>(PathKami);
+                    if (xml == null) continue;
+
+                    bool hasModels = false;
+                    string[] nutFiles = new string[0];
+                    if (Directory.Exists(ModPath + Path.DirectorySeparatorChar + "model"))
+                    {
+                        if (Directory.Exists(ModPath + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "body")) nutFiles = Directory.GetFiles(ModPath + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "body", "*.nut", SearchOption.AllDirectories);
+                        if (nutFiles.Length > 0) hasModels = true;
+                        else
+                        {
+                            nutFiles = Directory.GetFiles(ModPath + Path.DirectorySeparatorChar + "model", "*.nut", SearchOption.AllDirectories);
+                            if (nutFiles.Length > 0) hasModels = true;
+                        }
+                    }
+                    if (hasModels)
+                    {
+                        FileTypes.NUT nut = new FileTypes.NUT();
+                        nut.Read(nutFiles[0]);
+                        if (nut.Textures.Count > 0)
+                        {
+                            xml.TextureID = (nut.Textures[0].HashId & 0x0000FF00) >> 8;
+                        }
+                        else continue;
+                    }
+                    else continue;
+
+                    if ((xml.TextureID % 4 == 0 && xml.TextureID < 128) || ids.Contains((ushort)xml.TextureID))
+                    {
+                        xml.TextureID = 128;
+                        while (ids.Contains((ushort)xml.TextureID)) ++xml.TextureID;
+
+                        ChangeTextureID(ModPath + "model", fighter.id, (ushort)xml.TextureID);
+                        Globals.Utils.SerializeXMLToFile(xml, PathKami);
+                        Globals.LogHelper.Info(String.Format("Changed Texture ID of {0} to {1} successfully.", mod.FolderName, xml.TextureID));
+                    }
+                    ids.Add((ushort)xml.TextureID);
+                }
+            }
+        }
+
+        private enum CharacterException { None, Pacman_WiiU, Robin_WiiU}
         
-        public class Mod
+        private class Mod
         {
             public string[] nudFiles;
             public string[] nutFiles;
@@ -31,13 +94,10 @@ namespace KamiModpackBuilder.Objects
             }
         }
 
-        public List<Mod> modList = new List<Mod>();
-        public List<int> usedTextureIDs = new List<int>();
-
-        public void ChangeTextureID(Mod mod, ushort id)
+        private static void ChangeTextureID(Mod mod, ushort id)
         {
             ushort textureNum = 0;
-            int baseID = -1;
+            int baseID = 0;
             List<FileTypes.NUT> nuts = new List<FileTypes.NUT>();
             List<FileTypes.NUD> nuds = new List<FileTypes.NUD>();
             List<FileTypes.MTA> mtas = new List<FileTypes.MTA>();
@@ -52,7 +112,7 @@ namespace KamiModpackBuilder.Objects
                     {
                         mod.hashChanges.Add(t.HashId, (int)((t.HashId & 0xFFFF0000) | (id << 8) | textureNum));
                         ++textureNum;
-                        if (baseID == -1) baseID = t.HashId;
+                        if (baseID == 0) baseID = t.HashId;
                     }
                 }
             }
@@ -113,62 +173,78 @@ namespace KamiModpackBuilder.Objects
             }
         }
 
-        public void MassTextureIdFix()
+        public static void CheckForMissingTextures(string directoryName)
         {
-            SmashMod project = SmashProjectManager.instance.CurrentProject;
-            foreach (DB.Fighter fighter in DB.FightersDB.Fighters)
+            string modelPath = directoryName + "model" + Path.DirectorySeparatorChar;
+            string[] split = directoryName.Split(Path.DirectorySeparatorChar);
+            string modName = split[split.Length - 1];
+            if (!Directory.Exists(modelPath))
             {
-                List<ushort> ids = new List<ushort>();
-
-                foreach (CharacterSlotMod mod in project.ActiveCharacterSlotMods)
+                LogHelper.Info(string.Format("Mod '{0}' has no models", modName));
+                return;
+            }
+            string[] folders = Directory.GetDirectories(directoryName);
+            foreach (string folder in folders)
+            {
+                string[] foldersplit = folder.Split(Path.DirectorySeparatorChar);
+                string foldername = foldersplit[foldersplit.Length - 1];
+                string modelNut = folder + "model.nut";
+                string modelNud = folder + "model.nud";
+                string metalNud = folder + "metal.nud";
+                if (!File.Exists(modelNut))
                 {
-                    if (mod.CharacterID != fighter.id) continue;
-                    string ModPath = PathHelper.GetCharacterSlotModPath(fighter.name, mod.FolderName);
-                    string PathKami = ModPath + "kamimod.xml";
-
-                    CharacterSlotModXML xml = Utils.DeserializeXML<CharacterSlotModXML>(PathKami);
-                    if (xml == null) continue;
-
-                    bool hasModels = false;
-                    string[] nutFiles = new string[0];
-                    if (Directory.Exists(ModPath + Path.DirectorySeparatorChar + "model"))
-                    {
-                        if (Directory.Exists(ModPath + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "body")) nutFiles = Directory.GetFiles(ModPath + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "body", "*.nut", SearchOption.AllDirectories);
-                        if (nutFiles.Length > 0) hasModels = true;
-                        else
-                        {
-                            nutFiles = Directory.GetFiles(ModPath + Path.DirectorySeparatorChar + "model", "*.nut", SearchOption.AllDirectories);
-                            if (nutFiles.Length > 0) hasModels = true;
-                        }
+                    LogHelper.Error(string.Format("Mod '{0}' is missing its {1} model.nut!", modName, foldername));
+                    return;
+                }
+                if (!File.Exists(modelNud))
+                {
+                    LogHelper.Error(string.Format("Mod '{0}' is missing its {1} model.nud!", modName, foldername));
+                    return;
+                }
+                List<int> textureIDs = new List<int>();
+                string missingTextures = "";
+                FileTypes.NUT nut = new FileTypes.NUT();
+                nut.Read(modelNut);
+                bool duplicateTextures = false;
+                foreach (FileTypes.NutTexture t in nut.Textures)
+                {
+                    if (!textureIDs.Contains(t.HashId)) textureIDs.Add(t.HashId);
+                    else duplicateTextures = true;
+                }
+                if (duplicateTextures) LogHelper.Warning(string.Format("The model.nut in mod '{0}' part {1} has multiple textures with the same TextureIDs. This is likely not intentional.", modName, foldername));
+                FileTypes.NUD nud = new FileTypes.NUD();
+                nud.Read(modelNud);
+                foreach (FileTypes.NUD.MatTexture t in nud.allTextures)
+                {
+                    if (!textureIDs.Contains(t.hash)) {
+                        if (missingTextures.Length > 0) missingTextures += ", ";
+                        missingTextures += "0x" + t.hash.ToString("x8");
                     }
-                    if (hasModels)
+                }
+                if (missingTextures.Length > 0)
+                {
+                    LogHelper.Error(string.Format("The model.nud of mod {0} part {1} is missing the following textures: {2}. This may cause errors with the model.", modName, foldername, missingTextures));
+                    missingTextures = "";
+                }
+                if (!File.Exists(metalNud))
+                {
+                    LogHelper.Warning(string.Format("Mod '{0}' is does not have a {1} metal.nud! If it needs one, it likely wont work properly.", modName, foldername));
+                    return;
+                }
+                nud = new FileTypes.NUD();
+                nud.Read(modelNud);
+                foreach (FileTypes.NUD.MatTexture t in nud.allTextures)
+                {
+                    if (!textureIDs.Contains(t.hash))
                     {
-                        FileTypes.NUT nut = new FileTypes.NUT();
-                        nut.Read(nutFiles[0]);
-                        if (nut.Textures.Count > 0)
-                        {
-                            xml.TextureID = (nut.Textures[0].HashId & 0x0000FF00) >> 8;
-                        }
-                        else continue;
+                        if (missingTextures.Length > 0) missingTextures += ", ";
+                        missingTextures += "0x" + t.hash.ToString("x8");
                     }
-                    else continue;
-
-                    if ((xml.TextureID % 4 == 0 && xml.TextureID < 128) || ids.Contains((ushort)xml.TextureID))
-                    {
-                        xml.TextureID = 128;
-                        while (ids.Contains((ushort)xml.TextureID)) ++xml.TextureID;
-
-                        TextureIDFix.CharacterException exc = TextureIDFix.CharacterException.None;
-                        if (fighter.id == 0x32 && !project.IsSwitch) exc = TextureIDFix.CharacterException.Pacman_WiiU;
-                        if (fighter.id == 0x2a && !project.IsSwitch) exc = TextureIDFix.CharacterException.Robin_WiiU;
-
-                        TextureIDFix textureIDFix = new TextureIDFix();
-                        TextureIDFix.Mod textMod = new TextureIDFix.Mod(ModPath + "model", exc);
-                        textureIDFix.ChangeTextureID(textMod, (ushort)xml.TextureID);
-                        Globals.Utils.SerializeXMLToFile(xml, PathKami);
-                        Globals.LogHelper.Info(String.Format("Changed Texture ID of {0} to {1} successfully.", mod.FolderName, xml.TextureID));
-                    }
-                    ids.Add((ushort)xml.TextureID);
+                }
+                if (missingTextures.Length > 0)
+                {
+                    LogHelper.Error(string.Format("The metal.nud of mod {0} part {1} is missing the following textures: {2}. This may cause errors with the model.", modName, foldername, missingTextures));
+                    missingTextures = "";
                 }
             }
         }

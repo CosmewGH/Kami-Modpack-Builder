@@ -39,6 +39,7 @@ namespace KamiModpackBuilder.Forms
             ModPath = modPath;
             CharName = charName;
             _SmashProjectManager = project;
+            DB.Fighter currentFighter = project._CharacterModsPage.CurrentFighter;
             PathKami = ModPath + Path.DirectorySeparatorChar + "kamimod.xml";
             PathVoice = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_vc_" + CharName + "_cxx.nus3bank";
             PathSound = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_se_" + CharName + "_cxx.nus3bank";
@@ -92,9 +93,22 @@ namespace KamiModpackBuilder.Forms
                     XMLData.TextureID = (nut.Textures[0].HashId & 0x0000FF00) >> 8;
                 }
                 XMLData.Haslxx = Directory.Exists(ModPath + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "lxx");
+                List<string> modelparts = currentFighter.modelParts;
+                if (modelparts != null)
+                {
+                    string modelsString = "";
+                    for (int i = 0; i < modelparts.Count; ++i)
+                    {
+                        if (i != 0) modelsString += ", ";
+                        modelsString += modelparts[i] + " = " + (Directory.Exists(ModPath + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + modelparts[i]) ? "Yes" : "No");
+                    }
+                    if (currentFighter.lowPolySlots != DB.Fighter.LowPolySlots.None) modelsString += ", lxx = " + (XMLData.Haslxx ? "Yes" : "No");
+                    labelModels.Text = modelsString;
+                }
             }
             else
             {
+                labelModels.Text = "Mod has no models";
                 XMLData.TextureID = -1;
                 XMLData.MetalModel = CharacterSlotModXML.MetalModelStatus.Unknown;
                 comboBoxMetalModel.Enabled = false;
@@ -142,14 +156,7 @@ namespace KamiModpackBuilder.Forms
             if (XMLData.TextureID > 255) XMLData.TextureID = 255;
             textBoxTextureID.Text = XMLData.TextureID.ToString();
             
-            TextureIDFix.CharacterException exc = TextureIDFix.CharacterException.None;
-            if (_SmashProjectManager._CharacterModsPage.CurrentFighter.id == 0x32 && !_SmashProjectManager.CurrentProject.IsSwitch) exc = TextureIDFix.CharacterException.Pacman_WiiU;
-            if (_SmashProjectManager._CharacterModsPage.CurrentFighter.id == 0x2a && !_SmashProjectManager.CurrentProject.IsSwitch) exc = TextureIDFix.CharacterException.Robin_WiiU;
-
-            TextureIDFix textureIDFix = new TextureIDFix();
-
-            TextureIDFix.Mod mod = new TextureIDFix.Mod(ModPath + Path.DirectorySeparatorChar + "model", exc);
-            textureIDFix.ChangeTextureID(mod, (ushort)XMLData.TextureID);
+            TextureIDFix.ChangeTextureID(ModPath + Path.DirectorySeparatorChar + "model", _SmashProjectManager._CharacterModsPage.CurrentFighter.id, (ushort)XMLData.TextureID);
             LogHelper.Info(String.Format("Changed Texture ID of {0} to {1} successfully.", ModPath, XMLData.TextureID));
         }
 

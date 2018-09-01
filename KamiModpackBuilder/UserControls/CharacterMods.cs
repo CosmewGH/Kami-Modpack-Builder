@@ -510,14 +510,8 @@ namespace KamiModpackBuilder.UserControls
                 {
                     xml.TextureID = 128;
                     while (usedIDs.Contains((ushort)xml.TextureID)) ++xml.TextureID;
-
-                    TextureIDFix.CharacterException exc = TextureIDFix.CharacterException.None;
-                    if (_CurrentFighter.id == 0x32 && !_SmashProjectManager.CurrentProject.IsSwitch) exc = TextureIDFix.CharacterException.Pacman_WiiU;
-                    if (_CurrentFighter.id == 0x2a && !_SmashProjectManager.CurrentProject.IsSwitch) exc = TextureIDFix.CharacterException.Robin_WiiU;
-
-                    TextureIDFix textureIDFix = new TextureIDFix();
-                    TextureIDFix.Mod mod = new TextureIDFix.Mod(modPath + "model", exc);
-                    textureIDFix.ChangeTextureID(mod, (ushort)xml.TextureID);
+                    
+                    TextureIDFix.ChangeTextureID(modPath + "model", _CurrentFighter.id, (ushort)xml.TextureID);
                     Globals.Utils.SerializeXMLToFile(xml, kamiPath);
                     Globals.LogHelper.Info(String.Format("Changed Texture ID of {0} to {1} successfully.", slot.FolderName, xml.TextureID));
                 }
