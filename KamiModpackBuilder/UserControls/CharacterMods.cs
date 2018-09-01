@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using KamiModpackBuilder.Objects;
 
@@ -496,7 +497,7 @@ namespace KamiModpackBuilder.UserControls
 
         private void buttonTextureIDFixAll_Click(object sender, EventArgs e)
         {
-            Globals.LogHelper.Info(string.Format("Beginning Texture ID fix for character: {0}.", _CurrentFighter.nameHuman));
+            Globals.LogHelper.Info(string.Format("Beginning Texture ID Fixing for character: {0}.", _CurrentFighter.nameHuman));
 
             List<ushort> usedIDs = new List<ushort>();
             foreach (CharacterSlotMod slot in CurrentFighterActiveSlotMods)
@@ -517,8 +518,24 @@ namespace KamiModpackBuilder.UserControls
                 }
                 usedIDs.Add((ushort)xml.TextureID);
             }
+            Globals.LogHelper.Info(string.Format("Finished Texture ID Fixing for character: {0}.", _CurrentFighter.nameHuman));
         }
-        #endregion
+
+        private void buttonCheckErrors_Click(object sender, EventArgs e)
+        {
+            Globals.LogHelper.Info(string.Format("Beginning Error Checking for character: {0}.", _CurrentFighter.nameHuman));
+            
+            string baseDirectory = Globals.PathHelper.FolderCharSlotsMods + _CurrentFighter.name + Path.DirectorySeparatorChar;
+            string[] kamiFiles = Directory.GetFiles(baseDirectory, "kamimod.xml", SearchOption.AllDirectories);
+
+            for (int i = 0; i < kamiFiles.Length; ++i)
+            {
+                string modPath = kamiFiles[i].Replace("kamimod.xml", String.Empty);
+                TextureIDFix.CheckForMissingTextures(modPath);
+            }
+
+            Globals.LogHelper.Info(string.Format("Finished Error Checking for character: {0}.", _CurrentFighter.nameHuman));
+        }
 
         private void buttonDeleteMod_Click(object sender, EventArgs e)
         {
@@ -571,5 +588,6 @@ namespace KamiModpackBuilder.UserControls
                 RefreshGeneralModsLists();
             }
         }
+        #endregion
     }
 }
