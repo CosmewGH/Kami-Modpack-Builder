@@ -20,7 +20,7 @@ namespace KamiModpackBuilder.Forms
         private string ModPath = String.Empty;
 
         private string CharName = String.Empty;
-        private DataGridModsList.ModListType ModListType;
+        private ModsList.ModListType ModListType;
 
         private CharacterGeneralModXML XMLDataCharGeneral = null;
         private StageModXML XMLDataStage = null;
@@ -37,7 +37,7 @@ namespace KamiModpackBuilder.Forms
 
         public bool isInitialized { get { return IsInitialized; } }
 
-        public ModProperties(string modPath, DataGridModsList.ModListType modListType, string charName = "")
+        public ModProperties(string modPath, ModsList.ModListType modListType, string charName = "")
         {
             InitializeComponent();
             ModPath = modPath;
@@ -47,7 +47,7 @@ namespace KamiModpackBuilder.Forms
 
             switch (ModListType)
             {
-                case DataGridModsList.ModListType.CharacterGeneral:
+                case ModsList.ModListType.CharacterGeneral:
                     XMLDataCharGeneral = Utils.DeserializeXML<CharacterGeneralModXML>(PathKami);
                     if (XMLDataCharGeneral == null) return;
                     textBoxDisplayName.Text = XMLDataCharGeneral.DisplayName;
@@ -58,7 +58,7 @@ namespace KamiModpackBuilder.Forms
                     groupBoxStageData.Visible = false;
                     this.Height -= groupBoxPortaits.Height + groupBoxStageData.Height;
                     break;
-                case DataGridModsList.ModListType.Stage:
+                case ModsList.ModListType.Stage:
                     XMLDataStage = Utils.DeserializeXML<StageModXML>(PathKami);
                     if (XMLDataStage == null) return;
                     textBoxDisplayName.Text = XMLDataStage.DisplayName;
@@ -88,7 +88,7 @@ namespace KamiModpackBuilder.Forms
                     buttonExport_stage30.Enabled = XMLDataStage.stage_30;
                     buttonExport_stagen10.Enabled = XMLDataStage.stagen_10;
                     break;
-                case DataGridModsList.ModListType.General:
+                case ModsList.ModListType.General:
                     XMLDataGeneral = Utils.DeserializeXML<GeneralModXML>(PathKami);
                     if (XMLDataGeneral == null) return;
                     textBoxDisplayName.Text = XMLDataGeneral.DisplayName;
@@ -108,19 +108,19 @@ namespace KamiModpackBuilder.Forms
         {
             switch (ModListType)
             {
-                case DataGridModsList.ModListType.CharacterGeneral:
+                case ModsList.ModListType.CharacterGeneral:
                     XMLDataCharGeneral.DisplayName = textBoxDisplayName.Text;
                     XMLDataCharGeneral.WifiSafe = checkBoxWifiSafe.Checked;
                     XMLDataCharGeneral.Notes = textBoxNotes.Text.Replace("\r\n", "\n");
                     Utils.SerializeXMLToFile(XMLDataCharGeneral, PathKami);
                     break;
-                case DataGridModsList.ModListType.Stage:
+                case ModsList.ModListType.Stage:
                     XMLDataStage.DisplayName = textBoxDisplayName.Text;
                     XMLDataStage.WifiSafe = checkBoxWifiSafe.Checked;
                     XMLDataStage.Notes = textBoxNotes.Text.Replace("\r\n", "\n");
                     Utils.SerializeXMLToFile(XMLDataStage, PathKami);
                     break;
-                case DataGridModsList.ModListType.General:
+                case ModsList.ModListType.General:
                     XMLDataGeneral.DisplayName = textBoxDisplayName.Text;
                     XMLDataGeneral.WifiSafe = checkBoxWifiSafe.Checked;
                     XMLDataGeneral.Notes = textBoxNotes.Text.Replace("\r\n", "\n");
@@ -138,7 +138,7 @@ namespace KamiModpackBuilder.Forms
 
         private void buttonImport_stage10_Click(object sender, EventArgs e)
         {
-            if (ModListType != DataGridModsList.ModListType.Stage) return;
+            if (ModListType != ModsList.ModListType.Stage) return;
             DialogResult result = openFileDialogPortraits.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -162,14 +162,14 @@ namespace KamiModpackBuilder.Forms
 
         private void buttonExport_stage10_Click(object sender, EventArgs e)
         {
-            if (ModListType != DataGridModsList.ModListType.Stage) return;
+            if (ModListType != ModsList.ModListType.Stage) return;
             MessageBox.Show("Cannot export to PNG yet :(");
             //TODO: Export to PNG
         }
 
         private void buttonImport_stage11_Click(object sender, EventArgs e)
         {
-            if (ModListType != DataGridModsList.ModListType.Stage) return;
+            if (ModListType != ModsList.ModListType.Stage) return;
             DialogResult result = openFileDialogPortraits.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -193,14 +193,14 @@ namespace KamiModpackBuilder.Forms
 
         private void buttonExport_stage11_Click(object sender, EventArgs e)
         {
-            if (ModListType != DataGridModsList.ModListType.Stage) return;
+            if (ModListType != ModsList.ModListType.Stage) return;
             MessageBox.Show("Cannot export to PNG yet :(");
             //TODO: Export to PNG
         }
 
         private void buttonImport_stage12_Click(object sender, EventArgs e)
         {
-            if (ModListType != DataGridModsList.ModListType.Stage) return;
+            if (ModListType != ModsList.ModListType.Stage) return;
             DialogResult result = openFileDialogPortraits.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -224,14 +224,14 @@ namespace KamiModpackBuilder.Forms
 
         private void buttonExport_stage12_Click(object sender, EventArgs e)
         {
-            if (ModListType != DataGridModsList.ModListType.Stage) return;
+            if (ModListType != ModsList.ModListType.Stage) return;
             MessageBox.Show("Cannot export to PNG yet :(");
             //TODO: Export to PNG
         }
 
         private void buttonImport_stage30_Click(object sender, EventArgs e)
         {
-            if (ModListType != DataGridModsList.ModListType.Stage) return;
+            if (ModListType != ModsList.ModListType.Stage) return;
             DialogResult result = openFileDialogPortraits.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -255,14 +255,14 @@ namespace KamiModpackBuilder.Forms
 
         private void buttonExport_stage30_Click(object sender, EventArgs e)
         {
-            if (ModListType != DataGridModsList.ModListType.Stage) return;
+            if (ModListType != ModsList.ModListType.Stage) return;
             MessageBox.Show("Cannot export to PNG yet :(");
             //TODO: Export to PNG
         }
 
         private void buttonImport_stagen10_Click(object sender, EventArgs e)
         {
-            if (ModListType != DataGridModsList.ModListType.Stage) return;
+            if (ModListType != ModsList.ModListType.Stage) return;
             DialogResult result = openFileDialogPortraits.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -286,7 +286,7 @@ namespace KamiModpackBuilder.Forms
 
         private void buttonExport_stagen10_Click(object sender, EventArgs e)
         {
-            if (ModListType != DataGridModsList.ModListType.Stage) return;
+            if (ModListType != ModsList.ModListType.Stage) return;
             MessageBox.Show("Cannot export to PNG yet :(");
             //TODO: Export to PNG
         }

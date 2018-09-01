@@ -14,7 +14,7 @@ using KamiModpackBuilder.Globals;
 
 namespace KamiModpackBuilder.UserControls
 {
-    public partial class DataGridModsList : UserControl
+    public partial class ModsList : UserControl
     {
         #region Members
         private bool _IsActiveList = false;
@@ -32,11 +32,11 @@ namespace KamiModpackBuilder.UserControls
         #endregion
 
         #region Constructors
-        public DataGridModsList(SmashProjectManager a_smashProjectManager, bool a_isActiveList, ModListType a_modListType)
+        public ModsList(bool a_isActiveList, ModListType a_modListType)
         {
             InitializeComponent();
 
-            _SmashProjectManager = a_smashProjectManager;
+            _SmashProjectManager = SmashProjectManager.instance;
             _IsActiveList = a_isActiveList;
             _ModListType = a_modListType;
         }
@@ -67,13 +67,13 @@ namespace KamiModpackBuilder.UserControls
                 {
                     switch (_ModListType)
                     {
-                        case (DataGridModsList.ModListType.CharacterSlots):
+                        case (ModsList.ModListType.CharacterSlots):
                             EventManager.CharSlotModSelectionChanged(_Rows[i]); return;
-                        case (DataGridModsList.ModListType.CharacterGeneral):
+                        case (ModsList.ModListType.CharacterGeneral):
                             EventManager.CharGeneralModSelectionChanged(_Rows[i]); return;
-                        case (DataGridModsList.ModListType.Stage):
+                        case (ModsList.ModListType.Stage):
                             EventManager.StageModSelectionChanged(_Rows[i]); return;
-                        case (DataGridModsList.ModListType.General):
+                        case (ModsList.ModListType.General):
                             EventManager.MiscModSelectionChanged(_Rows[i]); return;
                     }
                 }
@@ -339,7 +339,8 @@ namespace KamiModpackBuilder.UserControls
                 return;
             }
 
-            if (Path.GetExtension(files[0]) == ".zip")
+            string fileExt = Path.GetExtension(files[0]);
+            if (fileExt.Equals(".zip") || fileExt.Equals(".7z") || fileExt.Equals(".rar"))
             {
                 if (!isZip) return;
                 CleanUnzipFolder();

@@ -344,7 +344,7 @@ namespace KamiModpackBuilder
 
         private void LoadCharacterModsPage()
         {
-            UserControls.CharacterMods characterMods = new UserControls.CharacterMods(_ProjectManager);
+            UserControls.CharacterMods characterMods = new UserControls.CharacterMods();
             characterMods.Parent = tabPageCharacterMods;
             characterMods.Dock = DockStyle.Fill;
             _ProjectManager._CharacterModsPage = characterMods;
@@ -360,7 +360,7 @@ namespace KamiModpackBuilder
 
         private void LoadStageModsPage()
         {
-            UserControls.StageMods stageMods = new UserControls.StageMods(_ProjectManager);
+            UserControls.StageMods stageMods = new UserControls.StageMods();
             stageMods.Parent = tabPageStageMods;
             stageMods.Dock = DockStyle.Fill;
             _ProjectManager._StageModsPage = stageMods;
@@ -376,7 +376,7 @@ namespace KamiModpackBuilder
 
         private void LoadGeneralModsPage()
         {
-            UserControls.GeneralMods generalMods = new UserControls.GeneralMods(_ProjectManager);
+            UserControls.GeneralMods generalMods = new UserControls.GeneralMods();
             generalMods.Parent = tabPageGeneralMods;
             generalMods.Dock = DockStyle.Fill;
             _ProjectManager._GeneralModsPage = generalMods;
@@ -392,7 +392,7 @@ namespace KamiModpackBuilder
 
         private void LoadExplorerModsPage()
         {
-            UserControls.Explorer explorer = new UserControls.Explorer(_ProjectManager);
+            UserControls.Explorer explorer = new UserControls.Explorer();
             explorer.Parent = tabPageExplorer;
             explorer.Dock = DockStyle.Fill;
             _ProjectManager._ExplorerPage = explorer;

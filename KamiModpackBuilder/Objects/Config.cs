@@ -11,6 +11,7 @@ namespace KamiModpackBuilder.Objects
         public string LastProject { get; set; }
         public int ApplicationVersion { get; set; }
         public bool Debug { get; set; }
+        public string ProjectHexEditorFile { get; set; }
 
         #region Constructors
         public Config()

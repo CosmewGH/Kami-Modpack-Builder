@@ -9,17 +9,17 @@ namespace KamiModpackBuilder.UserControls
     public partial class StageMods : UserControl
     {
         private SmashProjectManager _SmashProjectManager;
-        private DataGridModsList _GridMods;
-        private DataGridModsList _GridModsInactive;
+        private ModsList _GridMods;
+        private ModsList _GridModsInactive;
 
         private bool _IsInitialized = false;
         private ModRow SelectedMod = null;
 
-        public StageMods(SmashProjectManager a_smashProjectManager)
+        public StageMods()
         {
             InitializeComponent();
 
-            _SmashProjectManager = a_smashProjectManager;
+            _SmashProjectManager = SmashProjectManager.instance;
             CreateDataGrids();
 
             _IsInitialized = true;
@@ -34,10 +34,10 @@ namespace KamiModpackBuilder.UserControls
 
         private void CreateDataGrids()
         {
-            _GridMods = new DataGridModsList(_SmashProjectManager, true, DataGridModsList.ModListType.Stage);
+            _GridMods = new ModsList(true, ModsList.ModListType.Stage);
             _GridMods.Dock = DockStyle.Fill;
 
-            _GridModsInactive = new DataGridModsList(_SmashProjectManager, false, DataGridModsList.ModListType.Stage);
+            _GridModsInactive = new ModsList(false, ModsList.ModListType.Stage);
             _GridModsInactive.Dock = DockStyle.Fill;
 
             tableLayoutPanel1.Controls.Add(_GridMods, 0, 1);

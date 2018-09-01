@@ -35,7 +35,6 @@ namespace KamiModpackBuilder.Objects
         public bool SupressWarningModFileConflicts { get; set; }
         public bool SupressWarningSlotModModelFilesMissing { get; set; } //When a slot mod is missing the model.nud, model.nut or metal.nut files, or when a mod over an added slot is missing other files.
 
-        public string ProjectHexEditorFile { get; set; }
         public bool SkipJunkEntries { get; set; } //Default value is true, false will keep the empty folder and empty files.
         public bool KeepOriginalFlags { get; set; } //Default value is false, true will force the original flags of the resource (if they exist)
         public bool ExportCSVList { get; set; }

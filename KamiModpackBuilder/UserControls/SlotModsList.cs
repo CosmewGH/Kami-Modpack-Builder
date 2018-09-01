@@ -11,24 +11,24 @@ using KamiModpackBuilder.Objects;
 
 namespace KamiModpackBuilder.UserControls
 {
-    public partial class DataGridSlotModList : UserControl
+    public partial class SlotModsList : UserControl
     {
 
         #region Members
         private SmashProjectManager _SmashProjectManager;
         private SmashMod _Project;
         private DB.Fighter _CurrentFighter;
-        private List<DataGridModsList.RowData> _RowData = new List<DataGridModsList.RowData>();
+        private List<ModsList.RowData> _RowData = new List<ModsList.RowData>();
         private List<ModRow> _Rows = new List<ModRow>();
         #endregion
 
         #region Constructors
-        public DataGridSlotModList(SmashProjectManager a_smashProjectManager)
+        public SlotModsList()
         {
             InitializeComponent();
             InitializeAudioComboBoxes();
 
-            _SmashProjectManager = a_smashProjectManager;
+            _SmashProjectManager = SmashProjectManager.instance;
         }
         #endregion
 
@@ -121,12 +121,12 @@ namespace KamiModpackBuilder.UserControls
 
         public void RefreshRowData()
         {
-            _RowData = new List<DataGridModsList.RowData>();
+            _RowData = new List<ModsList.RowData>();
             _Project = _SmashProjectManager.CurrentProject;
 
             for (int i = 0; i < _CurrentFighter.maxSlots; ++i)
             {
-                DataGridModsList.RowData row = new DataGridModsList.RowData();
+                ModsList.RowData row = new ModsList.RowData();
                 bool modFound = false;
                 row.slotNum = i;
                 for (int j = 0; j < _Project.ActiveCharacterSlotMods.Count; ++j)
@@ -185,7 +185,7 @@ namespace KamiModpackBuilder.UserControls
             {
                 if (_Rows.Count < _RowData.Count)
                 {
-                    ModRow row = new ModRow(_SmashProjectManager, true, DataGridModsList.ModListType.CharacterSlots);
+                    ModRow row = new ModRow(_SmashProjectManager, true, ModsList.ModListType.CharacterSlots);
                     row.Dock = DockStyle.Top;
                     _Rows.Add(row);
                     row.Parent = panelModList;

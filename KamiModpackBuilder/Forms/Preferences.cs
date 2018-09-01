@@ -22,11 +22,21 @@ namespace KamiModpackBuilder.Forms
             _Project = project;
 
             checkBoxDebug.Checked = _Project._Config.Debug;
+            textBoxHexEditor.Text = _Project._Config.ProjectHexEditorFile;
         }
 
         private void Preferences_FormClosed(object sender, FormClosedEventArgs e)
         {
             _Project._Config.Debug = checkBoxDebug.Checked;
+            _Project._Config.ProjectHexEditorFile = textBoxHexEditor.Text;
+        }
+
+        private void buttonBrowseHexEditor_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Executables|*.exe";
+            if (dialog.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                textBoxHexEditor.Text = dialog.FileName;
         }
     }
 }

@@ -191,7 +191,7 @@
             // 
             // openFileDialogImportZip
             // 
-            this.openFileDialogImportZip.Filter = "Zip files|*.zip";
+            this.openFileDialogImportZip.Filter = "Zip file|*.zip|RAR Archive|*.rar|7 Zip Archive|*.7z";
             // 
             // GeneralMods
             // 

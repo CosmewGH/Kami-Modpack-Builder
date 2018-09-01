@@ -1,6 +1,6 @@
 ﻿namespace KamiModpackBuilder.UserControls
 {
-    partial class DataGridSlotModList
+    partial class SlotModsList
     {
         /// <summary> 
         /// Required designer variable.

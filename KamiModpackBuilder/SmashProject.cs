@@ -709,7 +709,7 @@ namespace KamiModpackBuilder
 
             CharacterDBParam CharDB = new CharacterDBParam(this);
             CharacterStringsMSBT charStringsMSBD = new CharacterStringsMSBT(this);
-
+            
             string[] baseFolders = new string[_resCols.Count()];
             SortedList<string, string>[] filesLists = new SortedList<string, string>[_resCols.Count()];
 

@@ -21,9 +21,9 @@ namespace KamiModpackBuilder.UserControls
 
         private SmashProjectManager _ProjectManager;
 
-        public Explorer(SmashProjectManager projectManager)
+        public Explorer()
         {
-            _ProjectManager = projectManager;
+            _ProjectManager = SmashProjectManager.instance;
 
             InitializeComponent();
 
@@ -290,18 +290,14 @@ namespace KamiModpackBuilder.UserControls
                 //Extract
                 string fullExtractedFile = _ProjectManager.ExtractResource(absolutePath);
                 uint crcFile = Crc32.Compute(File.ReadAllBytes(fullExtractedFile));
-
-                //If no plugin used, try hexeditor
-                //if (!pluginUsed)
-                //{
-                    if (string.IsNullOrEmpty(_ProjectManager.CurrentProject.ProjectHexEditorFile))
-                    {
-                        LogHelper.Info(UIStrings.INFO_FILE_HEX);
-                        return;
-                    }
-                    Process process = Process.Start(_ProjectManager.CurrentProject.ProjectHexEditorFile, "\"" + fullExtractedFile + "\"");
-                    process.WaitForExit();
-                //}
+                
+                if (string.IsNullOrEmpty(_ProjectManager._Config.ProjectHexEditorFile))
+                {
+                    LogHelper.Info(UIStrings.INFO_FILE_HEX);
+                    return;
+                }
+                Process process = Process.Start(_ProjectManager._Config.ProjectHexEditorFile, "\"" + fullExtractedFile + "\"");
+                process.WaitForExit();
 
                 //Check extract file, if changed, ask to add in workspace
                 uint compareCrcFile = Crc32.Compute(File.ReadAllBytes(fullExtractedFile));

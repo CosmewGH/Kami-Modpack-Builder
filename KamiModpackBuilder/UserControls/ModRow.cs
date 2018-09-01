@@ -19,7 +19,7 @@ namespace KamiModpackBuilder.UserControls
     {
         #region Members
         private bool _IsActiveList = false;
-        private DataGridModsList.ModListType _ModListType = DataGridModsList.ModListType.General;
+        private ModsList.ModListType _ModListType = ModsList.ModListType.General;
         private SmashProjectManager _SmashProjectManager;
         private DB.Fighter _CurrentFighter;
         private bool m_IsSelected = false;
@@ -49,11 +49,11 @@ namespace KamiModpackBuilder.UserControls
 
         public bool isSelected { get { return m_IsSelected; } }
         public bool isActiveList { get { return _IsActiveList; } }
-        public DataGridModsList.ModListType modListType { get { return _ModListType; } }
+        public ModsList.ModListType modListType { get { return _ModListType; } }
         #endregion
 
         #region Constructors
-        public ModRow(SmashProjectManager a_smashProjectManager, bool a_isActiveList, DataGridModsList.ModListType a_modListType)
+        public ModRow(SmashProjectManager a_smashProjectManager, bool a_isActiveList, ModsList.ModListType a_modListType)
         {
             InitializeComponent();
 
@@ -61,13 +61,13 @@ namespace KamiModpackBuilder.UserControls
             _IsActiveList = a_isActiveList;
             _ModListType = a_modListType;
             switch (_ModListType) {
-                case (DataGridModsList.ModListType.CharacterSlots):
-                case (DataGridModsList.ModListType.CharacterGeneral):
+                case (ModsList.ModListType.CharacterSlots):
+                case (ModsList.ModListType.CharacterGeneral):
                     EventManager.OnCharSlotModSelectionChanged += OnModSelectionChanged;
                     EventManager.OnCharGeneralModSelectionChanged += OnModSelectionChanged; break;
-                case (DataGridModsList.ModListType.Stage):
+                case (ModsList.ModListType.Stage):
                     EventManager.OnStageModSelectionChanged += OnModSelectionChanged; break;
-                case (DataGridModsList.ModListType.General):
+                case (ModsList.ModListType.General):
                     EventManager.OnMiscModSelectionChanged += OnModSelectionChanged; break;
             }
         }
@@ -78,13 +78,13 @@ namespace KamiModpackBuilder.UserControls
         {
             switch (_ModListType)
             {
-                case (DataGridModsList.ModListType.CharacterSlots):
-                case (DataGridModsList.ModListType.CharacterGeneral):
+                case (ModsList.ModListType.CharacterSlots):
+                case (ModsList.ModListType.CharacterGeneral):
                     EventManager.OnCharSlotModSelectionChanged -= OnModSelectionChanged;
                     EventManager.OnCharGeneralModSelectionChanged -= OnModSelectionChanged; break;
-                case (DataGridModsList.ModListType.Stage):
+                case (ModsList.ModListType.Stage):
                     EventManager.OnStageModSelectionChanged -= OnModSelectionChanged; break;
-                case (DataGridModsList.ModListType.General):
+                case (ModsList.ModListType.General):
                     EventManager.OnMiscModSelectionChanged -= OnModSelectionChanged; break;
             }
         }
@@ -96,7 +96,7 @@ namespace KamiModpackBuilder.UserControls
             _CurrentFighter = a_fighter;
         }
 
-        public void UpdateData(DataGridModsList.RowData rowData)
+        public void UpdateData(ModsList.RowData rowData)
         {
             slotNum = rowData.slotNum;
             name = rowData.name;
@@ -115,7 +115,7 @@ namespace KamiModpackBuilder.UserControls
 
         public void UpdateData()
         {
-            if (_IsActiveList && _ModListType == DataGridModsList.ModListType.CharacterSlots)
+            if (_IsActiveList && _ModListType == ModsList.ModListType.CharacterSlots)
             {
                 labelModName.Text = (slotNum+1).ToString("D2") + "    " + name;
             }
@@ -193,13 +193,13 @@ namespace KamiModpackBuilder.UserControls
             if (!isSelectable) return;
             switch (_ModListType)
             {
-                case (DataGridModsList.ModListType.CharacterSlots):
+                case (ModsList.ModListType.CharacterSlots):
                     EventManager.CharSlotModSelectionChanged(null); break;
-                case (DataGridModsList.ModListType.CharacterGeneral):
+                case (ModsList.ModListType.CharacterGeneral):
                     EventManager.CharGeneralModSelectionChanged(null); break;
-                case (DataGridModsList.ModListType.Stage):
+                case (ModsList.ModListType.Stage):
                     EventManager.StageModSelectionChanged(null); break;
-                case (DataGridModsList.ModListType.General):
+                case (ModsList.ModListType.General):
                     EventManager.MiscModSelectionChanged(null); break;
             }
         }
@@ -209,13 +209,13 @@ namespace KamiModpackBuilder.UserControls
             if (!isSelectable) return;
             switch (_ModListType)
             {
-                case (DataGridModsList.ModListType.CharacterSlots):
+                case (ModsList.ModListType.CharacterSlots):
                     EventManager.CharSlotModSelectionChanged(this); break;
-                case (DataGridModsList.ModListType.CharacterGeneral):
+                case (ModsList.ModListType.CharacterGeneral):
                     EventManager.CharGeneralModSelectionChanged(this); break;
-                case (DataGridModsList.ModListType.Stage):
+                case (ModsList.ModListType.Stage):
                     EventManager.StageModSelectionChanged(this); break;
-                case (DataGridModsList.ModListType.General):
+                case (ModsList.ModListType.General):
                     EventManager.MiscModSelectionChanged(this); break;
             }
         }
@@ -254,7 +254,7 @@ namespace KamiModpackBuilder.UserControls
             Forms.ModProperties popup2;
             switch (_ModListType)
             {
-                case DataGridModsList.ModListType.CharacterSlots:
+                case ModsList.ModListType.CharacterSlots:
                     popup = new Forms.SlotModProperties(PathHelper.FolderCharSlotsMods + Path.DirectorySeparatorChar + _CurrentFighter.name + Path.DirectorySeparatorChar + modFolder, _CurrentFighter.name, _SmashProjectManager);
                     if (!popup.isInitialized)
                     {
@@ -263,7 +263,7 @@ namespace KamiModpackBuilder.UserControls
                     }
                     popup.ShowDialog();
                     break;
-                case DataGridModsList.ModListType.CharacterGeneral:
+                case ModsList.ModListType.CharacterGeneral:
                     popup2 = new Forms.ModProperties(PathHelper.FolderCharGeneralMods + Path.DirectorySeparatorChar + _CurrentFighter.name + Path.DirectorySeparatorChar + modFolder, _ModListType, _CurrentFighter.name);
                     if (!popup2.isInitialized)
                     {
@@ -272,7 +272,7 @@ namespace KamiModpackBuilder.UserControls
                     }
                     popup2.ShowDialog();
                     break;
-                case DataGridModsList.ModListType.Stage:
+                case ModsList.ModListType.Stage:
                     popup2 = new Forms.ModProperties(PathHelper.FolderStageMods + Path.DirectorySeparatorChar + modFolder, _ModListType);
                     if (!popup2.isInitialized)
                     {
@@ -281,7 +281,7 @@ namespace KamiModpackBuilder.UserControls
                     }
                     popup2.ShowDialog();
                     break;
-                case DataGridModsList.ModListType.General:
+                case ModsList.ModListType.General:
                     popup2 = new Forms.ModProperties(PathHelper.FolderGeneralMods + Path.DirectorySeparatorChar + modFolder, _ModListType);
                     if (!popup2.isInitialized)
                     {
@@ -293,16 +293,16 @@ namespace KamiModpackBuilder.UserControls
             }
             switch (_ModListType)
             {
-                case DataGridModsList.ModListType.CharacterSlots:
+                case ModsList.ModListType.CharacterSlots:
                     _SmashProjectManager._CharacterModsPage.RefreshSlotModsLists();
                     break;
-                case DataGridModsList.ModListType.CharacterGeneral:
+                case ModsList.ModListType.CharacterGeneral:
                     _SmashProjectManager._CharacterModsPage.RefreshGeneralModsLists();
                     break;
-                case DataGridModsList.ModListType.Stage:
+                case ModsList.ModListType.Stage:
                     _SmashProjectManager._StageModsPage.RefreshModsLists();
                     break;
-                case DataGridModsList.ModListType.General:
+                case ModsList.ModListType.General:
                     _SmashProjectManager._GeneralModsPage.RefreshModsLists();
                     break;
             }

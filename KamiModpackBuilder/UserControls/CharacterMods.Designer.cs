@@ -32,6 +32,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.comboBoxCharacters = new System.Windows.Forms.ComboBox();
             this.buttonTextureIDFixAll = new System.Windows.Forms.Button();
+            this.buttonCheckErrors = new System.Windows.Forms.Button();
             this.buttonImportSlotMod = new System.Windows.Forms.Button();
             this.buttonImportGeneralMod = new System.Windows.Forms.Button();
             this.buttonDeleteMod = new System.Windows.Forms.Button();
@@ -53,7 +54,6 @@
             this.buttonSlotRight = new System.Windows.Forms.Button();
             this.buttonSlotUp = new System.Windows.Forms.Button();
             this.openFileDialogImportZip = new System.Windows.Forms.OpenFileDialog();
-            this.buttonCheckErrors = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -67,7 +67,7 @@
             this.panel1.Controls.Add(this.flowLayoutPanel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(931, 24);
             this.panel1.TabIndex = 0;
@@ -82,7 +82,7 @@
             this.flowLayoutPanel1.Controls.Add(this.buttonDeleteMod);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(931, 24);
             this.flowLayoutPanel1.TabIndex = 3;
@@ -92,7 +92,7 @@
             this.comboBoxCharacters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCharacters.FormattingEnabled = true;
             this.comboBoxCharacters.Location = new System.Drawing.Point(2, 2);
-            this.comboBoxCharacters.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxCharacters.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxCharacters.Name = "comboBoxCharacters";
             this.comboBoxCharacters.Size = new System.Drawing.Size(124, 21);
             this.comboBoxCharacters.TabIndex = 1;
@@ -101,17 +101,27 @@
             // buttonTextureIDFixAll
             // 
             this.buttonTextureIDFixAll.Location = new System.Drawing.Point(130, 2);
-            this.buttonTextureIDFixAll.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonTextureIDFixAll.Margin = new System.Windows.Forms.Padding(2);
             this.buttonTextureIDFixAll.Name = "buttonTextureIDFixAll";
             this.buttonTextureIDFixAll.Size = new System.Drawing.Size(116, 23);
             this.buttonTextureIDFixAll.TabIndex = 3;
             this.buttonTextureIDFixAll.Text = "TextureID Fix All Slots";
             this.buttonTextureIDFixAll.Click += new System.EventHandler(this.buttonTextureIDFixAll_Click);
             // 
+            // buttonCheckErrors
+            // 
+            this.buttonCheckErrors.Location = new System.Drawing.Point(250, 2);
+            this.buttonCheckErrors.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonCheckErrors.Name = "buttonCheckErrors";
+            this.buttonCheckErrors.Size = new System.Drawing.Size(124, 23);
+            this.buttonCheckErrors.TabIndex = 9;
+            this.buttonCheckErrors.Text = "Check Mods for Errors";
+            this.buttonCheckErrors.Click += new System.EventHandler(this.buttonCheckErrors_Click);
+            // 
             // buttonImportSlotMod
             // 
             this.buttonImportSlotMod.Location = new System.Drawing.Point(378, 2);
-            this.buttonImportSlotMod.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonImportSlotMod.Margin = new System.Windows.Forms.Padding(2);
             this.buttonImportSlotMod.Name = "buttonImportSlotMod";
             this.buttonImportSlotMod.Size = new System.Drawing.Size(105, 23);
             this.buttonImportSlotMod.TabIndex = 6;
@@ -121,7 +131,7 @@
             // buttonImportGeneralMod
             // 
             this.buttonImportGeneralMod.Location = new System.Drawing.Point(487, 2);
-            this.buttonImportGeneralMod.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonImportGeneralMod.Margin = new System.Windows.Forms.Padding(2);
             this.buttonImportGeneralMod.Name = "buttonImportGeneralMod";
             this.buttonImportGeneralMod.Size = new System.Drawing.Size(121, 23);
             this.buttonImportGeneralMod.TabIndex = 7;
@@ -131,7 +141,7 @@
             // buttonDeleteMod
             // 
             this.buttonDeleteMod.Location = new System.Drawing.Point(612, 2);
-            this.buttonDeleteMod.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonDeleteMod.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDeleteMod.Name = "buttonDeleteMod";
             this.buttonDeleteMod.Size = new System.Drawing.Size(80, 23);
             this.buttonDeleteMod.TabIndex = 8;
@@ -143,7 +153,7 @@
             this.panel2.Controls.Add(this.tableLayoutPanel1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 24);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(931, 714);
             this.panel2.TabIndex = 1;
@@ -162,7 +172,7 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanelSlotButtons, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 19F));
@@ -226,7 +236,7 @@
             this.tableLayoutPanelGeneralButtons.Controls.Add(this.buttonGeneralRight, 0, 1);
             this.tableLayoutPanelGeneralButtons.Controls.Add(this.buttonGeneralUp, 0, 2);
             this.tableLayoutPanelGeneralButtons.Location = new System.Drawing.Point(451, 531);
-            this.tableLayoutPanelGeneralButtons.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanelGeneralButtons.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanelGeneralButtons.Name = "tableLayoutPanelGeneralButtons";
             this.tableLayoutPanelGeneralButtons.RowCount = 4;
             this.tableLayoutPanelGeneralButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -299,7 +309,7 @@
             this.tableLayoutPanelSlotButtons.Controls.Add(this.buttonSlotRight, 0, 1);
             this.tableLayoutPanelSlotButtons.Controls.Add(this.buttonSlotUp, 0, 2);
             this.tableLayoutPanelSlotButtons.Location = new System.Drawing.Point(451, 161);
-            this.tableLayoutPanelSlotButtons.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanelSlotButtons.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanelSlotButtons.Name = "tableLayoutPanelSlotButtons";
             this.tableLayoutPanelSlotButtons.RowCount = 5;
             this.tableLayoutPanelSlotButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -377,17 +387,7 @@
             // 
             // openFileDialogImportZip
             // 
-            this.openFileDialogImportZip.Filter = "Zip files|*.zip";
-            // 
-            // buttonCheckErrors
-            // 
-            this.buttonCheckErrors.Location = new System.Drawing.Point(250, 2);
-            this.buttonCheckErrors.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonCheckErrors.Name = "buttonCheckErrors";
-            this.buttonCheckErrors.Size = new System.Drawing.Size(124, 23);
-            this.buttonCheckErrors.TabIndex = 9;
-            this.buttonCheckErrors.Text = "Check Mods for Errors";
-            this.buttonCheckErrors.Click += new System.EventHandler(this.buttonCheckErrors_Click);
+            this.openFileDialogImportZip.Filter = "Zip file|*.zip|RAR Archive|*.rar|7 Zip Archive|*.7z";
             // 
             // CharacterMods
             // 
@@ -395,7 +395,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CharacterMods";
             this.Size = new System.Drawing.Size(931, 738);
             this.panel1.ResumeLayout(false);

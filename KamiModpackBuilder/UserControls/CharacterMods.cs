@@ -11,10 +11,10 @@ namespace KamiModpackBuilder.UserControls
     {
 
         private SmashProjectManager _SmashProjectManager;
-        private DataGridSlotModList _GridSlots;
-        private DataGridModsList _GridSlotsInactive;
-        private DataGridModsList _GridGeneral;
-        private DataGridModsList _GridGeneralInactive;
+        private SlotModsList _GridSlots;
+        private ModsList _GridSlotsInactive;
+        private ModsList _GridGeneral;
+        private ModsList _GridGeneralInactive;
 
         private bool _IsInitialized = false;
         private ModRow SelectedSlotMod = null;
@@ -28,11 +28,11 @@ namespace KamiModpackBuilder.UserControls
         public DB.Fighter CurrentFighter { get { return _CurrentFighter; } }
 
         #region Constructors
-        public CharacterMods(SmashProjectManager a_smashProjectManager)
+        public CharacterMods()
         {
             InitializeComponent();
 
-            _SmashProjectManager = a_smashProjectManager;
+            _SmashProjectManager = SmashProjectManager.instance;
 
             InitializeCharactersComboBox();
             CreateDataGrids();
@@ -74,16 +74,16 @@ namespace KamiModpackBuilder.UserControls
 
         private void CreateDataGrids()
         {
-            _GridSlots = new DataGridSlotModList(_SmashProjectManager);
+            _GridSlots = new SlotModsList();
             _GridSlots.Dock = DockStyle.Fill;
 
-            _GridSlotsInactive = new DataGridModsList(_SmashProjectManager, false, DataGridModsList.ModListType.CharacterSlots);
+            _GridSlotsInactive = new ModsList(false, ModsList.ModListType.CharacterSlots);
             _GridSlotsInactive.Dock = DockStyle.Fill;
 
-            _GridGeneral = new DataGridModsList(_SmashProjectManager, true, DataGridModsList.ModListType.CharacterGeneral);
+            _GridGeneral = new ModsList(true, ModsList.ModListType.CharacterGeneral);
             _GridGeneral.Dock = DockStyle.Fill;
 
-            _GridGeneralInactive = new DataGridModsList(_SmashProjectManager, false, DataGridModsList.ModListType.CharacterGeneral);
+            _GridGeneralInactive = new ModsList(false, ModsList.ModListType.CharacterGeneral);
             _GridGeneralInactive.Dock = DockStyle.Fill;
 
             tableLayoutPanel1.Controls.Add(_GridSlots, 0, 1);

@@ -247,17 +247,17 @@
     <Compile Include="UserControls\CharacterMods.Designer.cs">
       <DependentUpon>CharacterMods.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\DataGridModsList.cs">
+    <Compile Include="UserControls\ModsList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\DataGridModsList.Designer.cs">
-      <DependentUpon>DataGridModsList.cs</DependentUpon>
+    <Compile Include="UserControls\ModsList.Designer.cs">
+      <DependentUpon>ModsList.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\DataGridSlotModList.cs">
+    <Compile Include="UserControls\SlotModsList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\DataGridSlotModList.Designer.cs">
-      <DependentUpon>DataGridSlotModList.cs</DependentUpon>
+    <Compile Include="UserControls\SlotModsList.Designer.cs">
+      <DependentUpon>SlotModsList.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Explorer.cs">
       <SubType>UserControl</SubType>
@@ -361,11 +361,11 @@
     <EmbeddedResource Include="UserControls\CharacterMods.resx">
       <DependentUpon>CharacterMods.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\DataGridModsList.resx">
-      <DependentUpon>DataGridModsList.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\ModsList.resx">
+      <DependentUpon>ModsList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\DataGridSlotModList.resx">
-      <DependentUpon>DataGridSlotModList.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\SlotModsList.resx">
+      <DependentUpon>SlotModsList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Explorer.resx">
       <DependentUpon>Explorer.cs</DependentUpon>
