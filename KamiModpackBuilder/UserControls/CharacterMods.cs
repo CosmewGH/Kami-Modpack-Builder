@@ -531,7 +531,7 @@ namespace KamiModpackBuilder.UserControls
             for (int i = 0; i < kamiFiles.Length; ++i)
             {
                 string modPath = kamiFiles[i].Replace("kamimod.xml", String.Empty);
-                TextureIDFix.CheckForMissingTextures(modPath);
+                TextureIDFix.CheckForErrors(modPath);
             }
 
             Globals.LogHelper.Info(string.Format("Finished Error Checking for character: {0}.", _CurrentFighter.nameHuman));

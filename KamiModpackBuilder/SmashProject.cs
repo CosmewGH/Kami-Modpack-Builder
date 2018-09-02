@@ -263,7 +263,7 @@ namespace KamiModpackBuilder
             if (_ExplorerPage != null) _ExplorerPage.RefreshTreeView();
             if (_Sm4shMusic != null)
             {
-                _Sm4shMusic = new Sm4shMusic.Sm4shMusic(this);
+                _Sm4shMusic = new Sm4shMusic.Sm4shMusic();
             }
         }
         #endregion

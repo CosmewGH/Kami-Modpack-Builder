@@ -89,15 +89,9 @@ namespace KamiModpackBuilder.FileTypes
                 d.skip(4);
                 int dataSize = d.readInt();
                 int headerSize = d.readUShort();
-                d.skip(2);
-
-                //It might seem that mipmapCount and pixelFormat would be shorts, but they're bytes because they stay in the same place regardless of endianness
-                d.skip(1);
+                d.skip(3);
                 byte mipmapCount = d.readByte();
-                d.skip(1);
-
-                d.skip(1);//skipping some texture stuff for now
-                //tex.setPixelFormatFromNutFormat(d.readByte());
+                d.skip(2);
                 tex.Width = d.readUShort();
                 tex.Height = d.readUShort();
 
@@ -105,14 +99,12 @@ namespace KamiModpackBuilder.FileTypes
                 uint caps2 = d.readUInt();
 
                 bool isCubemap = false;
-                byte surfaceCount = 1;
                 if ((caps2 & (uint)DDS.DDSCAPS2.CUBEMAP) == (uint)DDS.DDSCAPS2.CUBEMAP)
                 {
                     //Only supporting all six faces
                     if ((caps2 & (uint)DDS.DDSCAPS2.CUBEMAP_ALLFACES) == (uint)DDS.DDSCAPS2.CUBEMAP_ALLFACES)
                     {
                         isCubemap = true;
-                        surfaceCount = 6;
                     }
                     else
                     {
@@ -125,7 +117,6 @@ namespace KamiModpackBuilder.FileTypes
                 d.readInt();
                 d.readInt();
 
-                //The size of a single cubemap face (discounting mipmaps). I don't know why it is repeated. If mipmaps are present, this is also specified in the mipSize section anyway.
                 int cmapSize1 = 0;
                 int cmapSize2 = 0;
                 if (isCubemap)
@@ -221,14 +212,12 @@ namespace KamiModpackBuilder.FileTypes
                 uint caps2 = d.readUInt();
 
                 bool isCubemap = false;
-                byte surfaceCount = 1;
                 if ((caps2 & (uint)DDS.DDSCAPS2.CUBEMAP) == (uint)DDS.DDSCAPS2.CUBEMAP)
                 {
                     //Only supporting all six faces
                     if ((caps2 & (uint)DDS.DDSCAPS2.CUBEMAP_ALLFACES) == (uint)DDS.DDSCAPS2.CUBEMAP_ALLFACES)
                     {
                         isCubemap = true;
-                        surfaceCount = 6;
                     }
                     else
                     {

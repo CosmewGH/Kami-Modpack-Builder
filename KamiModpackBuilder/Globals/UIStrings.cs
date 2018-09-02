@@ -27,6 +27,14 @@ namespace KamiModpackBuilder.Globals
         public const string WARN_EXPORT_FOLDER_EXISTS = "Warning. The folder '{0}' already exists. If you wish to continue, all content from this folder will be deleted. Proceed?";
         public const string INFO_PACK_REBUILD = "This feature will rebuild the resource files and patchfile. \r\nThis will ensure that the game takes your changes into account. When it's done, you can find the file in this folder:\r\n{0}";
 
+        public const string WARNING_ERROR_CHECKING_METAL_TEXTURES = "The metal.nud of mod {0} part {1} is missing the following textures: {2}. This may cause errors with the model.";
+        public const string WARNING_ERROR_CHECKING_METAL_NUD_MISSING = "Mod '{0}' does not have a {1} metal.nud! If it needs one, it likely wont work properly.";
+        public const string WARNING_ERROR_CHECKING_MODEL_TEXTURES = "The model.nud of mod {0} part {1} is missing the following textures: {2}. This may cause errors with the model.";
+        public const string WARNING_ERROR_CHECKING_DUPLICATE_TEXTURES = "The model.nut in mod '{0}' part {1} has multiple textures with the same TextureIDs. This is likely not intentional.";
+        public const string ERROR_ERROR_CHECKING_MODEL_NUT_MISSING = "Mod '{0}' is missing its {1} model.nut!";
+        public const string ERROR_ERROR_CHECKING_MODEL_NUD_MISSING = "Mod '{0}' is missing its {1} model.nud!";
+        public const string INFO_ERROR_CHECKING_NO_MODELS = "Mod '{0}' has no models";
+
         public const string INFO_ABOUT =
             "Kami Modpack Builder v.{0} by Saiyan197\r\n" +
             "Based largely on Sm4shExplorer by Deinonychus71\r\n";

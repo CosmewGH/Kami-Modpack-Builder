@@ -408,7 +408,7 @@ namespace KamiModpackBuilder
             music.Parent = tabPageMyMusic;
             music.Dock = DockStyle.Fill;
             _ProjectManager._MyMusicPage = music;
-            _ProjectManager._Sm4shMusic = new Sm4shMusic.Sm4shMusic(_ProjectManager);
+            _ProjectManager._Sm4shMusic = new Sm4shMusic.Sm4shMusic();
             sm4shMusicToolStripMenuItem.Enabled = true;
         }
         #endregion

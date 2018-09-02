@@ -25,8 +25,7 @@ namespace KamiModpackBuilder.Sm4shMusic
         private MyMusicFile _MyMusicFile;
         private List<SoundMSBTFile> _SoundMSBTFiles;
         private SmashProjectManager _SmashProjectManager;
-
-        private SmashProjectManager _Sm4shProjectManager;
+        
         private BGMManagement _BGMManagement;
         private MyMusicManagement _MyMusicManagement;
         #endregion
@@ -42,9 +41,9 @@ namespace KamiModpackBuilder.Sm4shMusic
         }
         #endregion
 
-        public Sm4shMusic(SmashProjectManager project)
+        public Sm4shMusic()
         {
-            _SmashProjectManager = project;
+            _SmashProjectManager = SmashProjectManager.instance;
             _BGMManagement = _SmashProjectManager._BGMManagementPage;
             _MyMusicManagement = _SmashProjectManager._MyMusicPage;
             Load();
@@ -265,7 +264,7 @@ namespace KamiModpackBuilder.Sm4shMusic
                             sEntry.Source = string.Empty;
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
                     LogHelper.Error("Error parsing string variables.");
                 }

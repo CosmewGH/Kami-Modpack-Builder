@@ -11,8 +11,7 @@ namespace KamiModpackBuilder.UserControls
         private SmashProjectManager _SmashProjectManager;
         private ModsList _GridMods;
         private ModsList _GridModsInactive;
-
-        private bool _IsInitialized = false;
+        
         private ModRow SelectedMod = null;
 
         public GeneralMods()
@@ -21,8 +20,7 @@ namespace KamiModpackBuilder.UserControls
 
             _SmashProjectManager = SmashProjectManager.instance;
             CreateDataGrids();
-
-            _IsInitialized = true;
+            
             Globals.EventManager.OnMiscModSelectionChanged += MiscModSelectionChanged;
             RefreshModsLists();
         }

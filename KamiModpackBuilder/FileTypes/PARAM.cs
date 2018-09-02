@@ -157,14 +157,6 @@ namespace KamiModpackBuilder.FileTypes
 
         public class GroupWrapper : ValuesWrapper
         {
-            static GroupWrapper()
-            {
-            }
-            public GroupWrapper()
-            {
-
-            }
-
             public int EntryCount { get; set; }
             public List<ParameterType> types = new List<ParameterType>();
 
@@ -204,10 +196,6 @@ namespace KamiModpackBuilder.FileTypes
             public ValuesWrapper()
             {
                 Parameters = new List<ParamEntry>();
-            }
-            static ValuesWrapper()
-            {
-
             }
 
             public List<ValuesWrapper> Nodes = new List<ValuesWrapper>();

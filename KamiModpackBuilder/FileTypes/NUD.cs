@@ -132,7 +132,6 @@ namespace KamiModpackBuilder.FileTypes
             }
 
             // reading polygon data
-            int meshIndex = 0;
             foreach (var o in obj)
             {
                 Mesh m = new Mesh();

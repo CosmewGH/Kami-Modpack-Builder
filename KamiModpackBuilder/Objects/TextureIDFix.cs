@@ -111,7 +111,7 @@ namespace KamiModpackBuilder.Objects
                 {
                     if (!mod.hashChanges.ContainsKey(t.HashId))
                     {
-                        mod.hashChanges.Add(t.HashId, (int)((t.HashId & 0xFFFF0000) | (id << 8) | textureNum));
+                        mod.hashChanges.Add(t.HashId, ((int)(t.HashId & 0xFFFF0000) | (id << 8) | textureNum));
                         ++textureNum;
                         if (baseID == 0) baseID = t.HashId;
                     }
@@ -174,14 +174,14 @@ namespace KamiModpackBuilder.Objects
             }
         }
 
-        public static void CheckForMissingTextures(string directoryName)
+        public static void CheckForErrors(string directoryName)
         {
             string modelPath = directoryName + "model" + Path.DirectorySeparatorChar;
             directoryName = directoryName.Remove(directoryName.Length - 1, 1);
             string modName = directoryName.Split(Path.DirectorySeparatorChar).Last();
             if (!Directory.Exists(modelPath))
             {
-                LogHelper.Info(string.Format("Mod '{0}' has no models", modName));
+                LogHelper.Info(string.Format(UIStrings.INFO_ERROR_CHECKING_NO_MODELS, modName));
                 return;
             }
             string[] folders = Directory.GetDirectories(modelPath);
@@ -193,12 +193,12 @@ namespace KamiModpackBuilder.Objects
                 string metalNud = folder + Path.DirectorySeparatorChar + "metal.nud";
                 if (!File.Exists(modelNut))
                 {
-                    LogHelper.Error(string.Format("Mod '{0}' is missing its {1} model.nut!", modName, foldername));
+                    LogHelper.Error(string.Format(UIStrings.ERROR_ERROR_CHECKING_MODEL_NUT_MISSING, modName, foldername));
                     return;
                 }
                 if (!File.Exists(modelNud))
                 {
-                    LogHelper.Error(string.Format("Mod '{0}' is missing its {1} model.nud!", modName, foldername));
+                    LogHelper.Error(string.Format(UIStrings.ERROR_ERROR_CHECKING_MODEL_NUD_MISSING, modName, foldername));
                     return;
                 }
                 List<int> textureIDs = new List<int>();
@@ -213,7 +213,7 @@ namespace KamiModpackBuilder.Objects
                     if (!textureIDs.Contains(t.HashId)) textureIDs.Add(t.HashId);
                     else duplicateTextures = true;
                 }
-                if (duplicateTextures) LogHelper.Warning(string.Format("The model.nut in mod '{0}' part {1} has multiple textures with the same TextureIDs. This is likely not intentional.", modName, foldername));
+                if (duplicateTextures) LogHelper.Warning(string.Format(UIStrings.WARNING_ERROR_CHECKING_DUPLICATE_TEXTURES, modName, foldername));
                 FileTypes.NUD nud = new FileTypes.NUD();
                 nud.Read(modelNud);
                 foreach (FileTypes.NUD.MatTexture t in nud.allTextures)
@@ -230,13 +230,13 @@ namespace KamiModpackBuilder.Objects
                         if (missingTextures.Length > 0) missingTextures += ", ";
                         missingTextures += "0x" + i.ToString("x8");
                     }
-                    LogHelper.Error(string.Format("The model.nud of mod {0} part {1} is missing the following textures: {2}. This may cause errors with the model.", modName, foldername, missingTextures));
+                    LogHelper.Error(string.Format(UIStrings.WARNING_ERROR_CHECKING_MODEL_TEXTURES, modName, foldername, missingTextures));
                     missingTextures = "";
                     missingTextureIDs.Clear();
                 }
                 if (!File.Exists(metalNud))
                 {
-                    LogHelper.Warning(string.Format("Mod '{0}' does not have a {1} metal.nud! If it needs one, it likely wont work properly.", modName, foldername));
+                    LogHelper.Warning(string.Format(UIStrings.WARNING_ERROR_CHECKING_METAL_NUD_MISSING, modName, foldername));
                     return;
                 }
                 nud = new FileTypes.NUD();
@@ -255,10 +255,8 @@ namespace KamiModpackBuilder.Objects
                         if (missingTextures.Length > 0) missingTextures += ", ";
                         missingTextures += "0x" + i.ToString("x8");
                     }
-                    LogHelper.Error(string.Format("The metal.nud of mod {0} part {1} is missing the following textures: {2}. This may cause errors with the model.", modName, foldername, missingTextures));
-                    missingTextures = "";
-                    missingTextureIDs.Clear();
-                }
+                    LogHelper.Error(string.Format(UIStrings.WARNING_ERROR_CHECKING_METAL_TEXTURES, modName, foldername, missingTextures));
+                    }
             }
         }
     }
