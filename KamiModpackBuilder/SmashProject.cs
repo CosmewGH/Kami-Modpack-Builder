@@ -771,7 +771,9 @@ namespace KamiModpackBuilder
 
                 string modFolder = PathHelper.GetCharacterSlotModPath(fighterName, mod.FolderName);
                 string explorerFolder = PathHelper.GetExplorerFolder(PathHelperEnum.FOLDER_PATCH);
-                string explorerFighterFolder = explorerFolder + "data" + Path.DirectorySeparatorChar + "fighter" + Path.DirectorySeparatorChar + fighterName.ToLower() + Path.DirectorySeparatorChar;
+                string explorerFighterFolder;
+                if (currentFighter.id == 0x24 && !_CurrentProject.IsSwitch) explorerFighterFolder = explorerFolder + "data" + Path.DirectorySeparatorChar + "fighter" + Path.DirectorySeparatorChar + "mariod" + Path.DirectorySeparatorChar;
+                else explorerFighterFolder = explorerFolder + "data" + Path.DirectorySeparatorChar + "fighter" + Path.DirectorySeparatorChar + fighterName.ToLower() + Path.DirectorySeparatorChar;
                 string explorerChrFolder = explorerFolder + "data" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "replace" + Path.DirectorySeparatorChar + "chr" + Path.DirectorySeparatorChar;
                 string explorerChrDlcFolder = explorerFolder + "data" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "replace" + Path.DirectorySeparatorChar + "append" + Path.DirectorySeparatorChar + "chr" + Path.DirectorySeparatorChar;
 
@@ -934,7 +936,7 @@ namespace KamiModpackBuilder
                                 nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0], cxxNum = 0 });
                             }
                         }
-                        else if (currentFighter.soundPackSlots == Fighter.SoundPackSlots.Two && _CurrentProject.GetAudioSlotForFighter(currentFighter.id, false, 1) == mod.SlotID)
+                        else if (currentFighter.soundPackSlots == Fighter.SoundPackSlots.Two && _CurrentProject.GetAudioSlotForFighter(currentFighter.id, false, 1) - 1 == mod.SlotID)
                         {
                             fileSearch.AddRange(Directory.GetFiles(modFolder + "sound", "*snd_se_*", SearchOption.AllDirectories));
                             if (fileSearch.Count > 0)
@@ -978,7 +980,7 @@ namespace KamiModpackBuilder
                                 nus3Banks.Add(new AutoMTBFix.Nus3BankFile { fighterName = currentFighter.name, fileName = fileSearch[0], cxxNum = 0 });
                             }
                         }
-                        else if (currentFighter.soundPackSlots == Fighter.SoundPackSlots.Two && _CurrentProject.GetAudioSlotForFighter(currentFighter.id, true, 1) == mod.SlotID)
+                        else if (currentFighter.voicePackSlots == Fighter.VoicePackSlots.Two && _CurrentProject.GetAudioSlotForFighter(currentFighter.id, true, 1) - 1 == mod.SlotID)
                         {
                             fileSearch.AddRange(Directory.GetFiles(modFolder + "sound", "*snd_vc_*", SearchOption.AllDirectories));
                             if (fileSearch.Count > 0)
@@ -1002,7 +1004,7 @@ namespace KamiModpackBuilder
                     {
                         string explorerFilename = f.Replace(modFolder + "chr" + Path.DirectorySeparatorChar, string.Empty);
                         //R.O.B. c00 and c01 regional flip flop exception
-                        if (currentFighter.id == 0x1F && CurrentProject.IsSwitch)
+                        if (currentFighter.id == 0x1F && !CurrentProject.IsSwitch)
                         {
                             if (mod.SlotID == 0) explorerFilename = explorerFilename.Replace("XX", (mod.SlotID + 2).ToString("D2"));
                             else if (mod.SlotID == 1) explorerFilename = explorerFilename.Replace("XX", (mod.SlotID).ToString("D2"));
@@ -1022,7 +1024,7 @@ namespace KamiModpackBuilder
                     {
                         string explorerFilename = f.Replace(modFolder + "chr" + Path.DirectorySeparatorChar, string.Empty);
                         //R.O.B. c00 and c01 regional flip flop exception
-                        if (currentFighter.id == 0x1F && CurrentProject.IsSwitch)
+                        if (currentFighter.id == 0x1F && !CurrentProject.IsSwitch)
                         {
                             if (mod.SlotID == 0) explorerFilename = explorerFilename.Replace("XX", (mod.SlotID + 2).ToString("D2"));
                             else if (mod.SlotID == 1) explorerFilename = explorerFilename.Replace("XX", (mod.SlotID).ToString("D2"));
@@ -1042,7 +1044,7 @@ namespace KamiModpackBuilder
                     {
                         string explorerFilename = f.Replace(modFolder + "chr" + Path.DirectorySeparatorChar, string.Empty);
                         //R.O.B. c00 and c01 regional flip flop exception
-                        if (currentFighter.id == 0x1F && CurrentProject.IsSwitch)
+                        if (currentFighter.id == 0x1F && !CurrentProject.IsSwitch)
                         {
                             if (mod.SlotID == 0) explorerFilename = explorerFilename.Replace("XX", (mod.SlotID + 2).ToString("D2"));
                             else if (mod.SlotID == 1) explorerFilename = explorerFilename.Replace("XX", (mod.SlotID).ToString("D2"));
@@ -1062,7 +1064,7 @@ namespace KamiModpackBuilder
                     {
                         string explorerFilename = f.Replace(modFolder + "chr" + Path.DirectorySeparatorChar, string.Empty);
                         //R.O.B. c00 and c01 regional flip flop exception
-                        if (currentFighter.id == 0x1F && CurrentProject.IsSwitch)
+                        if (currentFighter.id == 0x1F && !CurrentProject.IsSwitch)
                         {
                             if (mod.SlotID == 0) explorerFilename = explorerFilename.Replace("XX", (mod.SlotID + 2).ToString("D2"));
                             else if (mod.SlotID == 1) explorerFilename = explorerFilename.Replace("XX", (mod.SlotID).ToString("D2"));
@@ -1165,7 +1167,9 @@ namespace KamiModpackBuilder
                 }
                 string modFolder = PathHelper.GetCharacterGeneralModPath(fighterName, mod.FolderName);
                 string explorerFolder = PathHelper.GetExplorerFolder(PathHelperEnum.FOLDER_PATCH);
-                string explorerFighterFolder = explorerFolder + "data" + Path.DirectorySeparatorChar + "fighter" + Path.DirectorySeparatorChar + fighterName.ToLower() + Path.DirectorySeparatorChar;
+                string explorerFighterFolder;
+                if (currentFighter.id == 0x24 && !_CurrentProject.IsSwitch) explorerFighterFolder = explorerFolder + "data" + Path.DirectorySeparatorChar + "fighter" + Path.DirectorySeparatorChar + "mariod" + Path.DirectorySeparatorChar;
+                else explorerFighterFolder = explorerFolder + "data" + Path.DirectorySeparatorChar + "fighter" + Path.DirectorySeparatorChar + fighterName.ToLower() + Path.DirectorySeparatorChar;
 
                 if (Directory.Exists(modFolder + "model")) fileSearch.AddRange(Directory.GetFiles(modFolder + "model", "*", SearchOption.AllDirectories));
                 if (Directory.Exists(modFolder + "effect")) fileSearch.AddRange(Directory.GetFiles(modFolder + "effect", "*", SearchOption.AllDirectories));
@@ -1204,6 +1208,7 @@ namespace KamiModpackBuilder
                 string explorerFolder = PathHelper.GetExplorerFolder(PathHelperEnum.FOLDER_PATCH);
                 string explorerStageFolder = explorerFolder + "data" + Path.DirectorySeparatorChar + "stage" + Path.DirectorySeparatorChar + stagePath;
                 string explorerStageUIFolder = explorerFolder + "data" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "replace" + Path.DirectorySeparatorChar + "stage" + Path.DirectorySeparatorChar;
+                string explorerStageUIFolderDLC = explorerFolder + "data" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "replace" + Path.DirectorySeparatorChar + "append" + Path.DirectorySeparatorChar + "stage" + Path.DirectorySeparatorChar;
 
                 #region Stage Data
                 if (Directory.Exists(modFolder + "stage"))
@@ -1228,6 +1233,11 @@ namespace KamiModpackBuilder
                         explorerFilename = explorerFilename.Replace("XX", stageName);
                         explorerFilename = explorerStageUIFolder + "stage_10" + Path.DirectorySeparatorChar + explorerFilename;
                         AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                        if (currentStage.IsDLC)
+                        {
+                            explorerFilename = explorerFilename.Replace(explorerStageUIFolder, explorerStageUIFolderDLC);
+                            AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                        }
                     }
                     fileSearch.Clear();
                     fileSearch.AddRange(Directory.GetFiles(modFolder + "ui", "*stage_11*", SearchOption.AllDirectories));
@@ -1237,6 +1247,11 @@ namespace KamiModpackBuilder
                         explorerFilename = explorerFilename.Replace("XX", stageName);
                         explorerFilename = explorerStageUIFolder + "stage_11" + Path.DirectorySeparatorChar + explorerFilename;
                         AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                        if (currentStage.IsDLC)
+                        {
+                            explorerFilename = explorerFilename.Replace(explorerStageUIFolder, explorerStageUIFolderDLC);
+                            AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                        }
                     }
                     fileSearch.Clear();
                     fileSearch.AddRange(Directory.GetFiles(modFolder + "ui", "*stage_12*", SearchOption.AllDirectories));
@@ -1246,6 +1261,25 @@ namespace KamiModpackBuilder
                         explorerFilename = explorerFilename.Replace("XX", stageName);
                         explorerFilename = explorerStageUIFolder + "stage_12" + Path.DirectorySeparatorChar + explorerFilename;
                         AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                        if (currentStage.IsDLC)
+                        {
+                            explorerFilename = explorerFilename.Replace(explorerStageUIFolder, explorerStageUIFolderDLC);
+                            AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                        }
+                    }
+                    fileSearch.Clear();
+                    fileSearch.AddRange(Directory.GetFiles(modFolder + "ui", "*stage_13*", SearchOption.AllDirectories));
+                    foreach (string f in fileSearch)
+                    {
+                        string explorerFilename = f.Replace(modFolder + "ui" + Path.DirectorySeparatorChar, string.Empty);
+                        explorerFilename = explorerFilename.Replace("XX", stageName);
+                        explorerFilename = explorerStageUIFolder + "stage_13" + Path.DirectorySeparatorChar + explorerFilename;
+                        AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                        if (currentStage.IsDLC)
+                        {
+                            explorerFilename = explorerFilename.Replace(explorerStageUIFolder, explorerStageUIFolderDLC);
+                            AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                        }
                     }
                     fileSearch.Clear();
                     fileSearch.AddRange(Directory.GetFiles(modFolder + "ui", "*stage_30*", SearchOption.AllDirectories));
@@ -1255,6 +1289,11 @@ namespace KamiModpackBuilder
                         explorerFilename = explorerFilename.Replace("XX", stageName);
                         explorerFilename = explorerStageUIFolder + "stage_30" + Path.DirectorySeparatorChar + explorerFilename;
                         AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                        if (currentStage.IsDLC)
+                        {
+                            explorerFilename = explorerFilename.Replace(explorerStageUIFolder, explorerStageUIFolderDLC);
+                            AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                        }
                     }
                     fileSearch.Clear();
                     fileSearch.AddRange(Directory.GetFiles(modFolder + "ui", "*stagen_10*", SearchOption.AllDirectories));
@@ -1264,6 +1303,11 @@ namespace KamiModpackBuilder
                         explorerFilename = explorerFilename.Replace("XX", stageName);
                         explorerFilename = explorerStageUIFolder + "stagen_10" + Path.DirectorySeparatorChar + explorerFilename;
                         AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                        if (currentStage.IsDLC)
+                        {
+                            explorerFilename = explorerFilename.Replace(explorerStageUIFolder, explorerStageUIFolderDLC);
+                            AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                        }
                     }
                     fileSearch.Clear();
                 }

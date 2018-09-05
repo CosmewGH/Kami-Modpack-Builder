@@ -702,6 +702,7 @@ namespace KamiModpackBuilder.UserControls
                 string[] Files_stage_10 = Utils.FindFilesByFilename(files, "stage_10");
                 string[] Files_stage_11 = Utils.FindFilesByFilename(files, "stage_11");
                 string[] Files_stage_12 = Utils.FindFilesByFilename(files, "stage_12");
+                string[] Files_stage_13 = Utils.FindFilesByFilename(files, "stage_13");
                 string[] Files_stage_30 = Utils.FindFilesByFilename(files, "stage_30");
                 string[] Files_stagen_10 = Utils.FindFilesByFilename(files, "stagen_10");
 
@@ -713,6 +714,7 @@ namespace KamiModpackBuilder.UserControls
                 xml.stage_10 = Files_stage_10.Length > 0;
                 xml.stage_11 = Files_stage_11.Length > 0;
                 xml.stage_12 = Files_stage_12.Length > 0;
+                xml.stage_13 = Files_stage_13.Length > 0;
                 xml.stage_30 = Files_stage_30.Length > 0;
                 xml.stagen_10 = Files_stagen_10.Length > 0;
                 Utils.SerializeXMLToFile(xml, newModDirectory + "kamimod.xml");
@@ -720,13 +722,14 @@ namespace KamiModpackBuilder.UserControls
                 
                 Utils.CopyAllValidFilesBetweenDirectories(stageFolder, newModDirectory + "stage" + Path.DirectorySeparatorChar);
 
-                if (xml.stage_10 || xml.stage_11 || xml.stage_12 || xml.stage_30 || xml.stagen_10)
+                if (xml.stage_10 || xml.stage_11 || xml.stage_12 || xml.stage_13 || xml.stage_30 || xml.stagen_10)
                 {
                     string baseChrPath = newModDirectory + "ui" + Path.DirectorySeparatorChar;
                     Directory.CreateDirectory(baseChrPath);
                     if (xml.stage_10) File.Copy(Files_stage_10[0], baseChrPath + "stage_10_XX.nut");
                     if (xml.stage_11) File.Copy(Files_stage_11[0], baseChrPath + "stage_11_XX.nut");
                     if (xml.stage_12) File.Copy(Files_stage_12[0], baseChrPath + "stage_12_XX.nut");
+                    if (xml.stage_13) File.Copy(Files_stage_13[0], baseChrPath + "stage_13_XX.nut");
                     if (xml.stage_30) File.Copy(Files_stage_30[0], baseChrPath + "stage_30_XX.nut");
                     if (xml.stagen_10) File.Copy(Files_stagen_10[0], baseChrPath + "stagen_10_XX.nut");
                 }

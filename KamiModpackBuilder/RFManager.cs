@@ -338,7 +338,8 @@ namespace KamiModpackBuilder
                 difference = start - chunk_start;
                 chunk_len = difference + size;
             }
-            return new DataSource(FileMap.FromFile(_DtPaths[dtIndex], FileMapProtect.ReadWrite, chunk_start, (int)chunk_len));
+            if (chunk_len == 0) return new DataSource(FileMap.FromFile(_DtPaths[dtIndex], FileMapProtect.Read, chunk_start, 1));
+            return new DataSource(FileMap.FromFile(_DtPaths[dtIndex], FileMapProtect.Read, chunk_start, (int)chunk_len));
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]

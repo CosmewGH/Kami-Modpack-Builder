@@ -34,6 +34,7 @@ namespace KamiModpackBuilder.Globals
         public const string ERROR_ERROR_CHECKING_MODEL_NUT_MISSING = "Mod '{0}' is missing its {1} model.nut!";
         public const string ERROR_ERROR_CHECKING_MODEL_NUD_MISSING = "Mod '{0}' is missing its {1} model.nud!";
         public const string INFO_ERROR_CHECKING_NO_MODELS = "Mod '{0}' has no models";
+        public const string TEXTURE_ID_FIX_NO_IDS_AVAILABLE = "Could not Texture ID Fix all the mods, ran out of texture IDs! That's both impressive and concerning. Use less mods.";
 
         public const string INFO_ABOUT =
             "Kami Modpack Builder v.{0} by Saiyan197\r\n" +

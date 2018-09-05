@@ -64,6 +64,10 @@
             this.buttonImport_stage30 = new System.Windows.Forms.Button();
             this.panelNotes = new System.Windows.Forms.Panel();
             this.openFileDialogPortraits = new System.Windows.Forms.OpenFileDialog();
+            this.label3 = new System.Windows.Forms.Label();
+            this.labelImage_stage13 = new System.Windows.Forms.Label();
+            this.buttonImport_stage13 = new System.Windows.Forms.Button();
+            this.buttonExport_stage13 = new System.Windows.Forms.Button();
             this.groupBoxInfo.SuspendLayout();
             this.groupBoxStageData.SuspendLayout();
             this.groupBoxPortaits.SuspendLayout();
@@ -109,7 +113,7 @@
             this.textBoxNotes.Location = new System.Drawing.Point(122, 17);
             this.textBoxNotes.Multiline = true;
             this.textBoxNotes.Name = "textBoxNotes";
-            this.textBoxNotes.Size = new System.Drawing.Size(644, 96);
+            this.textBoxNotes.Size = new System.Drawing.Size(818, 96);
             this.textBoxNotes.TabIndex = 29;
             // 
             // label20
@@ -150,7 +154,7 @@
             this.groupBoxInfo.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxInfo.Location = new System.Drawing.Point(0, 0);
             this.groupBoxInfo.Name = "groupBoxInfo";
-            this.groupBoxInfo.Size = new System.Drawing.Size(831, 130);
+            this.groupBoxInfo.Size = new System.Drawing.Size(974, 130);
             this.groupBoxInfo.TabIndex = 49;
             this.groupBoxInfo.TabStop = false;
             this.groupBoxInfo.Text = "Info";
@@ -163,7 +167,7 @@
             this.groupBoxStageData.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxStageData.Location = new System.Drawing.Point(0, 130);
             this.groupBoxStageData.Name = "groupBoxStageData";
-            this.groupBoxStageData.Size = new System.Drawing.Size(831, 114);
+            this.groupBoxStageData.Size = new System.Drawing.Size(974, 114);
             this.groupBoxStageData.TabIndex = 50;
             this.groupBoxStageData.TabStop = false;
             this.groupBoxStageData.Text = "Stage Data";
@@ -191,14 +195,18 @@
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(400, 20);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(420, 80);
+            this.label14.Size = new System.Drawing.Size(547, 60);
             this.label14.TabIndex = 36;
             this.label14.Text = "The stage the mod is over.\r\nTo change the stage, you must re-import the stage wit" +
-    "hout\r\nthe .kamimod file, and with new file and folder names to\r\nmatch the desire" +
-    "d stage.";
+    "hout the .kamimod file,\r\nand with new file and folder names to match the desired" +
+    " stage.";
             // 
             // groupBoxPortaits
             // 
+            this.groupBoxPortaits.Controls.Add(this.label3);
+            this.groupBoxPortaits.Controls.Add(this.labelImage_stage13);
+            this.groupBoxPortaits.Controls.Add(this.buttonImport_stage13);
+            this.groupBoxPortaits.Controls.Add(this.buttonExport_stage13);
             this.groupBoxPortaits.Controls.Add(this.label7);
             this.groupBoxPortaits.Controls.Add(this.labelImage_stage11);
             this.groupBoxPortaits.Controls.Add(this.labelImage_stage12);
@@ -222,7 +230,7 @@
             this.groupBoxPortaits.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxPortaits.Location = new System.Drawing.Point(0, 244);
             this.groupBoxPortaits.Name = "groupBoxPortaits";
-            this.groupBoxPortaits.Size = new System.Drawing.Size(831, 298);
+            this.groupBoxPortaits.Size = new System.Drawing.Size(974, 298);
             this.groupBoxPortaits.TabIndex = 54;
             this.groupBoxPortaits.TabStop = false;
             this.groupBoxPortaits.Text = "Portraits";
@@ -230,7 +238,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(20, 29);
+            this.label7.Location = new System.Drawing.Point(32, 29);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(76, 20);
             this.label7.TabIndex = 24;
@@ -282,7 +290,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(450, 29);
+            this.label10.Location = new System.Drawing.Point(453, 29);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(76, 20);
             this.label10.TabIndex = 27;
@@ -300,7 +308,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(303, 29);
+            this.label9.Location = new System.Drawing.Point(310, 29);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(76, 20);
             this.label9.TabIndex = 26;
@@ -320,7 +328,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(160, 29);
+            this.label8.Location = new System.Drawing.Point(175, 29);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(76, 20);
             this.label8.TabIndex = 25;
@@ -424,18 +432,56 @@
             this.panelNotes.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelNotes.Location = new System.Drawing.Point(0, 542);
             this.panelNotes.Name = "panelNotes";
-            this.panelNotes.Size = new System.Drawing.Size(831, 127);
+            this.panelNotes.Size = new System.Drawing.Size(974, 127);
             this.panelNotes.TabIndex = 55;
             // 
             // openFileDialogPortraits
             // 
             this.openFileDialogPortraits.Filter = "nut files|*.nut|PNG files|*.png";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(835, 29);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(133, 40);
+            this.label3.TabIndex = 32;
+            this.label3.Text = "stage_13\r\nDLC SSS Portrait";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // labelImage_stage13
+            // 
+            this.labelImage_stage13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelImage_stage13.Location = new System.Drawing.Point(836, 96);
+            this.labelImage_stage13.Name = "labelImage_stage13";
+            this.labelImage_stage13.Size = new System.Drawing.Size(128, 96);
+            this.labelImage_stage13.TabIndex = 29;
+            // 
+            // buttonImport_stage13
+            // 
+            this.buttonImport_stage13.Location = new System.Drawing.Point(862, 215);
+            this.buttonImport_stage13.Name = "buttonImport_stage13";
+            this.buttonImport_stage13.Size = new System.Drawing.Size(75, 32);
+            this.buttonImport_stage13.TabIndex = 30;
+            this.buttonImport_stage13.Text = "Import";
+            this.buttonImport_stage13.UseVisualStyleBackColor = true;
+            this.buttonImport_stage13.Click += new System.EventHandler(this.buttonImport_stage13_Click);
+            // 
+            // buttonExport_stage13
+            // 
+            this.buttonExport_stage13.Location = new System.Drawing.Point(862, 249);
+            this.buttonExport_stage13.Name = "buttonExport_stage13";
+            this.buttonExport_stage13.Size = new System.Drawing.Size(75, 32);
+            this.buttonExport_stage13.TabIndex = 31;
+            this.buttonExport_stage13.Text = "Export";
+            this.buttonExport_stage13.UseVisualStyleBackColor = true;
+            this.buttonExport_stage13.Click += new System.EventHandler(this.buttonExport_stage13_Click);
+            // 
             // ModProperties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(831, 670);
+            this.ClientSize = new System.Drawing.Size(974, 670);
             this.Controls.Add(this.panelNotes);
             this.Controls.Add(this.groupBoxPortaits);
             this.Controls.Add(this.groupBoxStageData);
@@ -494,5 +540,9 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Panel panelNotes;
         private System.Windows.Forms.OpenFileDialog openFileDialogPortraits;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelImage_stage13;
+        private System.Windows.Forms.Button buttonImport_stage13;
+        private System.Windows.Forms.Button buttonExport_stage13;
     }
 }

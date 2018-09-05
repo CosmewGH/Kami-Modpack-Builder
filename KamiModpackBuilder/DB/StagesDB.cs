@@ -72,7 +72,7 @@ namespace KamiModpackBuilder.DB
                 new Stage(0x14, "PunchOut", "Boxing Ring", StageType.Melee),
                 new Stage(0x15, "PunchOut2", "Boxing Ring 2", StageType.Melee),
                 new Stage(0x16, "Wufu", "Wuhu Island", StageType.Melee),
-                new Stage(0x17, "Miiverse", "Miiverse", StageType.Melee),
+                new Stage(0x17, "Miiverse", "Miiverse", StageType.Melee, true),
                 new Stage(0x18, "WiiFit", "Wii Fit Studio", StageType.Melee),
                 new Stage(0x19, "Pilotwings", "Pilotwings", StageType.Melee),
                 new Stage(0x1a, "Windyhill", "Windy Hill Zone", StageType.Melee),
@@ -118,7 +118,7 @@ namespace KamiModpackBuilder.DB
                 new Stage(0x42, "PunchOut", "Boxing Ring (Omega)", StageType.End),
                 new Stage(0x43, "PunchOut2", "Boxing Ring 2 (Omega)", StageType.End),
                 new Stage(0x44, "Wufu", "Wuhu Island (Omega)", StageType.End),
-                new Stage(0x45, "Miiverse", "Miiverse (Omega)", StageType.End),
+                new Stage(0x45, "Miiverse", "Miiverse (Omega)", StageType.End, true),
                 new Stage(0x46, "WiiFit", "Wii Fit Studio (Omega)", StageType.End),
                 new Stage(0x47, "Pilotwings", "Pilotwings (Omega)", StageType.End),
                 new Stage(0x48, "Windyhill", "Windy Hill Zone (Omega)", StageType.End),
@@ -159,24 +159,24 @@ namespace KamiModpackBuilder.DB
                 new Stage(0x6b, "fig_photo4", "Trophy Studio Galleries", StageType.Fig),
                 new Stage(0x6c, "BattleFieldL_f", "Big Battlefield", StageType.Melee),
                 new Stage(0x6d, "RushL_f", "Trophy Rush", StageType.Other),
-                new Stage(0x6e, "StreetFighter_f", "Suzaku Castle", StageType.Melee),
-                new Stage(0x6f, "StreetFighter_f", "Suzaku Castle (Omega)", StageType.End),
-                new Stage(0x70, "Pupupuland64_f", "Dream Land (64)", StageType.Melee),
-                new Stage(0x71, "Pupupuland64_f", "Dream Land (64) (Omega)", StageType.End),
-                new Stage(0x72, "PeachCastle64_f", "Peach's Castle (64)", StageType.Melee),
-                new Stage(0x73, "PeachCastle64_f", "Peach's Castle (64) (Omega)", StageType.End),
-                new Stage(0x74, "Hyrule64_f", "Hyrule Castle (64)", StageType.Melee),
-                new Stage(0x75, "Hyrule64_f", "Hyrule Castle (64) (Omega)", StageType.End),
-                new Stage(0x76, "MarioMaker_f", "Super Mario Maker", StageType.Melee),
-                new Stage(0x77, "MarioMaker_f", "Super Mario Maker (Omega)", StageType.End),
-                new Stage(0x78, "XPirates_f", "Pirate Ship", StageType.Melee),
-                new Stage(0x79, "XPirates_f", "Pirate Ship (Omega)", StageType.End),
+                new Stage(0x6e, "StreetFighter_f", "Suzaku Castle", StageType.Melee, true),
+                new Stage(0x6f, "StreetFighter_f", "Suzaku Castle (Omega)", StageType.End, true),
+                new Stage(0x70, "Pupupuland64_f", "Dream Land (64)", StageType.Melee, true),
+                new Stage(0x71, "Pupupuland64_f", "Dream Land (64) (Omega)", StageType.End, true),
+                new Stage(0x72, "PeachCastle64_f", "Peach's Castle (64)", StageType.Melee, true),
+                new Stage(0x73, "PeachCastle64_f", "Peach's Castle (64) (Omega)", StageType.End, true),
+                new Stage(0x74, "Hyrule64_f", "Hyrule Castle (64)", StageType.Melee, true),
+                new Stage(0x75, "Hyrule64_f", "Hyrule Castle (64) (Omega)", StageType.End, true),
+                new Stage(0x76, "MarioMaker_f", "Super Mario Maker", StageType.Melee, true),
+                new Stage(0x77, "MarioMaker_f", "Super Mario Maker (Omega)", StageType.End, true),
+                new Stage(0x78, "XPirates_f", "Pirate Ship", StageType.Melee, true),
+                new Stage(0x79, "XPirates_f", "Pirate Ship (Omega)", StageType.End, true),
                 new Stage(0x7a, "", "", StageType.Other),
                 new Stage(0x7b, "", "", StageType.Other),
-                new Stage(0x7c, "Midgar_f", "Midgar", StageType.Melee),
-                new Stage(0x7d, "Midgar_f", "Midgar (Omega)", StageType.End),
-                new Stage(0x7e, "Umbra_f", "Umbra Clock Tower", StageType.Melee),
-                new Stage(0x7f, "Umbra_f", "Umbra Clock Tower (Omega)", StageType.End)
+                new Stage(0x7c, "Midgar_f", "Midgar", StageType.Melee, true),
+                new Stage(0x7d, "Midgar_f", "Midgar (Omega)", StageType.End, true),
+                new Stage(0x7e, "Umbra_f", "Umbra Clock Tower", StageType.Melee, true),
+                new Stage(0x7f, "Umbra_f", "Umbra Clock Tower (Omega)", StageType.End, true)
             };
             List<string>  names = new List<string>();
             foreach (Stage st in _StagesDB)
@@ -203,18 +203,21 @@ namespace KamiModpackBuilder.DB
         private StageType _StageType;
         private string _StageLabel;
         private string _StageLabelHuman;
+        private bool _IsDLC;
 
         public int ID { get { return _StageID; } }
         public StageType Type { get { return _StageType; } }
         public string Label { get { return _StageLabel; } }
         public string LabelHuman { get { return _StageLabelHuman; } }
+        public bool IsDLC { get { return _IsDLC; } }
 
-        public Stage(int id, string label, string labelHuman, StageType type)
+        public Stage(int id, string label, string labelHuman, StageType type, bool isDLC = false)
         {
             _StageID = id;
             _StageLabel = label;
             _StageLabelHuman = labelHuman;
             _StageType = type;
+            _IsDLC = isDLC;
         }
     }
 }

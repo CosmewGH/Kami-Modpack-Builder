@@ -51,8 +51,23 @@ namespace KamiModpackBuilder.Forms
 
             if (_SmashProjectManager._CharacterModsPage.CurrentFighter.id == 0x19 && !_SmashProjectManager.CurrentProject.IsSwitch)
             {
-                PathVoice = PathVoice.Replace("Szerosuit", "SZerosuit");
-                PathSound = PathSound.Replace("Szerosuit", "SZerosuit");
+                PathVoice = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_vc_SZerosuit_cxx.nus3bank";
+                PathSound = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_se_SZerosuit_cxx.nus3bank";
+            }
+            if (_SmashProjectManager._CharacterModsPage.CurrentFighter.id == 0x24 && !_SmashProjectManager.CurrentProject.IsSwitch)
+            {
+                PathVoice = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_vc_MarioD_cxx.nus3bank";
+                PathSound = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_se_MarioD_cxx.nus3bank";
+            }
+            if (_SmashProjectManager._CharacterModsPage.CurrentFighter.id == 0x26 && !_SmashProjectManager.CurrentProject.IsSwitch)
+            {
+                PathVoice = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_vc_PitB_cxx.nus3bank";
+                PathSound = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_se_PitB_cxx.nus3bank";
+            }
+            if (_SmashProjectManager._CharacterModsPage.CurrentFighter.id == 0x13 && !_SmashProjectManager.CurrentProject.IsSwitch)
+            {
+                PathVoice = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_vc_GameWatch_cxx.nus3bank";
+                PathSound = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_se_GameWatch_cxx.nus3bank";
             }
 
             XMLData = Utils.DeserializeXML<CharacterSlotModXML>(PathKami);

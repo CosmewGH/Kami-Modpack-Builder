@@ -255,7 +255,7 @@ namespace KamiModpackBuilder.UserControls
             switch (_ModListType)
             {
                 case ModsList.ModListType.CharacterSlots:
-                    popup = new Forms.SlotModProperties(PathHelper.FolderCharSlotsMods + Path.DirectorySeparatorChar + _CurrentFighter.name + Path.DirectorySeparatorChar + modFolder, _CurrentFighter.name, _SmashProjectManager);
+                    popup = new Forms.SlotModProperties(PathHelper.FolderCharSlotsMods + _CurrentFighter.name + Path.DirectorySeparatorChar + modFolder, _CurrentFighter.name, _SmashProjectManager);
                     if (!popup.isInitialized)
                     {
                         MessageBox.Show("The mod properties could not be opened. Is the mod missing?");

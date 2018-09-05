@@ -509,8 +509,16 @@ namespace KamiModpackBuilder.UserControls
 
                 if ((currentID % 4 == 0 && currentID < 128) || usedIDs.Contains(currentID))
                 {
-                    xml.TextureID = 128;
-                    while (usedIDs.Contains((ushort)xml.TextureID)) ++xml.TextureID;
+                    xml.TextureID = 255;
+                    while (usedIDs.Contains((ushort)xml.TextureID))
+                    {
+                        --xml.TextureID;
+                        if (xml.TextureID < 1)
+                        {
+                            Globals.LogHelper.Error(Globals.UIStrings.TEXTURE_ID_FIX_NO_IDS_AVAILABLE);
+                            return;
+                        }
+                    }
                     
                     TextureIDFix.ChangeTextureID(modPath + "model", _CurrentFighter.id, (ushort)xml.TextureID);
                     Globals.Utils.SerializeXMLToFile(xml, kamiPath);

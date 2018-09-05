@@ -320,6 +320,12 @@ namespace KamiModpackBuilder.Forms
                     string fighterName = _CurrentFighter.name;
                     if (_CurrentFighter.id == 0x19 && !_SmashProjectManager.CurrentProject.IsSwitch)
                         fighterName = fighterName.Replace("Szerosuit", "SZerosuit");
+                    if (_CurrentFighter.id == 0x24 && !_SmashProjectManager.CurrentProject.IsSwitch)
+                        fighterName = fighterName.Replace("Drmario", "MarioD");
+                    if (_CurrentFighter.id == 0x26 && !_SmashProjectManager.CurrentProject.IsSwitch)
+                        fighterName = fighterName.Replace("Pitb", "PitB");
+                    if (_CurrentFighter.id == 0x13 && !_SmashProjectManager.CurrentProject.IsSwitch)
+                        fighterName = fighterName.Replace("Gamewatch", "GameWatch");
                     if (xml.Sound) File.Copy(GetFilenameFromComboBoxString(Files_Sound_Nus3bank, ComboBoxList_Files_Sound_Nus3bank, sound), baseSoundPath + "snd_se_" + _CurrentFighter.name + "_cxx.nus3bank");
                     if (xml.Voice) File.Copy(GetFilenameFromComboBoxString(Files_Voice_Nus3bank, ComboBoxList_Files_Voice_Nus3bank, voice), baseSoundPath + "snd_vc_" + _CurrentFighter.name + "_cxx.nus3bank");
                 }

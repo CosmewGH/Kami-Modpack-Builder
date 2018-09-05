@@ -94,7 +94,7 @@ namespace KamiModpackBuilder.DB
                 new Fighter(0x25, "Lucina", "Lucina", false, Fighter.LowPolySlots.All),
                 new Fighter(0x26, "Pitb", "Dark Pit", false, Fighter.LowPolySlots.All),
                 new Fighter(0x27, "Rosetta", "Rosalina & Luma", false, Fighter.LowPolySlots.All),
-                new Fighter(0x28, "Wiifit", "Wii Fit Trainer", false, Fighter.LowPolySlots.All),
+                new Fighter(0x28, "Wiifit", "Wii Fit Trainer", false, Fighter.LowPolySlots.All, Fighter.SoundPackSlots.All, Fighter.VoicePackSlots.Two),
                 new Fighter(0x29, "Littlemac", "Little Mac", false, Fighter.LowPolySlots.None, Fighter.SoundPackSlots.All, Fighter.VoicePackSlots.Two, 16, 16, 1, null, new List<string>{ "body","championbelt","throwsweat" }),
                 new Fighter(0x2A, "Murabito", "Villager", false, Fighter.LowPolySlots.None, Fighter.SoundPackSlots.All, Fighter.VoicePackSlots.All, 16, 8, 2),
                 new Fighter(0x2B, "Palutena", "Palutena", false, Fighter.LowPolySlots.All),

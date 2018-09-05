@@ -68,6 +68,12 @@ namespace KamiModpackBuilder.Objects
                 string nameFighter = _Nus3Banks[i].fighterName;
                 if (nameFighter.Equals("Szerosuit"))
                     nameFighter = "SZerosuit";
+                if (nameFighter.Equals("Drmario"))
+                    nameFighter = "MarioD";
+                if (nameFighter.Equals("Pitb"))
+                    nameFighter = "PitB";
+                if (nameFighter.Equals("Gamewatch"))
+                    nameFighter = "GameWatch";
                 string currentSoundFile = _Nus3Banks[i].fileName;
                 ushort cxxNum = _Nus3Banks[i].cxxNum;
                 getNusbankIdInfo(currentSoundFile);

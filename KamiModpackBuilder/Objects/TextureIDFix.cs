@@ -59,8 +59,16 @@ namespace KamiModpackBuilder.Objects
 
                     if ((xml.TextureID % 4 == 0 && xml.TextureID < 128) || ids.Contains((ushort)xml.TextureID))
                     {
-                        xml.TextureID = 128;
-                        while (ids.Contains((ushort)xml.TextureID)) ++xml.TextureID;
+                        xml.TextureID = 255;
+                        while (ids.Contains((ushort)xml.TextureID))
+                        {
+                            --xml.TextureID;
+                            if (xml.TextureID < 1)
+                            {
+                                LogHelper.Error(UIStrings.TEXTURE_ID_FIX_NO_IDS_AVAILABLE);
+                                break;
+                            }
+                        }
 
                         ChangeTextureID(ModPath + "model", fighter.id, (ushort)xml.TextureID);
                         Globals.Utils.SerializeXMLToFile(xml, PathKami);
@@ -203,7 +211,7 @@ namespace KamiModpackBuilder.Objects
                 }
                 List<int> textureIDs = new List<int>();
                 List<int> missingTextureIDs = new List<int>();
-                int[] dummyTextures = { 0x10100000, 0x10080000, 0x10101000 };
+                int[] dummyTextures = { 0x10100000, 0x10080000, 0x10101000, 0x10102000, 0x10040001, 0x10040000 };
                 string missingTextures = "";
                 FileTypes.NUT nut = new FileTypes.NUT();
                 nut.Read(modelNut);
@@ -240,7 +248,7 @@ namespace KamiModpackBuilder.Objects
                     return;
                 }
                 nud = new FileTypes.NUD();
-                nud.Read(modelNud);
+                nud.Read(metalNud);
                 foreach (FileTypes.NUD.MatTexture t in nud.allTextures)
                 {
                     if (!textureIDs.Contains(t.hash))

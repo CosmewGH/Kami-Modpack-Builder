@@ -32,6 +32,7 @@ namespace KamiModpackBuilder.Forms
         string PathStage10 = String.Empty;
         string PathStage11 = String.Empty;
         string PathStage12 = String.Empty;
+        string PathStage13 = String.Empty;
         string PathStage30 = String.Empty;
         string PathStagen10 = String.Empty;
 
@@ -75,16 +76,19 @@ namespace KamiModpackBuilder.Forms
                     PathStage10 = ModPath + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "stage_10_XX.nut";
                     PathStage11 = ModPath + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "stage_11_XX.nut";
                     PathStage12 = ModPath + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "stage_12_XX.nut";
+                    PathStage13 = ModPath + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "stage_13_XX.nut";
                     PathStage30 = ModPath + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "stage_30_XX.nut";
                     PathStagen10 = ModPath + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "stagen_10_XX.nut";
                     XMLDataStage.stage_10 = File.Exists(PathStage10);
                     XMLDataStage.stage_11 = File.Exists(PathStage11);
                     XMLDataStage.stage_12 = File.Exists(PathStage12);
+                    XMLDataStage.stage_13 = File.Exists(PathStage13);
                     XMLDataStage.stage_30 = File.Exists(PathStage30);
                     XMLDataStage.stagen_10 = File.Exists(PathStagen10);
                     buttonExport_stage10.Enabled = XMLDataStage.stage_10;
                     buttonExport_stage11.Enabled = XMLDataStage.stage_11;
                     buttonExport_stage12.Enabled = XMLDataStage.stage_12;
+                    buttonExport_stage13.Enabled = XMLDataStage.stage_13;
                     buttonExport_stage30.Enabled = XMLDataStage.stage_30;
                     buttonExport_stagen10.Enabled = XMLDataStage.stagen_10;
                     break;
@@ -223,6 +227,37 @@ namespace KamiModpackBuilder.Forms
         }
 
         private void buttonExport_stage12_Click(object sender, EventArgs e)
+        {
+            if (ModListType != ModsList.ModListType.Stage) return;
+            MessageBox.Show("Cannot export to PNG yet :(");
+            //TODO: Export to PNG
+        }
+
+        private void buttonImport_stage13_Click(object sender, EventArgs e)
+        {
+            if (ModListType != ModsList.ModListType.Stage) return;
+            DialogResult result = openFileDialogPortraits.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Equals("png"))
+                {
+                    MessageBox.Show("Cannot import PNGs yet :(");
+                    //TODO: Import PNG
+                    return;
+                }
+                else
+                {
+                    //TODO: Validate format
+                    Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "ui");
+                    File.Copy(openFileDialogPortraits.FileName, PathStage13, true);
+                    XMLDataStage.stage_13 = true;
+                    buttonExport_stage13.Enabled = true;
+                    LogHelper.Info("Imported stage_13 successfully.");
+                }
+            }
+        }
+
+        private void buttonExport_stage13_Click(object sender, EventArgs e)
         {
             if (ModListType != ModsList.ModListType.Stage) return;
             MessageBox.Show("Cannot export to PNG yet :(");
