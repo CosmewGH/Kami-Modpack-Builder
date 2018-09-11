@@ -180,7 +180,7 @@
             // 
             // openFileDialogImportZip
             // 
-            this.openFileDialogImportZip.Filter = "Zip file|*.zip|RAR Archive|*.rar|7 Zip Archive|*.7z";
+            this.openFileDialogImportZip.Filter = "Zip file|*.zip|7 Zip Archive|*.7z";
             // 
             // buttonDeleteMod
             // 

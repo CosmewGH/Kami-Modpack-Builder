@@ -742,6 +742,8 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "SlotModProperties";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Mod Properties";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SlotModProperties_FormClosing);
             this.groupBox1.ResumeLayout(false);

@@ -1024,6 +1024,8 @@
             this.ClientSize = new System.Drawing.Size(886, 845);
             this.Controls.Add(this.panel1);
             this.Name = "ProjectSettings";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Project Settings";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ProjectSettings_FormClosed);
             this.groupBoxDirectories.ResumeLayout(false);

@@ -340,7 +340,7 @@ namespace KamiModpackBuilder.UserControls
             }
 
             string fileExt = Path.GetExtension(files[0]);
-            if (fileExt.Equals(".zip") || fileExt.Equals(".7z") || fileExt.Equals(".rar"))
+            if (fileExt.Equals(".zip") || fileExt.Equals(".7z"))
             {
                 if (!isZip) return;
                 CleanUnzipFolder();

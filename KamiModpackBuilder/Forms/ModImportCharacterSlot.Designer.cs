@@ -387,6 +387,8 @@
             this.ClientSize = new System.Drawing.Size(1416, 299);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ModImportCharacterSlot";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Importing New Character Slot Mods";
             this.Shown += new System.EventHandler(this.ModImportCharacterSlot_Shown);
             this.tableLayoutPanel1.ResumeLayout(false);

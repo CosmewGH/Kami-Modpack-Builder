@@ -107,7 +107,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 168);
+            this.ClientSize = new System.Drawing.Size(678, 164);
             this.ControlBox = false;
             this.Controls.Add(this.ddpGameRegion);
             this.Controls.Add(this.txtGameVersion);
@@ -122,6 +122,7 @@
             this.Name = "CreationProjectInfo";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Create Project";
             ((System.ComponentModel.ISupportInitialize)(this.txtGameVersion)).EndInit();
             this.ResumeLayout(false);
