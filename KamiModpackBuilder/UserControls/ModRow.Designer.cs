@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panelModList = new System.Windows.Forms.Panel();
+            this.labelAudio = new System.Windows.Forms.Label();
+            this.labelCustomName = new System.Windows.Forms.Label();
             this.labelError = new System.Windows.Forms.Label();
             this.labelPortraits = new System.Windows.Forms.Label();
             this.labelMetal = new System.Windows.Forms.Label();
@@ -37,8 +39,6 @@
             this.labelWifi = new System.Windows.Forms.Label();
             this.labelModName = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.labelCustomName = new System.Windows.Forms.Label();
-            this.labelAudio = new System.Windows.Forms.Label();
             this.panelModList.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,6 +63,34 @@
             this.panelModList.DoubleClick += new System.EventHandler(this.panelModList_DoubleClick);
             this.panelModList.MouseEnter += new System.EventHandler(this.panelModList_MouseEnter);
             this.panelModList.MouseLeave += new System.EventHandler(this.panelModList_MouseLeave);
+            // 
+            // labelAudio
+            // 
+            this.labelAudio.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelAudio.Image = global::KamiModpackBuilder.Properties.Resources.icon_audio;
+            this.labelAudio.Location = new System.Drawing.Point(776, 2);
+            this.labelAudio.Name = "labelAudio";
+            this.labelAudio.Size = new System.Drawing.Size(24, 24);
+            this.labelAudio.TabIndex = 13;
+            this.labelAudio.Visible = false;
+            this.labelAudio.Click += new System.EventHandler(this.label_Click);
+            this.labelAudio.DoubleClick += new System.EventHandler(this.label_DoubleClick);
+            this.labelAudio.MouseEnter += new System.EventHandler(this.label_MouseEnter);
+            this.labelAudio.MouseLeave += new System.EventHandler(this.panelModList_MouseLeave);
+            // 
+            // labelCustomName
+            // 
+            this.labelCustomName.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelCustomName.Image = global::KamiModpackBuilder.Properties.Resources.icon_custom_name;
+            this.labelCustomName.Location = new System.Drawing.Point(806, 2);
+            this.labelCustomName.Name = "labelCustomName";
+            this.labelCustomName.Size = new System.Drawing.Size(24, 24);
+            this.labelCustomName.TabIndex = 12;
+            this.labelCustomName.Visible = false;
+            this.labelCustomName.Click += new System.EventHandler(this.label_Click);
+            this.labelCustomName.DoubleClick += new System.EventHandler(this.label_DoubleClick);
+            this.labelCustomName.MouseEnter += new System.EventHandler(this.label_MouseEnter);
+            this.labelCustomName.MouseLeave += new System.EventHandler(this.panelModList_MouseLeave);
             // 
             // labelError
             // 
@@ -149,34 +177,6 @@
             this.labelModName.MouseEnter += new System.EventHandler(this.label_MouseEnter);
             this.labelModName.MouseLeave += new System.EventHandler(this.label_MouseLeave);
             // 
-            // labelCustomName
-            // 
-            this.labelCustomName.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.labelCustomName.Image = global::KamiModpackBuilder.Properties.Resources.icon_custom_name;
-            this.labelCustomName.Location = new System.Drawing.Point(806, 2);
-            this.labelCustomName.Name = "labelCustomName";
-            this.labelCustomName.Size = new System.Drawing.Size(24, 24);
-            this.labelCustomName.TabIndex = 12;
-            this.labelCustomName.Visible = false;
-            this.labelCustomName.Click += new System.EventHandler(this.label_Click);
-            this.labelCustomName.DoubleClick += new System.EventHandler(this.label_DoubleClick);
-            this.labelCustomName.MouseEnter += new System.EventHandler(this.label_MouseEnter);
-            this.labelCustomName.MouseLeave += new System.EventHandler(this.panelModList_MouseLeave);
-            // 
-            // labelAudio
-            // 
-            this.labelAudio.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.labelAudio.Image = global::KamiModpackBuilder.Properties.Resources.icon_audio;
-            this.labelAudio.Location = new System.Drawing.Point(776, 2);
-            this.labelAudio.Name = "labelAudio";
-            this.labelAudio.Size = new System.Drawing.Size(24, 24);
-            this.labelAudio.TabIndex = 13;
-            this.labelAudio.Visible = false;
-            this.labelAudio.Click += new System.EventHandler(this.label_Click);
-            this.labelAudio.DoubleClick += new System.EventHandler(this.label_DoubleClick);
-            this.labelAudio.MouseEnter += new System.EventHandler(this.label_MouseEnter);
-            this.labelAudio.MouseLeave += new System.EventHandler(this.panelModList_MouseLeave);
-            // 
             // ModRow
             // 
             this.AllowDrop = true;
@@ -185,6 +185,8 @@
             this.Controls.Add(this.panelModList);
             this.Name = "ModRow";
             this.Size = new System.Drawing.Size(892, 28);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.ModRow_DragDrop);
+            this.DragOver += new System.Windows.Forms.DragEventHandler(this.ModRow_DragOver);
             this.panelModList.ResumeLayout(false);
             this.panelModList.PerformLayout();
             this.ResumeLayout(false);

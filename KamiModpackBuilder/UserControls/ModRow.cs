@@ -50,6 +50,7 @@ namespace KamiModpackBuilder.UserControls
         public bool isSelected { get { return m_IsSelected; } }
         public bool isActiveList { get { return _IsActiveList; } }
         public ModsList.ModListType modListType { get { return _ModListType; } }
+        public ModsList modsListParent = null;
         #endregion
 
         #region Constructors
@@ -359,6 +360,22 @@ namespace KamiModpackBuilder.UserControls
                 HoverValue = 0;
                 panelModList.BackColor = colorNormal;
             }
+        }
+
+        private void ModRow_DragOver(object sender, DragEventArgs e)
+        {
+            if (!_IsActiveList)
+            {
+                e.Effect = DragDropEffects.Link;
+            }
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void ModRow_DragDrop(object sender, DragEventArgs e)
+        {
+            if (_IsActiveList) return;
+            modsListParent.DoDragDrop((e.Data.GetData(DataFormats.FileDrop)) as string[]);
         }
     }
 }

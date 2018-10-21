@@ -70,7 +70,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(564, 126);
+            this.btnSave.Location = new System.Drawing.Point(292, 126);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(112, 35);
@@ -107,7 +107,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(678, 164);
+            this.ClientSize = new System.Drawing.Size(674, 172);
             this.ControlBox = false;
             this.Controls.Add(this.ddpGameRegion);
             this.Controls.Add(this.txtGameVersion);

@@ -79,6 +79,12 @@ namespace KamiModpackBuilder.UserControls
                 }
             }
         }
+
+        public void DoDragDrop(string[] dragdropdata)
+        {
+            DragDropData = dragdropdata;
+            backgroundWorkerDragDrop.RunWorkerAsync();
+        }
         #endregion
 
         #region Private Methods
@@ -280,6 +286,7 @@ namespace KamiModpackBuilder.UserControls
                 {
                     ModRow row = new ModRow(_SmashProjectManager, _IsActiveList, _ModListType);
                     row.Dock = DockStyle.Top;
+                    row.modsListParent = this;
                     _Rows.Add(row);
                     row.Parent = panelModList;
                 }

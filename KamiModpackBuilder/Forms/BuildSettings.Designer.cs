@@ -79,13 +79,13 @@
             this.comboBoxCrashSafety.FormattingEnabled = true;
             this.comboBoxCrashSafety.Location = new System.Drawing.Point(170, 64);
             this.comboBoxCrashSafety.Name = "comboBoxCrashSafety";
-            this.comboBoxCrashSafety.Size = new System.Drawing.Size(200, 28);
+            this.comboBoxCrashSafety.Size = new System.Drawing.Size(280, 28);
             this.comboBoxCrashSafety.TabIndex = 52;
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(400, 69);
+            this.label22.Location = new System.Drawing.Point(480, 69);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(284, 20);
             this.label22.TabIndex = 51;
@@ -104,7 +104,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(695, 165);
+            this.ClientSize = new System.Drawing.Size(783, 165);
             this.Controls.Add(this.comboBoxCrashSafety);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label23);
