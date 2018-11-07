@@ -205,5 +205,19 @@ namespace KamiModpackBuilder.UserControls
             if (Directory.Exists(path)) Directory.Delete(path, true);
             RefreshModsLists();
         }
+
+        public void SelectMod(string a_mod)
+        {
+            _GridMods.SelectMod(a_mod);
+            _GridModsInactive.SelectMod(a_mod);
+        }
+
+        private void buttonModProperties_Click(object sender, EventArgs e)
+        {
+            if (SelectedMod != null)
+            {
+                SelectedMod.OpenProperties();
+            }
+        }
     }
 }

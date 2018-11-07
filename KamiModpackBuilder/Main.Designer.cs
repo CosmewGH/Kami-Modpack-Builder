@@ -69,6 +69,7 @@
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.discardChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -176,6 +177,7 @@
             // 
             this.sm4shMusicToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveChangesToolStripMenuItem,
+            this.discardChangesToolStripMenuItem,
             this.toolStripSeparator4,
             this.loadConfigurationToolStripMenuItem,
             this.saveConfigurationToolStripMenuItem,
@@ -294,7 +296,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 24);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -320,7 +322,7 @@
             this.tabControl.Controls.Add(this.tabPageExplorer);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
-            this.tabControl.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(885, 635);
@@ -330,9 +332,9 @@
             // tabPageCharacterMods
             // 
             this.tabPageCharacterMods.Location = new System.Drawing.Point(4, 22);
-            this.tabPageCharacterMods.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageCharacterMods.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageCharacterMods.Name = "tabPageCharacterMods";
-            this.tabPageCharacterMods.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageCharacterMods.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageCharacterMods.Size = new System.Drawing.Size(877, 609);
             this.tabPageCharacterMods.TabIndex = 0;
             this.tabPageCharacterMods.Text = "Character Mods";
@@ -341,9 +343,9 @@
             // tabPageStageMods
             // 
             this.tabPageStageMods.Location = new System.Drawing.Point(4, 22);
-            this.tabPageStageMods.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageStageMods.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageStageMods.Name = "tabPageStageMods";
-            this.tabPageStageMods.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageStageMods.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageStageMods.Size = new System.Drawing.Size(877, 609);
             this.tabPageStageMods.TabIndex = 1;
             this.tabPageStageMods.Text = "Stage Mods";
@@ -352,9 +354,9 @@
             // tabPageGeneralMods
             // 
             this.tabPageGeneralMods.Location = new System.Drawing.Point(4, 22);
-            this.tabPageGeneralMods.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageGeneralMods.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageGeneralMods.Name = "tabPageGeneralMods";
-            this.tabPageGeneralMods.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageGeneralMods.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageGeneralMods.Size = new System.Drawing.Size(877, 609);
             this.tabPageGeneralMods.TabIndex = 2;
             this.tabPageGeneralMods.Text = "General Mods";
@@ -363,9 +365,9 @@
             // tabPageBGM
             // 
             this.tabPageBGM.Location = new System.Drawing.Point(4, 22);
-            this.tabPageBGM.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageBGM.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageBGM.Name = "tabPageBGM";
-            this.tabPageBGM.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageBGM.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageBGM.Size = new System.Drawing.Size(877, 609);
             this.tabPageBGM.TabIndex = 7;
             this.tabPageBGM.Text = "BGM Management";
@@ -374,9 +376,9 @@
             // tabPageMyMusic
             // 
             this.tabPageMyMusic.Location = new System.Drawing.Point(4, 22);
-            this.tabPageMyMusic.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageMyMusic.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageMyMusic.Name = "tabPageMyMusic";
-            this.tabPageMyMusic.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageMyMusic.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageMyMusic.Size = new System.Drawing.Size(877, 609);
             this.tabPageMyMusic.TabIndex = 3;
             this.tabPageMyMusic.Text = "My Music";
@@ -385,9 +387,9 @@
             // tabPageExplorer
             // 
             this.tabPageExplorer.Location = new System.Drawing.Point(4, 22);
-            this.tabPageExplorer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageExplorer.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageExplorer.Name = "tabPageExplorer";
-            this.tabPageExplorer.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageExplorer.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageExplorer.Size = new System.Drawing.Size(877, 609);
             this.tabPageExplorer.TabIndex = 6;
             this.tabPageExplorer.Text = "Explorer";
@@ -397,7 +399,7 @@
             // 
             this.textConsole.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textConsole.Location = new System.Drawing.Point(0, 0);
-            this.textConsole.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textConsole.Margin = new System.Windows.Forms.Padding(2);
             this.textConsole.Multiline = true;
             this.textConsole.Name = "textConsole";
             this.textConsole.ReadOnly = true;
@@ -420,6 +422,13 @@
             this.openFileDialog.DefaultExt = "xml";
             this.openFileDialog.Filter = "XML files|*.xml";
             // 
+            // discardChangesToolStripMenuItem
+            // 
+            this.discardChangesToolStripMenuItem.Name = "discardChangesToolStripMenuItem";
+            this.discardChangesToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
+            this.discardChangesToolStripMenuItem.Text = "Discard Changes";
+            this.discardChangesToolStripMenuItem.Click += new System.EventHandler(this.discardChangesToolStripMenuItem_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -429,7 +438,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Main";
             this.Text = "Kami Modpack Builder";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
@@ -489,6 +498,7 @@
         private System.Windows.Forms.ToolStripMenuItem generateCSVForMyMusicToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem listAllOrphanBGMsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem discardChangesToolStripMenuItem;
     }
 }
 

@@ -11,6 +11,7 @@ using KamiModpackBuilder.Objects;
 using KamiModpackBuilder.Globals;
 using KamiModpackBuilder.UserControls;
 using System.IO;
+using System.Diagnostics;
 
 namespace KamiModpackBuilder.Forms
 {
@@ -324,6 +325,11 @@ namespace KamiModpackBuilder.Forms
             if (ModListType != ModsList.ModListType.Stage) return;
             MessageBox.Show("Cannot export to PNG yet :(");
             //TODO: Export to PNG
+        }
+
+        private void buttonOpenFolder_Click(object sender, EventArgs e)
+        {
+            Process.Start(ModPath);
         }
     }
 }

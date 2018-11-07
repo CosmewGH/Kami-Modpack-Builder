@@ -53,11 +53,42 @@ namespace KamiModpackBuilder.UserControls
         }
         #endregion
 
+        #region Public Methods
+
         public void RefreshData()
         {
             InitializeCharactersComboBox();
             comboBoxCharacters_SelectedIndexChanged(this, null);
         }
+
+        public void RefreshSlotModsLists()
+        {
+            _GridSlots.RefreshRowData();
+            _GridSlotsInactive.RefreshRowData();
+            Globals.EventManager.CharSlotModSelectionChanged(null);
+        }
+
+        public void RefreshGeneralModsLists()
+        {
+            _GridGeneral.RefreshRowData();
+            _GridGeneralInactive.RefreshRowData();
+            Globals.EventManager.CharGeneralModSelectionChanged(null);
+        }
+
+        public void SelectSlotMod(string a_mod)
+        {
+            _GridSlots.SelectMod(a_mod);
+            _GridSlotsInactive.SelectMod(a_mod);
+        }
+
+        public void SelectGeneralMod(string a_mod)
+        {
+            _GridGeneral.SelectMod(a_mod);
+            _GridGeneralInactive.SelectMod(a_mod);
+        }
+        #endregion
+
+        #region Private Methods
 
         private void InitializeCharactersComboBox()
         {
@@ -172,20 +203,7 @@ namespace KamiModpackBuilder.UserControls
             }
             return null;
         }
-
-        public void RefreshSlotModsLists()
-        {
-            _GridSlots.RefreshRowData();
-            _GridSlotsInactive.RefreshRowData();
-            Globals.EventManager.CharSlotModSelectionChanged(null);
-        }
-
-        public void RefreshGeneralModsLists()
-        {
-            _GridGeneral.RefreshRowData();
-            _GridGeneralInactive.RefreshRowData();
-            Globals.EventManager.CharGeneralModSelectionChanged(null);
-        }
+        #endregion
 
         #region Events
         private void comboBoxCharacters_SelectedIndexChanged(object sender, EventArgs e)
@@ -594,6 +612,18 @@ namespace KamiModpackBuilder.UserControls
                 string path = Globals.PathHelper.GetCharacterGeneralModPath(CurrentFighter.name, SelectedGeneralMod.modFolder);
                 if (Directory.Exists(path)) Directory.Delete(path, true);
                 RefreshGeneralModsLists();
+            }
+        }
+
+        private void buttonModProperties_Click(object sender, EventArgs e)
+        {
+            if (SelectedSlotMod != null)
+            {
+                SelectedSlotMod.OpenProperties();
+            }
+            if (SelectedGeneralMod != null)
+            {
+                SelectedGeneralMod.OpenProperties();
             }
         }
         #endregion

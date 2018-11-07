@@ -216,6 +216,11 @@ namespace KamiModpackBuilder
             _ProjectManager._Sm4shMusic.CompileTheModifications();
         }
 
+        private void discardChangesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ProjectManager._Sm4shMusic = new Sm4shMusic.Sm4shMusic();
+        }
+
         private void loadConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ProjectManager._Sm4shMusic.LoadConfiguration();

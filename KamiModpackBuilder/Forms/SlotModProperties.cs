@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using KamiModpackBuilder.Objects;
 using KamiModpackBuilder.Globals;
 using System.IO;
+using System.Diagnostics;
 
 namespace KamiModpackBuilder.Forms
 {
@@ -414,6 +415,11 @@ namespace KamiModpackBuilder.Forms
         {
             MessageBox.Show("Cannot export to PNG yet :(");
             //TODO: Export to PNG
+        }
+
+        private void buttonOpenFolder_Click(object sender, EventArgs e)
+        {
+            Process.Start(ModPath);
         }
     }
 }

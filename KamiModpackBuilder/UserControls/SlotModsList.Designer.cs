@@ -196,13 +196,13 @@
             this.panelModList.Size = new System.Drawing.Size(829, 502);
             this.panelModList.TabIndex = 8;
             // 
-            // DataGridSlotModList
+            // SlotModsList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel4);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "DataGridSlotModList";
+            this.Name = "SlotModsList";
             this.Size = new System.Drawing.Size(835, 557);
             this.groupBoxVoiceMods.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);

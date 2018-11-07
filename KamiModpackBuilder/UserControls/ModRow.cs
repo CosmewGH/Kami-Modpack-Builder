@@ -169,25 +169,76 @@ namespace KamiModpackBuilder.UserControls
                 isSelectable = true;
                 panelModList.BackColor = colorNormal;
             }
-    }
+        }
+
+        public void OpenProperties()
+        {
+            if (modFolder == String.Empty || !propertiesEnabled) return;
+            Forms.SlotModProperties popup;
+            Forms.ModProperties popup2;
+            switch (_ModListType)
+            {
+                case ModsList.ModListType.CharacterSlots:
+                    popup = new Forms.SlotModProperties(PathHelper.FolderCharSlotsMods + _CurrentFighter.name + Path.DirectorySeparatorChar + modFolder, _CurrentFighter.name, _SmashProjectManager);
+                    if (!popup.isInitialized)
+                    {
+                        MessageBox.Show("The mod properties could not be opened. Is the mod missing?");
+                        return;
+                    }
+                    popup.ShowDialog();
+                    break;
+                case ModsList.ModListType.CharacterGeneral:
+                    popup2 = new Forms.ModProperties(PathHelper.FolderCharGeneralMods + Path.DirectorySeparatorChar + _CurrentFighter.name + Path.DirectorySeparatorChar + modFolder, _ModListType, _CurrentFighter.name);
+                    if (!popup2.isInitialized)
+                    {
+                        MessageBox.Show("The mod properties could not be opened. Is the mod missing?");
+                        return;
+                    }
+                    popup2.ShowDialog();
+                    break;
+                case ModsList.ModListType.Stage:
+                    popup2 = new Forms.ModProperties(PathHelper.FolderStageMods + Path.DirectorySeparatorChar + modFolder, _ModListType);
+                    if (!popup2.isInitialized)
+                    {
+                        MessageBox.Show("The mod properties could not be opened. Is the mod missing?");
+                        return;
+                    }
+                    popup2.ShowDialog();
+                    break;
+                case ModsList.ModListType.General:
+                    popup2 = new Forms.ModProperties(PathHelper.FolderGeneralMods + Path.DirectorySeparatorChar + modFolder, _ModListType);
+                    if (!popup2.isInitialized)
+                    {
+                        MessageBox.Show("The mod properties could not be opened. Is the mod missing?");
+                        return;
+                    }
+                    popup2.ShowDialog();
+                    break;
+            }
+            switch (_ModListType)
+            {
+                case ModsList.ModListType.CharacterSlots:
+                    _SmashProjectManager._CharacterModsPage.RefreshSlotModsLists();
+
+                    _SmashProjectManager._CharacterModsPage.SelectSlotMod(modFolder);
+                    break;
+                case ModsList.ModListType.CharacterGeneral:
+                    _SmashProjectManager._CharacterModsPage.RefreshGeneralModsLists();
+                    _SmashProjectManager._CharacterModsPage.SelectGeneralMod(modFolder);
+                    break;
+                case ModsList.ModListType.Stage:
+                    _SmashProjectManager._StageModsPage.RefreshModsLists();
+                    _SmashProjectManager._StageModsPage.SelectMod(modFolder);
+                    break;
+                case ModsList.ModListType.General:
+                    _SmashProjectManager._GeneralModsPage.RefreshModsLists();
+                    _SmashProjectManager._GeneralModsPage.SelectMod(modFolder);
+                    break;
+            }
+        }
         #endregion
 
         #region Private Methods
-
-        #endregion
-
-        private void panelModList_Click(object sender, EventArgs e)
-        {
-            if (m_IsSelected) SetModAsDeselected();
-            else SetModAsSelected();
-            HoverValue = 0;
-        }
-
-        private void label_Click(object sender, EventArgs e)
-        {
-            panelModList_Click(null, null);
-            return;
-        }
 
         private void SetModAsDeselected()
         {
@@ -239,74 +290,26 @@ namespace KamiModpackBuilder.UserControls
                 m_IsSelected = false;
             }
         }
+        #endregion
 
         #region Events
+        private void panelModList_Click(object sender, EventArgs e)
+        {
+            if (m_IsSelected) SetModAsDeselected();
+            else SetModAsSelected();
+            HoverValue = 0;
+        }
+
+        private void label_Click(object sender, EventArgs e)
+        {
+            panelModList_Click(null, null);
+            return;
+        }
+
         private void OnModSelectionChanged(ModRow modRowSelected)
         {
             if (modRowSelected != this) DeselectMod();
             else SelectMod();
-        }
-        #endregion
-
-        private void OpenProperties()
-        {
-            if (modFolder == String.Empty || !propertiesEnabled) return;
-            Forms.SlotModProperties popup;
-            Forms.ModProperties popup2;
-            switch (_ModListType)
-            {
-                case ModsList.ModListType.CharacterSlots:
-                    popup = new Forms.SlotModProperties(PathHelper.FolderCharSlotsMods + _CurrentFighter.name + Path.DirectorySeparatorChar + modFolder, _CurrentFighter.name, _SmashProjectManager);
-                    if (!popup.isInitialized)
-                    {
-                        MessageBox.Show("The mod properties could not be opened. Is the mod missing?");
-                        return;
-                    }
-                    popup.ShowDialog();
-                    break;
-                case ModsList.ModListType.CharacterGeneral:
-                    popup2 = new Forms.ModProperties(PathHelper.FolderCharGeneralMods + Path.DirectorySeparatorChar + _CurrentFighter.name + Path.DirectorySeparatorChar + modFolder, _ModListType, _CurrentFighter.name);
-                    if (!popup2.isInitialized)
-                    {
-                        MessageBox.Show("The mod properties could not be opened. Is the mod missing?");
-                        return;
-                    }
-                    popup2.ShowDialog();
-                    break;
-                case ModsList.ModListType.Stage:
-                    popup2 = new Forms.ModProperties(PathHelper.FolderStageMods + Path.DirectorySeparatorChar + modFolder, _ModListType);
-                    if (!popup2.isInitialized)
-                    {
-                        MessageBox.Show("The mod properties could not be opened. Is the mod missing?");
-                        return;
-                    }
-                    popup2.ShowDialog();
-                    break;
-                case ModsList.ModListType.General:
-                    popup2 = new Forms.ModProperties(PathHelper.FolderGeneralMods + Path.DirectorySeparatorChar + modFolder, _ModListType);
-                    if (!popup2.isInitialized)
-                    {
-                        MessageBox.Show("The mod properties could not be opened. Is the mod missing?");
-                        return;
-                    }
-                    popup2.ShowDialog();
-                    break;
-            }
-            switch (_ModListType)
-            {
-                case ModsList.ModListType.CharacterSlots:
-                    _SmashProjectManager._CharacterModsPage.RefreshSlotModsLists();
-                    break;
-                case ModsList.ModListType.CharacterGeneral:
-                    _SmashProjectManager._CharacterModsPage.RefreshGeneralModsLists();
-                    break;
-                case ModsList.ModListType.Stage:
-                    _SmashProjectManager._StageModsPage.RefreshModsLists();
-                    break;
-                case ModsList.ModListType.General:
-                    _SmashProjectManager._GeneralModsPage.RefreshModsLists();
-                    break;
-            }
         }
 
         private void panelModList_DoubleClick(object sender, EventArgs e)
@@ -377,5 +380,6 @@ namespace KamiModpackBuilder.UserControls
             if (_IsActiveList) return;
             modsListParent.DoDragDrop((e.Data.GetData(DataFormats.FileDrop)) as string[]);
         }
+        #endregion
     }
 }
