@@ -77,11 +77,12 @@
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1416, 299);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(944, 194);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
@@ -91,17 +92,19 @@
             this.panel1.Controls.Add(this.buttonRemoveRow);
             this.panel1.Controls.Add(this.buttonAddRow);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 262);
+            this.panel1.Location = new System.Drawing.Point(2, 170);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1410, 34);
+            this.panel1.Size = new System.Drawing.Size(940, 22);
             this.panel1.TabIndex = 1;
             // 
             // buttonCancel
             // 
             this.buttonCancel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonCancel.Location = new System.Drawing.Point(859, 5);
+            this.buttonCancel.Location = new System.Drawing.Point(573, 3);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 29);
+            this.buttonCancel.Size = new System.Drawing.Size(50, 19);
             this.buttonCancel.TabIndex = 3;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -110,9 +113,10 @@
             // buttonConfirm
             // 
             this.buttonConfirm.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonConfirm.Location = new System.Drawing.Point(484, 5);
+            this.buttonConfirm.Location = new System.Drawing.Point(323, 3);
+            this.buttonConfirm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonConfirm.Name = "buttonConfirm";
-            this.buttonConfirm.Size = new System.Drawing.Size(75, 29);
+            this.buttonConfirm.Size = new System.Drawing.Size(50, 19);
             this.buttonConfirm.TabIndex = 0;
             this.buttonConfirm.Text = "Confirm";
             this.buttonConfirm.UseVisualStyleBackColor = true;
@@ -122,9 +126,10 @@
             // 
             this.buttonRemoveRow.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.buttonRemoveRow.Enabled = false;
-            this.buttonRemoveRow.Location = new System.Drawing.Point(731, 5);
+            this.buttonRemoveRow.Location = new System.Drawing.Point(487, 3);
+            this.buttonRemoveRow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonRemoveRow.Name = "buttonRemoveRow";
-            this.buttonRemoveRow.Size = new System.Drawing.Size(75, 29);
+            this.buttonRemoveRow.Size = new System.Drawing.Size(50, 19);
             this.buttonRemoveRow.TabIndex = 2;
             this.buttonRemoveRow.Text = "- Row";
             this.buttonRemoveRow.UseVisualStyleBackColor = true;
@@ -133,9 +138,10 @@
             // buttonAddRow
             // 
             this.buttonAddRow.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonAddRow.Location = new System.Drawing.Point(605, 5);
+            this.buttonAddRow.Location = new System.Drawing.Point(403, 3);
+            this.buttonAddRow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonAddRow.Name = "buttonAddRow";
-            this.buttonAddRow.Size = new System.Drawing.Size(75, 29);
+            this.buttonAddRow.Size = new System.Drawing.Size(50, 19);
             this.buttonAddRow.TabIndex = 1;
             this.buttonAddRow.Text = "+ Row";
             this.buttonAddRow.UseVisualStyleBackColor = true;
@@ -177,12 +183,13 @@
             this.ColumnSound,
             this.ColumnVoice});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.Location = new System.Drawing.Point(2, 2);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.Size = new System.Drawing.Size(1410, 253);
+            this.dataGridView1.Size = new System.Drawing.Size(940, 164);
             this.dataGridView1.TabIndex = 0;
             // 
             // ColumnName
@@ -382,14 +389,16 @@
             // 
             // ModImportCharacterSlot
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1416, 299);
+            this.ClientSize = new System.Drawing.Size(944, 194);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ModImportCharacterSlot";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Importing New Character Slot Mods";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ModImportCharacterSlot_FormClosing);
             this.Shown += new System.EventHandler(this.ModImportCharacterSlot_Shown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);

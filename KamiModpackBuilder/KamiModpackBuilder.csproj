@@ -81,6 +81,9 @@
     <Compile Include="DB\FightersDB.cs" />
     <Compile Include="DB\IconsDB.cs" />
     <Compile Include="FileTypes\NUT.cs" />
+    <Compile Include="Globals\LabelNoCopy.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

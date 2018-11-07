@@ -110,7 +110,7 @@ namespace KamiModpackBuilder
 
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreateProject();
+            CreateProject(false);
         }
 
         private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -201,7 +201,7 @@ namespace KamiModpackBuilder
                     UnloadGeneralModsPage();
                     UnloadExplorerModsPage();
                     break;
-                case 7:
+                case 5:
                     if (_ProjectManager._ExplorerPage != null) return;
                     UnloadCharacterModsPage();
                     UnloadStageModsPage();
@@ -254,8 +254,23 @@ namespace KamiModpackBuilder
 
         #region Methods
         #region Save/Load
-        public bool CreateProject()
+        public bool CreateProject(bool showLoadOption = true)
         {
+            if (showLoadOption)
+            {
+                if (MessageBox.Show("Do you want to open an existing project?", "Open existing project", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    DialogResult result = openFileDialog.ShowDialog(this);
+                    if (result == DialogResult.OK)
+                    {
+                        LogHelper.Info("Loading project file...");
+                        LoadProject(openFileDialog.FileName);
+
+                        _ProjectManager.RefreshTabViews();
+                        return true;
+                    }
+                }
+            }
             MessageBox.Show(this, UIStrings.CREATE_PROJECT_FIND_FOLDER, UIStrings.CAPTION_CREATE_PROJECT);
             while (true)
             {
@@ -296,13 +311,11 @@ namespace KamiModpackBuilder
         public void LoadProject()
         {
             _ProjectManager.LoadProject(_ProjectManager._Config.LastProject);
-            if (_ProjectManager.CurrentProject == null)
-            {
-                MessageBox.Show(this, UIStrings.ERROR_LOADING_PROJECT, UIStrings.CAPTION_ERROR_LOADING_GAME_FOLDER);
-                Application.Exit();
-                return;
-            }
-            //_Options = new Options(_ProjectManager.CurrentProject);
+        }
+
+        public void LoadProject(string path)
+        {
+            _ProjectManager.LoadProject(path);
         }
 
         public void LoadProjectCompleted()

@@ -37,7 +37,7 @@
             this.labelMetal = new System.Windows.Forms.Label();
             this.labelModel = new System.Windows.Forms.Label();
             this.labelWifi = new System.Windows.Forms.Label();
-            this.labelModName = new System.Windows.Forms.Label();
+            this.labelModName = new System.Windows.Forms.LabelNoCopy();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panelModList.SuspendLayout();
             this.SuspendLayout();
@@ -196,7 +196,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panelModList;
-        private System.Windows.Forms.Label labelModName;
+        private System.Windows.Forms.LabelNoCopy labelModName;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label labelWifi;
         private System.Windows.Forms.Label labelPortraits;

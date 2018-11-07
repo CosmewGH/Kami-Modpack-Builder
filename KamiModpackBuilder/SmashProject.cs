@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Windows.Forms;
 using KamiModpackBuilder.UserControls;
 using ZLibNet;
 
@@ -141,8 +142,19 @@ namespace KamiModpackBuilder
 
             XmlSerializer ser = new XmlSerializer(typeof(SmashMod));
             SmashMod loadedProject = null;
-            using (StreamReader reader = new StreamReader(projectPathFile))
-                loadedProject = (SmashMod)(ser.Deserialize(reader));
+            try
+            {
+                using (StreamReader reader = new StreamReader(projectPathFile))
+                    loadedProject = (SmashMod)(ser.Deserialize(reader));
+                if (loadedProject == null) throw new Exception();
+                if (loadedProject.GameVersion == 0) throw new Exception();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(UIStrings.ERROR_LOADING_PROJECT, UIStrings.CAPTION_ERROR_LOADING_GAME_FOLDER);
+                Application.Exit();
+                return null;
+            }
             _CurrentProject = loadedProject;
             _ProjectFilePath = projectPathFile;
 
@@ -212,10 +224,16 @@ namespace KamiModpackBuilder
             if (string.IsNullOrEmpty(_CurrentProject.ProjectWorkspaceFolder) || !Directory.Exists(_CurrentProject.ProjectWorkspaceFolder))
                 _CurrentProject.ProjectWorkspaceFolder = PathHelper.FolderWorkspace;
 
-            if (!PathHelper.IsItSmashFolder(_CurrentProject.GamePath) || !PathHelper.DoesItHavePatchFolder(_CurrentProject.GamePath))
+            while (!PathHelper.IsItSmashFolder(_CurrentProject.GamePath) || !PathHelper.DoesItHavePatchFolder(_CurrentProject.GamePath))
             {
-                LogHelper.Error(string.Format("There seems to be a problem with the game folder: '{0}', check your config file and make sure this directory contains the game and is accessible.", _CurrentProject.GamePath));
-                return false;
+                LogHelper.Error(string.Format("There seems to be a problem with the game folder: '{0}'", _CurrentProject.GamePath));
+
+                FolderBrowserDialog dialog = new FolderBrowserDialog();
+                dialog.SelectedPath = _CurrentProject.GamePath;
+                dialog.ShowNewFolderButton = true;
+
+                if (dialog.ShowDialog() == DialogResult.OK) _CurrentProject.GamePath = dialog.SelectedPath;
+                else return false;
             }
 
             //Create temp folder

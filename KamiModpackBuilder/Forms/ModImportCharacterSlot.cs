@@ -336,6 +336,17 @@ namespace KamiModpackBuilder.Forms
             }
             this.Close();
         }
+
+        private void ModImportCharacterSlot_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                if (MessageBox.Show("Are you sure you want to cancel the import?", "Cancel Import", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
         #endregion
 
         #region Setup
