@@ -43,6 +43,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sm4shMusicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.discardChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.loadConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +70,7 @@
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.discardChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backgroundWorkerBuild = new System.ComponentModel.BackgroundWorker();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -200,6 +201,13 @@
             this.saveChangesToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.saveChangesToolStripMenuItem.Text = "Save Changes";
             this.saveChangesToolStripMenuItem.Click += new System.EventHandler(this.saveChangesToolStripMenuItem_Click);
+            // 
+            // discardChangesToolStripMenuItem
+            // 
+            this.discardChangesToolStripMenuItem.Name = "discardChangesToolStripMenuItem";
+            this.discardChangesToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
+            this.discardChangesToolStripMenuItem.Text = "Discard Changes";
+            this.discardChangesToolStripMenuItem.Click += new System.EventHandler(this.discardChangesToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
@@ -422,12 +430,12 @@
             this.openFileDialog.DefaultExt = "xml";
             this.openFileDialog.Filter = "XML files|*.xml";
             // 
-            // discardChangesToolStripMenuItem
+            // backgroundWorkerBuild
             // 
-            this.discardChangesToolStripMenuItem.Name = "discardChangesToolStripMenuItem";
-            this.discardChangesToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
-            this.discardChangesToolStripMenuItem.Text = "Discard Changes";
-            this.discardChangesToolStripMenuItem.Click += new System.EventHandler(this.discardChangesToolStripMenuItem_Click);
+            this.backgroundWorkerBuild.WorkerReportsProgress = true;
+            this.backgroundWorkerBuild.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerBuild_DoWork);
+            this.backgroundWorkerBuild.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerBuild_ProgressChanged);
+            this.backgroundWorkerBuild.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerBuild_RunWorkerCompleted);
             // 
             // Main
             // 
@@ -499,6 +507,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem listAllOrphanBGMsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem discardChangesToolStripMenuItem;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerBuild;
     }
 }
 

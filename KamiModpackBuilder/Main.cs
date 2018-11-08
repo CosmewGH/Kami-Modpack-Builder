@@ -84,9 +84,28 @@ namespace KamiModpackBuilder
             }
         }
 
+        private void backgroundWorkerBuild_DoWork(object sender, DoWorkEventArgs e)
+        {
+            _ConsoleProgress = new ConsoleRedirProgress(backgroundWorkerBuild);
+            _ProjectManager.RebuildRFAndPatchlist();
+        }
+
+        private void backgroundWorkerBuild_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            textConsole.AppendText(e.UserState.ToString() + Environment.NewLine);
+        }
+
+        private void backgroundWorkerBuild_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            tabControl.Enabled = true;
+            menuStrip1.Enabled = true;
+            Console.SetOut(_ConsoleText);
+        }
+
         private void Main_Shown(object sender, EventArgs e)
         {
             this.Enabled = false;
+            _ConsoleProgress = new ConsoleRedirProgress(backgroundWorker);
             Console.SetOut(_ConsoleProgress);
             backgroundWorker.RunWorkerAsync();
         }
@@ -122,6 +141,7 @@ namespace KamiModpackBuilder
                 _ProjectManager.LoadProject(openFileDialog.FileName);
 
                 this.Enabled = false;
+                _ConsoleProgress = new ConsoleRedirProgress(backgroundWorker);
                 Console.SetOut(_ConsoleProgress);
                 backgroundWorker.RunWorkerAsync();
 
@@ -164,9 +184,9 @@ namespace KamiModpackBuilder
             {
                 tabControl.Enabled = false;
                 menuStrip1.Enabled = false;
-                _ProjectManager.RebuildRFAndPatchlist();
-                tabControl.Enabled = true;
-                menuStrip1.Enabled = true;
+                _ConsoleProgress = new ConsoleRedirProgress(backgroundWorkerBuild);
+                Console.SetOut(_ConsoleProgress);
+                backgroundWorkerBuild.RunWorkerAsync();
             }
         }
 
@@ -279,6 +299,7 @@ namespace KamiModpackBuilder
                         if (this._MainLoaded)
                         {
                             this.Enabled = false;
+                            _ConsoleProgress = new ConsoleRedirProgress(backgroundWorker);
                             Console.SetOut(_ConsoleProgress);
                             backgroundWorker.RunWorkerAsync();
                         }
@@ -316,6 +337,7 @@ namespace KamiModpackBuilder
                         if (this._MainLoaded)
                         {
                             this.Enabled = false;
+                            _ConsoleProgress = new ConsoleRedirProgress(backgroundWorker);
                             Console.SetOut(_ConsoleProgress);
                             backgroundWorker.RunWorkerAsync();
                         }
