@@ -92,7 +92,7 @@ namespace KamiModpackBuilder.Forms
                 newSlot.comboBox_body.SelectedIndex = 1 + i < ComboBoxList_ModelNutDirectories.Length ? 1 + i : 0;
                 for (int k = 1; k < modelPartsCount; ++k)
                 {
-                    newSlot.comboBox_parts[k].SelectedIndex = (i + 1 + ((k + (k < 1 ? 0 : haslxxNum)) * slotCount) < ComboBoxList_ModelNutDirectories.Length) ? i + 1 + ((k + (k < 1 ? 0 : haslxxNum)) * slotCount) : 0;
+                    newSlot.comboBox_parts[k-1].SelectedIndex = (i + 1 + ((k + (k < 1 ? 0 : haslxxNum)) * slotCount) < ComboBoxList_ModelNutDirectories.Length) ? i + 1 + ((k + (k < 1 ? 0 : haslxxNum)) * slotCount) : 0;
                 }
                 if (haslxx) newSlot.comboBox_body_lxx.SelectedIndex = (i + 1 + slotCount < ComboBoxList_ModelNutDirectories.Length) ? i + 1 + slotCount : 0;
 
@@ -251,6 +251,22 @@ namespace KamiModpackBuilder.Forms
                 #region Model Files
                 int modelPartsCount = _CurrentFighter.modelParts.Count() - 1;
                 string baseModelPath = baseModPath + "model" + Path.DirectorySeparatorChar;
+                if (slotColumns[i].comboBox_body.SelectedIndex >= 1)
+                {
+                    xml.MetalModel = CharacterSlotModXML.MetalModelStatus.Unknown;
+                    string foldername = ModelNutDirectories[slotColumns[i].comboBox_body.SelectedIndex - 1];
+                    if (xml.TextureID == -1)
+                    {
+                        FileTypes.NUT nut = new FileTypes.NUT();
+                        nut.Read(foldername);
+                        if (nut.Textures.Count > 0)
+                        {
+                            xml.TextureID = nut.Textures[0].HashId;
+                        }
+                    }
+                    foldername = foldername.Replace(Path.GetFileName(foldername), string.Empty);
+                    Utils.CopyAllValidFilesBetweenDirectories(foldername, baseModelPath + "body" + Path.DirectorySeparatorChar);
+                }
                 for (int k = 0; k < modelPartsCount; ++k)
                 {
                     if (slotColumns[i].comboBox_parts[k].SelectedIndex < 1) continue;
@@ -270,6 +286,7 @@ namespace KamiModpackBuilder.Forms
                 }
                 if (xml.Haslxx)
                 {
+                    xml.MetalModel = CharacterSlotModXML.MetalModelStatus.Unknown;
                     string foldername = ModelNutDirectories[slotColumns[i].comboBox_body_lxx.SelectedIndex - 1];
                     foldername = foldername.Replace(Path.GetFileName(foldername), string.Empty);
                     Utils.CopyAllValidFilesBetweenDirectories(foldername, baseModelPath + "lxx" + Path.DirectorySeparatorChar);
@@ -437,6 +454,7 @@ namespace KamiModpackBuilder.Forms
 
                 if (has_lxx)
                 {
+                    label_body_lxx = new Label();
                     label_body_lxx.Text = UIStrings.MOD_IMPORT_BODY_LXX;
                     label_body_lxx.AutoSize = true;
                     label_body_lxx.Parent = panel;
@@ -452,12 +470,12 @@ namespace KamiModpackBuilder.Forms
                 {
                     if (parts.Length > 1)
                     {
-                        label_parts = new Label[parts.Length];
-                        comboBox_parts = new ComboBox[parts.Length];
-                        for (int i = 1; i < parts.Length; ++i)
+                        label_parts = new Label[parts.Length - 1];
+                        comboBox_parts = new ComboBox[parts.Length - 1];
+                        for (int i = 0; i < parts.Length - 1; ++i)
                         {
                             label_parts[i] = new Label();
-                            label_parts[i].Text = parts[i] + " " + UIStrings.MOD_IMPORT_EXTRA_PART;
+                            label_parts[i].Text = parts[i + 1] + " " + UIStrings.MOD_IMPORT_EXTRA_PART;
                             label_parts[i].AutoSize = true;
                             label_parts[i].Parent = panel;
                             comboBox_parts[i] = new ComboBox {
