@@ -50,6 +50,7 @@ namespace KamiModpackBuilder
                     return;
                 }
             }
+            LoadProject();
             
             //Console Redirection
             _ConsoleText = new ConsoleRedirText(textConsole);
@@ -62,7 +63,7 @@ namespace KamiModpackBuilder
         #region Events
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            LoadProject();
+            _ProjectManager.LoadProjectData();
         }
 
         private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -87,7 +88,6 @@ namespace KamiModpackBuilder
         {
             this.Enabled = false;
             Console.SetOut(_ConsoleProgress);
-
             backgroundWorker.RunWorkerAsync();
         }
 
@@ -120,6 +120,10 @@ namespace KamiModpackBuilder
             {
                 LogHelper.Info("Loading project file...");
                 _ProjectManager.LoadProject(openFileDialog.FileName);
+
+                this.Enabled = false;
+                Console.SetOut(_ConsoleProgress);
+                backgroundWorker.RunWorkerAsync();
 
                 _ProjectManager.RefreshTabViews();
             }
@@ -269,9 +273,15 @@ namespace KamiModpackBuilder
                     if (result == DialogResult.OK)
                     {
                         LogHelper.Info("Loading project file...");
-                        LoadProject(openFileDialog.FileName);
+                        
+                         LoadProject(openFileDialog.FileName);
 
-                        _ProjectManager.RefreshTabViews();
+                        if (this._MainLoaded)
+                        {
+                            this.Enabled = false;
+                            Console.SetOut(_ConsoleProgress);
+                            backgroundWorker.RunWorkerAsync();
+                        }
                         return true;
                     }
                 }
@@ -302,6 +312,13 @@ namespace KamiModpackBuilder
                         SmashMod newProject = _ProjectManager.CreateNewProject(saveFileDialog.FileName, gameFolder);
                         new Forms.CreationProjectInfo(newProject, _ProjectManager).ShowDialog(this);
                         MessageBox.Show(this, UIStrings.CREATE_PROJECT_SUCCESS, UIStrings.CAPTION_CREATE_PROJECT);
+
+                        if (this._MainLoaded)
+                        {
+                            this.Enabled = false;
+                            Console.SetOut(_ConsoleProgress);
+                            backgroundWorker.RunWorkerAsync();
+                        }
 
                         return true;
                     }
@@ -348,6 +365,8 @@ namespace KamiModpackBuilder
                 path = PathHelper.GetCharacterGeneralFolder(fighter.name);
                 if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             }
+
+            _ProjectManager.RefreshTabViews();
         }
         #endregion
 

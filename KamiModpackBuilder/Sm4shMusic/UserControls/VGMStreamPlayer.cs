@@ -89,7 +89,16 @@ namespace KamiModpackBuilder.Sm4shMusic.UserControls
 
             }
             else
-                lblTime.Text = EMPTY_SOUND;
+            {
+                try
+                {
+                    lblTime.Text = EMPTY_SOUND;
+                }
+                catch (Exception e)
+                {
+                    LogHelper.Error(e.Message);
+                }
+            }
         }
 
         private void btnPlay_Click(object sender, EventArgs e)

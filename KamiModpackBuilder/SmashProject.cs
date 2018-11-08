@@ -96,8 +96,6 @@ namespace KamiModpackBuilder
             _Config.LastProject = projectFilePath;
             SaveConfig();
 
-            LoadProjectData();
-
             return newProject;
         }
 
@@ -160,8 +158,6 @@ namespace KamiModpackBuilder
 
             _Config.LastProject = _ProjectFilePath;
             SaveConfig();
-
-            LoadProjectData();
 
             return loadedProject;
         }
