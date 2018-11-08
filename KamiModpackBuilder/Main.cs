@@ -375,7 +375,7 @@ namespace KamiModpackBuilder
             Console.SetOut(_ConsoleText);
 
             //Check if project directories exist
-            if (!Directory.Exists(PathHelper.FolderExplorer)) Directory.CreateDirectory(PathHelper.FolderExplorer);
+            if (!Directory.Exists(PathHelper.FolderExplorerFullPath)) Directory.CreateDirectory(PathHelper.FolderExplorerFullPath);
             if (!Directory.Exists(PathHelper.FolderStageMods)) Directory.CreateDirectory(PathHelper.FolderStageMods);
             if (!Directory.Exists(PathHelper.FolderGeneralMods)) Directory.CreateDirectory(PathHelper.FolderGeneralMods);
             if (!Directory.Exists(PathHelper.FolderEditorMods)) Directory.CreateDirectory(PathHelper.FolderEditorMods);

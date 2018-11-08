@@ -26,11 +26,20 @@ namespace KamiModpackBuilder.Globals
     {
         private static SmashMod _Project;
         public static Config _Config;
+        public static string FolderProject { get { return _Config.LastProject.Replace(Path.GetFileName(_Config.LastProject), ""); } }
         public static string FolderTemp { get { return GetProjectTempFolder(); } }
+        public static string FolderExplorerFullPath { get { return GetProjectExplorerFolderFullPath(); } }
+        public static string FolderWorkspaceFullPath { get { return GetProjectWorkspaceFolderFullPath(); } }
+        public static string FolderExtractFullPath { get { return GetProjectExtractFolderFullPath(); } }
+        public static string FolderExportFullPath { get { return GetProjectExportFolderFullPath(); } }
         public static string FolderExplorer { get { return GetProjectExplorerFolder(); } }
         public static string FolderWorkspace { get { return GetProjectWorkspaceFolder(); } }
         public static string FolderExtract { get { return GetProjectExtractFolder(); } }
         public static string FolderExport { get { return GetProjectExportFolder(); } }
+        public static string FolderExplorerDefault { get { return GetProjectExplorerFolderDefault(); } }
+        public static string FolderWorkspaceDefault { get { return GetProjectWorkspaceFolderDefault(); } }
+        public static string FolderExtractDefault { get { return GetProjectExtractFolderDefault(); } }
+        public static string FolderExportDefault { get { return GetProjectExportFolderDefault(); } }
         public static string FolderCharMods { get { return GetCharModsFolder(); } }
         public static string FolderCharSlotsMods { get { return GetCharModsSlotsFolder(); } }
         public static string FolderCharGeneralMods { get { return GetCharModsGeneralFolder(); } }
@@ -70,32 +79,32 @@ namespace KamiModpackBuilder.Globals
 
         public static string GetWorkspaceFolder()
         {
-            return GetProjectWorkspaceFolder();
+            return GetProjectWorkspaceFolderFullPath();
         }
 
         public static string GetExplorerFolder(PathHelperEnum path)
         {
-            return GetURI(GetProjectExplorerFolder(), path);
+            return GetURI(GetProjectExplorerFolderFullPath(), path);
         }
 
         public static string GetExplorerFolder(PathHelperEnum path, string folder)
         {
-            return GetURI(GetProjectExplorerFolder(), path, folder);
+            return GetURI(GetProjectExplorerFolderFullPath(), path, folder);
         }
         
         public static string GetExtractFolder(PathHelperEnum path)
         {
-            return GetURI(GetProjectExtractFolder(), path);
+            return GetURI(GetProjectExtractFolderFullPath(), path);
         }
 
         public static string GetExtractFolder(PathHelperEnum path, string folder)
         {
-            return GetURI(GetProjectExtractFolder(), path, folder);
+            return GetURI(GetProjectExtractFolderFullPath(), path, folder);
         }
 
         public static string GetCharModsFolder()
         {
-            return FolderWorkspace + "Characters" + Path.DirectorySeparatorChar;
+            return FolderWorkspaceFullPath + "Characters" + Path.DirectorySeparatorChar;
         }
 
         public static string GetCharModsSlotsFolder()
@@ -110,27 +119,27 @@ namespace KamiModpackBuilder.Globals
 
         public static string GetStageModsFolder()
         {
-            return FolderWorkspace + "Stages" + Path.DirectorySeparatorChar;
+            return FolderWorkspaceFullPath + "Stages" + Path.DirectorySeparatorChar;
         }
 
         public static string GetGeneralModsFolder()
         {
-            return FolderWorkspace + "General" + Path.DirectorySeparatorChar;
+            return FolderWorkspaceFullPath + "General" + Path.DirectorySeparatorChar;
         }
 
         public static string GetEditorModsFolder()
         {
-            return FolderWorkspace + "Editor" + Path.DirectorySeparatorChar;
+            return FolderWorkspaceFullPath + "Editor" + Path.DirectorySeparatorChar;
         }
 
         public static string GetBGMFolder()
         {
-            return FolderWorkspace + "BGM" + Path.DirectorySeparatorChar;
+            return FolderWorkspaceFullPath + "BGM" + Path.DirectorySeparatorChar;
         }
 
         public static string GetMovieFolder()
         {
-            return FolderWorkspace + "Movie" + Path.DirectorySeparatorChar;
+            return FolderWorkspaceFullPath + "Movie" + Path.DirectorySeparatorChar;
         }
 
         public static string GetCharacterSlotsFolder(string charName)
@@ -220,37 +229,111 @@ namespace KamiModpackBuilder.Globals
         #region private methods
         private static string GetProjectTempFolder()
         {
-            if (string.IsNullOrEmpty(_Project.ProjectTempFolder))
-                return Path.GetTempPath() + "kamimodpackbuilder" + Path.DirectorySeparatorChar;
-            return _Project.ProjectTempFolder + (!_Project.ProjectTempFolder.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar.ToString() : string.Empty);
+            return Path.GetTempPath() + "kamimodpackbuilder" + Path.DirectorySeparatorChar;
+        }
+
+        private static string GetProjectExplorerFolderFullPath()
+        {
+            if (string.IsNullOrEmpty(_Project.ProjectExplorerFolderFullPath))
+            {
+                if (Path.IsPathRooted(_Project.ProjectExplorerFolder))
+                    _Project.ProjectExplorerFolderFullPath = _Project.ProjectExplorerFolder + (!_Project.ProjectExplorerFolder.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar.ToString() : string.Empty);
+                else
+                    _Project.ProjectExplorerFolderFullPath = FolderProject + _Project.ProjectExplorerFolder + (!_Project.ProjectExplorerFolder.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar.ToString() : string.Empty);
+                
+                return _Project.ProjectExplorerFolderFullPath;
+            }
+            return _Project.ProjectExplorerFolderFullPath;
+        }
+
+        private static string GetProjectWorkspaceFolderFullPath()
+        {
+            if (string.IsNullOrEmpty(_Project.ProjectWorkspaceFolderFullPath))
+            {
+                if (Path.IsPathRooted(_Project.ProjectWorkspaceFolder))
+                    _Project.ProjectWorkspaceFolderFullPath = _Project.ProjectWorkspaceFolder + (!_Project.ProjectWorkspaceFolder.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar.ToString() : string.Empty);
+                else
+                    _Project.ProjectWorkspaceFolderFullPath = FolderProject + _Project.ProjectWorkspaceFolder + (!_Project.ProjectWorkspaceFolder.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar.ToString() : string.Empty);
+                
+                return _Project.ProjectWorkspaceFolderFullPath;
+            }
+            return _Project.ProjectWorkspaceFolderFullPath;
+        }
+
+        private static string GetProjectExportFolderFullPath()
+        {
+            if (string.IsNullOrEmpty(_Project.ProjectExportFolderFullPath))
+            {
+                if (Path.IsPathRooted(_Project.ProjectExportFolder))
+                    _Project.ProjectExportFolderFullPath = _Project.ProjectExportFolder + (!_Project.ProjectExportFolder.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar.ToString() : string.Empty);
+                else
+                    _Project.ProjectExportFolderFullPath = FolderProject + _Project.ProjectExportFolder + (!_Project.ProjectExportFolder.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar.ToString() : string.Empty);
+                
+                return _Project.ProjectExportFolderFullPath;
+            }
+            return _Project.ProjectExportFolderFullPath;
+        }
+
+        private static string GetProjectExtractFolderFullPath()
+        {
+            if (string.IsNullOrEmpty(_Project.ProjectExtractFolderFullPath))
+            {
+                if (Path.IsPathRooted(_Project.ProjectExtractFolder))
+                    _Project.ProjectExtractFolderFullPath = _Project.ProjectExtractFolder + (!_Project.ProjectExtractFolder.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar.ToString() : string.Empty);
+                else
+                    _Project.ProjectExtractFolderFullPath = FolderProject + _Project.ProjectExtractFolder + (!_Project.ProjectExtractFolder.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar.ToString() : string.Empty);
+                
+                return _Project.ProjectExtractFolderFullPath;
+            }
+            return _Project.ProjectExtractFolderFullPath;
         }
 
         private static string GetProjectExplorerFolder()
         {
             if (string.IsNullOrEmpty(_Project.ProjectExplorerFolder))
-                return _Config.LastProject.Replace(Path.GetFileName(_Config.LastProject), "") + "Mods" + Path.DirectorySeparatorChar + "Explorer" + Path.DirectorySeparatorChar;
-            return _Project.ProjectExplorerFolder + (!_Project.ProjectExplorerFolder.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar.ToString() : string.Empty);
+                _Project.ProjectExplorerFolder = FolderExplorerDefault;
+            return _Project.ProjectExplorerFolder;
         }
 
         private static string GetProjectWorkspaceFolder()
         {
             if (string.IsNullOrEmpty(_Project.ProjectWorkspaceFolder))
-                return _Config.LastProject.Replace(Path.GetFileName(_Config.LastProject), "") + "Mods" + Path.DirectorySeparatorChar;
-            return _Project.ProjectWorkspaceFolder + (!_Project.ProjectWorkspaceFolder.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar.ToString() : string.Empty);
+                _Project.ProjectWorkspaceFolder = FolderWorkspaceDefault;
+            return _Project.ProjectWorkspaceFolder;
         }
 
         private static string GetProjectExportFolder()
         {
             if (string.IsNullOrEmpty(_Project.ProjectExportFolder))
-                return _Config.LastProject.Replace(Path.GetFileName(_Config.LastProject),"") + "Export" + Path.DirectorySeparatorChar;
-            return _Project.ProjectExportFolder + (!_Project.ProjectExportFolder.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar.ToString() : string.Empty);
+                _Project.ProjectExportFolder = FolderExportDefault;
+            return _Project.ProjectExportFolder;
         }
 
         private static string GetProjectExtractFolder()
         {
             if (string.IsNullOrEmpty(_Project.ProjectExtractFolder))
-                return _Config.LastProject.Replace(Path.GetFileName(_Config.LastProject), "") + "Extract" + Path.DirectorySeparatorChar;
-            return _Project.ProjectExtractFolder + (!_Project.ProjectExtractFolder.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar.ToString() : string.Empty);
+                _Project.ProjectExtractFolder = FolderExtractDefault;
+            return _Project.ProjectExtractFolder;
+        }
+
+        private static string GetProjectExplorerFolderDefault()
+        {
+            return "Mods" + Path.DirectorySeparatorChar + "Explorer" + Path.DirectorySeparatorChar;
+        }
+
+        private static string GetProjectWorkspaceFolderDefault()
+        {
+            return "Mods" + Path.DirectorySeparatorChar;
+        }
+
+        private static string GetProjectExportFolderDefault()
+        {
+            return "Export" + Path.DirectorySeparatorChar;
+        }
+
+        private static string GetProjectExtractFolderDefault()
+        {
+            return "Extract" + Path.DirectorySeparatorChar;
         }
         /*
         private static string GetPluginsFolder()

@@ -1,6 +1,6 @@
 Kami Modpack Builder
 ===========
-Smash Bros. For Wii U modpack creation made simple!
+Smash Bros. For Wii U modpack creation made simple! Planning to support Smash Bros. Ultimate as well!
 
 Kami Modpack Builder is a (sort-of) fork of [Sm4shExplorer](https://github.com/Deinonychus71/Sm4shExplorer), built to expand its functionality, and to improve the efficiency of Modpack Creation.
 
@@ -34,6 +34,7 @@ Kami can support it's own database of imported mods for Character Skins, Stages,
 - Libs libg719_decode.dll/libg7221_decode.dll/libmpg123-0.dll/libvorbis.dll/NAudio.dll and libvgmstream.dll from [this repo](https://github.com/Deinonychus71/vgmstream) for Sm4shMusic
 
 ==Future plans==
+- SMASH ULTIMATE SUPPORT
 - Portrait previewing and automatic packing from .PNGs
 - Help text to be littered around the application
 - Build progress bar

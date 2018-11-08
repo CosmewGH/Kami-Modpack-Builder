@@ -209,16 +209,14 @@ namespace KamiModpackBuilder
 
             LogHelper.Info(string.Format("Loading from game: {0}", _CurrentProject.GamePath));
 
-            if (string.IsNullOrEmpty(_CurrentProject.ProjectExportFolder) || !Directory.Exists(_CurrentProject.ProjectExportFolder))
-                _CurrentProject.ProjectExportFolder = PathHelper.FolderExport;
-            if (string.IsNullOrEmpty(_CurrentProject.ProjectExportFolder) || !Directory.Exists(_CurrentProject.ProjectExportFolder))
-                _CurrentProject.ProjectExtractFolder = PathHelper.FolderExtract;
-            if (string.IsNullOrEmpty(_CurrentProject.ProjectTempFolder) || !Directory.Exists(_CurrentProject.ProjectTempFolder))
-                _CurrentProject.ProjectTempFolder = PathHelper.FolderTemp;
-            if (string.IsNullOrEmpty(_CurrentProject.ProjectExplorerFolder) || !Directory.Exists(_CurrentProject.ProjectExplorerFolder))
-                _CurrentProject.ProjectExplorerFolder = PathHelper.FolderExplorer;
-            if (string.IsNullOrEmpty(_CurrentProject.ProjectWorkspaceFolder) || !Directory.Exists(_CurrentProject.ProjectWorkspaceFolder))
-                _CurrentProject.ProjectWorkspaceFolder = PathHelper.FolderWorkspace;
+            if (!Directory.Exists(_CurrentProject.ProjectExportFolder))
+                _CurrentProject.ProjectExportFolder = PathHelper.FolderExportDefault;
+            if (!Directory.Exists(_CurrentProject.ProjectExportFolder))
+                _CurrentProject.ProjectExtractFolder = PathHelper.FolderExtractDefault;
+            if (!Directory.Exists(_CurrentProject.ProjectExplorerFolder))
+                _CurrentProject.ProjectExplorerFolder = PathHelper.FolderExplorerDefault;
+            if (!Directory.Exists(_CurrentProject.ProjectWorkspaceFolder))
+                _CurrentProject.ProjectWorkspaceFolder = PathHelper.FolderWorkspaceDefault;
 
             while (!PathHelper.IsItSmashFolder(_CurrentProject.GamePath) || !PathHelper.DoesItHavePatchFolder(_CurrentProject.GamePath))
             {
@@ -308,7 +306,7 @@ namespace KamiModpackBuilder
         /// <returns>Path to the file or folder extracted</returns>
         public string ExtractResource(string absolutePath)
         {
-            return ExtractResource(absolutePath, PathHelper.FolderExtract);
+            return ExtractResource(absolutePath, PathHelper.FolderExtractFullPath);
         }
 
         /// <summary>
@@ -339,7 +337,7 @@ namespace KamiModpackBuilder
         /// <returns>Path to the file or folder extracted</returns>
         public string ExtractResource(ResourceCollection resCol, string relativePath)
         {
-            return ExtractResource(resCol, relativePath, PathHelper.FolderExtract);
+            return ExtractResource(resCol, relativePath, PathHelper.FolderExtractFullPath);
         }
         #endregion
 
@@ -698,7 +696,7 @@ namespace KamiModpackBuilder
             LogHelper.Info("----------------------------------------------------------------");
             LogHelper.Info(string.Format("Starting compilation of the mod ({0})", (packing ? "release" : "debug")));
 
-            string exportFolder = PathHelper.FolderExport + (packing ? "release" : "debug") + Path.DirectorySeparatorChar + (_CurrentProject.ExportWithDateFolder ? string.Format("{0:yyyyMMdd-HHmmss}", DateTime.Now) + Path.DirectorySeparatorChar : string.Empty);
+            string exportFolder = PathHelper.FolderExportFullPath + (packing ? "release" : "debug") + Path.DirectorySeparatorChar + (_CurrentProject.ExportWithDateFolder ? string.Format("{0:yyyyMMdd-HHmmss}", DateTime.Now) + Path.DirectorySeparatorChar : string.Empty);
 
             try
             {
@@ -1399,14 +1397,14 @@ namespace KamiModpackBuilder
             if (_CurrentProject.YoshiFixActive)
             {
                 bool found = true;
-                if (!Directory.Exists(PathHelper.FolderWorkspace + "YoshiFix"))
+                if (!Directory.Exists(PathHelper.FolderWorkspaceFullPath + "YoshiFix"))
                 {
                     if (File.Exists(PathHelper.GetApplicationDirectory() + "tools" + Path.DirectorySeparatorChar + "Yoshi Fix.zip"))
                     {
                         UnZipper unZipper = new UnZipper();
                         unZipper.ZipFile = PathHelper.GetApplicationDirectory() + "tools" + Path.DirectorySeparatorChar + "Yoshi Fix.zip";
                         unZipper.ItemList.Add("*.*");
-                        unZipper.Destination = PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar;
+                        unZipper.Destination = PathHelper.FolderWorkspaceFullPath + "YoshiFix" + Path.DirectorySeparatorChar;
                         unZipper.Recurse = true;
                         unZipper.UnZip();
                         LogHelper.Debug("Unzipping file...");
@@ -1422,25 +1420,25 @@ namespace KamiModpackBuilder
                     int slots = CharDB.GetCharacterSlotCount(_CurrentProject.IsSwitch ? 0x07 : 0x07);
                     if (slots > 8)
                     {
-                        fileSearch.Add(PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar + "effect" + Path.DirectorySeparatorChar + "yoshi" + Path.DirectorySeparatorChar + "yoshi.010d0000.ptcl");
+                        fileSearch.Add(PathHelper.FolderWorkspaceFullPath + "YoshiFix" + Path.DirectorySeparatorChar + "effect" + Path.DirectorySeparatorChar + "yoshi" + Path.DirectorySeparatorChar + "yoshi.010d0000.ptcl");
                         for (int i = 8; i < slots; ++i)
                         {
-                            fileSearch.AddRange(Directory.GetFiles(PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar + "effect" + Path.DirectorySeparatorChar + "yoshi" + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "EffYoshiAirTrace" + slots.ToString("D2"), "*", SearchOption.AllDirectories));
-                            fileSearch.AddRange(Directory.GetFiles(PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar + "effect" + Path.DirectorySeparatorChar + "yoshi" + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "EffYoshiTamagoKakeraA" + slots, "*", SearchOption.AllDirectories));
-                            fileSearch.AddRange(Directory.GetFiles(PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar + "effect" + Path.DirectorySeparatorChar + "yoshi" + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "EffYoshiTamagoKakeraB" + slots, "*", SearchOption.AllDirectories));
-                            fileSearch.AddRange(Directory.GetFiles(PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar + "effect" + Path.DirectorySeparatorChar + "yoshi" + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "EffYoshiTamagoKakeraC" + slots, "*", SearchOption.AllDirectories));
+                            fileSearch.AddRange(Directory.GetFiles(PathHelper.FolderWorkspaceFullPath + "YoshiFix" + Path.DirectorySeparatorChar + "effect" + Path.DirectorySeparatorChar + "yoshi" + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "EffYoshiAirTrace" + slots.ToString("D2"), "*", SearchOption.AllDirectories));
+                            fileSearch.AddRange(Directory.GetFiles(PathHelper.FolderWorkspaceFullPath + "YoshiFix" + Path.DirectorySeparatorChar + "effect" + Path.DirectorySeparatorChar + "yoshi" + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "EffYoshiTamagoKakeraA" + slots, "*", SearchOption.AllDirectories));
+                            fileSearch.AddRange(Directory.GetFiles(PathHelper.FolderWorkspaceFullPath + "YoshiFix" + Path.DirectorySeparatorChar + "effect" + Path.DirectorySeparatorChar + "yoshi" + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "EffYoshiTamagoKakeraB" + slots, "*", SearchOption.AllDirectories));
+                            fileSearch.AddRange(Directory.GetFiles(PathHelper.FolderWorkspaceFullPath + "YoshiFix" + Path.DirectorySeparatorChar + "effect" + Path.DirectorySeparatorChar + "yoshi" + Path.DirectorySeparatorChar + "model" + Path.DirectorySeparatorChar + "EffYoshiTamagoKakeraC" + slots, "*", SearchOption.AllDirectories));
                         }
                         foreach (string f in fileSearch)
                         {
-                            string explorerFilename = f.Replace(PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar, string.Empty);
+                            string explorerFilename = f.Replace(PathHelper.FolderWorkspaceFullPath + "YoshiFix" + Path.DirectorySeparatorChar, string.Empty);
                             explorerFilename = PathHelper.GetExplorerFolder(PathHelperEnum.FOLDER_PATCH) + "data" + Path.DirectorySeparatorChar + "fighter" + Path.DirectorySeparatorChar + "yoshi" + Path.DirectorySeparatorChar + explorerFilename;
                             AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
                         }
                         fileSearch.Clear();
-                        fileSearch.AddRange(Directory.GetFiles(PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar + slots + " slots", "*", SearchOption.AllDirectories));
+                        fileSearch.AddRange(Directory.GetFiles(PathHelper.FolderWorkspaceFullPath + "YoshiFix" + Path.DirectorySeparatorChar + slots + " slots", "*", SearchOption.AllDirectories));
                         foreach (string f in fileSearch)
                         {
-                            string explorerFilename = f.Replace(PathHelper.FolderWorkspace + "YoshiFix" + Path.DirectorySeparatorChar + slots + " slots", string.Empty);
+                            string explorerFilename = f.Replace(PathHelper.FolderWorkspaceFullPath + "YoshiFix" + Path.DirectorySeparatorChar + slots + " slots", string.Empty);
                             explorerFilename = PathHelper.GetExplorerFolder(PathHelperEnum.FOLDER_PATCH) + "data" + Path.DirectorySeparatorChar + "fighter" + Path.DirectorySeparatorChar + "yoshi" + explorerFilename;
                             AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
                         }

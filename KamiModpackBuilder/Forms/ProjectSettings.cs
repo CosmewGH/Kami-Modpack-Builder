@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KamiModpackBuilder.Objects;
+using KamiModpackBuilder.Globals;
+using System.IO;
 
 namespace KamiModpackBuilder.Forms
 {
@@ -21,8 +23,7 @@ namespace KamiModpackBuilder.Forms
             InitializeComponent();
 
             _Project = project;
-
-            textBoxTempFolder.Text = _Project.ProjectTempFolder;
+            
             textBoxExtractionFolder.Text = _Project.ProjectExtractFolder;
             textBoxExplorerFolder.Text = _Project.ProjectExplorerFolder;
             textBoxExportFolder.Text = _Project.ProjectExportFolder;
@@ -55,13 +56,6 @@ namespace KamiModpackBuilder.Forms
             checkBoxUseExplorer.Checked = _Project.EditorExplorerChanges;
         }
 
-        private void buttonBrowseTempFolder_Click(object sender, EventArgs e)
-        {
-            folderBrowserDialog.SelectedPath = textBoxTempFolder.Text;
-            if (folderBrowserDialog.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-                textBoxTempFolder.Text = folderBrowserDialog.SelectedPath;
-        }
-
         private void buttonBrowseExtractionFolder_Click(object sender, EventArgs e)
         {
             folderBrowserDialog.SelectedPath = textBoxExtractionFolder.Text;
@@ -92,11 +86,30 @@ namespace KamiModpackBuilder.Forms
 
         private void ProjectSettings_FormClosed(object sender, FormClosedEventArgs e)
         {
-            _Project.ProjectTempFolder = textBoxTempFolder.Text;
-            _Project.ProjectExtractFolder = textBoxExtractionFolder.Text;
-            _Project.ProjectExplorerFolder = textBoxExplorerFolder.Text;
-            _Project.ProjectExportFolder = textBoxExportFolder.Text;
-            _Project.ProjectWorkspaceFolder = textBoxWorkspaceFolder.Text;
+            if (!_Project.ProjectExtractFolder.Equals(textBoxExtractionFolder.Text))
+            {
+                _Project.ProjectExtractFolderFullPath = string.Empty;
+                _Project.ProjectExtractFolder = textBoxExtractionFolder.Text + (!textBoxExtractionFolder.Text.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar.ToString() : string.Empty);
+                _Project.ProjectExtractFolder = _Project.ProjectExtractFolder.Replace(PathHelper.FolderProject, "");
+            }
+            if (!_Project.ProjectExplorerFolder.Equals(textBoxExtractionFolder.Text))
+            {
+                _Project.ProjectExplorerFolderFullPath = string.Empty;
+                _Project.ProjectExplorerFolder = textBoxExplorerFolder.Text + (!textBoxExplorerFolder.Text.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar.ToString() : string.Empty);
+                _Project.ProjectExplorerFolder = _Project.ProjectExplorerFolder.Replace(PathHelper.FolderProject, "");
+            }
+            if (!_Project.ProjectExportFolder.Equals(textBoxExtractionFolder.Text))
+            {
+                _Project.ProjectExportFolderFullPath = string.Empty;
+                _Project.ProjectExportFolder = textBoxExportFolder.Text + (!textBoxExportFolder.Text.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar.ToString() : string.Empty);
+                _Project.ProjectExportFolder = _Project.ProjectExportFolder.Replace(PathHelper.FolderProject, "");
+            }
+            if (!_Project.ProjectWorkspaceFolder.Equals(textBoxExtractionFolder.Text))
+            {
+                _Project.ProjectWorkspaceFolderFullPath = string.Empty;
+                _Project.ProjectWorkspaceFolder = textBoxWorkspaceFolder.Text + (!textBoxWorkspaceFolder.Text.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar.ToString() : string.Empty);
+                _Project.ProjectWorkspaceFolder = _Project.ProjectWorkspaceFolder.Replace(PathHelper.FolderProject, "");
+            }
 
             _Project.KeepOriginalFlags = checkBoxForceOriginalFlags.Checked;
             _Project.SkipJunkEntries = checkBoxSkipJunkEntries.Checked;

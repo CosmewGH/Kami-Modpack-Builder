@@ -6,11 +6,16 @@ namespace KamiModpackBuilder.Objects
     public class SmashMod
     {
         public string GamePath { get; set; }
+
         public string ProjectExportFolder { get; set; }
         public string ProjectExtractFolder { get; set; }
-        public string ProjectTempFolder { get; set; }
         public string ProjectExplorerFolder { get; set; }
         public string ProjectWorkspaceFolder { get; set; }
+
+        public string ProjectExportFolderFullPath = string.Empty;
+        public string ProjectExtractFolderFullPath = string.Empty;
+        public string ProjectExplorerFolderFullPath = string.Empty;
+        public string ProjectWorkspaceFolderFullPath = string.Empty;
 
         public List<CharacterSlotMod> ActiveCharacterSlotMods { get; set; }
         public List<StageSlotMod> ActiveStageMods { get; set; }
@@ -75,6 +80,8 @@ namespace KamiModpackBuilder.Objects
             EditorMusicActive = true;
             EditorMTBFix = true;
             EditorExplorerChanges = true;
+
+            ExportWithDateFolder = true;
 
             YoshiFixActive = true;
             DuplicateToOtherRegions = true;

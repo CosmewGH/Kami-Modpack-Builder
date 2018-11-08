@@ -7,7 +7,7 @@ namespace KamiModpackBuilder.Globals
 {
     internal class GlobalConstants
     {
-        public const string VERSION = "0.2";
+        public const string VERSION = "0.2.1";
 
         //TO BE USED FOR DEBUG PURPOSE
         public const bool FORCE_ACCURATE_LOCALIZATION_FLAG = false; //Default is false, true will add a few more rules to set the 0x800 flag (useless if FORCE_ORIGINAL_FLAGS is set to true)
