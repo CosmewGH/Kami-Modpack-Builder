@@ -47,5 +47,16 @@ namespace KamiModpackBuilder.Globals
             "- IcySon55 for his MSBT Editor\r\n" +
             "- Zarklord, Muno, G_F_D, and mariosonicds for their contributions for the Auto TexID Fix scripts\r\n" +
             "- Everyone else who has contributed to the Smash Modding Community";
+
+        public const string MOD_IMPORT_CHR_00 = "chr_00 (Battle Portrait)";
+        public const string MOD_IMPORT_CHR_11 = "chr_11 (8-Player CSS Portrait)";
+        public const string MOD_IMPORT_CHR_13 = "chr_13 (CSS Portrait)";
+        public const string MOD_IMPORT_CHRN_11 = "chrn_11 (CSS Nameplate)";
+        public const string MOD_IMPORT_STOCK_90 = "stock_90 (Stock Icon)";
+        public const string MOD_IMPORT_VOICE = "Voice Pack";
+        public const string MOD_IMPORT_SOUND = "Sound Pack";
+        public const string MOD_IMPORT_BODY = "body (Primary Model)";
+        public const string MOD_IMPORT_BODY_LXX = "body lxx (Primary Low Poly Model)";
+        public const string MOD_IMPORT_EXTRA_PART = "(Extra Neccessary Model)";
     }
 }
