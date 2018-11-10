@@ -595,7 +595,7 @@ namespace KamiModpackBuilder.UserControls
             }
             if (SelectedGeneralMod != null)
             {
-                if (MessageBox.Show(string.Format("Are you sure you want to delete the mod '{0}'?", SelectedSlotMod.name), "Delete Confirmation", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+                if (MessageBox.Show(string.Format("Are you sure you want to delete the mod '{0}'?", SelectedGeneralMod.name), "Delete Confirmation", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
                 if (SelectedGeneralMod.isActiveList)
                 {
                     string modFolder = SelectedGeneralMod.modFolder;

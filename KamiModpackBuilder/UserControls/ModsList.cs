@@ -354,7 +354,7 @@ namespace KamiModpackBuilder.UserControls
                 UnZipper unZipper = new UnZipper();
                 unZipper.ZipFile = files[0];
                 unZipper.ItemList.Add("*.*");
-                unZipper.Destination = PathHelper.FolderTemp + "unzip" + Path.DirectorySeparatorChar;
+                unZipper.Destination = PathHelper.FolderTemp + "unzip" + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(files[0]) + Path.DirectorySeparatorChar;
                 unZipper.Recurse = true;
                 unZipper.UnZip();
                 LogHelper.Debug("Unzipping file...");
@@ -540,13 +540,20 @@ namespace KamiModpackBuilder.UserControls
             }
             else
             {
-                string cameraFolder = Utils.FindDirectoryInFiles(files, "camera", baseDirectory);
-                string modelFolder = Utils.FindDirectoryInFiles(files, "model", baseDirectory);
-                string effectFolder = Utils.FindDirectoryInFiles(files, "effect", baseDirectory);
-                string motionFolder = Utils.FindDirectoryInFiles(files, "motion", baseDirectory);
-                string scriptFolder = Utils.FindDirectoryInFiles(files, "script", baseDirectory);
-                string soundFolder = Utils.FindDirectoryInFiles(files, "sound", baseDirectory);
+                string baseDirectoryTopFolderExcluded = baseDirectory.Remove(baseDirectory.LastIndexOf(Path.DirectorySeparatorChar,baseDirectory.Length - 2));
+                string cameraFolder = Utils.FindDirectoryInFiles(files, "camera", baseDirectoryTopFolderExcluded);
+                string modelFolder = Utils.FindDirectoryInFiles(files, "model", baseDirectoryTopFolderExcluded);
+                string effectFolder = Utils.FindDirectoryInFiles(files, "effect", baseDirectoryTopFolderExcluded);
+                string motionFolder = Utils.FindDirectoryInFiles(files, "motion", baseDirectoryTopFolderExcluded);
+                string scriptFolder = Utils.FindDirectoryInFiles(files, "script", baseDirectoryTopFolderExcluded);
+                string soundFolder = Utils.FindDirectoryInFiles(files, "sound", baseDirectoryTopFolderExcluded);
                 
+                if (string.IsNullOrEmpty(cameraFolder) && string.IsNullOrEmpty(modelFolder) && string.IsNullOrEmpty(effectFolder) && string.IsNullOrEmpty(motionFolder) && string.IsNullOrEmpty(scriptFolder) && string.IsNullOrEmpty(soundFolder))
+                {
+                    MessageBox.Show("No valid folder found. Make sure the directory or zip file contains one of the following folders: camera, model, effect, motion, script, sound");
+                    LogHelper.Error("No valid folder found. Make sure the directory or zip file contains one of the following folders: camera, model, effect, motion, script, sound");
+                    return;
+                }
                 string name = baseDirectory.Split(Path.DirectorySeparatorChar).Last();
                 Forms.NewModNamePopup popup = new Forms.NewModNamePopup();
                 popup.nameText = name;
@@ -644,7 +651,8 @@ namespace KamiModpackBuilder.UserControls
             }
             else
             {
-                string stageFolder = Utils.FindDirectoryInFiles(files, DB.StagesDB.StageNames, baseDirectory);
+                string baseDirectoryTopFolderExcluded = baseDirectory.Remove(baseDirectory.LastIndexOf(Path.DirectorySeparatorChar, baseDirectory.Length - 2));
+                string stageFolder = Utils.FindDirectoryInFiles(files, DB.StagesDB.StageNames, baseDirectoryTopFolderExcluded);
 
                 //Check if all the folders are either empty, or don't exist
                 if (stageFolder.Equals(String.Empty))
@@ -677,6 +685,13 @@ namespace KamiModpackBuilder.UserControls
                         stage = st;
                         break;
                     }
+                }
+
+                if (stage == null)
+                {
+                    MessageBox.Show("No 'end' or 'melee' folder found. Make sure that the mod files follow the Sm4shExplorer file tree, and have a root folder of 'melee' or 'end' that has a stage folder such as 'BattleField_f'");
+                    LogHelper.Error("No 'end' or 'melee' folder found. Make sure that the mod files follow the Sm4shExplorer file tree, and have a root folder of 'melee' or 'end' that has a stage folder such as 'BattleField_f'");
+                    return;
                 }
 
                 string name = baseDirectory.Split(Path.DirectorySeparatorChar).Last();
@@ -795,10 +810,11 @@ namespace KamiModpackBuilder.UserControls
             }
             else
             {
-                string data_Folder = Utils.FindDirectoryInFiles(files, "data", baseDirectory);
-                string data_en_Folder = Utils.FindDirectoryInFiles(files, "data(us_en)", baseDirectory);
-                string data_fr_Folder = Utils.FindDirectoryInFiles(files, "data(us_fr)", baseDirectory);
-                string data_sp_Folder = Utils.FindDirectoryInFiles(files, "data(us_sp)", baseDirectory);
+                string baseDirectoryTopFolderExcluded = baseDirectory.Remove(baseDirectory.LastIndexOf(Path.DirectorySeparatorChar, baseDirectory.Length - 2));
+                string data_Folder = Utils.FindDirectoryInFiles(files, "data", baseDirectoryTopFolderExcluded);
+                string data_en_Folder = Utils.FindDirectoryInFiles(files, "data(us_en)", baseDirectoryTopFolderExcluded);
+                string data_fr_Folder = Utils.FindDirectoryInFiles(files, "data(us_fr)", baseDirectoryTopFolderExcluded);
+                string data_sp_Folder = Utils.FindDirectoryInFiles(files, "data(us_sp)", baseDirectoryTopFolderExcluded);
 
                 //Check if all the folders are either empty, or don't exist
                 if (data_Folder.Equals(String.Empty) && data_en_Folder.Equals(String.Empty) && data_fr_Folder.Equals(String.Empty) && data_sp_Folder.Equals(String.Empty))
