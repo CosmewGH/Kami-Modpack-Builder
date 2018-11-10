@@ -12,9 +12,13 @@ namespace KamiModpackBuilder.Objects
         public string ProjectExplorerFolder { get; set; }
         public string ProjectWorkspaceFolder { get; set; }
 
+        [XmlIgnore]
         public string ProjectExportFolderFullPath = string.Empty;
+        [XmlIgnore]
         public string ProjectExtractFolderFullPath = string.Empty;
+        [XmlIgnore]
         public string ProjectExplorerFolderFullPath = string.Empty;
+        [XmlIgnore]
         public string ProjectWorkspaceFolderFullPath = string.Empty;
 
         public List<CharacterSlotMod> ActiveCharacterSlotMods { get; set; }

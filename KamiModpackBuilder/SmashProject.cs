@@ -679,6 +679,7 @@ namespace KamiModpackBuilder
                         lists[i].Add(fakeFilename, realFilename);
                 }
                 string directoryFake = Path.GetDirectoryName(fakeFilename);
+                if (baseFolders[i].Contains(directoryFake)) return;
                 if (!lists[i].ContainsKey(directoryFake))
                 {
                     string directoryReal = Path.GetDirectoryName(realFilename);
@@ -1511,6 +1512,7 @@ namespace KamiModpackBuilder
         #region private methods
         private void RemoveOriginalResourcesFromPackage(ResourceCollection resCol)
         {
+            if (_CurrentProject.ResourcesToRemove == null) return;
             SmashModItem modItem = _CurrentProject.ResourcesToRemove.Find(p => p.Partition == resCol.PartitionName);
             if (modItem == null)
                 return;
