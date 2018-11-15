@@ -558,6 +558,18 @@ namespace KamiModpackBuilder.UserControls
             {
                 string modPath = kamiFiles[i].Replace("kamimod.xml", String.Empty);
                 TextureIDFix.CheckForErrors(modPath);
+
+                CharacterSlotModXML xml = Globals.Utils.DeserializeXML<CharacterSlotModXML>(kamiFiles[i]);
+                if (xml == null)
+                {
+                    Globals.LogHelper.Error(String.Format("There was a problem opening the xml file of mod {0}.", xml.DisplayName));
+                    continue;
+                }
+                if (xml.UseCustomName)
+                {
+                    if (string.IsNullOrEmpty(xml.CharacterName)) Globals.LogHelper.Warning(String.Format("Custom Name of mod {0} is empty. Mods which have Use Custom Name enabled must have a Custom Name!", xml.DisplayName));
+                    if (string.IsNullOrEmpty(xml.BoxingRingText)) Globals.LogHelper.Warning(String.Format("Boxing Ring Text of mod {0} is empty. Mods which have Use Custom Name enabled must have Boxing Ring Text!", xml.DisplayName));
+                }
             }
 
             Globals.LogHelper.Info(string.Format("Finished Error Checking for character: {0}.", _CurrentFighter.nameHuman));

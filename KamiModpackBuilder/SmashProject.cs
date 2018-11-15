@@ -1098,6 +1098,11 @@ namespace KamiModpackBuilder
                 if (xml.UseCustomName)
                 {
                     bool found = false;
+                    if (string.IsNullOrEmpty(xml.CharacterName))
+                    {
+                        LogHelper.Warning(string.Format("The Custom Name of mod '{0}' is blank. Using the default name...", mod.FolderName));
+                        found = true;
+                    }
                     for (int i = 0; i < fighterNames.Count; ++i)
                     {
                         if (fighterNames[i].CharID == currentFighter.id)
@@ -1132,6 +1137,12 @@ namespace KamiModpackBuilder
                         FighterName newName = new FighterName { name = xml.CharacterName, BoxingText = xml.BoxingRingText, CharID = currentFighter.id, nameplateSlot = highestNameSlot };
                         fighterNames.Add(newName);
                         CharDB.SetCharacterSlotNameIndex(currentFighter.id, mod.SlotID, newName.nameplateSlot+1);
+                        string boxingText = xml.BoxingRingText;
+                        if (string.IsNullOrEmpty(boxingText))
+                        {
+                            boxingText = "Not much\nto say...";
+                            LogHelper.Warning(string.Format("The Boxing Ring Text of mod '{0}' is blank. Using a place-holder message...", mod.FolderName));
+                        }
                         charStringsMSBD.AddNewCharEntry(currentFighter.name, newName.nameplateSlot + 1, xml.CharacterName, xml.BoxingRingText);
 
                         if (xml.chrn_11)
