@@ -179,6 +179,16 @@ namespace KamiModpackBuilder
 
             _Config = config;
             PathHelper._Config = config;
+
+            int helpTextCount = UIStrings.HELPBOX_TEXT.Length;
+
+            if (config.HelpTextHide.Length < helpTextCount)
+            {
+                bool[] old = config.HelpTextHide;
+                config.HelpTextHide = new bool[helpTextCount];
+                for (int i = 0; i < old.Length; ++i) config.HelpTextHide[i] = old[i];
+            }
+
             return config;
         }
 

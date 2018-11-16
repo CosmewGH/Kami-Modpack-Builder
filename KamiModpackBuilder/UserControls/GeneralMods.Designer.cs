@@ -41,9 +41,11 @@
             this.buttonDeleteMod = new System.Windows.Forms.Button();
             this.buttonImportMod = new System.Windows.Forms.Button();
             this.openFileDialogImportZip = new System.Windows.Forms.OpenFileDialog();
+            this.helpMods = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanelSlotButtons.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.helpMods)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -55,6 +57,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanelSlotButtons, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.helpMods, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
@@ -211,6 +214,18 @@
             // 
             this.openFileDialogImportZip.Filter = "Zip file|*.zip|7 Zip Archive|*.7z";
             // 
+            // helpMods
+            // 
+            this.helpMods.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.helpMods.Image = global::KamiModpackBuilder.Properties.Resources.icon_help;
+            this.helpMods.Location = new System.Drawing.Point(272, 3);
+            this.helpMods.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.helpMods.Name = "helpMods";
+            this.helpMods.Size = new System.Drawing.Size(16, 16);
+            this.helpMods.TabIndex = 36;
+            this.helpMods.TabStop = false;
+            this.helpMods.Click += new System.EventHandler(this.help_Click);
+            // 
             // GeneralMods
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -223,6 +238,7 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanelSlotButtons.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.helpMods)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -242,5 +258,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialogImportZip;
         private System.Windows.Forms.Button buttonDeleteMod;
         private System.Windows.Forms.Button buttonModProperties;
+        private System.Windows.Forms.PictureBox helpMods;
     }
 }

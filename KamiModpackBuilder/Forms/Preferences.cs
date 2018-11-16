@@ -38,5 +38,13 @@ namespace KamiModpackBuilder.Forms
             if (dialog.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 textBoxHexEditor.Text = dialog.FileName;
         }
+
+        private void buttonResetTips_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < _Project._Config.HelpTextHide.Length; ++i)
+            {
+                _Project._Config.HelpTextHide[i] = false;
+            }
+        }
     }
 }

@@ -56,6 +56,8 @@ namespace KamiModpackBuilder
             _ConsoleText = new ConsoleRedirText(textConsole);
             _ConsoleProgress = new ConsoleRedirProgress(backgroundWorker);
 
+            HelpBox.Initialize(_ProjectManager);
+
             _MainLoaded = true;
         }
         #endregion
@@ -233,6 +235,7 @@ namespace KamiModpackBuilder
                     LoadExplorerModsPage();
                     break;
             }
+            HelpBox.Show(tabControl.SelectedIndex);
         }
 
         private void saveChangesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -389,6 +392,8 @@ namespace KamiModpackBuilder
             }
 
             _ProjectManager.RefreshTabViews();
+
+            HelpBox.Show(0);
         }
         #endregion
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using KamiModpackBuilder.Objects;
+using KamiModpackBuilder.Globals;
 using System.IO;
 
 namespace KamiModpackBuilder.UserControls
@@ -202,6 +203,20 @@ namespace KamiModpackBuilder.UserControls
             if (SelectedMod != null)
             {
                 SelectedMod.OpenProperties();
+            }
+        }
+
+        private void help_Click(object sender, EventArgs e)
+        {
+            PictureBox helpBtn = sender as PictureBox;
+            if (helpBtn == null)
+                return;
+
+            switch (helpBtn.Name)
+            {
+                case "helpMods":
+                    MessageBox.Show(UIStrings.HELP_GENERALMODS_MODS, UIStrings.CAPTION_HELP);
+                    break;
             }
         }
     }

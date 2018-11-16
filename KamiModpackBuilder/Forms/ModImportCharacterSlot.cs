@@ -104,6 +104,7 @@ namespace KamiModpackBuilder.Forms
                 newSlot.comboBox_sound.SelectedIndex = (i + 1 < ComboBoxList_Files_Sound_Nus3bank.Length) ? i + 1 : 0;
                 newSlot.comboBox_voice.SelectedIndex = (i + 1 < ComboBoxList_Files_Voice_Nus3bank.Length) ? i + 1 : 0;
             }
+            HelpBox.Show(6);
         }
         #endregion
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using KamiModpackBuilder.Objects;
+using KamiModpackBuilder.Globals;
 
 namespace KamiModpackBuilder.UserControls
 {
@@ -639,5 +640,25 @@ namespace KamiModpackBuilder.UserControls
             }
         }
         #endregion
+
+        private void help_Click(object sender, EventArgs e)
+        {
+            PictureBox helpBtn = sender as PictureBox;
+            if (helpBtn == null)
+                return;
+
+            switch (helpBtn.Name)
+            {
+                case "helpButtons":
+                    MessageBox.Show(UIStrings.HELP_CHARACTERMODS_BUTTONS, UIStrings.CAPTION_HELP);
+                    break;
+                case "helpSlotMods":
+                    MessageBox.Show(UIStrings.HELP_CHARACTERMODS_SLOTMODS, UIStrings.CAPTION_HELP);
+                    break;
+                case "helpGeneralMods":
+                    MessageBox.Show(UIStrings.HELP_CHARACTERMODS_GENERALMODS, UIStrings.CAPTION_HELP);
+                    break;
+            }
+        }
     }
 }
