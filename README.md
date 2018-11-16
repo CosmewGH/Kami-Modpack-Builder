@@ -16,6 +16,7 @@ Kami can support it's own database of imported mods for Character Skins, Stages,
 - Automatic String Database Building for character skin names
 - Automatic MTB Fixing for skin voice and sound packs
 - Built-in Sm4shMusic support to manage the list of musics and assign them to different stages (use [vgmstream from kode54](https://github.com/kode54/vgmstream)
+- Portrait and Nameplate previewing
 - Native Sm4shExplorer functionality
 	- It will let you see the whole filesystem of Smash (main data + regions) in a treeview using [DTLSExtractor from Sammi-Husky](https://github.com/Sammi-Husky/Sm4sh-Tools/tree/master/DTLS). The treeview will show the updated version of the game (core files in black + patch files in blue)
 	- Give you a few informations about any file (name, path, size, flags, source...)
@@ -35,10 +36,9 @@ Kami can support it's own database of imported mods for Character Skins, Stages,
 
 ==Future plans==
 - SMASH ULTIMATE SUPPORT
-- Portrait previewing and automatic packing from .PNGs
-- Help text to be littered around the application
+- Portrait packing from .PNGs
 - Build progress bar
 - Other possible suggestions
 
 
-Huge thanks to all the creators and contributors of Sm4shExplorer. Without them, this wouldn't be possible. I have simply stacked functionality on top of the huge codebase that was made by them. If you have contributed to any of the code used in this project and feel I haven't given proper credits/gotten permissions, please contact me. My intention is not to steal, but to improve modpack creation for myself and the community. If you have any suggestions or concerns, let me know as well.
+Huge thanks to all the creators and contributors of Sm4shExplorer. Without them, this wouldn't be possible. I have simply stacked functionality on top of the huge codebase that was made by them. Huge thanks to the contributers of Smash Forge as well. If you have contributed to any of the code used in this project and feel I haven't given proper credits/gotten permissions, please contact me. My intention is not to steal, but to improve modpack creation for myself and the community. If you have any suggestions or concerns, let me know as well.
