@@ -89,32 +89,32 @@ namespace KamiModpackBuilder.Globals
             "A mod can be moved from a default slot to a new slot by clicking the Double Down Arrow button.\r\n" +
             "--Icons--\r\n" +
             "- A red portrait icon will show if the mod doesn't have portrait data, or if it is missing it's Custom Name or Boxing Ring Text (if Use Custom Name is enabled on the mod)\r\n" +
-            "- A green ?-block(Metal Box) icon will show if it is unknown if it has a working Metal Model.This is marked in the properties by YOU (or the mod maker). Builds can include/exclude Non-Metal-Model-Safe mods.\r\n" +
+            "- A green ?-block(Metal Box) icon will show if it is unknown if it has a working Metal Model. This is marked in the properties by YOU (or the mod maker). Builds can include/exclude Non-Metal-Model-Safe mods.\r\n" +
             "- A red !-block icon (Metal Box) will show if the Metal Model is known to have errors or crashes. Similar as above, this is marked by YOU (or the mod maker).\r\n" +
             "- A blue speaker icon will show if the mod has a Soundpack or Voicepack.\r\n" +
-            "- A blue sign/name-tag icon will show if the mod is set to Use Custom Name.This makes the mod use it's custom nameplate and text in battles.\r\n" +
-            "- A red signal icon will show if the mod has been marked by YOU(or the mod maker) as Non-Wifi-Safe.It can be marked safe/unsafe in the properties.Builds can include/exclude Non-Wifi-Safe mods.\r\n" +
-            "- A red !-circle icon will show if the mod is missing.If the folder got renamed or deleted but the mod was still activated, you should deactivate it and reactivate it using the Arrow Buttons.\r\n";
+            "- A blue sign/name-tag icon will show if the mod is set to Use Custom Name. This makes the mod use it's custom nameplate and text in battles.\r\n" +
+            "- A red signal icon will show if the mod has been marked by YOU(or the mod maker) as Non-Wifi-Safe. It can be marked safe/unsafe in the properties. Builds can include/exclude Non-Wifi-Safe mods.\r\n" +
+            "- A red !-circle icon will show if the mod is missing. If the folder got renamed or deleted but the mod was still activated, you should deactivate it and reactivate it using the Arrow Buttons.\r\n";
         public const string HELP_CHARACTERMODS_GENERALMODS =
             "General Mods are mods which affect all skin slots for the fighter.\r\n" +
             "Active Mods are currently turned on.\r\n" +
             "Use the arrows to activate/deactivate the mods and change the priority.\r\n" +
             "--Icons--\r\n" +
-            "- A red signal icon will show if the mod has been marked by YOU(or the mod maker) as Non-Wifi-Safe.It can be marked safe/unsafe in the properties.Builds can include/exclude Non-Wifi-Safe mods.\r\n" +
-            "- A red !-circle icon will show if the mod is missing.If the folder got renamed or deleted but the mod was still activated, you should deactivate it and reactivate it using the Arrow Buttons.\r\n";
+            "- A red signal icon will show if the mod has been marked by YOU(or the mod maker) as Non-Wifi-Safe. It can be marked safe/unsafe in the properties. Builds can include/exclude Non-Wifi-Safe mods.\r\n" +
+            "- A red !-circle icon will show if the mod is missing. If the folder got renamed or deleted but the mod was still activated, you should deactivate it and reactivate it using the Arrow Buttons.\r\n";
         public const string HELP_STAGEMODS_MODS =
             "Stage Mods will specifically be for either the Regular variant, or the Omega variant, not both. For a mod that alters both the Regular and Omega variants, you must import it as 2 separate mods.\r\n" +
             "Active Mods are currently turned on.\r\n" +
             "Use the arrows to activate/deactivate the mods\r\n" +
             "--Icons--\r\n" +
-            "- A red signal icon will show if the mod has been marked by YOU(or the mod maker) as Non-Wifi-Safe.It can be marked safe/unsafe in the properties.Builds can include/exclude Non-Wifi-Safe mods.\r\n" +
-            "- A red !-circle icon will show if the mod is missing.If the folder got renamed or deleted but the mod was still activated, you should deactivate it and reactivate it using the Arrow Buttons.\r\n";
+            "- A red signal icon will show if the mod has been marked by YOU(or the mod maker) as Non-Wifi-Safe. It can be marked safe/unsafe in the properties. Builds can include/exclude Non-Wifi-Safe mods.\r\n" +
+            "- A red !-circle icon will show if the mod is missing. If the folder got renamed or deleted but the mod was still activated, you should deactivate it and reactivate it using the Arrow Buttons.\r\n";
         public const string HELP_GENERALMODS_MODS =
             "General Mods follow the same hierarchy as the Explorer, and can affect any file found in it.\r\n" +
             "Active Mods are currently turned on.\r\n" +
             "Use the arrows to activate/deactivate the mods and change the priority.\r\n" +
             "--Icons--\r\n" +
-            "- A red signal icon will show if the mod has been marked by YOU(or the mod maker) as Non-Wifi-Safe.It can be marked safe/unsafe in the properties.Builds can include/exclude Non-Wifi-Safe mods.\r\n" +
-            "- A red !-circle icon will show if the mod is missing.If the folder got renamed or deleted but the mod was still activated, you should deactivate it and reactivate it using the Arrow Buttons.\r\n";
+            "- A red signal icon will show if the mod has been marked by YOU(or the mod maker) as Non-Wifi-Safe. It can be marked safe/unsafe in the properties. Builds can include/exclude Non-Wifi-Safe mods.\r\n" +
+            "- A red !-circle icon will show if the mod is missing. If the folder got renamed or deleted but the mod was still activated, you should deactivate it and reactivate it using the Arrow Buttons.\r\n";
     }
 }

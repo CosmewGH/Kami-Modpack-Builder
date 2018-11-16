@@ -37,23 +37,24 @@
             this.label21 = new System.Windows.Forms.Label();
             this.checkBoxWifiSafe = new System.Windows.Forms.CheckBox();
             this.groupBoxInfo = new System.Windows.Forms.GroupBox();
+            this.buttonOpenFolder = new System.Windows.Forms.Button();
             this.groupBoxStageData = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.labelStageName = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBoxPortaits = new System.Windows.Forms.GroupBox();
+            this.pictureBox_stage13 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_stagen10 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_stage30 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_stage12 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_stage11 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_stage10 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.labelImage_stage13 = new System.Windows.Forms.Label();
             this.buttonImport_stage13 = new System.Windows.Forms.Button();
             this.buttonExport_stage13 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.labelImage_stage11 = new System.Windows.Forms.Label();
-            this.labelImage_stage12 = new System.Windows.Forms.Label();
-            this.labelImage_stage00 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.labelImage_stage30 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.labelImage_stagen10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.buttonImport_stage10 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
@@ -68,10 +69,16 @@
             this.buttonImport_stage30 = new System.Windows.Forms.Button();
             this.panelNotes = new System.Windows.Forms.Panel();
             this.openFileDialogPortraits = new System.Windows.Forms.OpenFileDialog();
-            this.buttonOpenFolder = new System.Windows.Forms.Button();
+            this.saveFileDialogPortraits = new System.Windows.Forms.SaveFileDialog();
             this.groupBoxInfo.SuspendLayout();
             this.groupBoxStageData.SuspendLayout();
             this.groupBoxPortaits.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stage13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stagen10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stage30)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stage12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stage11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stage10)).BeginInit();
             this.panelNotes.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,7 +95,7 @@
             // textBoxDisplayName
             // 
             this.textBoxDisplayName.Location = new System.Drawing.Point(116, 26);
-            this.textBoxDisplayName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxDisplayName.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxDisplayName.Name = "textBoxDisplayName";
             this.textBoxDisplayName.Size = new System.Drawing.Size(135, 20);
             this.textBoxDisplayName.TabIndex = 18;
@@ -116,7 +123,7 @@
             // textBoxNotes
             // 
             this.textBoxNotes.Location = new System.Drawing.Point(81, 11);
-            this.textBoxNotes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxNotes.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxNotes.Multiline = true;
             this.textBoxNotes.Name = "textBoxNotes";
             this.textBoxNotes.Size = new System.Drawing.Size(547, 64);
@@ -146,7 +153,7 @@
             // 
             this.checkBoxWifiSafe.AutoSize = true;
             this.checkBoxWifiSafe.Location = new System.Drawing.Point(115, 55);
-            this.checkBoxWifiSafe.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxWifiSafe.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxWifiSafe.Name = "checkBoxWifiSafe";
             this.checkBoxWifiSafe.Size = new System.Drawing.Size(15, 14);
             this.checkBoxWifiSafe.TabIndex = 47;
@@ -163,13 +170,25 @@
             this.groupBoxInfo.Controls.Add(this.label20);
             this.groupBoxInfo.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxInfo.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxInfo.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxInfo.Name = "groupBoxInfo";
-            this.groupBoxInfo.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxInfo.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxInfo.Size = new System.Drawing.Size(649, 84);
             this.groupBoxInfo.TabIndex = 49;
             this.groupBoxInfo.TabStop = false;
             this.groupBoxInfo.Text = "Info";
+            // 
+            // buttonOpenFolder
+            // 
+            this.buttonOpenFolder.FlatAppearance.BorderSize = 0;
+            this.buttonOpenFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonOpenFolder.Image = global::KamiModpackBuilder.Properties.Resources.icon_folder;
+            this.buttonOpenFolder.Location = new System.Drawing.Point(614, 18);
+            this.buttonOpenFolder.Name = "buttonOpenFolder";
+            this.buttonOpenFolder.Size = new System.Drawing.Size(23, 23);
+            this.buttonOpenFolder.TabIndex = 49;
+            this.buttonOpenFolder.UseVisualStyleBackColor = true;
+            this.buttonOpenFolder.Click += new System.EventHandler(this.buttonOpenFolder_Click);
             // 
             // groupBoxStageData
             // 
@@ -178,9 +197,9 @@
             this.groupBoxStageData.Controls.Add(this.label14);
             this.groupBoxStageData.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxStageData.Location = new System.Drawing.Point(0, 84);
-            this.groupBoxStageData.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxStageData.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxStageData.Name = "groupBoxStageData";
-            this.groupBoxStageData.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxStageData.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxStageData.Size = new System.Drawing.Size(649, 74);
             this.groupBoxStageData.TabIndex = 50;
             this.groupBoxStageData.TabStop = false;
@@ -220,18 +239,18 @@
             // 
             // groupBoxPortaits
             // 
+            this.groupBoxPortaits.Controls.Add(this.pictureBox_stage13);
+            this.groupBoxPortaits.Controls.Add(this.pictureBox_stagen10);
+            this.groupBoxPortaits.Controls.Add(this.pictureBox_stage30);
+            this.groupBoxPortaits.Controls.Add(this.pictureBox_stage12);
+            this.groupBoxPortaits.Controls.Add(this.pictureBox_stage11);
+            this.groupBoxPortaits.Controls.Add(this.pictureBox_stage10);
             this.groupBoxPortaits.Controls.Add(this.label3);
-            this.groupBoxPortaits.Controls.Add(this.labelImage_stage13);
             this.groupBoxPortaits.Controls.Add(this.buttonImport_stage13);
             this.groupBoxPortaits.Controls.Add(this.buttonExport_stage13);
             this.groupBoxPortaits.Controls.Add(this.label7);
-            this.groupBoxPortaits.Controls.Add(this.labelImage_stage11);
-            this.groupBoxPortaits.Controls.Add(this.labelImage_stage12);
-            this.groupBoxPortaits.Controls.Add(this.labelImage_stage00);
             this.groupBoxPortaits.Controls.Add(this.label11);
-            this.groupBoxPortaits.Controls.Add(this.labelImage_stage30);
             this.groupBoxPortaits.Controls.Add(this.label10);
-            this.groupBoxPortaits.Controls.Add(this.labelImage_stagen10);
             this.groupBoxPortaits.Controls.Add(this.label9);
             this.groupBoxPortaits.Controls.Add(this.buttonImport_stage10);
             this.groupBoxPortaits.Controls.Add(this.label8);
@@ -246,13 +265,73 @@
             this.groupBoxPortaits.Controls.Add(this.buttonImport_stage30);
             this.groupBoxPortaits.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxPortaits.Location = new System.Drawing.Point(0, 158);
-            this.groupBoxPortaits.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxPortaits.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxPortaits.Name = "groupBoxPortaits";
-            this.groupBoxPortaits.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxPortaits.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxPortaits.Size = new System.Drawing.Size(649, 194);
             this.groupBoxPortaits.TabIndex = 54;
             this.groupBoxPortaits.TabStop = false;
             this.groupBoxPortaits.Text = "Portraits";
+            // 
+            // pictureBox_stage13
+            // 
+            this.pictureBox_stage13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_stage13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_stage13.Location = new System.Drawing.Point(557, 62);
+            this.pictureBox_stage13.Name = "pictureBox_stage13";
+            this.pictureBox_stage13.Size = new System.Drawing.Size(86, 63);
+            this.pictureBox_stage13.TabIndex = 38;
+            this.pictureBox_stage13.TabStop = false;
+            // 
+            // pictureBox_stagen10
+            // 
+            this.pictureBox_stagen10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_stagen10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_stagen10.Location = new System.Drawing.Point(379, 73);
+            this.pictureBox_stagen10.Name = "pictureBox_stagen10";
+            this.pictureBox_stagen10.Size = new System.Drawing.Size(171, 42);
+            this.pictureBox_stagen10.TabIndex = 37;
+            this.pictureBox_stagen10.TabStop = false;
+            // 
+            // pictureBox_stage30
+            // 
+            this.pictureBox_stage30.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_stage30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_stage30.Location = new System.Drawing.Point(285, 52);
+            this.pictureBox_stage30.Name = "pictureBox_stage30";
+            this.pictureBox_stage30.Size = new System.Drawing.Size(86, 84);
+            this.pictureBox_stage30.TabIndex = 36;
+            this.pictureBox_stage30.TabStop = false;
+            // 
+            // pictureBox_stage12
+            // 
+            this.pictureBox_stage12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_stage12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_stage12.Location = new System.Drawing.Point(192, 73);
+            this.pictureBox_stage12.Name = "pictureBox_stage12";
+            this.pictureBox_stage12.Size = new System.Drawing.Size(86, 42);
+            this.pictureBox_stage12.TabIndex = 35;
+            this.pictureBox_stage12.TabStop = false;
+            // 
+            // pictureBox_stage11
+            // 
+            this.pictureBox_stage11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_stage11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_stage11.Location = new System.Drawing.Point(99, 73);
+            this.pictureBox_stage11.Name = "pictureBox_stage11";
+            this.pictureBox_stage11.Size = new System.Drawing.Size(86, 42);
+            this.pictureBox_stage11.TabIndex = 34;
+            this.pictureBox_stage11.TabStop = false;
+            // 
+            // pictureBox_stage10
+            // 
+            this.pictureBox_stage10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_stage10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_stage10.Location = new System.Drawing.Point(5, 66);
+            this.pictureBox_stage10.Name = "pictureBox_stage10";
+            this.pictureBox_stage10.Size = new System.Drawing.Size(88, 55);
+            this.pictureBox_stage10.TabIndex = 33;
+            this.pictureBox_stage10.TabStop = false;
             // 
             // label3
             // 
@@ -265,19 +344,10 @@
             this.label3.Text = "stage_13\r\nDLC SSS Portrait";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // labelImage_stage13
-            // 
-            this.labelImage_stage13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelImage_stage13.Location = new System.Drawing.Point(557, 62);
-            this.labelImage_stage13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelImage_stage13.Name = "labelImage_stage13";
-            this.labelImage_stage13.Size = new System.Drawing.Size(86, 63);
-            this.labelImage_stage13.TabIndex = 29;
-            // 
             // buttonImport_stage13
             // 
             this.buttonImport_stage13.Location = new System.Drawing.Point(575, 140);
-            this.buttonImport_stage13.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonImport_stage13.Margin = new System.Windows.Forms.Padding(2);
             this.buttonImport_stage13.Name = "buttonImport_stage13";
             this.buttonImport_stage13.Size = new System.Drawing.Size(50, 21);
             this.buttonImport_stage13.TabIndex = 30;
@@ -288,7 +358,7 @@
             // buttonExport_stage13
             // 
             this.buttonExport_stage13.Location = new System.Drawing.Point(575, 162);
-            this.buttonExport_stage13.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonExport_stage13.Margin = new System.Windows.Forms.Padding(2);
             this.buttonExport_stage13.Name = "buttonExport_stage13";
             this.buttonExport_stage13.Size = new System.Drawing.Size(50, 21);
             this.buttonExport_stage13.TabIndex = 31;
@@ -307,33 +377,6 @@
             this.label7.Text = "stage_10\r\n";
             this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // labelImage_stage11
-            // 
-            this.labelImage_stage11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelImage_stage11.Location = new System.Drawing.Point(99, 73);
-            this.labelImage_stage11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelImage_stage11.Name = "labelImage_stage11";
-            this.labelImage_stage11.Size = new System.Drawing.Size(86, 42);
-            this.labelImage_stage11.TabIndex = 0;
-            // 
-            // labelImage_stage12
-            // 
-            this.labelImage_stage12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelImage_stage12.Location = new System.Drawing.Point(192, 73);
-            this.labelImage_stage12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelImage_stage12.Name = "labelImage_stage12";
-            this.labelImage_stage12.Size = new System.Drawing.Size(86, 42);
-            this.labelImage_stage12.TabIndex = 1;
-            // 
-            // labelImage_stage00
-            // 
-            this.labelImage_stage00.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelImage_stage00.Location = new System.Drawing.Point(5, 66);
-            this.labelImage_stage00.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelImage_stage00.Name = "labelImage_stage00";
-            this.labelImage_stage00.Size = new System.Drawing.Size(86, 55);
-            this.labelImage_stage00.TabIndex = 2;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -345,15 +388,6 @@
             this.label11.Text = "stagen_10\r\nSSS Nameplate";
             this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // labelImage_stage30
-            // 
-            this.labelImage_stage30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelImage_stage30.Location = new System.Drawing.Point(285, 52);
-            this.labelImage_stage30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelImage_stage30.Name = "labelImage_stage30";
-            this.labelImage_stage30.Size = new System.Drawing.Size(86, 84);
-            this.labelImage_stage30.TabIndex = 3;
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -364,15 +398,6 @@
             this.label10.TabIndex = 27;
             this.label10.Text = "stage_30\r\n";
             this.label10.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // labelImage_stagen10
-            // 
-            this.labelImage_stagen10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelImage_stagen10.Location = new System.Drawing.Point(379, 73);
-            this.labelImage_stagen10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelImage_stagen10.Name = "labelImage_stagen10";
-            this.labelImage_stagen10.Size = new System.Drawing.Size(171, 42);
-            this.labelImage_stagen10.TabIndex = 4;
             // 
             // label9
             // 
@@ -388,7 +413,7 @@
             // buttonImport_stage10
             // 
             this.buttonImport_stage10.Location = new System.Drawing.Point(23, 140);
-            this.buttonImport_stage10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonImport_stage10.Margin = new System.Windows.Forms.Padding(2);
             this.buttonImport_stage10.Name = "buttonImport_stage10";
             this.buttonImport_stage10.Size = new System.Drawing.Size(50, 21);
             this.buttonImport_stage10.TabIndex = 5;
@@ -410,7 +435,7 @@
             // buttonExport_stage10
             // 
             this.buttonExport_stage10.Location = new System.Drawing.Point(23, 162);
-            this.buttonExport_stage10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonExport_stage10.Margin = new System.Windows.Forms.Padding(2);
             this.buttonExport_stage10.Name = "buttonExport_stage10";
             this.buttonExport_stage10.Size = new System.Drawing.Size(50, 21);
             this.buttonExport_stage10.TabIndex = 6;
@@ -421,7 +446,7 @@
             // buttonImport_stage11
             // 
             this.buttonImport_stage11.Location = new System.Drawing.Point(117, 140);
-            this.buttonImport_stage11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonImport_stage11.Margin = new System.Windows.Forms.Padding(2);
             this.buttonImport_stage11.Name = "buttonImport_stage11";
             this.buttonImport_stage11.Size = new System.Drawing.Size(50, 21);
             this.buttonImport_stage11.TabIndex = 7;
@@ -432,7 +457,7 @@
             // buttonExport_stagen10
             // 
             this.buttonExport_stagen10.Location = new System.Drawing.Point(439, 162);
-            this.buttonExport_stagen10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonExport_stagen10.Margin = new System.Windows.Forms.Padding(2);
             this.buttonExport_stagen10.Name = "buttonExport_stagen10";
             this.buttonExport_stagen10.Size = new System.Drawing.Size(50, 21);
             this.buttonExport_stagen10.TabIndex = 14;
@@ -443,7 +468,7 @@
             // buttonExport_stage11
             // 
             this.buttonExport_stage11.Location = new System.Drawing.Point(117, 162);
-            this.buttonExport_stage11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonExport_stage11.Margin = new System.Windows.Forms.Padding(2);
             this.buttonExport_stage11.Name = "buttonExport_stage11";
             this.buttonExport_stage11.Size = new System.Drawing.Size(50, 21);
             this.buttonExport_stage11.TabIndex = 8;
@@ -454,7 +479,7 @@
             // buttonImport_stagen10
             // 
             this.buttonImport_stagen10.Location = new System.Drawing.Point(439, 140);
-            this.buttonImport_stagen10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonImport_stagen10.Margin = new System.Windows.Forms.Padding(2);
             this.buttonImport_stagen10.Name = "buttonImport_stagen10";
             this.buttonImport_stagen10.Size = new System.Drawing.Size(50, 21);
             this.buttonImport_stagen10.TabIndex = 13;
@@ -465,7 +490,7 @@
             // buttonImport_stage12
             // 
             this.buttonImport_stage12.Location = new System.Drawing.Point(210, 140);
-            this.buttonImport_stage12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonImport_stage12.Margin = new System.Windows.Forms.Padding(2);
             this.buttonImport_stage12.Name = "buttonImport_stage12";
             this.buttonImport_stage12.Size = new System.Drawing.Size(50, 21);
             this.buttonImport_stage12.TabIndex = 9;
@@ -476,7 +501,7 @@
             // buttonExport_stage30
             // 
             this.buttonExport_stage30.Location = new System.Drawing.Point(303, 162);
-            this.buttonExport_stage30.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonExport_stage30.Margin = new System.Windows.Forms.Padding(2);
             this.buttonExport_stage30.Name = "buttonExport_stage30";
             this.buttonExport_stage30.Size = new System.Drawing.Size(50, 21);
             this.buttonExport_stage30.TabIndex = 12;
@@ -487,7 +512,7 @@
             // buttonExport_stage12
             // 
             this.buttonExport_stage12.Location = new System.Drawing.Point(210, 162);
-            this.buttonExport_stage12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonExport_stage12.Margin = new System.Windows.Forms.Padding(2);
             this.buttonExport_stage12.Name = "buttonExport_stage12";
             this.buttonExport_stage12.Size = new System.Drawing.Size(50, 21);
             this.buttonExport_stage12.TabIndex = 10;
@@ -498,7 +523,7 @@
             // buttonImport_stage30
             // 
             this.buttonImport_stage30.Location = new System.Drawing.Point(303, 140);
-            this.buttonImport_stage30.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonImport_stage30.Margin = new System.Windows.Forms.Padding(2);
             this.buttonImport_stage30.Name = "buttonImport_stage30";
             this.buttonImport_stage30.Size = new System.Drawing.Size(50, 21);
             this.buttonImport_stage30.TabIndex = 11;
@@ -512,7 +537,7 @@
             this.panelNotes.Controls.Add(this.textBoxNotes);
             this.panelNotes.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelNotes.Location = new System.Drawing.Point(0, 352);
-            this.panelNotes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelNotes.Margin = new System.Windows.Forms.Padding(2);
             this.panelNotes.Name = "panelNotes";
             this.panelNotes.Size = new System.Drawing.Size(649, 83);
             this.panelNotes.TabIndex = 55;
@@ -521,17 +546,9 @@
             // 
             this.openFileDialogPortraits.Filter = "nut files|*.nut|PNG files|*.png";
             // 
-            // buttonOpenFolder
+            // saveFileDialogPortraits
             // 
-            this.buttonOpenFolder.FlatAppearance.BorderSize = 0;
-            this.buttonOpenFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonOpenFolder.Image = global::KamiModpackBuilder.Properties.Resources.icon_folder;
-            this.buttonOpenFolder.Location = new System.Drawing.Point(614, 18);
-            this.buttonOpenFolder.Name = "buttonOpenFolder";
-            this.buttonOpenFolder.Size = new System.Drawing.Size(23, 23);
-            this.buttonOpenFolder.TabIndex = 49;
-            this.buttonOpenFolder.UseVisualStyleBackColor = true;
-            this.buttonOpenFolder.Click += new System.EventHandler(this.buttonOpenFolder_Click);
+            this.saveFileDialogPortraits.Filter = "PNG files|*.png";
             // 
             // ModProperties
             // 
@@ -553,6 +570,12 @@
             this.groupBoxStageData.PerformLayout();
             this.groupBoxPortaits.ResumeLayout(false);
             this.groupBoxPortaits.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stage13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stagen10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stage30)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stage12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stage11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stage10)).EndInit();
             this.panelNotes.ResumeLayout(false);
             this.panelNotes.PerformLayout();
             this.ResumeLayout(false);
@@ -573,13 +596,8 @@
         private System.Windows.Forms.GroupBox groupBoxStageData;
         private System.Windows.Forms.GroupBox groupBoxPortaits;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label labelImage_stage11;
-        private System.Windows.Forms.Label labelImage_stage12;
-        private System.Windows.Forms.Label labelImage_stage00;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label labelImage_stage30;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label labelImage_stagen10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button buttonImport_stage10;
         private System.Windows.Forms.Label label8;
@@ -598,9 +616,15 @@
         private System.Windows.Forms.Panel panelNotes;
         private System.Windows.Forms.OpenFileDialog openFileDialogPortraits;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label labelImage_stage13;
         private System.Windows.Forms.Button buttonImport_stage13;
         private System.Windows.Forms.Button buttonExport_stage13;
         private System.Windows.Forms.Button buttonOpenFolder;
+        private System.Windows.Forms.PictureBox pictureBox_stage10;
+        private System.Windows.Forms.PictureBox pictureBox_stage11;
+        private System.Windows.Forms.PictureBox pictureBox_stage13;
+        private System.Windows.Forms.PictureBox pictureBox_stagen10;
+        private System.Windows.Forms.PictureBox pictureBox_stage30;
+        private System.Windows.Forms.PictureBox pictureBox_stage12;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogPortraits;
     }
 }

@@ -123,4 +123,7 @@
   <metadata name="openFileDialogPortraits.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>330, 22</value>
   </metadata>
+  <metadata name="saveFileDialogPortraits.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>509, 22</value>
+  </metadata>
 </root>

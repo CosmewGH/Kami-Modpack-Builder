@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -86,6 +87,37 @@ namespace KamiModpackBuilder.Forms
             XMLData.chrn_11 = File.Exists(PathChrn11);
             XMLData.Voice = File.Exists(PathVoice);
             XMLData.Sound = File.Exists(PathSound);
+
+            if (XMLData.chr_00)
+            {
+                pictureBox_chr00.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathChr00);
+                pictureBox_chr00.Cursor = Cursors.Hand;
+                pictureBox_chr00.Click += portrait_Click;
+            }
+            if (XMLData.chr_11)
+            {
+                pictureBox_chr11.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathChr11);
+                pictureBox_chr11.Cursor = Cursors.Hand;
+                pictureBox_chr11.Click += portrait_Click;
+            }
+            if (XMLData.chr_13)
+            {
+                pictureBox_chr13.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathChr13);
+                pictureBox_chr13.Cursor = Cursors.Hand;
+                pictureBox_chr13.Click += portrait_Click;
+            }
+            if (XMLData.stock_90)
+            {
+                pictureBox_stock90.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStock90);
+                pictureBox_stock90.Cursor = Cursors.Hand;
+                pictureBox_stock90.Click += portrait_Click;
+            }
+            if (XMLData.chrn_11)
+            {
+                pictureBox_chrn11.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathChrn11, true);
+                pictureBox_chrn11.Cursor = Cursors.Hand;
+                pictureBox_chrn11.Click += portrait_Click;
+            }
 
             textBoxDisplayName.Text = XMLData.DisplayName;
             checkBoxUseCustomName.Checked = XMLData.UseCustomName;
@@ -275,151 +307,159 @@ namespace KamiModpackBuilder.Forms
         private void buttonImport_chr00_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialogPortraits.ShowDialog();
-            if (result == DialogResult.OK)
+            if (result != DialogResult.OK) return;
+            if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Contains("png"))
             {
-                if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Equals("png"))
-                {
-                    MessageBox.Show("Cannot import PNGs yet :(");
-                    //TODO: Import PNG
-                    return;
-                }
-                else
-                {
-                    //TODO: Validate format
-                    Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "chr");
-                    File.Copy(openFileDialogPortraits.FileName, PathChr00, true);
-                    XMLData.chr_00 = true;
-                    buttonExport_chr00.Enabled = true;
-                    LogHelper.Info("Imported chr_00 successfully.");
-                }
+                MessageBox.Show("Cannot import PNGs yet :(");
+                //TODO: Import PNG
+                return;
+            }
+            else
+            {
+                //TODO: Validate format
+                Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "chr");
+                File.Copy(openFileDialogPortraits.FileName, PathChr00, true);
+                XMLData.chr_00 = true;
+                buttonExport_chr00.Enabled = true;
+                LogHelper.Info("Imported chr_00 successfully.");
             }
         }
 
         private void buttonExport_chr00_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Cannot export to PNG yet :(");
-            //TODO: Export to PNG
+            saveFileDialogPortraits.FileName = "chr_00.png";
+            DialogResult result = saveFileDialogPortraits.ShowDialog();
+            if (result != DialogResult.OK) return;
+            pictureBox_chr00.BackgroundImage.Save(saveFileDialogPortraits.FileName);
         }
 
         private void buttonImport_chr11_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialogPortraits.ShowDialog();
-            if (result == DialogResult.OK)
+            if (result != DialogResult.OK) return;
+            if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Contains("png"))
             {
-                if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Equals("png"))
-                {
-                    MessageBox.Show("Cannot import PNGs yet :(");
-                    //TODO: Import PNG
-                    return;
-                }
-                else
-                {
-                    //TODO: Validate format
-                    Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "chr");
-                    File.Copy(openFileDialogPortraits.FileName, PathChr11, true);
-                    XMLData.chr_11 = true;
-                    buttonExport_chr11.Enabled = true;
-                    LogHelper.Info("Imported chr_11 successfully.");
-                }
+                MessageBox.Show("Cannot import PNGs yet :(");
+                //TODO: Import PNG
+                return;
+            }
+            else
+            {
+                //TODO: Validate format
+                Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "chr");
+                File.Copy(openFileDialogPortraits.FileName, PathChr11, true);
+                XMLData.chr_11 = true;
+                buttonExport_chr11.Enabled = true;
+                LogHelper.Info("Imported chr_11 successfully.");
             }
         }
 
         private void buttonExport_chr11_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Cannot export to PNG yet :(");
-            //TODO: Export to PNG
+            saveFileDialogPortraits.FileName = "chr_11.png";
+            DialogResult result = saveFileDialogPortraits.ShowDialog();
+            if (result != DialogResult.OK) return;
+            pictureBox_chr11.BackgroundImage.Save(saveFileDialogPortraits.FileName);
         }
 
         private void buttonImport_chr13_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialogPortraits.ShowDialog();
-            if (result == DialogResult.OK)
+            if (result != DialogResult.OK) return;
+            if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Contains("png"))
             {
-                if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Equals("png"))
-                {
-                    MessageBox.Show("Cannot import PNGs yet :(");
-                    //TODO: Import PNG
-                    return;
-                }
-                else
-                {
-                    //TODO: Validate format
-                    Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "chr");
-                    File.Copy(openFileDialogPortraits.FileName, PathChr13, true);
-                    XMLData.chr_13 = true;
-                    buttonExport_chr13.Enabled = true;
-                    LogHelper.Info("Imported chr_13 successfully.");
-                }
+                MessageBox.Show("Cannot import PNGs yet :(");
+                //TODO: Import PNG
+                return;
+            }
+            else
+            {
+                //TODO: Validate format
+                Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "chr");
+                File.Copy(openFileDialogPortraits.FileName, PathChr13, true);
+                XMLData.chr_13 = true;
+                buttonExport_chr13.Enabled = true;
+                LogHelper.Info("Imported chr_13 successfully.");
             }
         }
 
         private void buttonExport_chr13_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Cannot export to PNG yet :(");
-            //TODO: Export to PNG
+            saveFileDialogPortraits.FileName = "chr_13.png";
+            DialogResult result = saveFileDialogPortraits.ShowDialog();
+            if (result != DialogResult.OK) return;
+            pictureBox_chr13.BackgroundImage.Save(saveFileDialogPortraits.FileName);
         }
 
         private void buttonImport_stock90_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialogPortraits.ShowDialog();
-            if (result == DialogResult.OK)
+            if (result != DialogResult.OK) return;
+            if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Contains("png"))
             {
-                if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Equals("png"))
-                {
-                    MessageBox.Show("Cannot import PNGs yet :(");
-                    //TODO: Import PNG
-                    return;
-                }
-                else
-                {
-                    //TODO: Validate format
-                    Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "chr");
-                    File.Copy(openFileDialogPortraits.FileName, PathStock90, true);
-                    XMLData.stock_90 = true;
-                    buttonExport_stock90.Enabled = true;
-                    LogHelper.Info("Imported stock_90 successfully.");
-                }
+                MessageBox.Show("Cannot import PNGs yet :(");
+                //TODO: Import PNG
+                return;
+            }
+            else
+            {
+                //TODO: Validate format
+                Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "chr");
+                File.Copy(openFileDialogPortraits.FileName, PathStock90, true);
+                XMLData.stock_90 = true;
+                buttonExport_stock90.Enabled = true;
+                LogHelper.Info("Imported stock_90 successfully.");
             }
         }
 
         private void buttonExport_stock90_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Cannot export to PNG yet :(");
-            //TODO: Export to PNG
+            saveFileDialogPortraits.FileName = "stock_90.png";
+            DialogResult result = saveFileDialogPortraits.ShowDialog();
+            if (result != DialogResult.OK) return;
+            pictureBox_stock90.BackgroundImage.Save(saveFileDialogPortraits.FileName);
         }
 
         private void buttonImport_chrn11_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialogPortraits.ShowDialog();
-            if (result == DialogResult.OK)
+            if (result != DialogResult.OK) return;
+            if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Contains("png"))
             {
-                if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Equals("png"))
-                {
-                    MessageBox.Show("Cannot import PNGs yet :(");
-                    //TODO: Import PNG
-                    return;
-                }
-                else
-                {
-                    //TODO: Validate format
-                    Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "chr");
-                    File.Copy(openFileDialogPortraits.FileName, PathChrn11, true);
-                    XMLData.chrn_11 = true;
-                    buttonExport_chrn11.Enabled = true;
-                    LogHelper.Info("Imported chrn_11 successfully.");
-                }
+                MessageBox.Show("Cannot import PNGs yet :(");
+                //TODO: Import PNG
+                return;
+            }
+            else
+            {
+                //TODO: Validate format
+                Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "chr");
+                File.Copy(openFileDialogPortraits.FileName, PathChrn11, true);
+                XMLData.chrn_11 = true;
+                buttonExport_chrn11.Enabled = true;
+                LogHelper.Info("Imported chrn_11 successfully.");
             }
         }
 
         private void buttonExport_chrn11_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Cannot export to PNG yet :(");
-            //TODO: Export to PNG
+            saveFileDialogPortraits.FileName = "chrn_11.png";
+            DialogResult result = saveFileDialogPortraits.ShowDialog();
+            if (result != DialogResult.OK) return;
+            pictureBox_chrn11.BackgroundImage.Save(saveFileDialogPortraits.FileName);
         }
 
         private void buttonOpenFolder_Click(object sender, EventArgs e)
         {
             Process.Start(ModPath);
+        }
+
+        private void portrait_Click(object sender, EventArgs e)
+        {
+            PictureBox p = sender as PictureBox;
+            ImagePreview w = new ImagePreview();
+            w.image = p.BackgroundImage;
+            w.ShowDialog();
         }
     }
 }

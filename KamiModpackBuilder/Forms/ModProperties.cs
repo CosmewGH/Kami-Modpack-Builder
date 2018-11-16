@@ -92,6 +92,44 @@ namespace KamiModpackBuilder.Forms
                     buttonExport_stage13.Enabled = XMLDataStage.stage_13;
                     buttonExport_stage30.Enabled = XMLDataStage.stage_30;
                     buttonExport_stagen10.Enabled = XMLDataStage.stagen_10;
+
+                    if (XMLDataStage.stage_10)
+                    {
+                        pictureBox_stage10.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStage10);
+                        pictureBox_stage10.Cursor = Cursors.Hand;
+                        pictureBox_stage10.Click += portrait_Click;
+                    }
+                    if (XMLDataStage.stage_11)
+                    {
+                        pictureBox_stage11.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStage11);
+                        pictureBox_stage11.Cursor = Cursors.Hand;
+                        pictureBox_stage11.Click += portrait_Click;
+                    }
+                    if (XMLDataStage.stage_12)
+                    {
+                        pictureBox_stage12.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStage12);
+                        pictureBox_stage12.Cursor = Cursors.Hand;
+                        pictureBox_stage12.Click += portrait_Click;
+                    }
+                    if (XMLDataStage.stage_13)
+                    {
+                        pictureBox_stage13.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStage13);
+                        pictureBox_stage13.Cursor = Cursors.Hand;
+                        pictureBox_stage13.Click += portrait_Click;
+                    }
+                    if (XMLDataStage.stage_30)
+                    {
+                        pictureBox_stage30.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStage30);
+                        pictureBox_stage30.Cursor = Cursors.Hand;
+                        pictureBox_stage30.Click += portrait_Click;
+                    }
+                    if (XMLDataStage.stagen_10)
+                    {
+                        pictureBox_stagen10.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStagen10, true);
+                        pictureBox_stagen10.Cursor = Cursors.Hand;
+                        pictureBox_stagen10.Click += portrait_Click;
+                    }
+
                     break;
                 case ModsList.ModListType.General:
                     XMLDataGeneral = Utils.DeserializeXML<GeneralModXML>(PathKami);
@@ -145,191 +183,193 @@ namespace KamiModpackBuilder.Forms
         {
             if (ModListType != ModsList.ModListType.Stage) return;
             DialogResult result = openFileDialogPortraits.ShowDialog();
-            if (result == DialogResult.OK)
+            if (result != DialogResult.OK) return;
+            if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Contains("png"))
             {
-                if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Equals("png"))
-                {
-                    MessageBox.Show("Cannot import PNGs yet :(");
-                    //TODO: Import PNG
-                    return;
-                }
-                else
-                {
-                    //TODO: Validate format
-                    Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "ui");
-                    File.Copy(openFileDialogPortraits.FileName, PathStage10, true);
-                    XMLDataStage.stage_10 = true;
-                    buttonExport_stage10.Enabled = true;
-                    LogHelper.Info("Imported stage_10 successfully.");
-                }
+                MessageBox.Show("Cannot import PNGs yet :(");
+                //TODO: Import PNG
+                return;
+            }
+            else
+            {
+                //TODO: Validate format
+                Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "ui");
+                File.Copy(openFileDialogPortraits.FileName, PathStage10, true);
+                XMLDataStage.stage_10 = true;
+                buttonExport_stage10.Enabled = true;
+                LogHelper.Info("Imported stage_10 successfully.");
             }
         }
 
         private void buttonExport_stage10_Click(object sender, EventArgs e)
         {
-            if (ModListType != ModsList.ModListType.Stage) return;
-            MessageBox.Show("Cannot export to PNG yet :(");
-            //TODO: Export to PNG
+            saveFileDialogPortraits.FileName = "stage_10.png";
+            DialogResult result = saveFileDialogPortraits.ShowDialog();
+            if (result != DialogResult.OK) return;
+            pictureBox_stage10.BackgroundImage.Save(saveFileDialogPortraits.FileName);
         }
 
         private void buttonImport_stage11_Click(object sender, EventArgs e)
         {
             if (ModListType != ModsList.ModListType.Stage) return;
             DialogResult result = openFileDialogPortraits.ShowDialog();
-            if (result == DialogResult.OK)
+            if (result != DialogResult.OK) return;
+            if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Contains("png"))
             {
-                if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Equals("png"))
-                {
-                    MessageBox.Show("Cannot import PNGs yet :(");
-                    //TODO: Import PNG
-                    return;
-                }
-                else
-                {
-                    //TODO: Validate format
-                    Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "ui");
-                    File.Copy(openFileDialogPortraits.FileName, PathStage11, true);
-                    XMLDataStage.stage_11 = true;
-                    buttonExport_stage11.Enabled = true;
-                    LogHelper.Info("Imported stage_11 successfully.");
-                }
+                MessageBox.Show("Cannot import PNGs yet :(");
+                //TODO: Import PNG
+                return;
+            }
+            else
+            {
+                //TODO: Validate format
+                Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "ui");
+                File.Copy(openFileDialogPortraits.FileName, PathStage11, true);
+                XMLDataStage.stage_11 = true;
+                buttonExport_stage11.Enabled = true;
+                LogHelper.Info("Imported stage_11 successfully.");
             }
         }
 
         private void buttonExport_stage11_Click(object sender, EventArgs e)
         {
-            if (ModListType != ModsList.ModListType.Stage) return;
-            MessageBox.Show("Cannot export to PNG yet :(");
-            //TODO: Export to PNG
+            saveFileDialogPortraits.FileName = "stage_11.png";
+            DialogResult result = saveFileDialogPortraits.ShowDialog();
+            if (result != DialogResult.OK) return;
+            pictureBox_stage11.BackgroundImage.Save(saveFileDialogPortraits.FileName);
         }
 
         private void buttonImport_stage12_Click(object sender, EventArgs e)
         {
             if (ModListType != ModsList.ModListType.Stage) return;
             DialogResult result = openFileDialogPortraits.ShowDialog();
-            if (result == DialogResult.OK)
+            if (result != DialogResult.OK) return;
+            if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Contains("png"))
             {
-                if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Equals("png"))
-                {
-                    MessageBox.Show("Cannot import PNGs yet :(");
-                    //TODO: Import PNG
-                    return;
-                }
-                else
-                {
-                    //TODO: Validate format
-                    Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "ui");
-                    File.Copy(openFileDialogPortraits.FileName, PathStage12, true);
-                    XMLDataStage.stage_12 = true;
-                    buttonExport_stage12.Enabled = true;
-                    LogHelper.Info("Imported stage_12 successfully.");
-                }
+                MessageBox.Show("Cannot import PNGs yet :(");
+                //TODO: Import PNG
+                return;
+            }
+            else
+            {
+                //TODO: Validate format
+                Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "ui");
+                File.Copy(openFileDialogPortraits.FileName, PathStage12, true);
+                XMLDataStage.stage_12 = true;
+                buttonExport_stage12.Enabled = true;
+                LogHelper.Info("Imported stage_12 successfully.");
             }
         }
 
         private void buttonExport_stage12_Click(object sender, EventArgs e)
         {
-            if (ModListType != ModsList.ModListType.Stage) return;
-            MessageBox.Show("Cannot export to PNG yet :(");
-            //TODO: Export to PNG
+            saveFileDialogPortraits.FileName = "stage_12.png";
+            DialogResult result = saveFileDialogPortraits.ShowDialog();
+            if (result != DialogResult.OK) return;
+            pictureBox_stage12.BackgroundImage.Save(saveFileDialogPortraits.FileName);
         }
 
         private void buttonImport_stage13_Click(object sender, EventArgs e)
         {
             if (ModListType != ModsList.ModListType.Stage) return;
             DialogResult result = openFileDialogPortraits.ShowDialog();
-            if (result == DialogResult.OK)
+            if (result != DialogResult.OK) return;
+            if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Contains("png"))
             {
-                if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Equals("png"))
-                {
-                    MessageBox.Show("Cannot import PNGs yet :(");
-                    //TODO: Import PNG
-                    return;
-                }
-                else
-                {
-                    //TODO: Validate format
-                    Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "ui");
-                    File.Copy(openFileDialogPortraits.FileName, PathStage13, true);
-                    XMLDataStage.stage_13 = true;
-                    buttonExport_stage13.Enabled = true;
-                    LogHelper.Info("Imported stage_13 successfully.");
-                }
+                MessageBox.Show("Cannot import PNGs yet :(");
+                //TODO: Import PNG
+                return;
+            }
+            else
+            {
+                //TODO: Validate format
+                Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "ui");
+                File.Copy(openFileDialogPortraits.FileName, PathStage13, true);
+                XMLDataStage.stage_13 = true;
+                buttonExport_stage13.Enabled = true;
+                LogHelper.Info("Imported stage_13 successfully.");
             }
         }
 
         private void buttonExport_stage13_Click(object sender, EventArgs e)
         {
-            if (ModListType != ModsList.ModListType.Stage) return;
-            MessageBox.Show("Cannot export to PNG yet :(");
-            //TODO: Export to PNG
+            saveFileDialogPortraits.FileName = "stage_13.png";
+            DialogResult result = saveFileDialogPortraits.ShowDialog();
+            if (result != DialogResult.OK) return;
+            pictureBox_stage13.BackgroundImage.Save(saveFileDialogPortraits.FileName);
         }
 
         private void buttonImport_stage30_Click(object sender, EventArgs e)
         {
             if (ModListType != ModsList.ModListType.Stage) return;
             DialogResult result = openFileDialogPortraits.ShowDialog();
-            if (result == DialogResult.OK)
+            if (result != DialogResult.OK) return;
+            if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Contains("png"))
             {
-                if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Equals("png"))
-                {
-                    MessageBox.Show("Cannot import PNGs yet :(");
-                    //TODO: Import PNG
-                    return;
-                }
-                else
-                {
-                    //TODO: Validate format
-                    Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "ui");
-                    File.Copy(openFileDialogPortraits.FileName, PathStage30, true);
-                    XMLDataStage.stage_30 = true;
-                    buttonExport_stage30.Enabled = true;
-                    LogHelper.Info("Imported stage_30 successfully.");
-                }
+                MessageBox.Show("Cannot import PNGs yet :(");
+                //TODO: Import PNG
+                return;
+            }
+            else
+            {
+                //TODO: Validate format
+                Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "ui");
+                File.Copy(openFileDialogPortraits.FileName, PathStage30, true);
+                XMLDataStage.stage_30 = true;
+                buttonExport_stage30.Enabled = true;
+                LogHelper.Info("Imported stage_30 successfully.");
             }
         }
 
         private void buttonExport_stage30_Click(object sender, EventArgs e)
         {
-            if (ModListType != ModsList.ModListType.Stage) return;
-            MessageBox.Show("Cannot export to PNG yet :(");
-            //TODO: Export to PNG
+            saveFileDialogPortraits.FileName = "stage_30.png";
+            DialogResult result = saveFileDialogPortraits.ShowDialog();
+            if (result != DialogResult.OK) return;
+            pictureBox_stage30.BackgroundImage.Save(saveFileDialogPortraits.FileName);
         }
 
         private void buttonImport_stagen10_Click(object sender, EventArgs e)
         {
             if (ModListType != ModsList.ModListType.Stage) return;
             DialogResult result = openFileDialogPortraits.ShowDialog();
-            if (result == DialogResult.OK)
+            if (result != DialogResult.OK) return;
+            if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Contains("png"))
             {
-                if (Path.GetExtension(openFileDialogPortraits.FileName).ToLower().Equals("png"))
-                {
-                    MessageBox.Show("Cannot import PNGs yet :(");
-                    //TODO: Import PNG
-                    return;
-                }
-                else
-                {
-                    //TODO: Validate format
-                    Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "ui");
-                    File.Copy(openFileDialogPortraits.FileName, PathStagen10, true);
-                    XMLDataStage.stagen_10 = true;
-                    buttonExport_stagen10.Enabled = true;
-                    LogHelper.Info("Imported stagen_10 successfully.");
-                }
+                MessageBox.Show("Cannot import PNGs yet :(");
+                //TODO: Import PNG
+                return;
+            }
+            else
+            {
+                //TODO: Validate format
+                Directory.CreateDirectory(ModPath + Path.DirectorySeparatorChar + "ui");
+                File.Copy(openFileDialogPortraits.FileName, PathStagen10, true);
+                XMLDataStage.stagen_10 = true;
+                buttonExport_stagen10.Enabled = true;
+                LogHelper.Info("Imported stagen_10 successfully.");
             }
         }
 
         private void buttonExport_stagen10_Click(object sender, EventArgs e)
         {
-            if (ModListType != ModsList.ModListType.Stage) return;
-            MessageBox.Show("Cannot export to PNG yet :(");
-            //TODO: Export to PNG
+            saveFileDialogPortraits.FileName = "stagen_10.png";
+            DialogResult result = saveFileDialogPortraits.ShowDialog();
+            if (result != DialogResult.OK) return;
+            pictureBox_stagen10.BackgroundImage.Save(saveFileDialogPortraits.FileName);
         }
 
         private void buttonOpenFolder_Click(object sender, EventArgs e)
         {
             Process.Start(ModPath);
+        }
+
+        private void portrait_Click(object sender, EventArgs e)
+        {
+            PictureBox p = sender as PictureBox;
+            ImagePreview w = new ImagePreview();
+            w.image = p.BackgroundImage;
+            w.ShowDialog();
         }
     }
 }

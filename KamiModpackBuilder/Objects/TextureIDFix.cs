@@ -145,8 +145,8 @@ namespace KamiModpackBuilder.Objects
                     if (changedOffsets.Contains(t.HashOffset)) continue;
 
                     changedOffsets.Add(t.HashOffset);
-                    n.Data.seek(t.HashOffset);
-                    n.Data.writeInt(mod.hashChanges[t.HashId]);
+                    n.SourceData.seek(t.HashOffset);
+                    n.SourceData.writeInt(mod.hashChanges[t.HashId]);
                 }
                 n.SaveToFile(n.SourceFile);
             }

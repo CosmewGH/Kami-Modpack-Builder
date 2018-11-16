@@ -60,6 +60,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\NAudio.dll</HintPath>
     </Reference>
+    <Reference Include="OpenTK, Version=3.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl, Version=3.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\OpenTK.GLControl.dll</HintPath>
+    </Reference>
+    <Reference Include="SFGraphics, Version=1.0.6889.36420, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\SFGraphics.dll</HintPath>
+    </Reference>
+    <Reference Include="SFGraphics.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\SFGraphics.Utils.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -80,12 +96,19 @@
     <Compile Include="DB\CharsDB.cs" />
     <Compile Include="DB\FightersDB.cs" />
     <Compile Include="DB\IconsDB.cs" />
+    <Compile Include="FileTypes\GTX.cs" />
     <Compile Include="FileTypes\NUT.cs" />
     <Compile Include="Forms\HelpBoxWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\HelpBoxWindow.Designer.cs">
       <DependentUpon>HelpBoxWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ImagePreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImagePreview.Designer.cs">
+      <DependentUpon>ImagePreview.cs</DependentUpon>
     </Compile>
     <Compile Include="Globals\HelpBox.cs" />
     <Compile Include="Globals\LabelNoCopy.cs">
@@ -96,6 +119,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Rendering\OpenTKSharedResources.cs" />
     <Compile Include="Sm4shMusic\DB\BGMFilesDB.cs" />
     <Compile Include="Sm4shMusic\DB\BGMStage.cs" />
     <Compile Include="Sm4shMusic\DB\BGMStageDB.cs" />
@@ -336,6 +360,9 @@
     <EmbeddedResource Include="Forms\HelpBoxWindow.resx">
       <DependentUpon>HelpBoxWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ImagePreview.resx">
+      <DependentUpon>ImagePreview.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ImportFolderOrZip.resx">
       <DependentUpon>ImportFolderOrZip.cs</DependentUpon>
     </EmbeddedResource>
@@ -435,6 +462,10 @@
     <Content Include="application.ico" />
     <Content Include="libs\DTLS.exe" />
     <Content Include="libs\NAudio.dll" />
+    <Content Include="libs\OpenTK.dll" />
+    <Content Include="libs\OpenTK.GLControl.dll" />
+    <Content Include="libs\SFGraphics.dll" />
+    <Content Include="libs\SFGraphics.Utils.dll" />
     <Content Include="libs\zlibnet.dll" />
     <None Include="Resources\icon_wifi_safe_no.png" />
     <None Include="Resources\icon_portrait_missing.png" />

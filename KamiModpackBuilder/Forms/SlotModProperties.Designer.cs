@@ -28,11 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelImage_chr11 = new System.Windows.Forms.Label();
-            this.labelImage_chr13 = new System.Windows.Forms.Label();
-            this.labelImage_chr00 = new System.Windows.Forms.Label();
-            this.labelImage_stock90 = new System.Windows.Forms.Label();
-            this.labelImage_chrn11 = new System.Windows.Forms.Label();
             this.buttonImport_chr00 = new System.Windows.Forms.Button();
             this.buttonExport_chr00 = new System.Windows.Forms.Button();
             this.buttonExport_chr11 = new System.Windows.Forms.Button();
@@ -78,12 +73,18 @@
             this.label23 = new System.Windows.Forms.Label();
             this.comboBoxMetalModel = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonOpenFolder = new System.Windows.Forms.Button();
             this.textBoxBoxingRing = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.pictureBox_chrn11 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_stock90 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_chr13 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_chr11 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_chr00 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label24 = new System.Windows.Forms.Label();
             this.textBoxNotes = new System.Windows.Forms.TextBox();
@@ -91,59 +92,19 @@
             this.openFileDialogPortraits = new System.Windows.Forms.OpenFileDialog();
             this.groupBoxModels = new System.Windows.Forms.GroupBox();
             this.labelModels = new System.Windows.Forms.Label();
-            this.buttonOpenFolder = new System.Windows.Forms.Button();
+            this.saveFileDialogPortraits = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_chrn11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stock90)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_chr13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_chr11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_chr00)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBoxModels.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // labelImage_chr11
-            // 
-            this.labelImage_chr11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelImage_chr11.Location = new System.Drawing.Point(99, 52);
-            this.labelImage_chr11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelImage_chr11.Name = "labelImage_chr11";
-            this.labelImage_chr11.Size = new System.Drawing.Size(86, 84);
-            this.labelImage_chr11.TabIndex = 0;
-            // 
-            // labelImage_chr13
-            // 
-            this.labelImage_chr13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelImage_chr13.Location = new System.Drawing.Point(192, 52);
-            this.labelImage_chr13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelImage_chr13.Name = "labelImage_chr13";
-            this.labelImage_chr13.Size = new System.Drawing.Size(86, 84);
-            this.labelImage_chr13.TabIndex = 1;
-            // 
-            // labelImage_chr00
-            // 
-            this.labelImage_chr00.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelImage_chr00.Location = new System.Drawing.Point(5, 52);
-            this.labelImage_chr00.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelImage_chr00.Name = "labelImage_chr00";
-            this.labelImage_chr00.Size = new System.Drawing.Size(86, 84);
-            this.labelImage_chr00.TabIndex = 2;
-            // 
-            // labelImage_stock90
-            // 
-            this.labelImage_stock90.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelImage_stock90.Location = new System.Drawing.Point(307, 73);
-            this.labelImage_stock90.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelImage_stock90.Name = "labelImage_stock90";
-            this.labelImage_stock90.Size = new System.Drawing.Size(43, 42);
-            this.labelImage_stock90.TabIndex = 3;
-            // 
-            // labelImage_chrn11
-            // 
-            this.labelImage_chrn11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelImage_chrn11.Location = new System.Drawing.Point(379, 73);
-            this.labelImage_chrn11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelImage_chrn11.Name = "labelImage_chrn11";
-            this.labelImage_chrn11.Size = new System.Drawing.Size(171, 42);
-            this.labelImage_chrn11.TabIndex = 4;
             // 
             // buttonImport_chr00
             // 
@@ -627,6 +588,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Naming";
             // 
+            // buttonOpenFolder
+            // 
+            this.buttonOpenFolder.FlatAppearance.BorderSize = 0;
+            this.buttonOpenFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonOpenFolder.Image = global::KamiModpackBuilder.Properties.Resources.icon_folder;
+            this.buttonOpenFolder.Location = new System.Drawing.Point(519, 18);
+            this.buttonOpenFolder.Name = "buttonOpenFolder";
+            this.buttonOpenFolder.Size = new System.Drawing.Size(23, 23);
+            this.buttonOpenFolder.TabIndex = 27;
+            this.buttonOpenFolder.UseVisualStyleBackColor = true;
+            this.buttonOpenFolder.Click += new System.EventHandler(this.buttonOpenFolder_Click);
+            // 
             // textBoxBoxingRing
             // 
             this.textBoxBoxingRing.Location = new System.Drawing.Point(113, 104);
@@ -704,14 +677,14 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.pictureBox_chrn11);
+            this.groupBox4.Controls.Add(this.pictureBox_stock90);
+            this.groupBox4.Controls.Add(this.pictureBox_chr13);
+            this.groupBox4.Controls.Add(this.pictureBox_chr11);
+            this.groupBox4.Controls.Add(this.pictureBox_chr00);
             this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.labelImage_chr11);
-            this.groupBox4.Controls.Add(this.labelImage_chr13);
-            this.groupBox4.Controls.Add(this.labelImage_chr00);
             this.groupBox4.Controls.Add(this.label11);
-            this.groupBox4.Controls.Add(this.labelImage_stock90);
             this.groupBox4.Controls.Add(this.label10);
-            this.groupBox4.Controls.Add(this.labelImage_chrn11);
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Controls.Add(this.buttonImport_chr00);
             this.groupBox4.Controls.Add(this.label8);
@@ -733,6 +706,56 @@
             this.groupBox4.TabIndex = 53;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Portraits";
+            // 
+            // pictureBox_chrn11
+            // 
+            this.pictureBox_chrn11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_chrn11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_chrn11.Location = new System.Drawing.Point(379, 73);
+            this.pictureBox_chrn11.Name = "pictureBox_chrn11";
+            this.pictureBox_chrn11.Size = new System.Drawing.Size(171, 42);
+            this.pictureBox_chrn11.TabIndex = 33;
+            this.pictureBox_chrn11.TabStop = false;
+            // 
+            // pictureBox_stock90
+            // 
+            this.pictureBox_stock90.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_stock90.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_stock90.Location = new System.Drawing.Point(307, 73);
+            this.pictureBox_stock90.Name = "pictureBox_stock90";
+            this.pictureBox_stock90.Size = new System.Drawing.Size(42, 42);
+            this.pictureBox_stock90.TabIndex = 32;
+            this.pictureBox_stock90.TabStop = false;
+            // 
+            // pictureBox_chr13
+            // 
+            this.pictureBox_chr13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_chr13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_chr13.Location = new System.Drawing.Point(192, 52);
+            this.pictureBox_chr13.Name = "pictureBox_chr13";
+            this.pictureBox_chr13.Size = new System.Drawing.Size(84, 84);
+            this.pictureBox_chr13.TabIndex = 31;
+            this.pictureBox_chr13.TabStop = false;
+            // 
+            // pictureBox_chr11
+            // 
+            this.pictureBox_chr11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_chr11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_chr11.Location = new System.Drawing.Point(99, 52);
+            this.pictureBox_chr11.Name = "pictureBox_chr11";
+            this.pictureBox_chr11.Size = new System.Drawing.Size(84, 84);
+            this.pictureBox_chr11.TabIndex = 30;
+            this.pictureBox_chr11.TabStop = false;
+            // 
+            // pictureBox_chr00
+            // 
+            this.pictureBox_chr00.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_chr00.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_chr00.Location = new System.Drawing.Point(5, 52);
+            this.pictureBox_chr00.Name = "pictureBox_chr00";
+            this.pictureBox_chr00.Size = new System.Drawing.Size(84, 84);
+            this.pictureBox_chr00.TabIndex = 29;
+            this.pictureBox_chr00.TabStop = false;
             // 
             // panel1
             // 
@@ -799,17 +822,9 @@
             this.labelModels.TabIndex = 29;
             this.labelModels.Text = "Body:";
             // 
-            // buttonOpenFolder
+            // saveFileDialogPortraits
             // 
-            this.buttonOpenFolder.FlatAppearance.BorderSize = 0;
-            this.buttonOpenFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonOpenFolder.Image = global::KamiModpackBuilder.Properties.Resources.icon_folder;
-            this.buttonOpenFolder.Location = new System.Drawing.Point(519, 18);
-            this.buttonOpenFolder.Name = "buttonOpenFolder";
-            this.buttonOpenFolder.Size = new System.Drawing.Size(23, 23);
-            this.buttonOpenFolder.TabIndex = 27;
-            this.buttonOpenFolder.UseVisualStyleBackColor = true;
-            this.buttonOpenFolder.Click += new System.EventHandler(this.buttonOpenFolder_Click);
+            this.saveFileDialogPortraits.Filter = "PNG files|*.png";
             // 
             // SlotModProperties
             // 
@@ -837,6 +852,11 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_chrn11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stock90)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_chr13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_chr11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_chr00)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBoxModels.ResumeLayout(false);
@@ -847,12 +867,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label labelImage_chr11;
-        private System.Windows.Forms.Label labelImage_chr13;
-        private System.Windows.Forms.Label labelImage_chr00;
-        private System.Windows.Forms.Label labelImage_stock90;
-        private System.Windows.Forms.Label labelImage_chrn11;
         private System.Windows.Forms.Button buttonImport_chr00;
         private System.Windows.Forms.Button buttonExport_chr00;
         private System.Windows.Forms.Button buttonExport_chr11;
@@ -912,5 +926,11 @@
         private System.Windows.Forms.GroupBox groupBoxModels;
         private System.Windows.Forms.Label labelModels;
         private System.Windows.Forms.Button buttonOpenFolder;
+        private System.Windows.Forms.PictureBox pictureBox_chrn11;
+        private System.Windows.Forms.PictureBox pictureBox_stock90;
+        private System.Windows.Forms.PictureBox pictureBox_chr13;
+        private System.Windows.Forms.PictureBox pictureBox_chr11;
+        private System.Windows.Forms.PictureBox pictureBox_chr00;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogPortraits;
     }
 }

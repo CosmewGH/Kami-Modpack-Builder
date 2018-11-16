@@ -57,6 +57,7 @@ namespace KamiModpackBuilder
             _ConsoleProgress = new ConsoleRedirProgress(backgroundWorker);
 
             HelpBox.Initialize(_ProjectManager);
+            Rendering.OpenTKSharedResources.InitializeSharedResources();
 
             _MainLoaded = true;
         }
