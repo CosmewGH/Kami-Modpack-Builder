@@ -96,38 +96,32 @@ namespace KamiModpackBuilder.Forms
                     if (XMLDataStage.stage_10)
                     {
                         pictureBox_stage10.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStage10);
-                        pictureBox_stage10.Cursor = Cursors.Hand;
-                        pictureBox_stage10.Click += portrait_Click;
+                        UpdatePictureBoxClickable(pictureBox_stage10);
                     }
                     if (XMLDataStage.stage_11)
                     {
                         pictureBox_stage11.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStage11);
-                        pictureBox_stage11.Cursor = Cursors.Hand;
-                        pictureBox_stage11.Click += portrait_Click;
+                        UpdatePictureBoxClickable(pictureBox_stage11);
                     }
                     if (XMLDataStage.stage_12)
                     {
                         pictureBox_stage12.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStage12);
-                        pictureBox_stage12.Cursor = Cursors.Hand;
-                        pictureBox_stage12.Click += portrait_Click;
+                        UpdatePictureBoxClickable(pictureBox_stage12);
                     }
                     if (XMLDataStage.stage_13)
                     {
                         pictureBox_stage13.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStage13);
-                        pictureBox_stage13.Cursor = Cursors.Hand;
-                        pictureBox_stage13.Click += portrait_Click;
+                        UpdatePictureBoxClickable(pictureBox_stage13);
                     }
                     if (XMLDataStage.stage_30)
                     {
                         pictureBox_stage30.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStage30);
-                        pictureBox_stage30.Cursor = Cursors.Hand;
-                        pictureBox_stage30.Click += portrait_Click;
+                        UpdatePictureBoxClickable(pictureBox_stage30);
                     }
                     if (XMLDataStage.stagen_10)
                     {
                         pictureBox_stagen10.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStagen10, true);
-                        pictureBox_stagen10.Cursor = Cursors.Hand;
-                        pictureBox_stagen10.Click += portrait_Click;
+                        UpdatePictureBoxClickable(pictureBox_stagen10);
                     }
 
                     break;
@@ -145,6 +139,22 @@ namespace KamiModpackBuilder.Forms
             }
 
             IsInitialized = true;
+        }
+
+        private void UpdatePictureBoxClickable(PictureBox box)
+        {
+            if (box.BackgroundImage != null)
+            {
+                if (box.Cursor == Cursors.Hand) return;
+                box.Cursor = Cursors.Hand;
+                box.Click += portrait_Click;
+            }
+            else
+            {
+                if (box.Cursor != Cursors.Hand) return;
+                box.Cursor = Cursors.Arrow;
+                box.Click -= portrait_Click;
+            }
         }
 
         private void SaveXMLData()
@@ -198,6 +208,8 @@ namespace KamiModpackBuilder.Forms
                 XMLDataStage.stage_10 = true;
                 buttonExport_stage10.Enabled = true;
                 LogHelper.Info("Imported stage_10 successfully.");
+                pictureBox_stage10.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStage10);
+                UpdatePictureBoxClickable(pictureBox_stage10);
             }
         }
 
@@ -228,6 +240,8 @@ namespace KamiModpackBuilder.Forms
                 XMLDataStage.stage_11 = true;
                 buttonExport_stage11.Enabled = true;
                 LogHelper.Info("Imported stage_11 successfully.");
+                pictureBox_stage11.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStage11);
+                UpdatePictureBoxClickable(pictureBox_stage11);
             }
         }
 
@@ -258,6 +272,8 @@ namespace KamiModpackBuilder.Forms
                 XMLDataStage.stage_12 = true;
                 buttonExport_stage12.Enabled = true;
                 LogHelper.Info("Imported stage_12 successfully.");
+                pictureBox_stage12.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStage12);
+                UpdatePictureBoxClickable(pictureBox_stage12);
             }
         }
 
@@ -288,6 +304,8 @@ namespace KamiModpackBuilder.Forms
                 XMLDataStage.stage_13 = true;
                 buttonExport_stage13.Enabled = true;
                 LogHelper.Info("Imported stage_13 successfully.");
+                pictureBox_stage13.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStage13);
+                UpdatePictureBoxClickable(pictureBox_stage13);
             }
         }
 
@@ -318,6 +336,8 @@ namespace KamiModpackBuilder.Forms
                 XMLDataStage.stage_30 = true;
                 buttonExport_stage30.Enabled = true;
                 LogHelper.Info("Imported stage_30 successfully.");
+                pictureBox_stage30.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStage30);
+                UpdatePictureBoxClickable(pictureBox_stage30);
             }
         }
 
@@ -348,6 +368,8 @@ namespace KamiModpackBuilder.Forms
                 XMLDataStage.stagen_10 = true;
                 buttonExport_stagen10.Enabled = true;
                 LogHelper.Info("Imported stagen_10 successfully.");
+                pictureBox_stagen10.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStagen10, true);
+                UpdatePictureBoxClickable(pictureBox_stagen10);
             }
         }
 

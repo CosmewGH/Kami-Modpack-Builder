@@ -97,10 +97,15 @@ namespace KamiModpackBuilder.UserControls
         
         private void InitializeAudioComboBoxes()
         {
-            string[] slots = {"Default", "Slot 1", "Slot 2", "Slot 3", "Slot 4",
-            "Slot 5", "Slot 6", "Slot 7", "Slot 8",
-            "Slot 9", "Slot 10", "Slot 11", "Slot 12",
-            "Slot 13", "Slot 14", "Slot 15", "Slot 16"};
+            string[] slots = {
+                "Default", "Slot 1", "Slot 2", "Slot 3", "Slot 4",
+                "Slot 5", "Slot 6", "Slot 7", "Slot 8",
+                "Slot 9", "Slot 10", "Slot 11", "Slot 12",
+                "Slot 13", "Slot 14", "Slot 15", "Slot 16",
+                "Slot 17", "Slot 18", "Slot 19", "Slot 20",
+                "Slot 21", "Slot 22", "Slot 23", "Slot 24",
+                "Slot 25", "Slot 26", "Slot 27", "Slot 28",
+                "Slot 29", "Slot 30", "Slot 31", "Slot 32"};
             comboBoxVoiceSlot1.DataSource = slots;
             comboBoxVoiceSlot2.DataSource = slots.Clone();
             comboBoxSoundSlot1.DataSource = slots.Clone();
@@ -123,8 +128,9 @@ namespace KamiModpackBuilder.UserControls
         {
             _RowData = new List<ModsList.RowData>();
             _Project = _SmashProjectManager.CurrentProject;
+            int maxSlots = _Project.EnableMoreCustomSlots ? _CurrentFighter.unrestrictedSlots : _CurrentFighter.maxSlots;
 
-            for (int i = 0; i < _CurrentFighter.maxSlots; ++i)
+            for (int i = 0; i < maxSlots; ++i)
             {
                 ModsList.RowData row = new ModsList.RowData();
                 bool modFound = false;

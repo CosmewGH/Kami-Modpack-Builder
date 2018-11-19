@@ -160,11 +160,12 @@ namespace KamiModpackBuilder.UserControls
         {
             //First, return the 1st additional added slot available if possible.
             int highestModSlot = GetHighestSlotModSlot();
+            int maxSlots = _SmashProjectManager.CurrentProject.EnableMoreCustomSlots ? _CurrentFighter.unrestrictedSlots : _CurrentFighter.maxSlots;
             if (highestModSlot < _CurrentFighter.defaultSlots - 1)
             {
-                if (_CurrentFighter.defaultSlots < _CurrentFighter.maxSlots) return _CurrentFighter.defaultSlots;
+                if (_CurrentFighter.defaultSlots < maxSlots) return _CurrentFighter.defaultSlots;
             }
-            if (highestModSlot < _CurrentFighter.maxSlots - 1) return highestModSlot + 1;
+            if (highestModSlot < maxSlots - 1) return highestModSlot + 1;
             //If no additional slots are available, find the highest slot number which still has a default skin.
             int highestDefaultSlotAvailable = _CurrentFighter.defaultSlots - 1;
             while (highestDefaultSlotAvailable > -1)
@@ -245,13 +246,14 @@ namespace KamiModpackBuilder.UserControls
                 }
                 else
                 {
+                    int maxSlots = _SmashProjectManager.CurrentProject.EnableMoreCustomSlots ? _CurrentFighter.unrestrictedSlots : _CurrentFighter.maxSlots;
                     buttonSlotRight.Enabled = true;
                     buttonSlotLeft.Enabled = false;
                     if (SelectedSlotMod.slotNum <= 0) buttonSlotUp.Enabled = false;
                     else buttonSlotUp.Enabled = true;
-                    if (SelectedSlotMod.slotNum >= _CurrentFighter.maxSlots - 1 || (SelectedSlotMod.slotNum >= GetHighestSlotModSlot() && SelectedSlotMod.slotNum > _CurrentFighter.defaultSlots - 1)) buttonSlotDown.Enabled = false;
+                    if (SelectedSlotMod.slotNum >= maxSlots - 1 || (SelectedSlotMod.slotNum >= GetHighestSlotModSlot() && SelectedSlotMod.slotNum > _CurrentFighter.defaultSlots - 1)) buttonSlotDown.Enabled = false;
                     else buttonSlotDown.Enabled = true;
-                    if ((_CurrentFighter.defaultSlots == _CurrentFighter.maxSlots) || (SelectedSlotMod.slotNum >= _CurrentFighter.defaultSlots) || (GetHighestSlotModSlot() >= _CurrentFighter.maxSlots - 1))
+                    if ((_CurrentFighter.defaultSlots == maxSlots) || (SelectedSlotMod.slotNum >= _CurrentFighter.defaultSlots) || (GetHighestSlotModSlot() >= maxSlots - 1))
                         buttonSlotBottom.Enabled = false;
                     else buttonSlotBottom.Enabled = true;
                 }
@@ -364,9 +366,10 @@ namespace KamiModpackBuilder.UserControls
         {
             if (SelectedSlotMod == null) return;
             if (!SelectedSlotMod.isActiveList) return;
+            int maxSlots = _SmashProjectManager.CurrentProject.EnableMoreCustomSlots ? _CurrentFighter.unrestrictedSlots : _CurrentFighter.maxSlots;
             string modFolder = SelectedSlotMod.modFolder;
             int slot = SelectedSlotMod.slotNum;
-            if (slot >= _CurrentFighter.maxSlots - 1) return;
+            if (slot >= maxSlots - 1) return;
             if (slot >= GetHighestSlotModSlot() && slot > _CurrentFighter.defaultSlots - 1) return;
 
             CharacterSlotMod originalSlot = GetActiveModAtSlot(slot);
@@ -382,11 +385,12 @@ namespace KamiModpackBuilder.UserControls
         {
             if (SelectedSlotMod == null) return;
             if (!SelectedSlotMod.isActiveList) return;
-            if (_CurrentFighter.defaultSlots == _CurrentFighter.maxSlots) return;
+            int maxSlots = _SmashProjectManager.CurrentProject.EnableMoreCustomSlots ? _CurrentFighter.unrestrictedSlots : _CurrentFighter.maxSlots;
+            if (_CurrentFighter.defaultSlots == maxSlots) return;
             int slot = SelectedSlotMod.slotNum;
             if (slot >= _CurrentFighter.defaultSlots) return;
             int newslot = GetHighestSlotModSlot();
-            if (newslot >= _CurrentFighter.maxSlots - 1) return;
+            if (newslot >= maxSlots - 1) return;
             if (newslot < _CurrentFighter.defaultSlots) newslot = _CurrentFighter.defaultSlots;
             else ++newslot;
             CharacterSlotMod originalSlot = GetActiveModAtSlot(slot);

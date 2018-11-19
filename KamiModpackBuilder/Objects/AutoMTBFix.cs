@@ -65,15 +65,6 @@ namespace KamiModpackBuilder.Objects
         
         public void Run() {
             for (int i = 0; i < _Nus3Banks.Count; ++i) {
-                string nameFighter = _Nus3Banks[i].fighterName;
-                if (nameFighter.Equals("Szerosuit"))
-                    nameFighter = "SZerosuit";
-                if (nameFighter.Equals("Drmario"))
-                    nameFighter = "MarioD";
-                if (nameFighter.Equals("Pitb"))
-                    nameFighter = "PitB";
-                if (nameFighter.Equals("Gamewatch"))
-                    nameFighter = "GameWatch";
                 string currentSoundFile = _Nus3Banks[i].fileName;
                 ushort cxxNum = _Nus3Banks[i].cxxNum;
                 getNusbankIdInfo(currentSoundFile);
@@ -88,7 +79,7 @@ namespace KamiModpackBuilder.Objects
                 }
                 int entryNum = _MTB.findByDefaultInternalAndNusType((int)defaultNusId, correctNusType);
                 if (cxxNum > 0) {
-                    EntryEdit(nameFighter, defaultNusId, (ushort)correctNusType, correctNusId, entryNum, cxxNum);
+                    EntryEdit(_Nus3Banks[i].fighterName, defaultNusId, (ushort)correctNusType, correctNusId, entryNum, cxxNum);
                 }
                 cxxNum = 0;
             }

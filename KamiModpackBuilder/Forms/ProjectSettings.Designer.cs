@@ -113,6 +113,9 @@
             this.label24 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.label1 = new System.Windows.Forms.Label();
+            this.checkBoxUnrestrictSlots = new System.Windows.Forms.CheckBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBoxDirectories.SuspendLayout();
             this.groupBoxEditorMods.SuspendLayout();
             this.groupBoxAutoFix.SuspendLayout();
@@ -145,9 +148,9 @@
             this.groupBoxDirectories.Controls.Add(this.label4);
             this.groupBoxDirectories.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxDirectories.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxDirectories.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxDirectories.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxDirectories.Name = "groupBoxDirectories";
-            this.groupBoxDirectories.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxDirectories.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxDirectories.Size = new System.Drawing.Size(574, 162);
             this.groupBoxDirectories.TabIndex = 1;
             this.groupBoxDirectories.TabStop = false;
@@ -167,7 +170,7 @@
             // 
             this.checkBoxAddDateToExport.AutoSize = true;
             this.checkBoxAddDateToExport.Location = new System.Drawing.Point(112, 133);
-            this.checkBoxAddDateToExport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxAddDateToExport.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxAddDateToExport.Name = "checkBoxAddDateToExport";
             this.checkBoxAddDateToExport.Size = new System.Drawing.Size(15, 14);
             this.checkBoxAddDateToExport.TabIndex = 21;
@@ -206,7 +209,7 @@
             // buttonBrowseExplorerFolder
             // 
             this.buttonBrowseExplorerFolder.Location = new System.Drawing.Point(317, 78);
-            this.buttonBrowseExplorerFolder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonBrowseExplorerFolder.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBrowseExplorerFolder.Name = "buttonBrowseExplorerFolder";
             this.buttonBrowseExplorerFolder.Size = new System.Drawing.Size(50, 21);
             this.buttonBrowseExplorerFolder.TabIndex = 14;
@@ -217,7 +220,7 @@
             // buttonBrowseExportFolder
             // 
             this.buttonBrowseExportFolder.Location = new System.Drawing.Point(317, 104);
-            this.buttonBrowseExportFolder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonBrowseExportFolder.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBrowseExportFolder.Name = "buttonBrowseExportFolder";
             this.buttonBrowseExportFolder.Size = new System.Drawing.Size(50, 21);
             this.buttonBrowseExportFolder.TabIndex = 18;
@@ -238,7 +241,7 @@
             // textBoxExportFolder
             // 
             this.textBoxExportFolder.Location = new System.Drawing.Point(113, 104);
-            this.textBoxExportFolder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxExportFolder.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxExportFolder.Name = "textBoxExportFolder";
             this.textBoxExportFolder.Size = new System.Drawing.Size(201, 20);
             this.textBoxExportFolder.TabIndex = 16;
@@ -256,7 +259,7 @@
             // textBoxExplorerFolder
             // 
             this.textBoxExplorerFolder.Location = new System.Drawing.Point(113, 78);
-            this.textBoxExplorerFolder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxExplorerFolder.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxExplorerFolder.Name = "textBoxExplorerFolder";
             this.textBoxExplorerFolder.Size = new System.Drawing.Size(201, 20);
             this.textBoxExplorerFolder.TabIndex = 12;
@@ -274,7 +277,7 @@
             // buttonBrowseWorkspaceFolder
             // 
             this.buttonBrowseWorkspaceFolder.Location = new System.Drawing.Point(317, 52);
-            this.buttonBrowseWorkspaceFolder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonBrowseWorkspaceFolder.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBrowseWorkspaceFolder.Name = "buttonBrowseWorkspaceFolder";
             this.buttonBrowseWorkspaceFolder.Size = new System.Drawing.Size(50, 21);
             this.buttonBrowseWorkspaceFolder.TabIndex = 10;
@@ -285,7 +288,7 @@
             // textBoxWorkspaceFolder
             // 
             this.textBoxWorkspaceFolder.Location = new System.Drawing.Point(113, 52);
-            this.textBoxWorkspaceFolder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxWorkspaceFolder.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxWorkspaceFolder.Name = "textBoxWorkspaceFolder";
             this.textBoxWorkspaceFolder.Size = new System.Drawing.Size(201, 20);
             this.textBoxWorkspaceFolder.TabIndex = 8;
@@ -313,7 +316,7 @@
             // buttonBrowseExtractionFolder
             // 
             this.buttonBrowseExtractionFolder.Location = new System.Drawing.Point(317, 26);
-            this.buttonBrowseExtractionFolder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonBrowseExtractionFolder.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBrowseExtractionFolder.Name = "buttonBrowseExtractionFolder";
             this.buttonBrowseExtractionFolder.Size = new System.Drawing.Size(50, 21);
             this.buttonBrowseExtractionFolder.TabIndex = 6;
@@ -324,7 +327,7 @@
             // textBoxExtractionFolder
             // 
             this.textBoxExtractionFolder.Location = new System.Drawing.Point(113, 26);
-            this.textBoxExtractionFolder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxExtractionFolder.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxExtractionFolder.Name = "textBoxExtractionFolder";
             this.textBoxExtractionFolder.Size = new System.Drawing.Size(201, 20);
             this.textBoxExtractionFolder.TabIndex = 4;
@@ -341,6 +344,9 @@
             // 
             // groupBoxEditorMods
             // 
+            this.groupBoxEditorMods.Controls.Add(this.label1);
+            this.groupBoxEditorMods.Controls.Add(this.checkBoxUnrestrictSlots);
+            this.groupBoxEditorMods.Controls.Add(this.label11);
             this.groupBoxEditorMods.Controls.Add(this.label52);
             this.groupBoxEditorMods.Controls.Add(this.checkBoxUseExplorer);
             this.groupBoxEditorMods.Controls.Add(this.label53);
@@ -355,10 +361,10 @@
             this.groupBoxEditorMods.Controls.Add(this.label59);
             this.groupBoxEditorMods.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxEditorMods.Location = new System.Drawing.Point(0, 162);
-            this.groupBoxEditorMods.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxEditorMods.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxEditorMods.Name = "groupBoxEditorMods";
-            this.groupBoxEditorMods.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBoxEditorMods.Size = new System.Drawing.Size(574, 139);
+            this.groupBoxEditorMods.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBoxEditorMods.Size = new System.Drawing.Size(574, 162);
             this.groupBoxEditorMods.TabIndex = 2;
             this.groupBoxEditorMods.TabStop = false;
             this.groupBoxEditorMods.Text = "Editor Mods";
@@ -377,7 +383,7 @@
             // 
             this.checkBoxUseExplorer.AutoSize = true;
             this.checkBoxUseExplorer.Location = new System.Drawing.Point(112, 107);
-            this.checkBoxUseExplorer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxUseExplorer.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxUseExplorer.Name = "checkBoxUseExplorer";
             this.checkBoxUseExplorer.Size = new System.Drawing.Size(15, 14);
             this.checkBoxUseExplorer.TabIndex = 29;
@@ -407,7 +413,7 @@
             // 
             this.checkBoxUseMusic.AutoSize = true;
             this.checkBoxUseMusic.Location = new System.Drawing.Point(112, 81);
-            this.checkBoxUseMusic.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxUseMusic.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxUseMusic.Name = "checkBoxUseMusic";
             this.checkBoxUseMusic.Size = new System.Drawing.Size(15, 14);
             this.checkBoxUseMusic.TabIndex = 26;
@@ -437,7 +443,7 @@
             // 
             this.checkBoxUseSSS.AutoSize = true;
             this.checkBoxUseSSS.Location = new System.Drawing.Point(112, 55);
-            this.checkBoxUseSSS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxUseSSS.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxUseSSS.Name = "checkBoxUseSSS";
             this.checkBoxUseSSS.Size = new System.Drawing.Size(15, 14);
             this.checkBoxUseSSS.TabIndex = 23;
@@ -457,7 +463,7 @@
             // 
             this.checkBoxUseCSS.AutoSize = true;
             this.checkBoxUseCSS.Location = new System.Drawing.Point(112, 29);
-            this.checkBoxUseCSS.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxUseCSS.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxUseCSS.Name = "checkBoxUseCSS";
             this.checkBoxUseCSS.Size = new System.Drawing.Size(15, 14);
             this.checkBoxUseCSS.TabIndex = 21;
@@ -507,10 +513,10 @@
             this.groupBoxAutoFix.Controls.Add(this.checkBoxTextureIDFixing);
             this.groupBoxAutoFix.Controls.Add(this.label34);
             this.groupBoxAutoFix.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxAutoFix.Location = new System.Drawing.Point(0, 301);
-            this.groupBoxAutoFix.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxAutoFix.Location = new System.Drawing.Point(0, 324);
+            this.groupBoxAutoFix.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxAutoFix.Name = "groupBoxAutoFix";
-            this.groupBoxAutoFix.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxAutoFix.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxAutoFix.Size = new System.Drawing.Size(574, 213);
             this.groupBoxAutoFix.TabIndex = 3;
             this.groupBoxAutoFix.TabStop = false;
@@ -530,7 +536,7 @@
             // 
             this.checkBoxSoundMTB.AutoSize = true;
             this.checkBoxSoundMTB.Location = new System.Drawing.Point(112, 185);
-            this.checkBoxSoundMTB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxSoundMTB.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxSoundMTB.Name = "checkBoxSoundMTB";
             this.checkBoxSoundMTB.Size = new System.Drawing.Size(15, 14);
             this.checkBoxSoundMTB.TabIndex = 41;
@@ -560,7 +566,7 @@
             // 
             this.checkBoxFighterStrings.AutoSize = true;
             this.checkBoxFighterStrings.Location = new System.Drawing.Point(112, 159);
-            this.checkBoxFighterStrings.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxFighterStrings.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxFighterStrings.Name = "checkBoxFighterStrings";
             this.checkBoxFighterStrings.Size = new System.Drawing.Size(15, 14);
             this.checkBoxFighterStrings.TabIndex = 38;
@@ -591,7 +597,7 @@
             // 
             this.checkBoxFighterDB.AutoSize = true;
             this.checkBoxFighterDB.Location = new System.Drawing.Point(112, 133);
-            this.checkBoxFighterDB.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxFighterDB.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxFighterDB.Name = "checkBoxFighterDB";
             this.checkBoxFighterDB.Size = new System.Drawing.Size(15, 14);
             this.checkBoxFighterDB.TabIndex = 35;
@@ -621,7 +627,7 @@
             // 
             this.checkBoxYoshiFix.AutoSize = true;
             this.checkBoxYoshiFix.Location = new System.Drawing.Point(112, 107);
-            this.checkBoxYoshiFix.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxYoshiFix.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxYoshiFix.Name = "checkBoxYoshiFix";
             this.checkBoxYoshiFix.Size = new System.Drawing.Size(15, 14);
             this.checkBoxYoshiFix.TabIndex = 32;
@@ -651,7 +657,7 @@
             // 
             this.checkBoxRegionDuplication.AutoSize = true;
             this.checkBoxRegionDuplication.Location = new System.Drawing.Point(112, 81);
-            this.checkBoxRegionDuplication.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxRegionDuplication.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxRegionDuplication.Name = "checkBoxRegionDuplication";
             this.checkBoxRegionDuplication.Size = new System.Drawing.Size(15, 14);
             this.checkBoxRegionDuplication.TabIndex = 29;
@@ -681,7 +687,7 @@
             // 
             this.checkBoxLxxDuplication.AutoSize = true;
             this.checkBoxLxxDuplication.Location = new System.Drawing.Point(112, 55);
-            this.checkBoxLxxDuplication.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxLxxDuplication.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxLxxDuplication.Name = "checkBoxLxxDuplication";
             this.checkBoxLxxDuplication.Size = new System.Drawing.Size(15, 14);
             this.checkBoxLxxDuplication.TabIndex = 26;
@@ -712,7 +718,7 @@
             // 
             this.checkBoxTextureIDFixing.AutoSize = true;
             this.checkBoxTextureIDFixing.Location = new System.Drawing.Point(112, 29);
-            this.checkBoxTextureIDFixing.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxTextureIDFixing.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxTextureIDFixing.Name = "checkBoxTextureIDFixing";
             this.checkBoxTextureIDFixing.Size = new System.Drawing.Size(15, 14);
             this.checkBoxTextureIDFixing.TabIndex = 23;
@@ -743,10 +749,10 @@
             this.groupBoxSupressWarnings.Controls.Add(this.label20);
             this.groupBoxSupressWarnings.Controls.Add(this.label21);
             this.groupBoxSupressWarnings.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxSupressWarnings.Location = new System.Drawing.Point(0, 514);
-            this.groupBoxSupressWarnings.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxSupressWarnings.Location = new System.Drawing.Point(0, 537);
+            this.groupBoxSupressWarnings.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxSupressWarnings.Name = "groupBoxSupressWarnings";
-            this.groupBoxSupressWarnings.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxSupressWarnings.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxSupressWarnings.Size = new System.Drawing.Size(574, 136);
             this.groupBoxSupressWarnings.TabIndex = 4;
             this.groupBoxSupressWarnings.TabStop = false;
@@ -769,7 +775,7 @@
             this.checkBoxModelFilesMissing.AutoSize = true;
             this.checkBoxModelFilesMissing.Enabled = false;
             this.checkBoxModelFilesMissing.Location = new System.Drawing.Point(112, 107);
-            this.checkBoxModelFilesMissing.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxModelFilesMissing.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxModelFilesMissing.Name = "checkBoxModelFilesMissing";
             this.checkBoxModelFilesMissing.Size = new System.Drawing.Size(15, 14);
             this.checkBoxModelFilesMissing.TabIndex = 29;
@@ -800,7 +806,7 @@
             this.checkBoxModFileConflicts.AutoSize = true;
             this.checkBoxModFileConflicts.Enabled = false;
             this.checkBoxModFileConflicts.Location = new System.Drawing.Point(112, 81);
-            this.checkBoxModFileConflicts.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxModFileConflicts.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxModFileConflicts.Name = "checkBoxModFileConflicts";
             this.checkBoxModFileConflicts.Size = new System.Drawing.Size(15, 14);
             this.checkBoxModFileConflicts.TabIndex = 26;
@@ -831,7 +837,7 @@
             // 
             this.checkBoxMissingPortraits.AutoSize = true;
             this.checkBoxMissingPortraits.Location = new System.Drawing.Point(112, 55);
-            this.checkBoxMissingPortraits.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxMissingPortraits.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxMissingPortraits.Name = "checkBoxMissingPortraits";
             this.checkBoxMissingPortraits.Size = new System.Drawing.Size(15, 14);
             this.checkBoxMissingPortraits.TabIndex = 23;
@@ -852,7 +858,7 @@
             this.checkBoxTextureIDConflicts.AutoSize = true;
             this.checkBoxTextureIDConflicts.Enabled = false;
             this.checkBoxTextureIDConflicts.Location = new System.Drawing.Point(112, 29);
-            this.checkBoxTextureIDConflicts.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxTextureIDConflicts.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxTextureIDConflicts.Name = "checkBoxTextureIDConflicts";
             this.checkBoxTextureIDConflicts.Size = new System.Drawing.Size(15, 14);
             this.checkBoxTextureIDConflicts.TabIndex = 21;
@@ -888,10 +894,10 @@
             this.groupBoxCSVExport.Controls.Add(this.checkBoxExportCSV);
             this.groupBoxCSVExport.Controls.Add(this.label18);
             this.groupBoxCSVExport.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxCSVExport.Location = new System.Drawing.Point(0, 650);
-            this.groupBoxCSVExport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxCSVExport.Location = new System.Drawing.Point(0, 673);
+            this.groupBoxCSVExport.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxCSVExport.Name = "groupBoxCSVExport";
-            this.groupBoxCSVExport.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxCSVExport.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxCSVExport.Size = new System.Drawing.Size(574, 114);
             this.groupBoxCSVExport.TabIndex = 5;
             this.groupBoxCSVExport.TabStop = false;
@@ -901,7 +907,7 @@
             // 
             this.checkBoxIgnorePackOffsets.AutoSize = true;
             this.checkBoxIgnorePackOffsets.Location = new System.Drawing.Point(230, 81);
-            this.checkBoxIgnorePackOffsets.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxIgnorePackOffsets.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxIgnorePackOffsets.Name = "checkBoxIgnorePackOffsets";
             this.checkBoxIgnorePackOffsets.Size = new System.Drawing.Size(117, 17);
             this.checkBoxIgnorePackOffsets.TabIndex = 26;
@@ -912,7 +918,7 @@
             // 
             this.checkBoxIgnoreFlags.AutoSize = true;
             this.checkBoxIgnoreFlags.Location = new System.Drawing.Point(11, 81);
-            this.checkBoxIgnoreFlags.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxIgnoreFlags.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxIgnoreFlags.Name = "checkBoxIgnoreFlags";
             this.checkBoxIgnoreFlags.Size = new System.Drawing.Size(84, 17);
             this.checkBoxIgnoreFlags.TabIndex = 25;
@@ -923,7 +929,7 @@
             // 
             this.checkBoxIgnoreCompSize.AutoSize = true;
             this.checkBoxIgnoreCompSize.Location = new System.Drawing.Point(113, 81);
-            this.checkBoxIgnoreCompSize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxIgnoreCompSize.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxIgnoreCompSize.Name = "checkBoxIgnoreCompSize";
             this.checkBoxIgnoreCompSize.Size = new System.Drawing.Size(106, 17);
             this.checkBoxIgnoreCompSize.TabIndex = 24;
@@ -954,7 +960,7 @@
             // 
             this.checkBoxExportCSV.AutoSize = true;
             this.checkBoxExportCSV.Location = new System.Drawing.Point(112, 29);
-            this.checkBoxExportCSV.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxExportCSV.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxExportCSV.Name = "checkBoxExportCSV";
             this.checkBoxExportCSV.Size = new System.Drawing.Size(15, 14);
             this.checkBoxExportCSV.TabIndex = 21;
@@ -979,10 +985,10 @@
             this.groupBoxDebug.Controls.Add(this.label22);
             this.groupBoxDebug.Controls.Add(this.label24);
             this.groupBoxDebug.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxDebug.Location = new System.Drawing.Point(0, 764);
-            this.groupBoxDebug.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxDebug.Location = new System.Drawing.Point(0, 787);
+            this.groupBoxDebug.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxDebug.Name = "groupBoxDebug";
-            this.groupBoxDebug.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxDebug.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxDebug.Size = new System.Drawing.Size(574, 83);
             this.groupBoxDebug.TabIndex = 6;
             this.groupBoxDebug.TabStop = false;
@@ -1002,7 +1008,7 @@
             // 
             this.checkBoxForceOriginalFlags.AutoSize = true;
             this.checkBoxForceOriginalFlags.Location = new System.Drawing.Point(112, 55);
-            this.checkBoxForceOriginalFlags.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxForceOriginalFlags.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxForceOriginalFlags.Name = "checkBoxForceOriginalFlags";
             this.checkBoxForceOriginalFlags.Size = new System.Drawing.Size(15, 14);
             this.checkBoxForceOriginalFlags.TabIndex = 23;
@@ -1022,7 +1028,7 @@
             // 
             this.checkBoxSkipJunkEntries.AutoSize = true;
             this.checkBoxSkipJunkEntries.Location = new System.Drawing.Point(112, 29);
-            this.checkBoxSkipJunkEntries.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxSkipJunkEntries.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxSkipJunkEntries.Name = "checkBoxSkipJunkEntries";
             this.checkBoxSkipJunkEntries.Size = new System.Drawing.Size(15, 14);
             this.checkBoxSkipJunkEntries.TabIndex = 21;
@@ -1059,10 +1065,41 @@
             this.panel1.Controls.Add(this.groupBoxDirectories);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(591, 549);
             this.panel1.TabIndex = 8;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(147, 133);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(406, 13);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "Allows for more custom slots per fighter beyond the recommended amount. (Up to 32" +
+    ")";
+            // 
+            // checkBoxUnrestrictSlots
+            // 
+            this.checkBoxUnrestrictSlots.AutoSize = true;
+            this.checkBoxUnrestrictSlots.Location = new System.Drawing.Point(112, 133);
+            this.checkBoxUnrestrictSlots.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBoxUnrestrictSlots.Name = "checkBoxUnrestrictSlots";
+            this.checkBoxUnrestrictSlots.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxUnrestrictSlots.TabIndex = 32;
+            this.checkBoxUnrestrictSlots.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(8, 133);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(101, 13);
+            this.label11.TabIndex = 31;
+            this.label11.Text = "Un-Restricted Slots:";
             // 
             // ProjectSettings
             // 
@@ -1070,7 +1107,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(591, 549);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ProjectSettings";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -1179,5 +1216,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.CheckBox checkBoxFighterStrings;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox checkBoxUnrestrictSlots;
+        private System.Windows.Forms.Label label11;
     }
 }

@@ -312,17 +312,8 @@ namespace KamiModpackBuilder.Forms
                 {
                     string baseSoundPath = baseModPath + "sound" + Path.DirectorySeparatorChar;
                     Directory.CreateDirectory(baseSoundPath);
-                    string fighterName = _CurrentFighter.name;
-                    if (_CurrentFighter.id == 0x19 && !_SmashProjectManager.CurrentProject.IsSwitch)
-                        fighterName = fighterName.Replace("Szerosuit", "SZerosuit");
-                    if (_CurrentFighter.id == 0x24 && !_SmashProjectManager.CurrentProject.IsSwitch)
-                        fighterName = fighterName.Replace("Drmario", "MarioD");
-                    if (_CurrentFighter.id == 0x26 && !_SmashProjectManager.CurrentProject.IsSwitch)
-                        fighterName = fighterName.Replace("Pitb", "PitB");
-                    if (_CurrentFighter.id == 0x13 && !_SmashProjectManager.CurrentProject.IsSwitch)
-                        fighterName = fighterName.Replace("Gamewatch", "GameWatch");
-                    if (xml.Sound) File.Copy(Files_Sound_Nus3bank[slotColumns[i].comboBox_sound.SelectedIndex - 1], baseSoundPath + "snd_se_" + _CurrentFighter.name + "_cxx.nus3bank");
-                    if (xml.Voice) File.Copy(Files_Voice_Nus3bank[slotColumns[i].comboBox_voice.SelectedIndex - 1], baseSoundPath + "snd_vc_" + _CurrentFighter.name + "_cxx.nus3bank");
+                    if (xml.Sound) File.Copy(Files_Sound_Nus3bank[slotColumns[i].comboBox_sound.SelectedIndex - 1], baseSoundPath + "snd_se_" + (string.IsNullOrEmpty(_CurrentFighter.nameSoundPack) ? _CurrentFighter.name : _CurrentFighter.nameSoundPack) + "_cxx.nus3bank");
+                    if (xml.Voice) File.Copy(Files_Voice_Nus3bank[slotColumns[i].comboBox_voice.SelectedIndex - 1], baseSoundPath + "snd_vc_" + (string.IsNullOrEmpty(_CurrentFighter.nameSoundPack) ? _CurrentFighter.name : _CurrentFighter.nameSoundPack) + "_cxx.nus3bank");
                 }
                 #endregion
 

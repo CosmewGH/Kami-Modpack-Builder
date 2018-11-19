@@ -43,34 +43,13 @@ namespace KamiModpackBuilder.Forms
             _SmashProjectManager = project;
             DB.Fighter currentFighter = project._CharacterModsPage.CurrentFighter;
             PathKami = ModPath + Path.DirectorySeparatorChar + "kamimod.xml";
-            PathVoice = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_vc_" + CharName + "_cxx.nus3bank";
-            PathSound = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_se_" + CharName + "_cxx.nus3bank";
+            PathVoice = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_vc_" + (string.IsNullOrEmpty(currentFighter.nameSoundPack) ? CharName : currentFighter.nameSoundPack) + "_cxx.nus3bank";
+            PathSound = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_se_" + (string.IsNullOrEmpty(currentFighter.nameSoundPack) ? CharName : currentFighter.nameSoundPack) + "_cxx.nus3bank";
             PathChr00 = ModPath + Path.DirectorySeparatorChar + "chr" + Path.DirectorySeparatorChar + "chr_00_" + CharName + "_XX.nut";
             PathChr11 = ModPath + Path.DirectorySeparatorChar + "chr" + Path.DirectorySeparatorChar + "chr_11_" + CharName + "_XX.nut";
             PathChr13 = ModPath + Path.DirectorySeparatorChar + "chr" + Path.DirectorySeparatorChar + "chr_13_" + CharName + "_XX.nut";
             PathStock90 = ModPath + Path.DirectorySeparatorChar + "chr" + Path.DirectorySeparatorChar + "stock_90_" + CharName + "_XX.nut";
             PathChrn11 = ModPath + Path.DirectorySeparatorChar + "chr" + Path.DirectorySeparatorChar + "chrn_11_" + CharName + "_XX.nut";
-
-            if (_SmashProjectManager._CharacterModsPage.CurrentFighter.id == 0x19 && !_SmashProjectManager.CurrentProject.IsSwitch)
-            {
-                PathVoice = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_vc_SZerosuit_cxx.nus3bank";
-                PathSound = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_se_SZerosuit_cxx.nus3bank";
-            }
-            if (_SmashProjectManager._CharacterModsPage.CurrentFighter.id == 0x24 && !_SmashProjectManager.CurrentProject.IsSwitch)
-            {
-                PathVoice = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_vc_MarioD_cxx.nus3bank";
-                PathSound = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_se_MarioD_cxx.nus3bank";
-            }
-            if (_SmashProjectManager._CharacterModsPage.CurrentFighter.id == 0x26 && !_SmashProjectManager.CurrentProject.IsSwitch)
-            {
-                PathVoice = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_vc_PitB_cxx.nus3bank";
-                PathSound = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_se_PitB_cxx.nus3bank";
-            }
-            if (_SmashProjectManager._CharacterModsPage.CurrentFighter.id == 0x13 && !_SmashProjectManager.CurrentProject.IsSwitch)
-            {
-                PathVoice = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_vc_GameWatch_cxx.nus3bank";
-                PathSound = ModPath + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "snd_se_GameWatch_cxx.nus3bank";
-            }
 
             XMLData = Utils.DeserializeXML<CharacterSlotModXML>(PathKami);
             if (XMLData == null) return;
@@ -91,32 +70,27 @@ namespace KamiModpackBuilder.Forms
             if (XMLData.chr_00)
             {
                 pictureBox_chr00.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathChr00);
-                pictureBox_chr00.Cursor = Cursors.Hand;
-                pictureBox_chr00.Click += portrait_Click;
+                UpdatePictureBoxClickable(pictureBox_chr00);
             }
             if (XMLData.chr_11)
             {
                 pictureBox_chr11.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathChr11);
-                pictureBox_chr11.Cursor = Cursors.Hand;
-                pictureBox_chr11.Click += portrait_Click;
+                UpdatePictureBoxClickable(pictureBox_chr11);
             }
             if (XMLData.chr_13)
             {
                 pictureBox_chr13.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathChr13);
-                pictureBox_chr13.Cursor = Cursors.Hand;
-                pictureBox_chr13.Click += portrait_Click;
+                UpdatePictureBoxClickable(pictureBox_chr13);
             }
             if (XMLData.stock_90)
             {
                 pictureBox_stock90.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStock90);
-                pictureBox_stock90.Cursor = Cursors.Hand;
-                pictureBox_stock90.Click += portrait_Click;
+                UpdatePictureBoxClickable(pictureBox_stock90);
             }
             if (XMLData.chrn_11)
             {
                 pictureBox_chrn11.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathChrn11, true);
-                pictureBox_chrn11.Cursor = Cursors.Hand;
-                pictureBox_chrn11.Click += portrait_Click;
+                UpdatePictureBoxClickable(pictureBox_chrn11);
             }
 
             textBoxDisplayName.Text = XMLData.DisplayName;
@@ -191,6 +165,22 @@ namespace KamiModpackBuilder.Forms
             textBoxNotes.Text = XMLData.Notes.Replace("\n", "\r\n");
 
             IsInitialized = true;
+        }
+
+        private void UpdatePictureBoxClickable(PictureBox box)
+        {
+            if (box.BackgroundImage != null)
+            {
+                if (box.Cursor == Cursors.Hand) return;
+                box.Cursor = Cursors.Hand;
+                box.Click += portrait_Click;
+            }
+            else
+            {
+                if (box.Cursor != Cursors.Hand) return;
+                box.Cursor = Cursors.Arrow;
+                box.Click -= portrait_Click;
+            }
         }
 
         private void ChangeTextureID()
@@ -322,6 +312,8 @@ namespace KamiModpackBuilder.Forms
                 XMLData.chr_00 = true;
                 buttonExport_chr00.Enabled = true;
                 LogHelper.Info("Imported chr_00 successfully.");
+                pictureBox_chr00.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathChr00);
+                UpdatePictureBoxClickable(pictureBox_chr00);
             }
         }
 
@@ -351,6 +343,8 @@ namespace KamiModpackBuilder.Forms
                 XMLData.chr_11 = true;
                 buttonExport_chr11.Enabled = true;
                 LogHelper.Info("Imported chr_11 successfully.");
+                pictureBox_chr11.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathChr11);
+                UpdatePictureBoxClickable(pictureBox_chr11);
             }
         }
 
@@ -380,6 +374,8 @@ namespace KamiModpackBuilder.Forms
                 XMLData.chr_13 = true;
                 buttonExport_chr13.Enabled = true;
                 LogHelper.Info("Imported chr_13 successfully.");
+                pictureBox_chr13.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathChr13);
+                UpdatePictureBoxClickable(pictureBox_chr13);
             }
         }
 
@@ -409,6 +405,8 @@ namespace KamiModpackBuilder.Forms
                 XMLData.stock_90 = true;
                 buttonExport_stock90.Enabled = true;
                 LogHelper.Info("Imported stock_90 successfully.");
+                pictureBox_stock90.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathStock90);
+                UpdatePictureBoxClickable(pictureBox_stock90);
             }
         }
 
@@ -438,6 +436,8 @@ namespace KamiModpackBuilder.Forms
                 XMLData.chrn_11 = true;
                 buttonExport_chrn11.Enabled = true;
                 LogHelper.Info("Imported chrn_11 successfully.");
+                pictureBox_chrn11.BackgroundImage = FileTypes.NUT.BitmapFromPortraitNut(PathChrn11, true);
+                UpdatePictureBoxClickable(pictureBox_chrn11);
             }
         }
 

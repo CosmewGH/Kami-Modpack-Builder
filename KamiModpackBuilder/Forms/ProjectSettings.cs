@@ -54,6 +54,7 @@ namespace KamiModpackBuilder.Forms
             checkBoxUseSSS.Checked = _Project.EditorSSSActive;
             checkBoxUseMusic.Checked = _Project.EditorMusicActive;
             checkBoxUseExplorer.Checked = _Project.EditorExplorerChanges;
+            checkBoxUnrestrictSlots.Checked = _Project.EnableMoreCustomSlots;
         }
 
         private void buttonBrowseExtractionFolder_Click(object sender, EventArgs e)
@@ -136,6 +137,7 @@ namespace KamiModpackBuilder.Forms
             _Project.EditorSSSActive = checkBoxUseSSS.Checked;
             _Project.EditorMusicActive = checkBoxUseMusic.Checked;
             _Project.EditorExplorerChanges = checkBoxUseExplorer.Checked;
+            _Project.EnableMoreCustomSlots = checkBoxUnrestrictSlots.Checked;
         }
     }
 }
