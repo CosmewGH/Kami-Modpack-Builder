@@ -300,11 +300,11 @@ namespace KamiModpackBuilder
         /// <param name="absolutePath">Absolute path</param>
         /// <param name="outputFolder">Output folder</param>
         /// <returns>Path to the file or folder extracted</returns>
-        public string ExtractResource(string absolutePath, string outputFolder)
+        public string ExtractResource(string absolutePath, string outputFolder, bool ignoreMods = false)
         {
             ResourceCollection resCol = GetResourceCollection(absolutePath);
             string relativePath = GetRelativePath(absolutePath);
-            return ExtractResource(resCol, relativePath, outputFolder);
+            return ExtractResource(resCol, relativePath, outputFolder, ignoreMods);
         }
 
         /// <summary>
@@ -314,9 +314,9 @@ namespace KamiModpackBuilder
         /// </summary>
         /// <param name="absolutePath">Absolute path</param>
         /// <returns>Path to the file or folder extracted</returns>
-        public string ExtractResource(string absolutePath)
+        public string ExtractResource(string absolutePath, bool ignoreMods = false)
         {
-            return ExtractResource(absolutePath, PathHelper.FolderExtractFullPath);
+            return ExtractResource(absolutePath, PathHelper.FolderExtractFullPath, ignoreMods);
         }
 
         /// <summary>
@@ -328,12 +328,12 @@ namespace KamiModpackBuilder
         /// <param name="relativePath">Relative path</param>
         /// <param name="outputFolder">Output folder</param>
         /// <returns>Path to the file or folder extracted</returns>
-        public string ExtractResource(ResourceCollection resCol, string relativePath, string outputFolder)
+        public string ExtractResource(ResourceCollection resCol, string relativePath, string outputFolder, bool ignoreMods = false)
         {
             if (!relativePath.EndsWith("/"))
-                return ExtractFile(resCol, relativePath, outputFolder);
+                return ExtractFile(resCol, relativePath, outputFolder, ignoreMods);
             else
-                ExtractFolder(resCol, relativePath, outputFolder);
+                ExtractFolder(resCol, relativePath, outputFolder, ignoreMods);
             return string.Empty;
         }
 
@@ -352,7 +352,7 @@ namespace KamiModpackBuilder
         #endregion
 
         #region private methods
-        private string ExtractFile(ResourceCollection resCol, string relativePath, string outputFile, bool isFromFolder)
+        private string ExtractFile(ResourceCollection resCol, string relativePath, string outputFile, bool isFromFolder, bool ignoreMods = false)
         {
             //Get absolute path
             string absolutePath = GetAbsolutePath(resCol, relativePath);
@@ -368,13 +368,16 @@ namespace KamiModpackBuilder
                 //If file is present in workplace, a mod already exist.
                 if (File.Exists(workplaceFile))
                 {
-                    Directory.CreateDirectory(Path.GetDirectoryName(extractFile));
-                    File.Copy(workplaceFile, extractFile, true);
+                    if (!ignoreMods)
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(extractFile));
+                        File.Copy(workplaceFile, extractFile, true);
 
-                    if (!isFromFolder)
-                        LogHelper.Info(string.Format("Extracting file '{0}' from Mod...", absolutePath));
+                        if (!isFromFolder)
+                            LogHelper.Info(string.Format("Extracting file '{0}' from Mod...", absolutePath));
 
-                    return extractFile;
+                        return extractFile;
+                    }
                 }
 
                 //If not, we make sure the path given is correct and exist in the resource collection
@@ -416,12 +419,12 @@ namespace KamiModpackBuilder
             return extractFile;
         }
 
-        private string ExtractFile(ResourceCollection resCol, string relativePath, string outputFolder)
+        private string ExtractFile(ResourceCollection resCol, string relativePath, string outputFolder, bool ignoreMods = false)
         {
-            return ExtractFile(resCol, relativePath, outputFolder, false);
+            return ExtractFile(resCol, relativePath, outputFolder, false, ignoreMods);
         }
 
-        private string ExtractFolder(ResourceCollection resCol, string relativePath, string outputFolder)
+        private string ExtractFolder(ResourceCollection resCol, string relativePath, string outputFolder, bool ignoreMods = false)
         {
             //Get all the existing resource to extract
             List<string> lResources = FilterRelativePath(resCol.CachedFilteredResources.Keys.ToArray(), relativePath);
@@ -435,7 +438,7 @@ namespace KamiModpackBuilder
             foreach (string resource in lResources)
             {
                 if(!resource.EndsWith("/"))
-                    ExtractFile(resCol, resource, outputFolder, true);
+                    ExtractFile(resCol, resource, outputFolder, true, ignoreMods);
             }
             _RfManager.ClearCachedDataSources();
 

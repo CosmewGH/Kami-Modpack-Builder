@@ -54,6 +54,8 @@ namespace KamiModpackBuilder.Forms
             XMLData = Utils.DeserializeXML<CharacterSlotModXML>(PathKami);
             if (XMLData == null) return;
 
+            XMLData.isDirty = false;
+
             if (XMLData.BoxingRingText == null) XMLData.BoxingRingText = String.Empty;
             if (XMLData.CharacterName == null) XMLData.CharacterName = String.Empty;
             if (XMLData.DisplayName == null) XMLData.DisplayName = String.Empty;
@@ -224,8 +226,12 @@ namespace KamiModpackBuilder.Forms
 
             XMLData.Notes = textBoxNotes.Text.Replace("\r\n", "\n");
 
-            Utils.SerializeXMLToFile<CharacterSlotModXML>(XMLData, PathKami);
-            LogHelper.Info("Mod properties saved.");
+            if (XMLData.isDirty)
+            {
+                Utils.SerializeXMLToFile<CharacterSlotModXML>(XMLData, PathKami);
+                LogHelper.Info("Mod properties saved.");
+                XMLData.isDirty = false;
+            }
         }
 
         private void SlotModProperties_FormClosing(object sender, FormClosingEventArgs e)

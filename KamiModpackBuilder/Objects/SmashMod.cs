@@ -361,22 +361,214 @@ namespace KamiModpackBuilder.Objects
     /// </summary>
     public class CharacterSlotModXML
     {
-        public string DisplayName { get; set; }
-        public int TextureID { get; set; }
-        public bool Haslxx { get; set; }
-        public bool chr_00 { get; set; }
-        public bool chr_11 { get; set; }
-        public bool chr_13 { get; set; }
-        public bool stock_90 { get; set; }
-        public bool chrn_11 { get; set; }
-        public bool Sound { get; set; }
-        public bool Voice { get; set; }
-        public bool UseCustomName { get; set; }
-        public string CharacterName { get; set; }
-        public string BoxingRingText { get; set; }
-        public bool WifiSafe { get; set; }
-        public MetalModelStatus MetalModel { get; set; }
-        public string Notes { get; set; }
+
+        public string DisplayName
+        {
+            get { return m_DisplayName; }
+            set
+            {
+                if (m_DisplayName != null)
+                    if (!m_DisplayName.Equals(value))
+                        isDirty = true;
+                m_DisplayName = value;
+            }
+        }
+        public int TextureID
+        {
+            get { return m_TextureID; }
+            set
+            {
+                if (m_TextureID != value)
+                {
+                    isDirty = true;
+                }
+                m_TextureID = value;
+            }
+        }
+        public bool Haslxx
+        {
+            get { return m_Haslxx; }
+            set
+            {
+                if (m_Haslxx != value)
+                {
+                    isDirty = true;
+                }
+                m_Haslxx = value;
+            }
+        }
+        public bool chr_00
+        {
+            get { return m_chr_00; }
+            set
+            {
+                if (m_chr_00 != value)
+                {
+                    isDirty = true;
+                }
+                m_chr_00 = value;
+            }
+        }
+        public bool chr_11
+        {
+            get { return m_chr_11; }
+            set
+            {
+                if (m_chr_11 != value)
+                {
+                    isDirty = true;
+                }
+                m_chr_11 = value;
+            }
+        }
+        public bool chr_13
+        {
+            get { return m_chr_13; }
+            set
+            {
+                if (m_chr_13 != value)
+                {
+                    isDirty = true;
+                }
+                m_chr_13 = value;
+            }
+        }
+        public bool stock_90
+        {
+            get { return m_stock_90; }
+            set
+            {
+                if (m_stock_90 != value)
+                {
+                    isDirty = true;
+                }
+                m_stock_90 = value;
+            }
+        }
+        public bool chrn_11
+        {
+            get { return m_chrn_11; }
+            set
+            {
+                if (m_chrn_11 != value)
+                {
+                    isDirty = true;
+                }
+                m_chrn_11 = value;
+            }
+        }
+        public bool Sound
+        {
+            get { return m_Sound; }
+            set
+            {
+                if (m_Sound != value)
+                {
+                    isDirty = true;
+                }
+                m_Sound = value;
+            }
+        }
+        public bool Voice
+        {
+            get { return m_Voice; }
+            set
+            {
+                if (m_Voice != value)
+                {
+                    isDirty = true;
+                }
+                m_Voice = value;
+            }
+        }
+        public bool UseCustomName
+        {
+            get { return m_UseCustomName; }
+            set
+            {
+                if (m_UseCustomName != value)
+                {
+                    isDirty = true;
+                }
+                m_UseCustomName = value;
+            }
+        }
+        public string CharacterName
+        {
+            get { return m_CharacterName; }
+            set
+            {
+                if (m_CharacterName != null)
+                    if (!m_CharacterName.Equals(value))
+                        isDirty = true;
+                m_CharacterName = value;
+            }
+        }
+        public string BoxingRingText
+        {
+            get { return m_BoxingRingText; }
+            set
+            {
+                if (m_BoxingRingText != null)
+                    if (!m_BoxingRingText.Equals(value))
+                        isDirty = true;
+                m_BoxingRingText = value;
+            }
+        }
+        public bool WifiSafe
+        {
+            get { return m_WifiSafe; }
+            set
+            {
+                if (m_WifiSafe != value)
+                {
+                    isDirty = true;
+                }
+                m_WifiSafe = value;
+            }
+        }
+        public MetalModelStatus MetalModel
+        {
+            get { return m_MetalModel; }
+            set
+            {
+                if (m_MetalModel != value)
+                {
+                    isDirty = true;
+                }
+                m_MetalModel = value;
+            }
+        }
+        public string Notes
+        {
+            get { return m_Notes; }
+            set
+            {
+                if (m_Notes != null)
+                    if (!m_Notes.Equals(value))
+                        isDirty = true;
+                m_Notes = value;
+            }
+        }
+
+        [XmlIgnore] public bool isDirty = false;
+
+        [XmlIgnore] private string m_DisplayName;
+        [XmlIgnore] private int m_TextureID;
+        [XmlIgnore] private bool m_Haslxx;
+        [XmlIgnore] private bool m_chr_00;
+        [XmlIgnore] private bool m_chr_11;
+        [XmlIgnore] private bool m_chr_13;
+        [XmlIgnore] private bool m_stock_90;
+        [XmlIgnore] private bool m_chrn_11;
+        [XmlIgnore] private bool m_Sound;
+        [XmlIgnore] private bool m_Voice;
+        [XmlIgnore] private bool m_UseCustomName;
+        [XmlIgnore] private string m_CharacterName;
+        [XmlIgnore] private string m_BoxingRingText;
+        [XmlIgnore] private bool m_WifiSafe;
+        [XmlIgnore] private MetalModelStatus m_MetalModel;
+        [XmlIgnore] private string m_Notes;
 
         public enum MetalModelStatus { Unknown, Works, Missing, Crashes}
 
@@ -391,9 +583,44 @@ namespace KamiModpackBuilder.Objects
     /// </summary>
     public class CharacterGeneralModXML
     {
-        public string DisplayName { get; set; }
-        public bool WifiSafe { get; set; }
-        public string Notes { get; set; }
+        public string DisplayName
+        {
+            get { return m_DisplayName; }
+            set
+            {
+                if (m_DisplayName != null)
+                    if (!m_DisplayName.Equals(value))
+                        isDirty = true;
+                m_DisplayName = value;
+            }
+        }
+        public bool WifiSafe
+        {
+            get { return m_WifiSafe; }
+            set
+            {
+                if (m_WifiSafe != value)
+                    isDirty = true;
+                m_WifiSafe = value;
+            }
+        }
+        public string Notes
+        {
+            get { return m_Notes; }
+            set
+            {
+                if (m_Notes != null)
+                    if (!m_Notes.Equals(value))
+                        isDirty = true;
+                m_Notes = value;
+            }
+        }
+
+        [XmlIgnore] public bool isDirty = false;
+
+        [XmlIgnore] private string m_DisplayName;
+        [XmlIgnore] private bool m_WifiSafe;
+        [XmlIgnore] private string m_Notes;
 
         public CharacterGeneralModXML()
         {
@@ -406,16 +633,121 @@ namespace KamiModpackBuilder.Objects
     /// </summary>
     public class StageModXML
     {
-        public string DisplayName { get; set; }
-        public int IntendedStage { get; set; }
-        public bool WifiSafe { get; set; }
-        public string Notes { get; set; }
-        public bool stage_10 { get; set; }
-        public bool stage_11 { get; set; }
-        public bool stage_12 { get; set; }
-        public bool stage_13 { get; set; }
-        public bool stage_30 { get; set; }
-        public bool stagen_10 { get; set; }
+        public string DisplayName
+        {
+            get { return m_DisplayName; }
+            set
+            {
+                if (m_DisplayName != null)
+                    if (!m_DisplayName.Equals(value))
+                        isDirty = true;
+                m_DisplayName = value;
+            }
+        }
+        public int IntendedStage
+        {
+            get { return m_IntendedStage; }
+            set
+            {
+                if (m_IntendedStage != value)
+                    isDirty = true;
+                m_IntendedStage = value;
+            }
+        }
+        public bool WifiSafe
+        {
+            get { return m_WifiSafe; }
+            set
+            {
+                if (m_WifiSafe != value)
+                    isDirty = true;
+                m_WifiSafe = value;
+            }
+        }
+        public string Notes
+        {
+            get { return m_Notes; }
+            set
+            {
+                if (m_Notes != null)
+                    if (!m_Notes.Equals(value))
+                        isDirty = true;
+                m_Notes = value;
+            }
+        }
+        public bool stage_10
+        {
+            get { return m_stage_10; }
+            set
+            {
+                if (m_stage_10 != value)
+                    isDirty = true;
+                m_stage_10 = value;
+            }
+        }
+        public bool stage_11
+        {
+            get { return m_stage_11; }
+            set
+            {
+                if (m_stage_11 != value)
+                    isDirty = true;
+                m_stage_11 = value;
+            }
+        }
+        public bool stage_12
+        {
+            get { return m_stage_12; }
+            set
+            {
+                if (m_stage_12 != value)
+                    isDirty = true;
+                m_stage_12 = value;
+            }
+        }
+        public bool stage_13
+        {
+            get { return m_stage_13; }
+            set
+            {
+                if (m_stage_13 != value)
+                    isDirty = true;
+                m_stage_13 = value;
+            }
+        }
+        public bool stage_30
+        {
+            get { return m_stage_30; }
+            set
+            {
+                if (m_stage_30 != value)
+                    isDirty = true;
+                m_stage_30 = value;
+            }
+        }
+        public bool stagen_10
+        {
+            get { return m_stagen_10; }
+            set
+            {
+                if (m_stagen_10 != value)
+                    isDirty = true;
+                m_stagen_10 = value;
+            }
+        }
+
+        [XmlIgnore] public bool isDirty = false;
+
+        [XmlIgnore] private string m_DisplayName;
+        [XmlIgnore] private int m_IntendedStage;
+        [XmlIgnore] private bool m_WifiSafe;
+        [XmlIgnore] private string m_Notes;
+        [XmlIgnore] private bool m_stage_10;
+        [XmlIgnore] private bool m_stage_11;
+        [XmlIgnore] private bool m_stage_12;
+        [XmlIgnore] private bool m_stage_13;
+        [XmlIgnore] private bool m_stage_30;
+        [XmlIgnore] private bool m_stagen_10;
 
         public StageModXML()
         {
@@ -428,9 +760,44 @@ namespace KamiModpackBuilder.Objects
     /// </summary>
     public class GeneralModXML
     {
-        public string DisplayName { get; set; }
-        public bool WifiSafe { get; set; }
-        public string Notes { get; set; }
+        public string DisplayName
+        {
+            get { return m_DisplayName; }
+            set
+            {
+                if (m_DisplayName != null)
+                    if (!m_DisplayName.Equals(value))
+                        isDirty = true;
+                m_DisplayName = value;
+            }
+        }
+        public bool WifiSafe
+        {
+            get { return m_WifiSafe; }
+            set
+            {
+                if (m_WifiSafe != value)
+                    isDirty = true;
+                m_WifiSafe = value;
+            }
+        }
+        public string Notes
+        {
+            get { return m_Notes; }
+            set
+            {
+                if (m_Notes != null)
+                    if (!m_Notes.Equals(value))
+                        isDirty = true;
+                m_Notes = value;
+            }
+        }
+
+        [XmlIgnore] public bool isDirty = false;
+
+        [XmlIgnore] private string m_DisplayName;
+        [XmlIgnore] private bool m_WifiSafe;
+        [XmlIgnore] private string m_Notes;
 
         public GeneralModXML()
         {

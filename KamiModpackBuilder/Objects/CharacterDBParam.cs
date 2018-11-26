@@ -20,7 +20,7 @@ namespace KamiModpackBuilder.Objects
             if (createNew || !File.Exists(PathHelper.FolderEditorMods + "data(us_en)/param/ui/ui_character_db.bin"))
             {
                 _SmashProjectManager = project;
-                _SmashProjectManager.ExtractResource("data(us_en)/param/ui/ui_character_db.bin", PathHelper.FolderEditorMods);
+                _SmashProjectManager.ExtractResource("data(us_en)/param/ui/ui_character_db.bin", PathHelper.FolderEditorMods, true);
             }
             Param.LoadFile(PathHelper.FolderEditorMods + "data(us_en)/param/ui/ui_character_db.bin");
         }

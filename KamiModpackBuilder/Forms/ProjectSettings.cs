@@ -49,9 +49,7 @@ namespace KamiModpackBuilder.Forms
             checkBoxMissingPortraits.Checked = _Project.SupressWarningMissingPortraits;
             checkBoxModFileConflicts.Checked = _Project.SupressWarningModFileConflicts;
             checkBoxModelFilesMissing.Checked = _Project.SupressWarningSlotModModelFilesMissing;
-
-            checkBoxUseCSS.Checked = _Project.EditorCSSActive;
-            checkBoxUseSSS.Checked = _Project.EditorSSSActive;
+            
             checkBoxUseMusic.Checked = _Project.EditorMusicActive;
             checkBoxUseExplorer.Checked = _Project.EditorExplorerChanges;
             checkBoxUnrestrictSlots.Checked = _Project.EnableMoreCustomSlots;
@@ -132,9 +130,7 @@ namespace KamiModpackBuilder.Forms
             _Project.SupressWarningMissingPortraits = checkBoxMissingPortraits.Checked;
             _Project.SupressWarningModFileConflicts = checkBoxModFileConflicts.Checked;
             _Project.SupressWarningSlotModModelFilesMissing = checkBoxModelFilesMissing.Checked;
-
-            _Project.EditorCSSActive = checkBoxUseCSS.Checked;
-            _Project.EditorSSSActive = checkBoxUseSSS.Checked;
+            
             _Project.EditorMusicActive = checkBoxUseMusic.Checked;
             _Project.EditorExplorerChanges = checkBoxUseExplorer.Checked;
             _Project.EnableMoreCustomSlots = checkBoxUnrestrictSlots.Checked;

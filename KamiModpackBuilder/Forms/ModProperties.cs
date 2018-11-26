@@ -52,6 +52,7 @@ namespace KamiModpackBuilder.Forms
                 case ModsList.ModListType.CharacterGeneral:
                     XMLDataCharGeneral = Utils.DeserializeXML<CharacterGeneralModXML>(PathKami);
                     if (XMLDataCharGeneral == null) return;
+                    XMLDataCharGeneral.isDirty = false;
                     textBoxDisplayName.Text = XMLDataCharGeneral.DisplayName;
                     checkBoxWifiSafe.Checked = XMLDataCharGeneral.WifiSafe;
                     if (XMLDataCharGeneral.Notes == null) XMLDataCharGeneral.Notes = String.Empty;
@@ -63,6 +64,7 @@ namespace KamiModpackBuilder.Forms
                 case ModsList.ModListType.Stage:
                     XMLDataStage = Utils.DeserializeXML<StageModXML>(PathKami);
                     if (XMLDataStage == null) return;
+                    XMLDataStage.isDirty = false;
                     textBoxDisplayName.Text = XMLDataStage.DisplayName;
                     checkBoxWifiSafe.Checked = XMLDataStage.WifiSafe;
                     if (XMLDataStage.Notes == null) XMLDataStage.Notes = String.Empty;
@@ -128,6 +130,7 @@ namespace KamiModpackBuilder.Forms
                 case ModsList.ModListType.General:
                     XMLDataGeneral = Utils.DeserializeXML<GeneralModXML>(PathKami);
                     if (XMLDataGeneral == null) return;
+                    XMLDataGeneral.isDirty = false;
                     textBoxDisplayName.Text = XMLDataGeneral.DisplayName;
                     checkBoxWifiSafe.Checked = XMLDataGeneral.WifiSafe;
                     if (XMLDataGeneral.Notes == null) XMLDataGeneral.Notes = String.Empty;
@@ -165,23 +168,37 @@ namespace KamiModpackBuilder.Forms
                     XMLDataCharGeneral.DisplayName = textBoxDisplayName.Text;
                     XMLDataCharGeneral.WifiSafe = checkBoxWifiSafe.Checked;
                     XMLDataCharGeneral.Notes = textBoxNotes.Text.Replace("\r\n", "\n");
-                    Utils.SerializeXMLToFile(XMLDataCharGeneral, PathKami);
+                    if (XMLDataCharGeneral.isDirty)
+                    {
+                        Utils.SerializeXMLToFile(XMLDataCharGeneral, PathKami);
+                        LogHelper.Info("Mod properties saved.");
+                        XMLDataCharGeneral.isDirty = false;
+                    }
                     break;
                 case ModsList.ModListType.Stage:
                     XMLDataStage.DisplayName = textBoxDisplayName.Text;
                     XMLDataStage.WifiSafe = checkBoxWifiSafe.Checked;
                     XMLDataStage.Notes = textBoxNotes.Text.Replace("\r\n", "\n");
-                    Utils.SerializeXMLToFile(XMLDataStage, PathKami);
+                    if (XMLDataStage.isDirty)
+                    {
+                        Utils.SerializeXMLToFile(XMLDataStage, PathKami);
+                        LogHelper.Info("Mod properties saved.");
+                        XMLDataStage.isDirty = false;
+                    }
                     break;
                 case ModsList.ModListType.General:
                     XMLDataGeneral.DisplayName = textBoxDisplayName.Text;
                     XMLDataGeneral.WifiSafe = checkBoxWifiSafe.Checked;
                     XMLDataGeneral.Notes = textBoxNotes.Text.Replace("\r\n", "\n");
-                    Utils.SerializeXMLToFile(XMLDataGeneral, PathKami);
+                    if (XMLDataGeneral.isDirty)
+                    {
+                        Utils.SerializeXMLToFile(XMLDataGeneral, PathKami);
+                        LogHelper.Info("Mod properties saved.");
+                        XMLDataGeneral.isDirty = false;
+                    }
                     break;
             }
 
-            LogHelper.Info("Mod properties saved.");
         }
 
         private void ModProperties_FormClosing(object sender, FormClosingEventArgs e)

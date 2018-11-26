@@ -49,18 +49,15 @@
             this.textBoxExtractionFolder = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBoxEditorMods = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.checkBoxUnrestrictSlots = new System.Windows.Forms.CheckBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
             this.checkBoxUseExplorer = new System.Windows.Forms.CheckBox();
             this.label53 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.checkBoxUseMusic = new System.Windows.Forms.CheckBox();
             this.label55 = new System.Windows.Forms.Label();
-            this.label56 = new System.Windows.Forms.Label();
-            this.checkBoxUseSSS = new System.Windows.Forms.CheckBox();
-            this.label57 = new System.Windows.Forms.Label();
-            this.checkBoxUseCSS = new System.Windows.Forms.CheckBox();
-            this.label58 = new System.Windows.Forms.Label();
-            this.label59 = new System.Windows.Forms.Label();
             this.groupBoxAutoFix = new System.Windows.Forms.GroupBox();
             this.label42 = new System.Windows.Forms.Label();
             this.checkBoxSoundMTB = new System.Windows.Forms.CheckBox();
@@ -113,9 +110,6 @@
             this.label24 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.label1 = new System.Windows.Forms.Label();
-            this.checkBoxUnrestrictSlots = new System.Windows.Forms.CheckBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.groupBoxDirectories.SuspendLayout();
             this.groupBoxEditorMods.SuspendLayout();
             this.groupBoxAutoFix.SuspendLayout();
@@ -353,26 +347,51 @@
             this.groupBoxEditorMods.Controls.Add(this.label54);
             this.groupBoxEditorMods.Controls.Add(this.checkBoxUseMusic);
             this.groupBoxEditorMods.Controls.Add(this.label55);
-            this.groupBoxEditorMods.Controls.Add(this.label56);
-            this.groupBoxEditorMods.Controls.Add(this.checkBoxUseSSS);
-            this.groupBoxEditorMods.Controls.Add(this.label57);
-            this.groupBoxEditorMods.Controls.Add(this.checkBoxUseCSS);
-            this.groupBoxEditorMods.Controls.Add(this.label58);
-            this.groupBoxEditorMods.Controls.Add(this.label59);
             this.groupBoxEditorMods.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxEditorMods.Location = new System.Drawing.Point(0, 162);
             this.groupBoxEditorMods.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxEditorMods.Name = "groupBoxEditorMods";
             this.groupBoxEditorMods.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBoxEditorMods.Size = new System.Drawing.Size(574, 162);
+            this.groupBoxEditorMods.Size = new System.Drawing.Size(574, 109);
             this.groupBoxEditorMods.TabIndex = 2;
             this.groupBoxEditorMods.TabStop = false;
             this.groupBoxEditorMods.Text = "Editor Mods";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(147, 81);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(406, 13);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "Allows for more custom slots per fighter beyond the recommended amount. (Up to 32" +
+    ")";
+            // 
+            // checkBoxUnrestrictSlots
+            // 
+            this.checkBoxUnrestrictSlots.AutoSize = true;
+            this.checkBoxUnrestrictSlots.Location = new System.Drawing.Point(112, 81);
+            this.checkBoxUnrestrictSlots.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBoxUnrestrictSlots.Name = "checkBoxUnrestrictSlots";
+            this.checkBoxUnrestrictSlots.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxUnrestrictSlots.TabIndex = 32;
+            this.checkBoxUnrestrictSlots.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(8, 81);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(101, 13);
+            this.label11.TabIndex = 31;
+            this.label11.Text = "Un-Restricted Slots:";
+            // 
             // label52
             // 
             this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(147, 107);
+            this.label52.Location = new System.Drawing.Point(147, 55);
             this.label52.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(235, 13);
@@ -382,7 +401,7 @@
             // checkBoxUseExplorer
             // 
             this.checkBoxUseExplorer.AutoSize = true;
-            this.checkBoxUseExplorer.Location = new System.Drawing.Point(112, 107);
+            this.checkBoxUseExplorer.Location = new System.Drawing.Point(112, 55);
             this.checkBoxUseExplorer.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxUseExplorer.Name = "checkBoxUseExplorer";
             this.checkBoxUseExplorer.Size = new System.Drawing.Size(15, 14);
@@ -392,7 +411,7 @@
             // label53
             // 
             this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(8, 107);
+            this.label53.Location = new System.Drawing.Point(8, 55);
             this.label53.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(70, 13);
@@ -402,7 +421,7 @@
             // label54
             // 
             this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(147, 81);
+            this.label54.Location = new System.Drawing.Point(147, 29);
             this.label54.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(253, 13);
@@ -412,7 +431,7 @@
             // checkBoxUseMusic
             // 
             this.checkBoxUseMusic.AutoSize = true;
-            this.checkBoxUseMusic.Location = new System.Drawing.Point(112, 81);
+            this.checkBoxUseMusic.Location = new System.Drawing.Point(112, 29);
             this.checkBoxUseMusic.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxUseMusic.Name = "checkBoxUseMusic";
             this.checkBoxUseMusic.Size = new System.Drawing.Size(15, 14);
@@ -422,72 +441,12 @@
             // label55
             // 
             this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(8, 81);
+            this.label55.Location = new System.Drawing.Point(8, 29);
             this.label55.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(60, 13);
             this.label55.TabIndex = 25;
             this.label55.Text = "Use Music:";
-            // 
-            // label56
-            // 
-            this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(147, 55);
-            this.label56.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(301, 13);
-            this.label56.TabIndex = 24;
-            this.label56.Text = "Use the Stage Select Screen layout designed in the editor tab.";
-            // 
-            // checkBoxUseSSS
-            // 
-            this.checkBoxUseSSS.AutoSize = true;
-            this.checkBoxUseSSS.Location = new System.Drawing.Point(112, 55);
-            this.checkBoxUseSSS.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBoxUseSSS.Name = "checkBoxUseSSS";
-            this.checkBoxUseSSS.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxUseSSS.TabIndex = 23;
-            this.checkBoxUseSSS.UseVisualStyleBackColor = true;
-            // 
-            // label57
-            // 
-            this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(147, 29);
-            this.label57.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(319, 13);
-            this.label57.TabIndex = 22;
-            this.label57.Text = "Use the Character Select Screen layout designed in the editor tab.";
-            // 
-            // checkBoxUseCSS
-            // 
-            this.checkBoxUseCSS.AutoSize = true;
-            this.checkBoxUseCSS.Location = new System.Drawing.Point(112, 29);
-            this.checkBoxUseCSS.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBoxUseCSS.Name = "checkBoxUseCSS";
-            this.checkBoxUseCSS.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxUseCSS.TabIndex = 21;
-            this.checkBoxUseCSS.UseVisualStyleBackColor = true;
-            // 
-            // label58
-            // 
-            this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(8, 55);
-            this.label58.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(53, 13);
-            this.label58.TabIndex = 5;
-            this.label58.Text = "Use SSS:";
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(8, 29);
-            this.label59.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(53, 13);
-            this.label59.TabIndex = 1;
-            this.label59.Text = "Use CSS:";
             // 
             // groupBoxAutoFix
             // 
@@ -513,7 +472,7 @@
             this.groupBoxAutoFix.Controls.Add(this.checkBoxTextureIDFixing);
             this.groupBoxAutoFix.Controls.Add(this.label34);
             this.groupBoxAutoFix.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxAutoFix.Location = new System.Drawing.Point(0, 324);
+            this.groupBoxAutoFix.Location = new System.Drawing.Point(0, 271);
             this.groupBoxAutoFix.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxAutoFix.Name = "groupBoxAutoFix";
             this.groupBoxAutoFix.Padding = new System.Windows.Forms.Padding(2);
@@ -749,7 +708,7 @@
             this.groupBoxSupressWarnings.Controls.Add(this.label20);
             this.groupBoxSupressWarnings.Controls.Add(this.label21);
             this.groupBoxSupressWarnings.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxSupressWarnings.Location = new System.Drawing.Point(0, 537);
+            this.groupBoxSupressWarnings.Location = new System.Drawing.Point(0, 484);
             this.groupBoxSupressWarnings.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxSupressWarnings.Name = "groupBoxSupressWarnings";
             this.groupBoxSupressWarnings.Padding = new System.Windows.Forms.Padding(2);
@@ -894,7 +853,7 @@
             this.groupBoxCSVExport.Controls.Add(this.checkBoxExportCSV);
             this.groupBoxCSVExport.Controls.Add(this.label18);
             this.groupBoxCSVExport.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxCSVExport.Location = new System.Drawing.Point(0, 673);
+            this.groupBoxCSVExport.Location = new System.Drawing.Point(0, 620);
             this.groupBoxCSVExport.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxCSVExport.Name = "groupBoxCSVExport";
             this.groupBoxCSVExport.Padding = new System.Windows.Forms.Padding(2);
@@ -985,7 +944,7 @@
             this.groupBoxDebug.Controls.Add(this.label22);
             this.groupBoxDebug.Controls.Add(this.label24);
             this.groupBoxDebug.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxDebug.Location = new System.Drawing.Point(0, 787);
+            this.groupBoxDebug.Location = new System.Drawing.Point(0, 734);
             this.groupBoxDebug.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxDebug.Name = "groupBoxDebug";
             this.groupBoxDebug.Padding = new System.Windows.Forms.Padding(2);
@@ -1069,37 +1028,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(591, 549);
             this.panel1.TabIndex = 8;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(147, 133);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(406, 13);
-            this.label1.TabIndex = 33;
-            this.label1.Text = "Allows for more custom slots per fighter beyond the recommended amount. (Up to 32" +
-    ")";
-            // 
-            // checkBoxUnrestrictSlots
-            // 
-            this.checkBoxUnrestrictSlots.AutoSize = true;
-            this.checkBoxUnrestrictSlots.Location = new System.Drawing.Point(112, 133);
-            this.checkBoxUnrestrictSlots.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBoxUnrestrictSlots.Name = "checkBoxUnrestrictSlots";
-            this.checkBoxUnrestrictSlots.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxUnrestrictSlots.TabIndex = 32;
-            this.checkBoxUnrestrictSlots.UseVisualStyleBackColor = true;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(8, 133);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(101, 13);
-            this.label11.TabIndex = 31;
-            this.label11.Text = "Un-Restricted Slots:";
             // 
             // ProjectSettings
             // 
@@ -1207,12 +1135,6 @@
         private System.Windows.Forms.Label label54;
         private System.Windows.Forms.CheckBox checkBoxUseMusic;
         private System.Windows.Forms.Label label55;
-        private System.Windows.Forms.Label label56;
-        private System.Windows.Forms.CheckBox checkBoxUseSSS;
-        private System.Windows.Forms.Label label57;
-        private System.Windows.Forms.CheckBox checkBoxUseCSS;
-        private System.Windows.Forms.Label label58;
-        private System.Windows.Forms.Label label59;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.CheckBox checkBoxFighterStrings;

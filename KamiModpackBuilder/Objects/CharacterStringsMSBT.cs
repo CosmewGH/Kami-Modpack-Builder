@@ -18,7 +18,7 @@ namespace KamiModpackBuilder.Objects
             if (createNew || !File.Exists(PathHelper.FolderEditorMods + "data/ui/message/melee.msbt"))
             {
                 _SmashProjectManager = project;
-                _SmashProjectManager.ExtractResource("data/ui/message/melee.msbt", PathHelper.FolderEditorMods);
+                _SmashProjectManager.ExtractResource("data/ui/message/melee.msbt", PathHelper.FolderEditorMods, true);
             }
             msbt = new MSBT(PathHelper.FolderEditorMods + "data/ui/message/melee.msbt");
         }

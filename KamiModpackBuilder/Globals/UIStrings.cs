@@ -111,6 +111,7 @@ namespace KamiModpackBuilder.Globals
             "- A red !-circle icon will show if the mod is missing. If the folder got renamed or deleted but the mod was still activated, you should deactivate it and reactivate it using the Arrow Buttons.\r\n";
         public const string HELP_GENERALMODS_MODS =
             "General Mods follow the same hierarchy as the Explorer, and can affect any file found in it.\r\n" +
+            "Some General Mods will need to overwrite the files over multiple regions to get expected results, such as custom default rules mods.\r\n" +
             "Active Mods are currently turned on.\r\n" +
             "Use the arrows to activate/deactivate the mods and change the priority.\r\n" +
             "--Icons--\r\n" +
