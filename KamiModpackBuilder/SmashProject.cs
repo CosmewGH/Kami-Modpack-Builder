@@ -1493,6 +1493,9 @@ namespace KamiModpackBuilder
                 //Cloning to leave the original resourcecollection untouched
                 ResourceCollection newCol = (ResourceCollection)_resCols[i].Clone();
 
+                //Reset the list of files to remove from the build temporarily, since they cannot be extracted
+                CurrentProject.ClearCurrentBuildResourceRemoval();
+
                 //Build Export Files
                 BuildingExportFiles(newCol, exportPatchFolder, packing, filesLists[i]);
 
@@ -1529,15 +1532,30 @@ namespace KamiModpackBuilder
         #region private methods
         private void RemoveOriginalResourcesFromPackage(ResourceCollection resCol)
         {
-            if (_CurrentProject.ResourcesToRemove == null) return;
-            SmashModItem modItem = _CurrentProject.ResourcesToRemove.Find(p => p.Partition == resCol.PartitionName);
-            if (modItem == null)
-                return;
-
-            foreach(string relativePath in modItem.Paths)
+            SmashModItem modItem;
+            if (_CurrentProject.ResourcesToRemove != null)
             {
-                resCol.Resources.Remove(relativePath);
-                LogHelper.Debug(string.Format("Removing resource '{0}' from partition '{1}'", relativePath, resCol.PartitionName));
+                modItem = _CurrentProject.ResourcesToRemove.Find(p => p.Partition == resCol.PartitionName);
+                if (modItem != null)
+                {
+                    foreach (string relativePath in modItem.Paths)
+                    {
+                        resCol.Resources.Remove(relativePath);
+                        LogHelper.Debug(string.Format("Removing resource '{0}' from partition '{1}'", relativePath, resCol.PartitionName));
+                    }
+                }
+            }
+            if (_CurrentProject.ResourcesToRemoveCurrentBuildOnly != null)
+            {
+                modItem = _CurrentProject.ResourcesToRemoveCurrentBuildOnly.Find(p => p.Partition == resCol.PartitionName);
+                if (modItem != null)
+                {
+                    foreach (string relativePath in modItem.Paths)
+                    {
+                        resCol.Resources.Remove(relativePath);
+                        LogHelper.Debug(string.Format("Removing resource '{0}' from partition '{1}'", relativePath, resCol.PartitionName));
+                    }
+                }
             }
         }
 
@@ -1903,6 +1921,12 @@ namespace KamiModpackBuilder
 
                             if (!isFolder)
                             {
+                                if (nItem.Flags > 16384) //Cannot currently parse files with flag bit 15 set. Skip it and add to remove list.
+                                {
+                                    CurrentProject.RemoveOriginalResourceCurrentBuild(nItem.ResourceCollection.PartitionName, nItem.RelativePath);
+                                    continue;
+                                }
+
                                 byte[] fileToWrite;
 
                                 GetFileBinary(nItem, file, out cmpSize, out decSize, out fileToWrite);

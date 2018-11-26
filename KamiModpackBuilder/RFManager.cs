@@ -317,7 +317,9 @@ namespace KamiModpackBuilder
                         z += 2;
                 }
                 if (b[0] == 0x78 && b[1] == 0x9c)
+                {
                     b = Utils.DeCompress(b.Skip(z).ToArray());
+                }
             }
             src.Close();
 

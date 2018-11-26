@@ -59,6 +59,8 @@ namespace KamiModpackBuilder.Objects
 
         public List<SmashModItem> UnlocalizationItems { get; set; }
         public List<SmashModItem> ResourcesToRemove { get; set; }
+        [XmlIgnore]
+        public List<SmashModItem> ResourcesToRemoveCurrentBuildOnly { get; set; }
         //public List<string> PluginsOrder { get; set; }
 
         public bool IsSwitch { get; set; } //TODO SUPPORT
@@ -134,7 +136,24 @@ namespace KamiModpackBuilder.Objects
         #region Resource Removal
         internal void RemoveOriginalResource(string partition, string relativePath)
         {
+            if (ResourcesToRemove == null)
+                ResourcesToRemove = new List<SmashModItem>();
+
             AddSmashModItem(ResourcesToRemove, partition, relativePath);
+        }
+
+        internal void ClearCurrentBuildResourceRemoval()
+        {
+            if (ResourcesToRemoveCurrentBuildOnly == null) return;
+            ResourcesToRemoveCurrentBuildOnly.Clear();
+        }
+
+        internal void RemoveOriginalResourceCurrentBuild(string partition, string relativePath)
+        {
+            if (ResourcesToRemoveCurrentBuildOnly == null)
+                ResourcesToRemoveCurrentBuildOnly = new List<SmashModItem>();
+
+            AddSmashModItem(ResourcesToRemoveCurrentBuildOnly, partition, relativePath);
         }
 
         internal void ReintroduceOriginalResource(string partition, string relativePath)
