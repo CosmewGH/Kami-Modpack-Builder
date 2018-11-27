@@ -91,6 +91,8 @@ namespace KamiModpackBuilder
 
                 //New ResourceItem object
                 ResourceItem rItem = new ResourceItem(resCol, rEntry.EntryString, rEntry.OffInPack, (uint)rEntry.CmpSize, (uint)rEntry.DecSize, rEntry.Packed, string.Join(string.Empty, pathParts));
+                rItem.OriginalFlags = rEntry.Flags;
+                rItem.OverridePackedFile = (rItem.OriginalFlags & 0x4000) == 0x4000;
 
                 //For Treeview
                 pathPartsRes[rEntry.FolderDepth - 1] = rItem;
@@ -108,7 +110,7 @@ namespace KamiModpackBuilder
                     patchItem = _PatchFileList.GetPatchFileItem(rItem.AbsolutePath);
                     if (patchItem != null)
                     {
-                        if(patchItem.Packed)
+                        if (patchItem.Packed)
                             currentPackedPatchFile = patchItem;
                     }
                     //Part of LS
@@ -130,9 +132,16 @@ namespace KamiModpackBuilder
 
                 //Check if part of the patch/mod
                 if (currentPackedPatchFile != null && rItem.AbsolutePath.StartsWith(currentPackedPatchFile.AbsolutePath))
+                {
                     rItem.Source = FileSource.Patch;
+                    rItem.PatchItem = currentPackedPatchFile;
+                }
                 else if (patchItem != null)
+                {
                     rItem.Source = FileSource.Patch;
+                    rItem.PatchItem = patchItem;
+                }
+
                 //Part of LS
                 else
                 {
@@ -150,7 +159,14 @@ namespace KamiModpackBuilder
                     }
                 }
 
-                rItem.PatchItem = currentPackedPatchFile;
+                //Case of patch but not in packed
+                if (rItem.OverridePackedFile && rItem.Source != FileSource.NotFound)
+                {
+                    rItem.Source = FileSource.Patch;
+                    rItem.PatchItem = _PatchFileList.GetPatchFileItem(rItem.AbsolutePath);
+                    if (rItem.PatchItem == null)
+                        rItem.PatchItem = _PatchFileList.GetPatchFileItem("data/" + rItem.RelativePath);
+                }
 
                 if (rItem.Source != FileSource.NotFound)
                 {
@@ -168,8 +184,6 @@ namespace KamiModpackBuilder
                         }
                     }
                 }
-
-                rItem.OriginalFlags = rEntry.Flags;
 
                 resCol.Resources.Add(rItem.RelativePath, rItem);
             }
@@ -238,15 +252,29 @@ namespace KamiModpackBuilder
             try
             {
                 //Simple file
-                string gameFile = PathHelper.GetGameFolder(PathHelperEnum.FOLDER_PATCH) + rItem.AbsolutePath.Replace('/', Path.DirectorySeparatorChar);
+                string gameFile = PathHelper.GetGameFolder(PathHelperEnum.FOLDER_PATCH) + rItem.PatchItem.AbsolutePath.Replace('/', Path.DirectorySeparatorChar);
                 if (File.Exists(gameFile))
                 {
-                    Directory.CreateDirectory(Path.GetDirectoryName(outputFile));
-                    File.Copy(gameFile, outputFile, true);
-                    return true;
+                    //If the file is an externally-patched file, we want to decompress it
+                    if (rItem.OverridePackedFile)
+                    {
+                        byte[] fileBinary = File.ReadAllBytes(gameFile);
+                        if (Utils.IsCompressed(fileBinary))
+                            fileBinary = Utils.DeCompress(fileBinary);
+
+                        Directory.CreateDirectory(Path.GetDirectoryName(outputFile));
+                        File.WriteAllBytes(outputFile, fileBinary);
+                        return true;
+                    }
+                    else
+                    {
+                        File.Copy(gameFile, outputFile);
+                        return true;
+                    }
                 }
 
                 string mainfolder = "";
+                string gamePackedFile = PathHelper.GetGameFolder(PathHelperEnum.FOLDER_PATCH) + rItem.AbsolutePath.Replace('/', Path.DirectorySeparatorChar);
                 if (!rItem.AbsolutePath.EndsWith("/"))
                 {
                     DataSource packedSource;
@@ -255,7 +283,7 @@ namespace KamiModpackBuilder
                     string packed = rItem.PatchItem.AbsolutePath;
                     if (!_CachedDataSources.TryGetValue(packed, out packedSource))
                     {
-                        string path = gameFile.Substring(0, gameFile.LastIndexOf("\\data")) + Path.DirectorySeparatorChar + packed.Replace("/", "\\") + "packed";
+                        string path = gamePackedFile.Substring(0, gamePackedFile.LastIndexOf("\\data")) + Path.DirectorySeparatorChar + packed.Replace("/", "\\") + "packed";
                         if (File.Exists(path))
                         {
                             packedSource = new DataSource(FileMap.FromFile(path));
@@ -410,11 +438,29 @@ namespace KamiModpackBuilder
             List<string> files = new List<string>();
             foreach (PatchFileItem pItem in _PatchFileList.Files)
             {
-                string formatedPath = pItem.AbsolutePath + (pItem.Packed ? "packed" : string.Empty);
-                if (Array.Exists(filesToRemove, p => p == formatedPath))
+                string formattedPath = pItem.AbsolutePath + (pItem.Packed ? "packed" : string.Empty);
+
+                //If remove resource, don't add the pItem
+                if (Array.Exists(filesToRemove, p => p == formattedPath))
                     continue;
-                files.Add(formatedPath);
+
+                //We don't want to remove externally-patched files from the patchlist, so leave this commented out
+                /*foreach (string fileToAdd in filesToAdd)
+                {
+                    //If the pItem is found in a packed file, but not in the export folder, don't add the pItem
+                    if (!fileToAdd.EndsWith("packed"))
+                        continue;
+                    if (pItem.AbsolutePath.StartsWith(fileToAdd.Replace("packed", string.Empty)))
+                    {
+                        addFile = false;
+                        break;
+                    }
+                }*/
+
+                files.Add(formattedPath);
             }
+
+            //Add every file that's in the export folder
             foreach (string fileToAdd in filesToAdd)
                 if (!files.Contains(fileToAdd))
                     files.Add(fileToAdd);
@@ -427,7 +473,7 @@ namespace KamiModpackBuilder
             byte[] newValueLength = BitConverter.GetBytes(strFilesFinal.Length);
             Buffer.BlockCopy(_PatchFileList.Header, 0, fileFinal, 0, headerSize);
             Buffer.BlockCopy(newValueLength, 0, fileFinal, 0x04, newValueLength.Length);
-            for(int i = 0; i < strFilesFinal.Length; i++)
+            for (int i = 0; i < strFilesFinal.Length; i++)
             {
                 byte[] strByte = Encoding.ASCII.GetBytes(strFilesFinal[i]);
                 Buffer.BlockCopy(strByte, 0, fileFinal, headerSize + (i * 0x80), strByte.Length);
