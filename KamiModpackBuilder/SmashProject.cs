@@ -52,6 +52,7 @@ namespace KamiModpackBuilder
         public Sm4shMusic.Sm4shMusic _Sm4shMusic = null;
         public Sm4shMusic.UserControls.BGMManagement _BGMManagementPage = null;
         public Sm4shMusic.UserControls.MyMusicManagement _MyMusicPage = null;
+        public string[] Locales = new string[0];
         #endregion
 
         #region Constructors
@@ -270,6 +271,21 @@ namespace KamiModpackBuilder
 
             //Check DT files
             _CurrentProject.DTFilesFound = CheckDTFiles();
+
+            //Find all locales
+            int localeCount = 0;
+            foreach (ResourceCollection resource in _resCols)
+            {
+                if (resource.IsRegion) localeCount++;
+            }
+            Locales = new string[localeCount];
+            int i = 0;
+            foreach (ResourceCollection resource in _resCols)
+            {
+                if (!resource.IsRegion) continue;
+                Locales[i] = resource.PartitionName;
+                i++;
+            }
 
             //Init DBS
             InitializeDBs();
@@ -821,12 +837,11 @@ namespace KamiModpackBuilder
                                     if (mod.SlotID == 1)
                                     {
                                         string regionName;
-                                        regionName  = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_en)" + Path.DirectorySeparatorChar);
-                                        AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
-                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_fr)" + Path.DirectorySeparatorChar);
-                                        AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
-                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_sp)" + Path.DirectorySeparatorChar);
-                                        AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                        foreach (string local in Locales)
+                                        {
+                                            regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + local + Path.DirectorySeparatorChar);
+                                            AddFileToResColFileLists(explorerFilename, f, baseFolders, filesLists);
+                                        }
                                     }
                                 }
                             }
@@ -845,12 +860,11 @@ namespace KamiModpackBuilder
                                     if (mod.SlotID == 2)
                                     {
                                         string regionName;
-                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_en)" + Path.DirectorySeparatorChar);
-                                        AddFileToResColFileLists(regionName, f, baseFolders, filesLists);
-                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_fr)" + Path.DirectorySeparatorChar);
-                                        AddFileToResColFileLists(regionName, f, baseFolders, filesLists);
-                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_sp)" + Path.DirectorySeparatorChar);
-                                        AddFileToResColFileLists(regionName, f, baseFolders, filesLists);
+                                        foreach (string local in Locales)
+                                        {
+                                            regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + local + Path.DirectorySeparatorChar);
+                                            AddFileToResColFileLists(regionName, f, baseFolders, filesLists);
+                                        }
                                     }
                                 }
                                 if (currentFighter.id == 0x1F && !_CurrentProject.IsSwitch)
@@ -858,12 +872,11 @@ namespace KamiModpackBuilder
                                     if (mod.SlotID <= 1)
                                     {
                                         string regionName;
-                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_en)" + Path.DirectorySeparatorChar);
-                                        AddFileToResColFileLists(regionName, f, baseFolders, filesLists);
-                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_fr)" + Path.DirectorySeparatorChar);
-                                        AddFileToResColFileLists(regionName, f, baseFolders, filesLists);
-                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_sp)" + Path.DirectorySeparatorChar);
-                                        AddFileToResColFileLists(regionName, f, baseFolders, filesLists);
+                                        foreach (string local in Locales)
+                                        {
+                                            regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + local + Path.DirectorySeparatorChar);
+                                            AddFileToResColFileLists(regionName, f, baseFolders, filesLists);
+                                        }
                                     }
                                 }
                             }
@@ -885,12 +898,11 @@ namespace KamiModpackBuilder
                                                     if (mod.SlotID == 2)
                                                     {
                                                         string regionName;
-                                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_en)" + Path.DirectorySeparatorChar);
-                                                        AddFileToResColFileLists(regionName, f, baseFolders, filesLists);
-                                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_fr)" + Path.DirectorySeparatorChar);
-                                                        AddFileToResColFileLists(regionName, f, baseFolders, filesLists);
-                                                        regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_sp)" + Path.DirectorySeparatorChar);
-                                                        AddFileToResColFileLists(regionName, f, baseFolders, filesLists);
+                                                        foreach (string local in Locales)
+                                                        {
+                                                            regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + local + Path.DirectorySeparatorChar);
+                                                            AddFileToResColFileLists(regionName, f, baseFolders, filesLists);
+                                                        }
                                                     }
                                                 }
                                             }
@@ -915,12 +927,11 @@ namespace KamiModpackBuilder
                                         if (mod.SlotID <= currentFighter.defaultSlots)
                                         {
                                             string regionName;
-                                            regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_en)" + Path.DirectorySeparatorChar);
-                                            AddFileToResColFileLists(regionName, f, baseFolders, filesLists);
-                                            regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_fr)" + Path.DirectorySeparatorChar);
-                                            AddFileToResColFileLists(regionName, f, baseFolders, filesLists);
-                                            regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + "data(us_sp)" + Path.DirectorySeparatorChar);
-                                            AddFileToResColFileLists(regionName, f, baseFolders, filesLists);
+                                            foreach (string local in Locales)
+                                            {
+                                                regionName = explorerFilename.Replace(Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar, Path.DirectorySeparatorChar + local + Path.DirectorySeparatorChar);
+                                                AddFileToResColFileLists(regionName, f, baseFolders, filesLists);
+                                            }
                                         }
                                     }
                                 }
@@ -1367,9 +1378,10 @@ namespace KamiModpackBuilder
                 string explorerFolder = PathHelper.GetExplorerFolder(PathHelperEnum.FOLDER_PATCH);
 
                 if (Directory.Exists(modFolder + "data")) fileSearch.AddRange(Directory.GetFiles(modFolder + "data", "*", SearchOption.AllDirectories));
-                if (Directory.Exists(modFolder + "data(us_en)")) fileSearch.AddRange(Directory.GetFiles(modFolder + "data(us_en)", "*", SearchOption.AllDirectories));
-                if (Directory.Exists(modFolder + "data(us_fr)")) fileSearch.AddRange(Directory.GetFiles(modFolder + "data(us_fr)", "*", SearchOption.AllDirectories));
-                if (Directory.Exists(modFolder + "data(us_sp)")) fileSearch.AddRange(Directory.GetFiles(modFolder + "data(us_sp)", "*", SearchOption.AllDirectories));
+                foreach (string local in Locales)
+                {
+                    if (Directory.Exists(modFolder + local)) fileSearch.AddRange(Directory.GetFiles(modFolder + local, "*", SearchOption.AllDirectories));
+                }
                 foreach (string f in fileSearch)
                 {
                     string explorerFilename = f.Replace(modFolder, string.Empty);
@@ -1387,21 +1399,22 @@ namespace KamiModpackBuilder
             if (_CurrentProject.EditorMusicActive)
             {
                 fileSearch.Add(PathHelper.FolderEditorMods + "data" + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_sound_db.bin");
-                fileSearch.Add(PathHelper.FolderEditorMods + "data(us_en)" + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_sound_db.bin");
-                fileSearch.Add(PathHelper.FolderEditorMods + "data(us_fr)" + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_sound_db.bin");
-                fileSearch.Add(PathHelper.FolderEditorMods + "data(us_sp)" + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_sound_db.bin");
+                foreach (string local in Locales)
+                {
+                    fileSearch.Add(PathHelper.FolderEditorMods + local + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_sound_db.bin");
+                    fileSearch.Add(PathHelper.FolderEditorMods + local + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "message" + Path.DirectorySeparatorChar + "sound.msbt");
+                }
                 fileSearch.Add(PathHelper.FolderEditorMods + "data" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "message" + Path.DirectorySeparatorChar + "sound.msbt");
-                fileSearch.Add(PathHelper.FolderEditorMods + "data(us_fr)" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "message" + Path.DirectorySeparatorChar + "sound.msbt");
-                fileSearch.Add(PathHelper.FolderEditorMods + "data(us_sp)" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "message" + Path.DirectorySeparatorChar + "sound.msbt");
                 fileSearch.Add(PathHelper.FolderEditorMods + "data" + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "config" + Path.DirectorySeparatorChar + "bgm_mymusic.mmb");
                 fileSearch.Add(PathHelper.FolderEditorMods + "data" + Path.DirectorySeparatorChar + "sound" + Path.DirectorySeparatorChar + "config" + Path.DirectorySeparatorChar + "bgm_property.mpb");
             }
             if (_CurrentProject.EditorCharacterMenuDBActive)
             {
                 fileSearch.Add(PathHelper.FolderEditorMods + "data" + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_character_db.bin");
-                fileSearch.Add(PathHelper.FolderEditorMods + "data(us_en)" + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_character_db.bin");
-                fileSearch.Add(PathHelper.FolderEditorMods + "data(us_fr)" + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_character_db.bin");
-                fileSearch.Add(PathHelper.FolderEditorMods + "data(us_sp)" + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_character_db.bin");
+                foreach (string local in Locales)
+                {
+                    fileSearch.Add(PathHelper.FolderEditorMods + local + Path.DirectorySeparatorChar + "param" + Path.DirectorySeparatorChar + "ui" + Path.DirectorySeparatorChar + "ui_character_db.bin");
+                }
             }
             if (_CurrentProject.EditorCharacterStringsActive)
             {

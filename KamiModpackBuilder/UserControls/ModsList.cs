@@ -812,15 +812,19 @@ namespace KamiModpackBuilder.UserControls
             {
                 string baseDirectoryTopFolderExcluded = baseDirectory.Remove(baseDirectory.LastIndexOf(Path.DirectorySeparatorChar, baseDirectory.Length - 2));
                 string data_Folder = Utils.FindDirectoryInFiles(files, "data", baseDirectoryTopFolderExcluded);
-                string data_en_Folder = Utils.FindDirectoryInFiles(files, "data(us_en)", baseDirectoryTopFolderExcluded);
-                string data_fr_Folder = Utils.FindDirectoryInFiles(files, "data(us_fr)", baseDirectoryTopFolderExcluded);
-                string data_sp_Folder = Utils.FindDirectoryInFiles(files, "data(us_sp)", baseDirectoryTopFolderExcluded);
+                string[] data_locale_folders = new string[_SmashProjectManager.Locales.Length];
+                bool locale_folders_empty = true;
+                for (int i = 0; i < _SmashProjectManager.Locales.Length; ++i)
+                {
+                    data_locale_folders[i] = Utils.FindDirectoryInFiles(files, _SmashProjectManager.Locales[i], baseDirectoryTopFolderExcluded);
+                    if (!data_locale_folders[i].Equals(String.Empty)) locale_folders_empty = false;
+                }
 
                 //Check if all the folders are either empty, or don't exist
-                if (data_Folder.Equals(String.Empty) && data_en_Folder.Equals(String.Empty) && data_fr_Folder.Equals(String.Empty) && data_sp_Folder.Equals(String.Empty))
+                if (data_Folder.Equals(String.Empty) && locale_folders_empty)
                 {
-                    MessageBox.Show("No valid mod files or directories found. Make sure that the mod files follow the Sm4shExplorer file tree, and have a root folder of 'data', 'data(us_en)', 'data(us_fr)' and/or 'data(us_sp).'");
-                    LogHelper.Error("No valid mod files or directories found. Make sure that the mod files follow the Sm4shExplorer file tree, and have a root folder of 'data', 'data(us_en)', 'data(us_fr)' and/or 'data(us_sp).'");
+                    MessageBox.Show("No valid mod files or directories found. Make sure that the mod files follow the Sm4shExplorer file tree, and have a root folder of 'data' and/or 'data(locale)'.");
+                    LogHelper.Error("No valid mod files or directories found. Make sure that the mod files follow the Sm4shExplorer file tree, and have a root folder of 'data' and/or 'data(locale)'.");
                     return;
                 }
 
@@ -860,9 +864,10 @@ namespace KamiModpackBuilder.UserControls
 
                 #region Mod Files
                 if (!data_Folder.Equals(String.Empty)) Utils.CopyAllValidFilesBetweenDirectories(data_Folder, newModDirectory + "data" + Path.DirectorySeparatorChar);
-                if (!data_en_Folder.Equals(String.Empty)) Utils.CopyAllValidFilesBetweenDirectories(data_en_Folder, newModDirectory + "data(us_en)" + Path.DirectorySeparatorChar);
-                if (!data_fr_Folder.Equals(String.Empty)) Utils.CopyAllValidFilesBetweenDirectories(data_fr_Folder, newModDirectory + "data(us_fr)" + Path.DirectorySeparatorChar);
-                if (!data_sp_Folder.Equals(String.Empty)) Utils.CopyAllValidFilesBetweenDirectories(data_sp_Folder, newModDirectory + "data(us_sp)" + Path.DirectorySeparatorChar);
+                for (int i = 0; i < data_locale_folders.Length; i++)
+                {
+                    if (!data_locale_folders[i].Equals(String.Empty)) Utils.CopyAllValidFilesBetweenDirectories(data_locale_folders[i], newModDirectory + _SmashProjectManager.Locales[i] + Path.DirectorySeparatorChar);
+                }
                 #endregion
 
                 LogHelper.Info(String.Format("Mod {0} imported successfully!", name));

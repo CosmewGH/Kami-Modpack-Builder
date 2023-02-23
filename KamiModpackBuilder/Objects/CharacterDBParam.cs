@@ -13,16 +13,18 @@ namespace KamiModpackBuilder.Objects
     {
         private PARAM Param;
         private SmashProjectManager _SmashProjectManager;
+        private string _locale;
 
         public CharacterDBParam(SmashProjectManager project, bool createNew = true)
         {
             Param = new PARAM();
-            if (createNew || !File.Exists(PathHelper.FolderEditorMods + "data(us_en)/param/ui/ui_character_db.bin"))
+            if (createNew || !File.Exists(PathHelper.FolderEditorMods + _locale + "/param/ui/ui_character_db.bin"))
             {
                 _SmashProjectManager = project;
-                _SmashProjectManager.ExtractResource("data(us_en)/param/ui/ui_character_db.bin", PathHelper.FolderEditorMods, true);
+                _locale = project.Locales[0];
+                _SmashProjectManager.ExtractResource(_locale + "/param/ui/ui_character_db.bin", PathHelper.FolderEditorMods, true);
             }
-            Param.LoadFile(PathHelper.FolderEditorMods + "data(us_en)/param/ui/ui_character_db.bin");
+            Param.LoadFile(PathHelper.FolderEditorMods + _locale + "/param/ui/ui_character_db.bin");
         }
 
         public void SetCharacterSlotCount(int charID, int slotCount, bool increaseOnly = true)
@@ -74,9 +76,10 @@ namespace KamiModpackBuilder.Objects
         public void SaveFiles()
         {
             Param.SaveFile(PathHelper.FolderEditorMods + "data/param/ui/ui_character_db.bin");
-            Param.SaveFile(PathHelper.FolderEditorMods + "data(us_en)/param/ui/ui_character_db.bin");
-            Param.SaveFile(PathHelper.FolderEditorMods + "data(us_fr)/param/ui/ui_character_db.bin");
-            Param.SaveFile(PathHelper.FolderEditorMods + "data(us_sp)/param/ui/ui_character_db.bin");
+            foreach (string locale in _SmashProjectManager.Locales)
+            {
+                Param.SaveFile(PathHelper.FolderEditorMods + locale + "/param/ui/ui_character_db.bin");
+            }
         }
     }
 }

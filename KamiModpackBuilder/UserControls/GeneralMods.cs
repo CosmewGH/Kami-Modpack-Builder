@@ -151,7 +151,7 @@ namespace KamiModpackBuilder.UserControls
         private void buttonImportMod_Click(object sender, EventArgs e)
         {
             Forms.ImportFolderOrZip popup = new Forms.ImportFolderOrZip();
-            popup.textInstuctions = "Folder must have a 'data', 'data(us_en)', 'data(us_fr)' and/or 'data(us_sp)'\r\nfolder for the root of the mod files (Based on the Sm4shExplorer hierarchy\r\nin the fighter folder) so Kami Modpack Builder knows where to place\r\nthe files.";
+            popup.textInstuctions = "Folder must have a 'data' and/or 'data(locale)'\r\nfolder for the root of the mod files (Based on the Sm4shExplorer hierarchy\r\nin the fighter folder) so Kami Modpack Builder knows where to place\r\nthe files.";
             popup.ShowDialog();
             String path = String.Empty;
             if (popup.choseZip)
